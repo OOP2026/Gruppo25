@@ -26,7 +26,9 @@ package project.database_connection;
     			} catch (ClassNotFoundException ex) {
     				System.out.println("Connessione al Database fallita: " + ex.getMessage());
     				ex.printStackTrace();
-    			}
+    			} catch (Exception e){
+					System.out.println("Connessione al Database fallita: " + e.getMessage());
+				}
 
     		}
 
