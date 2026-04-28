@@ -18,8 +18,8 @@ public class Tesi {
         return statoTesi;
     }
 
-
     public void setStatotesi(Stato statoTesi) {
         this.statoTesi = statoTesi;
     }
+
 }

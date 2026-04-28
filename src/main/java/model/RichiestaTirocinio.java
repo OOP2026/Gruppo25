@@ -17,6 +17,7 @@ public class RichiestaTirocinio {
     public Stato getStatoRichiesta() {
         return statoRichiesta;
     }
+
     public void setStatoRichiesta(Stato statoRichiesta) {
         this.statoRichiesta = statoRichiesta;
     }
@@ -32,6 +33,7 @@ public class RichiestaTirocinio {
     public void setTirocinioGenerato(Tirocinio tirocinio) {
         this.tirocinioGenerato = tirocinio;
     }
+
     public Tirocinio getTirocinioGenerato() {
         return tirocinioGenerato;
     }

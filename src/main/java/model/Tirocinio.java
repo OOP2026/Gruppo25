@@ -25,7 +25,6 @@ public class Tirocinio {
 
     public void setTipologiaTirocinio(TipologiaTirocinio tipologiaTirocinio) {
         this.tipologiaTirocinio = tipologiaTirocinio;
-
     }
 
     public void setCompletato(Boolean completato) {
@@ -34,16 +33,17 @@ public class Tirocinio {
 
     public void setAzienda(Azienda azienda) {
                 this.azienda = azienda;
-            if(this.tipologiaTirocinio == TipologiaTirocinio.ESTERNO && this.azienda != null) {
+            if(this.tipologiaTirocinio == TipologiaTirocinio.ESTERNO && this.azienda != null){
                 this.azienda.addTirocinio(this);
             }
         }
-
-        public Tesi getTesi() {
-            return tesi;
-        }
-        public void setTesi(Tesi tesi) {
-        this.tesi = tesi;
-        }
+    public Tesi getTesi() {
+        return tesi;
     }
+
+    public void setTesi(Tesi tesi) {
+        this.tesi = tesi;
+    }
+
+}
 
