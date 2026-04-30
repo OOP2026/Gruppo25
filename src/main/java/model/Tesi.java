@@ -1,11 +1,11 @@
 package model;
 
 public class Tesi {
-    protected Stato statoTesi;
+    private Stato statoTesi;
     private Studente studente;
     private Docente docente;
 
-    // costruttore oggetto Tesi
+    // Costruttore dell'Oggetto Tesi
     public Tesi(Stato statoTesi, Studente studente, Docente docente) {
         this.statoTesi = statoTesi;
         this.studente = studente;
@@ -14,12 +14,19 @@ public class Tesi {
         docente.addTesi(this);
     }
 
-    public Stato getStatotesi() {
+    // Implementazione dei vari metodi get e set di tutti gli attributi della classe
+    public Stato getStatoTesi() {
         return statoTesi;
     }
 
-    public void setStatotesi(Stato statoTesi) {
-        this.statoTesi = statoTesi;
-    }
+    public void setStatoTesi(Stato statoTesi) {this.statoTesi = statoTesi;}
+
+    public Studente getStudente() {return studente;}
+
+    public void setStudente(Studente studente) {this.studente = studente;}
+
+    public Docente getDocente() {return docente;}
+
+    public void setDocente(Docente docente) {this.docente = docente;}
 
 }
