@@ -8,7 +8,7 @@
     <properties/>
     <border type="none"/>
     <children>
-      <component id="fd8f2" class="javax.swing.JLabel">
+      <component id="fd8f2" class="javax.swing.JLabel" binding="TitoloRegistraStudenteJLabel">
         <constraints>
           <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -16,7 +16,7 @@
           <text value="Registrati come nuovo Studente"/>
         </properties>
       </component>
-      <component id="5a6e6" class="javax.swing.JTextField" binding="nomeTextField" default-binding="true">
+      <component id="5a6e6" class="javax.swing.JTextField" binding="s_nomeTextField">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="1" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -26,7 +26,7 @@
           <text value="Nome"/>
         </properties>
       </component>
-      <component id="eec4" class="javax.swing.JTextField" binding="cognomeTextField" default-binding="true">
+      <component id="eec4" class="javax.swing.JTextField" binding="s_cognomeTextField">
         <constraints>
           <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="1" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -36,7 +36,7 @@
           <text value="Cognome"/>
         </properties>
       </component>
-      <component id="59208" class="javax.swing.JTextField" binding="emailTextField" default-binding="true">
+      <component id="59208" class="javax.swing.JTextField" binding="s_emailTextField">
         <constraints>
           <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="1" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -46,7 +46,7 @@
           <text value="Email"/>
         </properties>
       </component>
-      <component id="5c26d" class="javax.swing.JTextField" binding="loginTextField" default-binding="true">
+      <component id="5c26d" class="javax.swing.JTextField" binding="ls_oginTextField">
         <constraints>
           <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="1" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -56,7 +56,7 @@
           <text value="Login"/>
         </properties>
       </component>
-      <component id="781eb" class="javax.swing.JPasswordField" binding="passwordPasswordField" default-binding="true">
+      <component id="781eb" class="javax.swing.JPasswordField" binding="s_passwordPasswordField">
         <constraints>
           <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="1" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -66,7 +66,7 @@
           <text value="Password"/>
         </properties>
       </component>
-      <component id="327e3" class="javax.swing.JTextField" binding="matricolaTextField" default-binding="true">
+      <component id="327e3" class="javax.swing.JTextField" binding="s_matricolaTextField">
         <constraints>
           <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="1" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -76,7 +76,7 @@
           <text value="Matricola"/>
         </properties>
       </component>
-      <component id="b5f6f" class="javax.swing.JButton" binding="confermaButton" default-binding="true">
+      <component id="b5f6f" class="javax.swing.JButton" binding="s_confermaButton">
         <constraints>
           <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>

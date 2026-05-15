@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<form xmlns="http://www.intellij.com/uidesigner/form/" version="1" bind-to-class="gui.ElencoDocenti">
+  <grid id="27dc6" layout-manager="GridLayoutManager" row-count="3" column-count="4" same-size-horizontally="false" same-size-vertically="false" hgap="-1" vgap="-1">
+    <margin top="0" left="0" bottom="0" right="0"/>
+    <constraints>
+      <xy x="20" y="20" width="472" height="471"/>
+    </constraints>
+    <properties/>
+    <border type="none"/>
+    <children>
+      <component id="b631b" class="javax.swing.JList" binding="argomentilist2">
+        <constraints>
+          <grid row="1" column="2" row-span="1" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+        </constraints>
+        <properties>
+          <model>
+            <item value="Argomento Docente 1"/>
+            <item value="Argomento Docente 2"/>
+            <item value="Argomento Docente 3"/>
+            <item value="Argomento Docente 4"/>
+            <item value="Argomento Docente 5"/>
+          </model>
+        </properties>
+      </component>
+      <component id="47287" class="javax.swing.JList" binding="docentilist1">
+        <constraints>
+          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="6" hsize-policy="2" anchor="0" fill="3" indent="0" use-parent-layout="false">
+            <preferred-size width="150" height="50"/>
+          </grid>
+        </constraints>
+        <properties>
+          <model>
+            <item value="Docente 1"/>
+            <item value="Docente 2"/>
+            <item value="Docente 3"/>
+            <item value="Docente 4"/>
+            <item value="Docente 5"/>
+          </model>
+        </properties>
+      </component>
+      <vspacer id="a8512">
+        <constraints>
+          <grid row="0" column="1" row-span="2" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <component id="869cf" class="javax.swing.JLabel" binding="TitoloListaDocentiJLabel">
+        <constraints>
+          <grid row="0" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="DOCENTI"/>
+        </properties>
+      </component>
+      <component id="25588" class="javax.swing.JLabel" binding="TitoloListaArgomentiJLabel">
+        <constraints>
+          <grid row="0" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="ARGOMENTI"/>
+        </properties>
+      </component>
+      <component id="61438" class="javax.swing.JScrollBar" binding="scrollBar1" default-binding="true">
+        <constraints>
+          <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="6" hsize-policy="0" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties/>
+      </component>
+      <component id="39e8b" class="javax.swing.JButton" binding="OKButton" default-binding="true">
+        <constraints>
+          <grid row="2" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="OK"/>
+        </properties>
+      </component>
+    </children>
+  </grid>
+</form>
