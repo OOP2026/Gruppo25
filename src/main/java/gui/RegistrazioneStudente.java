@@ -1,8 +1,11 @@
 package gui;
 
+import controller.Controller;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
 
 public class RegistrazioneStudente extends JFrame {
     private JTextField s_loginTextField;
@@ -17,8 +20,11 @@ public class RegistrazioneStudente extends JFrame {
     private JPasswordField s_passwordPasswordField;
     private JTextField s_matricolaTextField;
     private JFrame frame;
+    private final Controller controller;
 
     public RegistrazioneStudente(JFrame frameHome) {
+        controller = new Controller();
+
         frame = new JFrame("Registrazione Studente");
         frame.setContentPane(panelRegStudenti);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -29,8 +35,23 @@ public class RegistrazioneStudente extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // LISTENER RIFERITO AL PULSANTE PER CONFERMARE LA REGISTRAZIONE DELLO STUDENTE
-                frameHome.setVisible(true);
-                frame.dispose();
+                String login = s_loginTextField.getText().trim();
+                String password = new String (s_passwordPasswordField.getText());
+                password.trim();
+                String nome = s_nomeTextField.getText().trim();
+                String cognome = s_cognomeTextField.getText().trim();
+                String email = s_emailTextField.getText().trim();
+                String corsoLaurea = s_corsoLaureaTextField.getText().trim();
+                String matricola = s_matricolaTextField.getText().trim();
+
+                if(login.isEmpty() || password.isEmpty() || nome.isEmpty() || cognome.isEmpty() || email.isEmpty() || corsoLaurea.isEmpty() || matricola.isEmpty()){
+                    JOptionPane.showMessageDialog(frame, "Devi riempire tutti i campi idoneamente.");
+                } else {
+                    JOptionPane.showMessageDialog(frame, "Benvenuto, " + nome);
+                    controller.setStudente(login, password, nome, cognome, email, corsoLaurea, matricola);
+                    frameHome.setVisible(true);
+                    frame.dispose();
+                }
             }
         });
         annullaButton.addActionListener(new ActionListener() {

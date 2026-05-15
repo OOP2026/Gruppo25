@@ -19,8 +19,8 @@ public class Controller {
 		studente = new Studente (login, password, nome, cognome, email, corsoLaurea, matricola);
 	}
 
-	public void setDocente(String login, String password, String nome, String cognome, String email, String corsoLaurea, String argomentiTirocinio) {
-		docente = new Docente (login, password, nome, cognome, email, corsoLaurea, argomentiTirocinio);
+	public void setDocente(String login, String password, String nome, String cognome, String email, String corsoLaurea) {
+		docente = new Docente (login, password, nome, cognome, email, corsoLaurea);
 	}
 	
 }

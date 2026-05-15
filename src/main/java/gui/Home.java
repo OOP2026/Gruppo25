@@ -1,5 +1,6 @@
 package gui;
 
+import controller.Controller;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -13,6 +14,7 @@ public class Home {
     private JLabel BENVENUTOJLabel;
     private JPanel panelHome;
     private JButton inviaButton;
+    private final Controller controller;
 
     public static void main(String[] args) {
         frame = new JFrame("Home"); // finestra nella quale ci sono gli elementi da visualizzare, qui è incluso anche il JPanel, e attraverso questo possiamo specificare il contenuto delle GUI
@@ -23,6 +25,8 @@ public class Home {
     }
 
     public Home() {
+        controller = new Controller();
+
         registratiComeStudenteRButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -51,6 +55,7 @@ public class Home {
                     JOptionPane.showMessageDialog(frame,"FORZA NAPOLI");
                 } else {
                     // ALTRIMENTI SE TUTTI I CONTROLLI SONO PASSATI, APRE LA FINESTRA STUDENTE / DOCENTE
+                    JOptionPane.showMessageDialog(frame, "Bentornato!");
                 }
             }
         });

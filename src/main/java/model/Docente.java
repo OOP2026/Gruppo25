@@ -11,9 +11,9 @@ public class Docente extends Utente {
     private List<RichiestaTirocinio> richiestaTirocinio = new ArrayList<>();
 
     //costrutture dell'oggetto Docente
-    public Docente(String login, String password, String nome, String cognome, String email, String corsoLaurea,String argomentiTirocinio) {
+    public Docente(String login, String password, String nome, String cognome, String email, String corsoLaurea) {
         super(login, password, nome, cognome, email, corsoLaurea);
-        this.argomentiTirocinio.add(argomentiTirocinio);
+        //this.argomentiTirocinio.add(argomentiTirocinio);
     }
 
     public List<Tirocinio> getTirocinio() { return tirocinio; }
