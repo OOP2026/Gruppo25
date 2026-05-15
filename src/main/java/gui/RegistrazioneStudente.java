@@ -9,4 +9,5 @@ public class RegistrazioneStudente {
     private JTextField loginTextField;
     private JPasswordField passwordPasswordField;
     private JTextField matricolaTextField;
+    private JButton confermaButton;
 }
