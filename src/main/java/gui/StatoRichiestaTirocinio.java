@@ -8,12 +8,19 @@ public class StatoRichiestaTirocinio {
     private JButton OKButton;
     private JLabel statoEffettivoJLabel;
     private JLabel stato_della_richiestaJLabel;
+    private JButton annullaButton;
 
     public StatoRichiestaTirocinio() {
         OKButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // LISTENER DEL PULSANTE OK DELLA SCHERMATA DELLO STATO DELLA RICHIESTA DI TIROCINIO
+            }
+        });
+        annullaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // LISTENER DEL PULSANTE ANNULLA PER TORNARE INDIETRO DELLA SCHERMATA DELLO STATO DELLA RICHIESTA DI TIROCINIO
             }
         });
     }

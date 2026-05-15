@@ -11,6 +11,7 @@ public class ElencoDocenti {
     private JButton OKButton;
     private JLabel TitoloListaDocentiJLabel;
     private JLabel TitoloListaArgomentiJLabel;
+    private JButton annullaButton;
 
     public ElencoDocenti() {
         OKButton.addActionListener(new ActionListener() {
@@ -18,6 +19,12 @@ public class ElencoDocenti {
             public void actionPerformed(ActionEvent e) {
                 // LISTENER RIFERITO AL BOTTONE OK DELLA SCHERMATA ELENCO DOCENTI
 
+            }
+        });
+        annullaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // PULSANTE DELLA SCHERMATA ELENCO DOCENTI PER RITORNARE INDIETRO
             }
         });
     }
