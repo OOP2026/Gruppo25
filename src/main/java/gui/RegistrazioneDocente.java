@@ -18,7 +18,7 @@ public class RegistrazioneDocente extends JFrame {
     private JPanel panelRegDocenti;
     private JFrame frame;
     private final Controller controller;
-
+// eliminami!!!!!!!!!!
     public RegistrazioneDocente(JFrame frameHome) {
 
         controller = new Controller();
