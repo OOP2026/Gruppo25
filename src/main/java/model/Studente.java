@@ -25,8 +25,7 @@ public class Studente extends Utente{
         return sedutaDiLaurea;
     }
 
-    public void setSedutaDiLaurea(SedutaDiLaurea sedutaDiLaurea) {
-        this.sedutaDiLaurea = sedutaDiLaurea;
+    public void setSedutaDiLaurea(SedutaDiLaurea sedutaDiLaurea) { this.sedutaDiLaurea = sedutaDiLaurea;
     }
 
     public Tirocinio getTirocinio() {
