@@ -37,6 +37,7 @@ public class Home {
                 // LISTENER RIFERITO AL PULSANTE PER REGISTRARSI COME DOCENTE.
                 RegistrazioneDocente guiRegistrazione = new RegistrazioneDocente(frame);
                 frame.setVisible(false);
+                String login =
             }
         });
 
@@ -44,7 +45,14 @@ public class Home {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // LISTENER PER ACCEDERE ALL'ACCOUNT E ANDARE NELLA HOME DOCENTE OPPURE STUDENTE.
-
+                String login = loginTextField.getText().trim();
+                String password = new String(passwordPasswordField.getPassword()).trim();
+                // CONTROLLO PER CONVALIDARE SE I CAMPI LOGIN E PASSWORD NON SONO VUOTI.
+                if(login.isEmpty() || password.isEmpty()){
+                    JOptionPane.showMessageDialog(frame,"FORZA NAPOLI");
+                } else {
+                    // ALTRIMENTI SE TUTTI I CONTROLLI SONO PASSATI, APRE LA FINESTRA STUDENTE / DOCENTE
+                }
             }
         });
     }

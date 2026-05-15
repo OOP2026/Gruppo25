@@ -5,16 +5,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class RegistrazioneStudente extends JFrame {
+    private JTextField s_loginTextField;
     private JTextField s_nomeTextField;
-    private JTextField s_cognomeTextField;
     private JTextField s_emailTextField;
-    private JTextField ls_oginTextField;
-    private JPasswordField s_passwordPasswordField;
-    private JTextField s_matricolaTextField;
+    private JTextField s_cognomeTextField;
     private JButton s_confermaButton;
     private JLabel TitoloRegistraStudenteJLabel;
     private JPanel panelRegStudenti;
     private JButton annullaButton;
+    private JTextField s_corsoLaureaTextField;
+    private JPasswordField s_passwordPasswordField;
+    private JTextField s_matricolaTextField;
     private JFrame frame;
 
     public RegistrazioneStudente(JFrame frameHome) {
