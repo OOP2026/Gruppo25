@@ -37,7 +37,6 @@ public class Home {
                 // LISTENER RIFERITO AL PULSANTE PER REGISTRARSI COME DOCENTE.
                 RegistrazioneDocente guiRegistrazione = new RegistrazioneDocente(frame);
                 frame.setVisible(false);
-                String login =
             }
         });
 
@@ -56,5 +55,4 @@ public class Home {
             }
         });
     }
-
 }

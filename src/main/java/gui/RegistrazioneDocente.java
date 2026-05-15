@@ -6,14 +6,15 @@ import java.awt.event.ActionListener;
 
 public class RegistrazioneDocente extends JFrame {
     private JButton d_confermaButton;
-    private JTextField dNomeText;
-    private JTextField dCognomeText;
-    private JTextField dEmailText;
-    private JTextField dLoginText;
-    private JTextField dPassowordText;
+    private JTextField d_loginText;
+    private JTextField d_PasswordText;
+    private JTextField d_NomeText;
+    private JTextField d_CognomeText;
+    private JTextField d_EmailText;
     private JButton annullaButton;
-    private JLabel TitoloRegistraDocente;
     private JPanel panelRegDocenti;
+    private JTextField d_CorsoLaureaText;
+    private JTextField d_ArgomentiTirocinioText;
     private JFrame frame;
 
 
@@ -35,6 +36,15 @@ public class RegistrazioneDocente extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
+                frameHome.setVisible(true);
+                frame.dispose();
+            }
+        });
+
+        d_confermaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // LISTENER RIFERITO AL PULSANTE PER CONFERMARE LA REGISTRAZIONE DEL DOCENTE
                 frameHome.setVisible(true);
                 frame.dispose();
             }
