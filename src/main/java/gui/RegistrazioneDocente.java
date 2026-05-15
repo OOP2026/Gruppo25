@@ -4,25 +4,40 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class RegistrazioneDocente {
+public class RegistrazioneDocente extends JFrame {
     private JButton d_confermaButton;
-<<<<<<< Updated upstream
     private JTextField dNomeText;
     private JTextField dCognomeText;
     private JTextField dEmailText;
     private JTextField dLoginText;
     private JTextField dPassowordText;
     private JButton annullaButton;
-=======
     private JLabel TitoloRegistraDocente;
+    private JPanel panelRegDocenti;
+    private JFrame frame;
 
-    public RegistrazioneDocente() {
+
+    public RegistrazioneDocente(JFrame frameHome) {
+        frame = new JFrame("Registrazione Docente");
+        frame.setContentPane(panelRegDocenti);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
         d_confermaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // LISTENER RIFERITO AL PULSANTE PER CONFERMARE LA REGISTRAZIONE DEL DOCENTE
+                frameHome.setVisible(true);
+                frame.dispose();
             }
         });
-    }
->>>>>>> Stashed changes
+        annullaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                frame.setVisible(false);
+                frameHome.setVisible(true);
+                frame.dispose();
+            }
+        });
+    };
 }

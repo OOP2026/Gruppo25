@@ -17,6 +17,7 @@ public class MandaRichiestaTirocinio {
                 // LISTENER RIFERITO AL PULSANTE PER TORNARE INDIETRO DELLA SCHERMATA PER MANDARE LA RICHIESTA DI TIROCINIO
             }
         });
+
         OKButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
