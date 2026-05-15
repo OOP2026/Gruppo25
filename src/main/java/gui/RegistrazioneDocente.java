@@ -59,13 +59,5 @@ public class RegistrazioneDocente extends JFrame {
             }
         });
 
-        d_confermaButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // LISTENER RIFERITO AL PULSANTE PER CONFERMARE LA REGISTRAZIONE DEL DOCENTE
-                frameHome.setVisible(true);
-                frame.dispose();
-            }
-        });
     };
 }
