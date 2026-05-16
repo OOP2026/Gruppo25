@@ -11,7 +11,6 @@ public class Home {
     private JTextField loginTextField;
     private JPasswordField passwordPasswordField;
     private JButton registratiComeDocenteButton;
-    private JLabel BENVENUTOJLabel;
     private JPanel panelHome;
     private JButton inviaButton;
     private final Controller controller;
@@ -22,6 +21,9 @@ public class Home {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+        //frame.setLocation(300,300); Questo metodo serve per far avviare l'applicazione in un determinato punto dello schermo.
+        frame.setLocationRelativeTo(null); //Questo metodo serve per far avviare la schermata al centro dello schermo.
+        frame.setResizable(false); //Questo metodo permetto(o non) di far ingrandire la schemrata.
     }
 
     public Home() {

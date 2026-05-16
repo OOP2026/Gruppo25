@@ -30,6 +30,8 @@ public class RegistrazioneStudente extends JFrame {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+        frame.setLocationRelativeTo(null); //Questo metodo serve per far avviare la schermata al centro dello schermo.
+        frame.setResizable(false); //Questo metodo permetto(o non) di far ingrandire la schemrata.
 
         s_confermaButton.addActionListener(new ActionListener() {
             @Override
