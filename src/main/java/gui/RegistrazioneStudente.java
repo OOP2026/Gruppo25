@@ -48,7 +48,10 @@ public class RegistrazioneStudente extends JFrame {
 
                 if(login.isEmpty() || password.isEmpty() || nome.isEmpty() || cognome.isEmpty() || email.isEmpty() || corsoLaurea.isEmpty() || matricola.isEmpty()){
                     JOptionPane.showMessageDialog(frame, "Devi riempire tutti i campi idoneamente.");
-                } else {
+                }
+                else if(controller.controlloLogin(login)) {
+                    JOptionPane.showMessageDialog(frame, "Login già esistente! Utilizzare una login differente");
+                }else {
                     JOptionPane.showMessageDialog(frame, "Benvenuto, " + nome);
                     controller.setStudente(login, password, nome, cognome, email, corsoLaurea, matricola);
                     frameHome.setVisible(true);

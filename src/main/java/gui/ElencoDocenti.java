@@ -12,8 +12,16 @@ public class ElencoDocenti {
     private JLabel TitoloListaDocentiJLabel;
     private JLabel TitoloListaArgomentiJLabel;
     private JButton annullaButton;
+    private JPanel panelElencoDocenti;
+    private JFrame frame;
 
-    public ElencoDocenti() {
+
+    public ElencoDocenti(JFrame FrameChiamante) {
+        frame = new JFrame("Elenco Docenti");
+        frame.setContentPane(panelElencoDocenti);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
         OKButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

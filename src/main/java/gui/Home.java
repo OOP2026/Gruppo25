@@ -23,7 +23,7 @@ public class Home {
         frame.setVisible(true);
         //frame.setLocation(300,300); Questo metodo serve per far avviare l'applicazione in un determinato punto dello schermo.
         frame.setLocationRelativeTo(null); //Questo metodo serve per far avviare la schermata al centro dello schermo.
-        frame.setResizable(false); //Questo metodo permetto(o non) di far ingrandire la schemrata.
+        frame.setResizable(false); //Questo metodo permetto(o non) di far ingrandire la schermata.
     }
 
     public Home() {
@@ -55,10 +55,27 @@ public class Home {
                 // CONTROLLO PER CONVALIDARE SE I CAMPI LOGIN E PASSWORD NON SONO VUOTI.
                 if(login.isEmpty() || password.isEmpty()){
                     JOptionPane.showMessageDialog(frame,"FORZA NAPOLI");
-                } else {
-                    // ALTRIMENTI SE TUTTI I CONTROLLI SONO PASSATI, APRE LA FINESTRA STUDENTE / DOCENTE
-                    JOptionPane.showMessageDialog(frame, "Bentornato!");
+                    return;
                 }
+                Controller controller = new Controller();
+                String ruolo = controller.effettuaLogin(login, password);
+                if (ruolo.equals("STUDENTE")) {
+                    JOptionPane.showMessageDialog(frame, "Accesso eseguito come studente");
+                    // ora possiamo aprire la HomeStudente
+                    StudenteHome studenteHome = new StudenteHome(frame);
+                    frame.setVisible(false);
+
+                } else if (ruolo.equals("DOCENTE")) {
+                    JOptionPane.showMessageDialog(frame, "Accesso eseguito come docente");
+                    // ora possiamo aprire la HomeDocente
+                    DocenteHome docenteHome = new DocenteHome(frame);
+                    frame.setVisible(false);
+                }
+                else {
+                    JOptionPane.showMessageDialog(frame, "Accesso negato. Credenziali errate!");
+                }
+
+
             }
         });
     }

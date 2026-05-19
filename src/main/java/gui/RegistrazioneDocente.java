@@ -44,8 +44,13 @@ public class RegistrazioneDocente extends JFrame {
 
                 if(login.isEmpty() || password.isEmpty() || nome.isEmpty() || cognome.isEmpty() || email.isEmpty() || corsoLaurea.isEmpty()){
                     JOptionPane.showMessageDialog(frame, "Inserisci tutti i campi coglione");
-                } else {
+                }
+                else if(controller.controlloLogin(login)) {
+                    JOptionPane.showMessageDialog(frame, "Login già esistente! Utilizzare una login differente");
+                }
+                else {
                     JOptionPane.showMessageDialog(frame, "Benvenuto Prof. " +cognome);
+                    controller.setDocente(login, password, nome, cognome, email, corsoLaurea);
                     frameHome.setVisible(true);
                     frame.dispose();
                 }

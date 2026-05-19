@@ -9,8 +9,16 @@ public class DocenteHome {
     private JButton visualizzaElencoDelleRichiesteButton;
     private JButton visualizzaTirocininantiButton;
     private JButton visualizzaTesiInCorsoButton;
+    private JButton indietroButton;
+    private JPanel panelDocenteHome;
+    private JFrame frame;
 
-    public DocenteHome() {
+    public DocenteHome(JFrame FrameChiamante) {
+        frame = new JFrame("Home Docente");
+        frame.setContentPane(panelDocenteHome);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
         aggiungiTirocinioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -33,6 +41,13 @@ public class DocenteHome {
             @Override
             public void actionPerformed(ActionEvent e) {
 
+            }
+        });
+        indietroButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                FrameChiamante.setVisible(true);
+                frame.dispose();
             }
         });
     }
