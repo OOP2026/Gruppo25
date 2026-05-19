@@ -15,13 +15,7 @@
           </grid>
         </constraints>
         <properties>
-          <model>
-            <item value="Argomento Docente 1"/>
-            <item value="Argomento Docente 2"/>
-            <item value="Argomento Docente 3"/>
-            <item value="Argomento Docente 4"/>
-            <item value="Argomento Docente 5"/>
-          </model>
+          <model/>
         </properties>
       </component>
       <component id="47287" class="javax.swing.JList" binding="docentilist1">
@@ -31,13 +25,7 @@
           </grid>
         </constraints>
         <properties>
-          <model>
-            <item value="Docente 1"/>
-            <item value="Docente 2"/>
-            <item value="Docente 3"/>
-            <item value="Docente 4"/>
-            <item value="Docente 5"/>
-          </model>
+          <model/>
         </properties>
       </component>
       <vspacer id="a8512">

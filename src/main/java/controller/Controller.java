@@ -2,6 +2,8 @@ package controller;
 
 import model.Studente;
 import model.Docente;
+
+import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +13,9 @@ public class Controller {
 	private Docente docente;
 	private final static List<Studente> fintoDatabaseStudenti = new ArrayList<>();
 	private final static List<Docente> fintoDatabaseDocenti = new ArrayList<>();
+	// Usiamo DefaultListModel perché JList non accetta List native Java.
+	// Questo modello notifica e aggiorna automaticamente la GUI ad ogni inserimento.
+	private final static DefaultListModel<String> fintoDatabaseArgomenti = new DefaultListModel<>();
 
 	public Controller() {
 		}
@@ -102,6 +107,14 @@ public class Controller {
 		return false;
 	}
 
+	// Metodo per aggiungere un argomento alla lista di argomenti del tirocinio.
+	public void aggiungiNuovoArgomento(String argomento) {
+		fintoDatabaseArgomenti.addElement(argomento); // DefaultListModel usa addElement invece di add
+	}
+	// Metodo per dare in output la lista di argomenti.
+	public DefaultListModel<String> ottieniModelloArgomenti() {
+		return fintoDatabaseArgomenti;
+	}
 
 
 }

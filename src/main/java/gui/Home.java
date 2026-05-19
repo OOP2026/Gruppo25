@@ -16,6 +16,12 @@ public class Home {
     private final Controller controller;
 
     public static void main(String[] args) {
+       // TRY-CATCH PER SETTARE LA GUI IN BASE AL TEMA DELLA MACCHINA.
+        try {
+            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
         frame = new JFrame("Home"); // finestra nella quale ci sono gli elementi da visualizzare, qui è incluso anche il JPanel, e attraverso questo possiamo specificare il contenuto delle GUI
         frame.setContentPane(new Home().panelHome);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
