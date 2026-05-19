@@ -8,10 +8,11 @@ public class ElencoTesisti {
     private JButton ritornaAllaHomeButton;
     private JList listaTesisti;
     private JPanel panelElencoTesisti;
+    private JScrollBar scrollBar1;
     private JFrame frame;
 
     public ElencoTesisti(JFrame FrameChiamante) {
-        frame = new JFrame("Home Docente");
+        frame = new JFrame("Elenco Tesisti");
         frame.setContentPane(panelElencoTesisti);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();

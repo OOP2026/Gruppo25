@@ -54,19 +54,20 @@ public class Home {
                 String password = new String(passwordPasswordField.getPassword()).trim();
                 // CONTROLLO PER CONVALIDARE SE I CAMPI LOGIN E PASSWORD NON SONO VUOTI.
                 if(login.isEmpty() || password.isEmpty()){
-                    JOptionPane.showMessageDialog(frame,"FORZA NAPOLI");
+                    JOptionPane.showMessageDialog(frame,"Ci sono dei campi vuoti.");
                     return;
                 }
                 Controller controller = new Controller();
                 String ruolo = controller.effettuaLogin(login, password);
+                // CONTROLLO PER VERIFICARE SE L'ACCESSO LO FA UNO STUDENTE O UN DOCENTE.
                 if (ruolo.equals("STUDENTE")) {
-                    JOptionPane.showMessageDialog(frame, "Accesso eseguito come studente");
+                    JOptionPane.showMessageDialog(frame, "Accesso eseguito come studente.");
                     // ora possiamo aprire la HomeStudente
                     StudenteHome studenteHome = new StudenteHome(frame);
                     frame.setVisible(false);
 
                 } else if (ruolo.equals("DOCENTE")) {
-                    JOptionPane.showMessageDialog(frame, "Accesso eseguito come docente");
+                    JOptionPane.showMessageDialog(frame, "Accesso eseguito come docente.");
                     // ora possiamo aprire la HomeDocente
                     DocenteHome docenteHome = new DocenteHome(frame);
                     frame.setVisible(false);

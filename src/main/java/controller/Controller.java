@@ -33,7 +33,6 @@ public class Controller {
 				return "STUDENTE"; // Trovato uno studente!
 			}
 		}
-
 		// 2. Cerca tra i docenti
 		for (Docente d : fintoDatabaseDocenti) {
 			if (d.getLogin().equals(login) && d.getPassword().equals(password)) {
@@ -41,7 +40,6 @@ public class Controller {
 				return "DOCENTE";
 			}
 		}
-
 		// 3. Se non trova nessuno
 		return "NON_TROVATO";
 	}

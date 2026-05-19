@@ -8,10 +8,11 @@ public class ElencoTirocinanti {
     private JButton ritornaAllaHomeButton;
     private JTable tabellaStudenteArgomentoTirocinio;
     private JPanel panelElencoTirocinanti;
+    private JScrollBar scrollBar1;
     private JFrame frame;
 
     public ElencoTirocinanti(JFrame FrameChiamante) {
-        frame = new JFrame("Home Docente");
+        frame = new JFrame("Elenco Tirocinanti");
         frame.setContentPane(panelElencoTirocinanti);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();

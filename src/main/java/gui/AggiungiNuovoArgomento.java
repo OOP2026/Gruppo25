@@ -13,7 +13,7 @@ public class AggiungiNuovoArgomento {
     private JFrame frame;
 
     public AggiungiNuovoArgomento(JFrame FrameChiamante) {
-        frame = new JFrame("Home Docente");
+        frame = new JFrame("Aggiungi Argomento di Tirocinio");
         frame.setContentPane(panelAggArg);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();

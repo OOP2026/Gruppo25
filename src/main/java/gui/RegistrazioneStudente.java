@@ -64,7 +64,7 @@ public class RegistrazioneStudente extends JFrame {
                 // Verifico se la matricola inserita è già presente
                 else if(controller.controlloMatricola(matricola)){JOptionPane.showMessageDialog(frame,"Attenzione matricola già presente nel database!");}
                 else {
-                    JOptionPane.showMessageDialog(frame, "Benvenuto, " + nome);
+                    JOptionPane.showMessageDialog(frame, "Benvenuto " + nome +cognome);
                     controller.setStudente(login, password, nome, cognome, email, corsoLaurea, matricola);
                     frameHome.setVisible(true);
                     frame.dispose();
