@@ -35,12 +35,16 @@ public class StudenteHome {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // LISTENER RIFERITO AL BOTTONE PER APRIRE LA FINESTRA PER COMPILARE LA RICHIESTA DI TIROCINIO
+                MandaRichiestaTirocinio mandaRichiestaTirocinio = new MandaRichiestaTirocinio(frame);
+                frame.setVisible(false);
             }
         });
         visualizzaStatoRichiestaTirocinioButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // LISTENER RIFERITO AL BOTTONE PER APRIRE LA FINESTRA PER VISUALIZZARE LO STATO DELLA RICHIESTA DEL TIROCINIO
+                StatoRichiestaTirocinio statoRichiestaTirocinio = new StatoRichiestaTirocinio(frame);
+                frame.setVisible(false);
             }
         });
         caricaTesiButton.addActionListener(new ActionListener() {

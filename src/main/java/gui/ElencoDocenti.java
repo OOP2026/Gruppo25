@@ -26,15 +26,10 @@ public class ElencoDocenti {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // LISTENER RIFERITO AL BOTTONE OK DELLA SCHERMATA ELENCO DOCENTI
-
+                FrameChiamante.setVisible(true);
+                frame.dispose();
             }
         });
 
-        annullaButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // PULSANTE DELLA SCHERMATA ELENCO DOCENTI PER RITORNARE INDIETRO
-            }
-        });
     }
 }

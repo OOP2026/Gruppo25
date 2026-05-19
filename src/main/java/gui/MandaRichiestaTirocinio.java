@@ -8,20 +8,23 @@ public class MandaRichiestaTirocinio {
     private JComboBox comboBox1;
     private JComboBox comboBox2;
     private JButton OKButton;
+    private JPanel panelRichiestaTirocinio;
     private JButton annullaButton;
+    private JFrame frame;
 
-    public MandaRichiestaTirocinio() {
-        annullaButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // LISTENER RIFERITO AL PULSANTE PER TORNARE INDIETRO DELLA SCHERMATA PER MANDARE LA RICHIESTA DI TIROCINIO
-            }
-        });
+    public MandaRichiestaTirocinio(JFrame FrameChiamante) {
+        frame = new JFrame("Richiesta Tirocinio");
+        frame.setContentPane(panelRichiestaTirocinio);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
 
         OKButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // LISTENER RIFERITO AL PULSANTE OK DELLA SCHERMATA PER MANDARE LA RICHIESTA DI TIROCINIO
+                FrameChiamante.setVisible(true);
+                frame.dispose();
             }
         });
     }
