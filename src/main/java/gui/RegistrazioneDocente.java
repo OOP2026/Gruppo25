@@ -45,9 +45,16 @@ public class RegistrazioneDocente extends JFrame {
                 if(login.isEmpty() || password.isEmpty() || nome.isEmpty() || cognome.isEmpty() || email.isEmpty() || corsoLaurea.isEmpty()){
                     JOptionPane.showMessageDialog(frame, "Inserisci tutti i campi coglione");
                 }
-                else if(controller.controlloLogin(login)) {
-                    JOptionPane.showMessageDialog(frame, "Login già esistente! Utilizzare una login differente");
-                }
+                // verifico se la login inserita è già presente
+                else if(controller.controlloLogin(login)){JOptionPane.showMessageDialog(frame, "Login già esistente! Utilizzare una login differente");}
+                // Verifico che la password inserita abbia almeno 8 caratteri
+                else if(controller.controlloPassoword(password)){JOptionPane.showMessageDialog(frame,"Attenzione inserire una password di almeno 8 caratteri!");}
+                // Verifico se nel nome sono inseriti dei numeri
+                else if(controller.controlloNomeCognome(nome)){JOptionPane.showMessageDialog(frame, "Attenzione carattere non consentito nel nome!");}
+                // Verifico se nel cognome sono inseriti dei numeri
+                else if (controller.controlloNomeCognome(cognome)){JOptionPane.showMessageDialog(frame,"Attenzione carattere non consentito nel cognome!");}
+                // verifico che la mail sia inserita nel formato giusto
+                else if(controller.controlloEmailDocente(email)) {JOptionPane.showMessageDialog(frame,"Attenzione inserire la mail nel formato corretto!");}
                 else {
                     JOptionPane.showMessageDialog(frame, "Benvenuto Prof. " +cognome);
                     controller.setDocente(login, password, nome, cognome, email, corsoLaurea);

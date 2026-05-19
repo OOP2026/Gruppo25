@@ -49,9 +49,21 @@ public class RegistrazioneStudente extends JFrame {
                 if(login.isEmpty() || password.isEmpty() || nome.isEmpty() || cognome.isEmpty() || email.isEmpty() || corsoLaurea.isEmpty() || matricola.isEmpty()){
                     JOptionPane.showMessageDialog(frame, "Devi riempire tutti i campi idoneamente.");
                 }
-                else if(controller.controlloLogin(login)) {
-                    JOptionPane.showMessageDialog(frame, "Login già esistente! Utilizzare una login differente");
-                }else {
+                // Verifico se il login inserito è già presente
+                else if(controller.controlloLogin(login)) {JOptionPane.showMessageDialog(frame, "Login già esistente! Utilizzare una login differente");}
+                // Verifico che la password inserita abbia almeno 8 caratteri
+                else if(controller.controlloPassoword(password)){JOptionPane.showMessageDialog(frame,"Attenzione inserire una password di almeno 8 caratteri!");}
+                // Verifico se nel nome sono inseriti dei numeri
+                else if(controller.controlloNomeCognome(nome)){JOptionPane.showMessageDialog(frame, "Attenzione carattere non consentito nel nome!");}
+                // Verifico se nel cognome sono inseriti dei numeri
+                else if (controller.controlloNomeCognome(cognome)){JOptionPane.showMessageDialog(frame,"Attenzione carattere non consentito nel cognome!");}
+                // Verifico se la mail inserita è nel formato giusto
+                else if(controller.controlloEmailStudente(email)){JOptionPane.showMessageDialog(frame,"Attenzione inserire la mail nel formato corretto!");}
+                // Verifico se la matricola è inserita correttamente
+                else if(controller.controlloFormatoMatricola(matricola)){JOptionPane.showMessageDialog(frame,"Attenzione la matricola deve essere nella forma DExxxxxxx!");}
+                // Verifico se la matricola inserita è già presente
+                else if(controller.controlloMatricola(matricola)){JOptionPane.showMessageDialog(frame,"Attenzione matricola già presente nel database!");}
+                else {
                     JOptionPane.showMessageDialog(frame, "Benvenuto, " + nome);
                     controller.setStudente(login, password, nome, cognome, email, corsoLaurea, matricola);
                     frameHome.setVisible(true);
