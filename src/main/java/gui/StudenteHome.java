@@ -1,5 +1,7 @@
 package gui;
 
+import controller.Controller;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,8 +17,10 @@ public class StudenteHome {
     private JPanel panelStudenteHome;
     private JButton indietroButton;
     private JFrame frame;
+    private Controller controller;
 
-    public StudenteHome(JFrame FrameChiamante) {
+    public StudenteHome(JFrame FrameChiamante, Controller controller) {
+        this.controller = controller;
         frame = new JFrame("Home Studente");
         frame.setContentPane(panelStudenteHome);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -28,7 +32,7 @@ public class StudenteHome {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // LISTENER RIFERITO AL BOTTONE PER APRIRE LA FINESTRA DELL'ELENCO DEI DOCENTI
-                ElencoDocenti elencoDocenti = new ElencoDocenti(frame);
+                ElencoDocenti elencoDocenti = new ElencoDocenti(frame,controller);
                 frame.setVisible(false);
             }
         });
@@ -36,7 +40,7 @@ public class StudenteHome {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // LISTENER RIFERITO AL BOTTONE PER APRIRE LA FINESTRA PER COMPILARE LA RICHIESTA DI TIROCINIO
-                MandaRichiestaTirocinio mandaRichiestaTirocinio = new MandaRichiestaTirocinio(frame);
+                MandaRichiestaTirocinio mandaRichiestaTirocinio = new MandaRichiestaTirocinio(frame,controller);
                 frame.setVisible(false);
             }
         });
@@ -44,7 +48,7 @@ public class StudenteHome {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // LISTENER RIFERITO AL BOTTONE PER APRIRE LA FINESTRA PER VISUALIZZARE LO STATO DELLA RICHIESTA DEL TIROCINIO
-                StatoRichiestaTirocinio statoRichiestaTirocinio = new StatoRichiestaTirocinio(frame);
+                StatoRichiestaTirocinio statoRichiestaTirocinio = new StatoRichiestaTirocinio(frame,controller);
                 frame.setVisible(false);
             }
         });

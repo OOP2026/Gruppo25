@@ -15,9 +15,7 @@ public class Tesi {
     }
 
     // Implementazione dei vari metodi get e set di tutti gli attributi della classe
-    public Stato getStatoTesi() {
-        return statoTesi;
-    }
+    public Stato getStatoTesi() {return statoTesi;}
 
     public void setStatoTesi(Stato statoTesi) {this.statoTesi = statoTesi;}
 

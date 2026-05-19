@@ -1,5 +1,6 @@
 package controller;
 
+import model.SistemaUniversitario;
 import model.Studente;
 import model.Docente;
 
@@ -9,39 +10,40 @@ import java.util.List;
 
 public class Controller {
 
-	private Studente studente;
-	private Docente docente;
-	private final static List<Studente> fintoDatabaseStudenti = new ArrayList<>();
-	private final static List<Docente> fintoDatabaseDocenti = new ArrayList<>();
-	// Usiamo DefaultListModel perché JList non accetta List native Java.
-	// Questo modello notifica e aggiorna automaticamente la GUI ad ogni inserimento.
-	private final static DefaultListModel<String> fintoDatabaseArgomenti = new DefaultListModel<>();
+	private SistemaUniversitario sistema;
+	// Variabili di sessione per ricordare chi sono i docenti/studenti che sono nel sistema
+	private Docente docenteLoggato;
+	private Studente studenteLoggato;
+
 
 	public Controller() {
+		this.sistema = new SistemaUniversitario();
 		}
 
 	public void setStudente(String login, String password, String nome, String cognome, String email, String corsoLaurea,String matricola){
-		studente = new Studente (login, password, nome, cognome, email, corsoLaurea, matricola);
-		fintoDatabaseStudenti.add(studente);
+		Studente studente = new Studente (login, password, nome, cognome, email, corsoLaurea, matricola);
+		sistema.aggiungiStudente(studente);
 	}
 
 	public void setDocente(String login, String password, String nome, String cognome, String email, String corsoLaurea) {
-		docente = new Docente (login, password, nome, cognome, email, corsoLaurea);
-		fintoDatabaseDocenti.add(docente);
+		Docente docente = new Docente (login, password, nome, cognome, email, corsoLaurea);
+		sistema.aggiungiDocente(docente);
 	}
 
 	// Metodo per verificare se la login e la password inseriti corrispondono ad uno Studente, ad un Docente o non esiste
 	public String effettuaLogin(String login, String password) {
 		// 1. Cerca tra gli studenti
-		for (Studente s : fintoDatabaseStudenti) {
+		for (Studente s : sistema.getStudenti()) {
 			if (s.getLogin().equals(login) && s.getPassword().equals(password)) {
-				return "STUDENTE"; // Trovato uno studente!
+				this.studenteLoggato = s;
+				return "STUDENTE";
+
 			}
 		}
 		// 2. Cerca tra i docenti
-		for (Docente d : fintoDatabaseDocenti) {
+		for (Docente d : sistema.getDocenti()) {
 			if (d.getLogin().equals(login) && d.getPassword().equals(password)) {
-				// Cerca tra i docenti
+				this.docenteLoggato = d;
 				return "DOCENTE";
 			}
 		}
@@ -52,10 +54,10 @@ public class Controller {
 	// Metodo per verificare che la login inserita non esista giá
 	public boolean controlloLogin(String login){
 		// cerca tra gli Studenti
-		for (Studente s : fintoDatabaseStudenti) {
+		for (Studente s : sistema.getStudenti()) {
 			if (s.getLogin().equals(login)) {return true;};
 		}
-		for(Docente d : fintoDatabaseDocenti) {
+		for(Docente d : sistema.getDocenti()) {
 			if (d.getLogin().equals(login)) {return true;};
 		}
 		return false;
@@ -83,7 +85,7 @@ public class Controller {
 	}
 	// Metodo per la verifica dell`unicità della matricola
 	public boolean controlloMatricola(String matricola) {
-		for(Studente s : fintoDatabaseStudenti) {
+		for(Studente s : sistema.getStudenti()) {
 			if(s.getMatricola().equals(matricola)){return true;}
 		}
 		return false;
@@ -107,14 +109,37 @@ public class Controller {
 		return false;
 	}
 
-	// Metodo per aggiungere un argomento alla lista di argomenti del tirocinio.
+	// Metodo per aggiungere un argomento alla lista di argomenti del docente loggato.
 	public void aggiungiNuovoArgomento(String argomento) {
-		fintoDatabaseArgomenti.addElement(argomento); // DefaultListModel usa addElement invece di add
-	}
-	// Metodo per dare in output la lista di argomenti.
-	public DefaultListModel<String> ottieniModelloArgomenti() {
-		return fintoDatabaseArgomenti;
+		if (this.docenteLoggato != null) {
+			this.docenteLoggato.addArgomentoTirocinio(argomento);
+		}
 	}
 
+	// Restituisce la colonna dei nomi dei docenti
+	public ArrayList<String> getNomiDocentiPerTabella() {
+		ArrayList<String> nomi = new ArrayList<>();
+
+		for (Docente d : sistema.getDocenti()) {
+			// Per ogni argomento che il docente ha, aggiungiamo il suo nome nella lista
+			for (String arg : d.getArgomentiTirocinio()) { // Assumendo che il metodo si chiami getArgomenti() nel Docente
+				nomi.add("Prof. " + d.getCognome() + " " + d.getNome());
+			}
+		}
+		return nomi;
+	}
+
+	// Restituisce la colonna degli argomenti (sincronizzata con i nomi)
+	public ArrayList<String> getArgomentiPerTabella() {
+		ArrayList<String> argomenti = new ArrayList<>();
+
+		for (Docente d : sistema.getDocenti()) {
+			// Aggiungiamo tutti gli argomenti di questo docente
+			for (String arg : d.getArgomentiTirocinio()) {
+				argomenti.add(arg);
+			}
+		}
+		return argomenti;
+	}
 
 }

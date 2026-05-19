@@ -5,7 +5,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Home {
+public class Home extends JFrame {
     public static JFrame frame;
     private JButton registratiComeStudenteRButton;
     private JTextField loginTextField;
@@ -39,7 +39,7 @@ public class Home {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // LISTENER RIFERITO AL PULSANTE PER REGISTRARSI COME STUDENTE
-                RegistrazioneStudente guiRegistrazioneStudente = new RegistrazioneStudente(frame);
+                RegistrazioneStudente guiRegistrazioneStudente = new RegistrazioneStudente(frame,controller);
                 frame.setVisible(false);
             }
         });
@@ -47,7 +47,7 @@ public class Home {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // LISTENER RIFERITO AL PULSANTE PER REGISTRARSI COME DOCENTE.
-                RegistrazioneDocente guiRegistrazione = new RegistrazioneDocente(frame);
+                RegistrazioneDocente guiRegistrazione = new RegistrazioneDocente(frame,controller);
                 frame.setVisible(false);
             }
         });
@@ -63,19 +63,19 @@ public class Home {
                     JOptionPane.showMessageDialog(frame,"Ci sono dei campi vuoti.");
                     return;
                 }
-                Controller controller = new Controller();
+                //Controller controller = new Controller();
                 String ruolo = controller.effettuaLogin(login, password);
                 // CONTROLLO PER VERIFICARE SE L'ACCESSO LO FA UNO STUDENTE O UN DOCENTE.
                 if (ruolo.equals("STUDENTE")) {
                     JOptionPane.showMessageDialog(frame, "Accesso eseguito come studente.");
                     // ora possiamo aprire la HomeStudente
-                    StudenteHome studenteHome = new StudenteHome(frame);
+                    StudenteHome studenteHome = new StudenteHome(frame,controller);
                     frame.setVisible(false);
 
                 } else if (ruolo.equals("DOCENTE")) {
                     JOptionPane.showMessageDialog(frame, "Accesso eseguito come docente.");
                     // ora possiamo aprire la HomeDocente
-                    DocenteHome docenteHome = new DocenteHome(frame);
+                    DocenteHome docenteHome = new DocenteHome(frame,controller);
                     frame.setVisible(false);
                 }
                 else {

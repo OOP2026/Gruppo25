@@ -13,10 +13,10 @@ public class AggiungiNuovoArgomento {
     private JButton annullaButton;
     private JPanel panelAggArg;
     private JFrame frame;
-    private final Controller controller;
+    private Controller controller;
 
-    public AggiungiNuovoArgomento(JFrame FrameChiamante) {
-        controller = new Controller();
+    public AggiungiNuovoArgomento(JFrame FrameChiamante, Controller controller) {
+        this.controller = controller;
         frame = new JFrame("Aggiungi Argomento di Tirocinio");
         frame.setContentPane(panelAggArg);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -42,7 +42,7 @@ public class AggiungiNuovoArgomento {
                     return;
                 } else {
                     // Chiamiamo il metodo aggiungiNuovoArgomento del controller per fare aggiungere nella lista la stringa presa dal TextField.
-                    controller.aggiungiNuovoArgomento(nomeArgomentoText.getText());
+                    AggiungiNuovoArgomento.this.controller.aggiungiNuovoArgomento(nomeArgomentoText.getText());
                     JOptionPane.showMessageDialog(null, "Argomento aggiunto correttamente.");
                 }
                 FrameChiamante.setVisible(true);

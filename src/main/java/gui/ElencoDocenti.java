@@ -3,24 +3,22 @@ package gui;
 import controller.Controller;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ElencoDocenti {
     private JScrollBar scrollBar1;
-    private JList docentilist1;
     private JList argomentilist2;
-    private JButton OKButton;
-    private JLabel TitoloListaDocentiJLabel;
-    private JLabel TitoloListaArgomentiJLabel;
-    private JButton annullaButton;
+    private JButton IndietroButton;
     private JPanel panelElencoDocenti;
+    private JTable table1;
     private JFrame frame;
-    private final Controller controller;
+    private Controller controller;
 
-    public ElencoDocenti(JFrame FrameChiamante) {
-        controller = new Controller();
-        argomentilist2.setModel(controller.ottieniModelloArgomenti());
+    public ElencoDocenti(JFrame FrameChiamante, Controller controller) {
+        this.controller = controller;
         frame = new JFrame("Elenco Docenti");
         frame.setContentPane(panelElencoDocenti);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -28,11 +26,8 @@ public class ElencoDocenti {
         frame.setVisible(true);
         frame.setLocationRelativeTo(null); //Questo metodo serve per far avviare la schermata al centro dello schermo.
 
-        // Aggiorniamo la lista che lo studente può vedere degli argomenti aggiunti dai docenti con il metodo setModel, passandogli
-        // la stringa ottenuta ancora dal metodo del controller ottieniModelArgomenti.
-        argomentilist2.setModel(controller.ottieniModelloArgomenti());
 
-        OKButton.addActionListener(new ActionListener() {
+        IndietroButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // LISTENER RIFERITO AL BOTTONE OK DELLA SCHERMATA ELENCO DOCENTI
@@ -40,6 +35,25 @@ public class ElencoDocenti {
                 frame.dispose();
             }
         });
+
+        // Creo la tabella per visualizzare docenti e argomenti dei tirocini
+        table1.setModel(new DefaultTableModel(
+                new Object[][] {}, // Nessun dato iniziale
+                new String[] { "Nome Docente", "Argomento Tirocinio" } // Intestazioni
+        ));
+
+        DefaultTableModel model = (DefaultTableModel) table1.getModel();
+
+        // 3. Chiediamo al Controller le due liste parallele
+        ArrayList<String> listaNomi = controller.getNomiDocentiPerTabella();
+        ArrayList<String> listaArgomenti = controller.getArgomentiPerTabella();
+
+        if (listaNomi != null) {
+            for (int i = 0; i < listaNomi.size(); i++) {
+                // Inseriamo una riga creando un Object array con i dati corrispondenti
+                model.addRow(new Object[]{ listaNomi.get(i), listaArgomenti.get(i) });
+            }
+        }
 
     }
 }

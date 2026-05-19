@@ -1,5 +1,7 @@
 package gui;
 
+import controller.Controller;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,8 +12,10 @@ public class ElencoTirocinanti {
     private JPanel panelElencoTirocinanti;
     private JScrollBar scrollBar1;
     private JFrame frame;
+    private Controller controller;
 
-    public ElencoTirocinanti(JFrame FrameChiamante) {
+    public ElencoTirocinanti(JFrame FrameChiamante, Controller controller) {
+        this.controller = controller;
         frame = new JFrame("Elenco Tirocinanti");
         frame.setContentPane(panelElencoTirocinanti);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

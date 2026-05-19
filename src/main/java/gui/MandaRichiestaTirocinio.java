@@ -1,5 +1,7 @@
 package gui;
 
+import controller.Controller;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,8 +13,10 @@ public class MandaRichiestaTirocinio {
     private JPanel panelRichiestaTirocinio;
     private JButton annullaButton;
     private JFrame frame;
+    private Controller controller;
 
-    public MandaRichiestaTirocinio(JFrame FrameChiamante) {
+    public MandaRichiestaTirocinio(JFrame FrameChiamante, Controller controller) {
+        this.controller = controller;
         frame = new JFrame("Richiesta Tirocinio");
         frame.setContentPane(panelRichiestaTirocinio);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

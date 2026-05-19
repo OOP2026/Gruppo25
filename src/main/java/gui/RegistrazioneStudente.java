@@ -4,8 +4,6 @@ import controller.Controller;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
 
 public class RegistrazioneStudente extends JFrame {
     private JTextField s_loginTextField;
@@ -20,10 +18,10 @@ public class RegistrazioneStudente extends JFrame {
     private JPasswordField s_passwordPasswordField;
     private JTextField s_matricolaTextField;
     private JFrame frame;
-    private final Controller controller;
+    private Controller controller;
 
-    public RegistrazioneStudente(JFrame frameHome) {
-        controller = new Controller();
+    public RegistrazioneStudente(JFrame frameHome, Controller controller) {
+        this.controller = controller;
 
         frame = new JFrame("Registrazione Studente");
         frame.setContentPane(panelRegStudenti);
@@ -50,22 +48,22 @@ public class RegistrazioneStudente extends JFrame {
                     JOptionPane.showMessageDialog(frame, "Devi riempire tutti i campi idoneamente.");
                 }
                 // Verifico se il login inserito è già presente
-                else if(controller.controlloLogin(login)) {JOptionPane.showMessageDialog(frame, "Login già esistente! Utilizzare una login differente");}
+                else if(RegistrazioneStudente.this.controller.controlloLogin(login)) {JOptionPane.showMessageDialog(frame, "Login già esistente! Utilizzare una login differente");}
                 // Verifico che la password inserita abbia almeno 8 caratteri
-                else if(controller.controlloPassoword(password)){JOptionPane.showMessageDialog(frame,"Attenzione inserire una password di almeno 8 caratteri!");}
+                else if(RegistrazioneStudente.this.controller.controlloPassoword(password)){JOptionPane.showMessageDialog(frame,"Attenzione inserire una password di almeno 8 caratteri!");}
                 // Verifico se nel nome sono inseriti dei numeri
-                else if(controller.controlloNomeCognome(nome)){JOptionPane.showMessageDialog(frame, "Attenzione carattere non consentito nel nome!");}
+                else if(RegistrazioneStudente.this.controller.controlloNomeCognome(nome)){JOptionPane.showMessageDialog(frame, "Attenzione carattere non consentito nel nome!");}
                 // Verifico se nel cognome sono inseriti dei numeri
-                else if (controller.controlloNomeCognome(cognome)){JOptionPane.showMessageDialog(frame,"Attenzione carattere non consentito nel cognome!");}
+                else if (RegistrazioneStudente.this.controller.controlloNomeCognome(cognome)){JOptionPane.showMessageDialog(frame,"Attenzione carattere non consentito nel cognome!");}
                 // Verifico se la mail inserita è nel formato giusto
-                else if(controller.controlloEmailStudente(email)){JOptionPane.showMessageDialog(frame,"Attenzione inserire la mail nel formato corretto!");}
+                else if(RegistrazioneStudente.this.controller.controlloEmailStudente(email)){JOptionPane.showMessageDialog(frame,"Attenzione inserire la mail nel formato corretto!");}
                 // Verifico se la matricola è inserita correttamente
-                else if(controller.controlloFormatoMatricola(matricola)){JOptionPane.showMessageDialog(frame,"Attenzione la matricola deve essere nella forma DExxxxxxx!");}
+                else if(RegistrazioneStudente.this.controller.controlloFormatoMatricola(matricola)){JOptionPane.showMessageDialog(frame,"Attenzione la matricola deve essere nella forma DExxxxxxx!");}
                 // Verifico se la matricola inserita è già presente
-                else if(controller.controlloMatricola(matricola)){JOptionPane.showMessageDialog(frame,"Attenzione matricola già presente nel database!");}
+                else if(RegistrazioneStudente.this.controller.controlloMatricola(matricola)){JOptionPane.showMessageDialog(frame,"Attenzione matricola già presente nel database!");}
                 else {
                     JOptionPane.showMessageDialog(frame, "Benvenuto " + nome + " " + cognome + ".");
-                    controller.setStudente(login, password, nome, cognome, email, corsoLaurea, matricola);
+                    RegistrazioneStudente.this.controller.setStudente(login, password, nome, cognome, email, corsoLaurea, matricola);
                     frameHome.setVisible(true);
                     frame.dispose();
                 }
