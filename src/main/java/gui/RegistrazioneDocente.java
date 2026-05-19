@@ -29,6 +29,7 @@ public class RegistrazioneDocente extends JFrame {
         frame.setVisible(true);
         frame.setLocationRelativeTo(null); //Questo metodo serve per far avviare la schermata al centro dello schermo.
         frame.setResizable(false); //Questo metodo permetto(o non) di far ingrandire la schemrata.
+        frame.getRootPane().setDefaultButton(d_confermaButton); // Con questo metodo il pulsante conferma rileva anche l'invio da tastiera
 
         d_confermaButton.addActionListener(new ActionListener() {
             @Override
