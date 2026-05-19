@@ -23,7 +23,7 @@ public class Home {
         frame.setVisible(true);
         //frame.setLocation(300,300); Questo metodo serve per far avviare l'applicazione in un determinato punto dello schermo.
         frame.setLocationRelativeTo(null); //Questo metodo serve per far avviare la schermata al centro dello schermo.
-        frame.setResizable(false); //Questo metodo permetto(o non) di far ingrandire la schermata.
+        //frame.setResizable(false); //Questo metodo permetto(o non) di far ingrandire la schermata.
     }
 
     public Home() {

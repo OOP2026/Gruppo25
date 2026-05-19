@@ -30,7 +30,13 @@
             <preferred-size width="150" height="50"/>
           </grid>
         </constraints>
-        <properties/>
+        <properties>
+          <model>
+            <item value="Tesista 1"/>
+            <item value="Tesista 2"/>
+            <item value="Tesista 3"/>
+          </model>
+        </properties>
       </component>
     </children>
   </grid>
