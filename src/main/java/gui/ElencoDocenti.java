@@ -44,13 +44,11 @@ public class ElencoDocenti {
 
         DefaultTableModel model = (DefaultTableModel) table1.getModel();
 
-        // 3. Chiediamo al Controller le due liste parallele
         ArrayList<String> listaNomi = controller.getNomiDocentiPerTabella();
         ArrayList<String> listaArgomenti = controller.getArgomentiPerTabella();
 
         if (listaNomi != null) {
             for (int i = 0; i < listaNomi.size(); i++) {
-                // Inseriamo una riga creando un Object array con i dati corrispondenti
                 model.addRow(new Object[]{ listaNomi.get(i), listaArgomenti.get(i) });
             }
         }
