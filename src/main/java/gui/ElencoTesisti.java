@@ -7,12 +7,21 @@ import java.awt.event.ActionListener;
 public class ElencoTesisti {
     private JButton ritornaAllaHomeButton;
     private JList listaTesisti;
+    private JPanel panelElencoTesisti;
+    private JFrame frame;
 
-    public ElencoTesisti() {
+    public ElencoTesisti(JFrame FrameChiamante) {
+        frame = new JFrame("Home Docente");
+        frame.setContentPane(panelElencoTesisti);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.pack();
+        frame.setVisible(true);
+        frame.setLocationRelativeTo(null); //Questo metodo serve per far avviare la schermata al centro dello schermo.
         ritornaAllaHomeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-
+                FrameChiamante.setVisible(true);
+                frame.dispose();
             }
         });
     }

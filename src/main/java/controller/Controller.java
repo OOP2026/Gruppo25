@@ -13,7 +13,6 @@ public class Controller {
 	private final static List<Docente> fintoDatabaseDocenti = new ArrayList<>();
 
 	public Controller() {
-
 		}
 
 	public void setStudente(String login, String password, String nome, String cognome, String email, String corsoLaurea,String matricola){
