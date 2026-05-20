@@ -142,4 +142,14 @@ public class Controller {
 		return argomenti;
 	}
 
+	// Metodo per restituire la lista di nomi di tutti i prof che servono nella Tendina di MandaRichiestTirocinio.
+	public ArrayList<String> getNomiUnaVolta() {
+		ArrayList<String> nomiDocentiSingoli = new ArrayList<>();
+		for (Docente d : sistema.getDocenti()){
+			String nomeDocente = (d.getNome() + " " + d.getCognome());
+			nomiDocentiSingoli.add(nomeDocente);
+		}
+		return nomiDocentiSingoli;
+	}
+
 }
