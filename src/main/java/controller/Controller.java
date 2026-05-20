@@ -122,7 +122,7 @@ public class Controller {
 
 		for (Docente d : sistema.getDocenti()) {
 			// Per ogni argomento che il docente ha, aggiungiamo il suo nome nella lista
-			for (String arg : d.getArgomentiTirocinio()) { // Assumendo che il metodo si chiami getArgomenti() nel Docente
+			for (String arg : d.getArgomentiTirocinio()) {
 				nomi.add("Prof. " + d.getCognome() + " " + d.getNome());
 			}
 		}
