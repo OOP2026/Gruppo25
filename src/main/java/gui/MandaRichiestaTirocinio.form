@@ -35,11 +35,7 @@
         </constraints>
         <properties>
           <model>
-            <item value="Docente 1"/>
-            <item value="Docente 2"/>
-            <item value="Docente 3"/>
-            <item value="Docente 4"/>
-            <item value="Docente 5"/>
+            <item value="Seleziona un docente"/>
           </model>
         </properties>
       </component>
@@ -48,13 +44,7 @@
           <grid row="3" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="2" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
-          <model>
-            <item value="Argomento 1"/>
-            <item value="Argomento 2"/>
-            <item value="Argomento 3"/>
-            <item value="Argomento 4"/>
-            <item value="Argomento 5"/>
-          </model>
+          <model/>
         </properties>
       </component>
       <vspacer id="dd299">

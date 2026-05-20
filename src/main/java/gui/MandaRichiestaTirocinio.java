@@ -32,5 +32,11 @@ public class MandaRichiestaTirocinio {
                 frame.dispose();
             }
         });
+
+        // Per poter aggiungere tutti i docenti diversi alla tendina.
+        for(String nomeProf : controller.getNomiUnaVolta()){
+            comboBox1.addItem(nomeProf);
+        }
+
     }
 }
