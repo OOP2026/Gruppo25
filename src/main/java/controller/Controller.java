@@ -23,7 +23,7 @@ public class Controller {
 
 
 	public Controller() {
-		//this.sistema = new SistemaUniversitario();
+
 		this.studenti = new ArrayList<>();
 		this.docenti = new ArrayList<>();
 		this.richiesteTirocinio = new ArrayList<>();
@@ -67,13 +67,13 @@ public class Controller {
 			if (s.getLogin().equals(login)) {
 				return true;
 			}
-			;
+
 		}
 		for (Docente d : docenti) {
 			if (d.getLogin().equals(login)) {
 				return true;
 			}
-			;
+
 		}
 		return false;
 	}

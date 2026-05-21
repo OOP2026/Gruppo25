@@ -48,21 +48,7 @@ public class MandaRichiestaTirocinio extends JFrame {
 
             }
         });
-
-
-        argomentoTextField.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
-
-        nomeDocenteTextField.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-
-            }
-        });
+        
         annullaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -71,11 +57,6 @@ public class MandaRichiestaTirocinio extends JFrame {
                 frame.dispose();
             }
         });
-        cognomeDocenteTextField.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
 
-            }
-        });
     }
 }
