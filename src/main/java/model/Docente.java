@@ -38,7 +38,10 @@ public class Docente extends Utente {
     }
 
     public List<RichiestaTirocinio> getRichiestaTirocinio() { return richiestaTirocinio; }
+
     public void setRichiestaTirocinio(ArrayList<RichiestaTirocinio> richiestaTirocinio) { this.richiestaTirocinio = richiestaTirocinio; }
+
+    public Docente getDocente(){return this;}
 }
 
 

@@ -9,6 +9,7 @@ public class Studente extends Utente{
     private Tirocinio tirocinio;
     private Tesi tesi;
     private List<RichiestaTirocinio> richiestaTirocinio = new ArrayList<>();
+    private String argomentoTirocinio;
 
     //Costrutture dell'Oggetto Studente
     public Studente(String login, String password, String nome, String cognome, String email, String corsoLaurea,String matricola) {
@@ -39,5 +40,11 @@ public class Studente extends Utente{
     public List<RichiestaTirocinio> getRichiestaTirocinio() {return richiestaTirocinio;}
 
     public void setRichiestaTirocinio(List<RichiestaTirocinio> richiestaTirocinio) {this.richiestaTirocinio = richiestaTirocinio;}
+
+    public Studente getStudente(){return this;}
+
+    public void setArgomentoTirocinio(String argomentoTirocinio) {this.argomentoTirocinio = argomentoTirocinio;}
+
+    public String getArgomentoTirocinio() {return argomentoTirocinio;}
 
 }

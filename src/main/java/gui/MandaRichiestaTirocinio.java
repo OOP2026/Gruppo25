@@ -1,6 +1,8 @@
 package gui;
 
 import controller.Controller;
+import model.Docente;
+import model.Studente;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
@@ -37,7 +39,9 @@ public class MandaRichiestaTirocinio extends JFrame {
                     JOptionPane.showMessageDialog(frame, "Attenzione inserire correttamente nome e argomento!");
                 }
                 else {
+                    MandaRichiestaTirocinio.this.controller.aggiungiRichiestaTirocinio(nomeDocente, cognomeDocente, argomentoProf);
                     JOptionPane.showMessageDialog(frame,"Richiesta inoltrata correttamente");
+                    MandaRichiestaTirocinio.this.controller.setArgomentoStudente(argomentoProf);
                     FrameChiamante.setVisible(true);
                     frame.dispose();
                 }

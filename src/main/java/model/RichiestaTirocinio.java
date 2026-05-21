@@ -5,13 +5,14 @@ public class RichiestaTirocinio {
     private Studente studente;
     private Docente docente;
     private Tirocinio tirocinioGenerato;
+    private String argomento;
 
     // Costruttore dell'Oggetto RichiestaTirocinio
-    public RichiestaTirocinio(Stato statoRichiesta,  Studente studente, Docente docente) {
+    public RichiestaTirocinio(Stato statoRichiesta,  Studente studente, Docente docente, String argomento) {
         this.statoRichiesta = statoRichiesta;
         this.studente = studente;
         this.docente = docente;
-
+        this.argomento = argomento;
     }
 
     // Implementazione dei vari metodi get e set di tutti gli attributi della classe
@@ -39,4 +40,5 @@ public class RichiestaTirocinio {
 
     public Tirocinio getTirocinioGenerato() {return tirocinioGenerato;}
 
+    public String getArgomento(){return argomento;}
 }

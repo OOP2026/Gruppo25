@@ -3,13 +3,18 @@ package gui;
 import controller.Controller;
 
 import javax.swing.*;
+import javax.swing.table.DefaultTableModel;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class ElencoRichiesteTirocinio {
     private JButton ritornaAllaHomeButton;
-    private JList listaRrichiesteTirocinio;
     private JPanel panelElencoRichiesteTirocinio;
+    private JTable table1;
+    private JButton accettaButton;
+    private JButton rifiutaButton;
     private JFrame frame;
     private Controller controller;
 
@@ -27,6 +32,51 @@ public class ElencoRichiesteTirocinio {
             public void actionPerformed(ActionEvent e) {
                 FrameChiamante.setVisible(true);
                 frame.dispose();
+            }
+        });
+
+        // Creo la tabella per visualizzare le richieste dei tirocini
+        table1.setModel(new DefaultTableModel(
+                new Object[][] {},
+                new String[]{"Nome Studente", "Matricola", "Argomento Tirocinio"}
+        ));
+
+        DefaultTableModel model = (DefaultTableModel) table1.getModel();
+
+        ArrayList<String> listaNomi = controller.getNomiStudentiPerTabella();
+        ArrayList<String> listaMatricole = controller.getMatricolaStudentiPerTabella();
+        ArrayList<String> listaArgomenti = controller.getArgomentiStudentiPerTabella();
+
+        if (listaNomi != null) {
+            for (int i = 0; i < listaNomi.size(); i++) {
+                model.addRow(new Object[]{ listaNomi.get(i), listaMatricole.get(i), listaArgomenti.get(i) });
+            }
+        }
+
+        accettaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int rigaSelezionata = table1.getSelectedRow();
+                if (rigaSelezionata < 0) {
+                    JOptionPane.showMessageDialog(frame,"Selezionare prima una richiesta dalla tabella.");
+                }
+                // Il controller aggiorna lo stato in base alla riga cliccata
+                // TODO: controller.modificaStatoRichiesta(rigaSelezionata,Stato.ACCETTATA);
+                JOptionPane.showMessageDialog(frame,"Richiesta accettata con successo.");
+            }
+            // TODO: Chiamare il codice per "aggiornare" la tabella a schermo.
+        });
+
+        rifiutaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int rigaSelezionata = table1.getSelectedRow();
+                if (rigaSelezionata < 0) {
+                    JOptionPane.showMessageDialog(frame,"Selezionare prima una richiesta dalla tabella");
+                }
+                // Il controller aggiorna lo stato in base alla riga cliccata
+                // TODO: controller.modificaStatoRichiesta(rigaSelezionata,Stato.RIFIUTATA);
+                JOptionPane.showMessageDialog(frame,"Richiesta rifiutata con successo.");
             }
         });
     }
