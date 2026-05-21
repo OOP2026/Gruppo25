@@ -10,83 +10,24 @@
     <children>
       <component id="fd8f2" class="javax.swing.JLabel" binding="TitoloRegistraStudenteJLabel">
         <constraints>
-          <grid row="0" column="0" row-span="1" col-span="4" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="0" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
+          <font size="16"/>
           <text value="Registrati come nuovo Studente"/>
         </properties>
       </component>
       <component id="b5f6f" class="javax.swing.JButton" binding="s_confermaButton">
         <constraints>
-          <grid row="8" column="1" row-span="1" col-span="3" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
+          <grid row="8" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Conferma"/>
         </properties>
       </component>
-      <component id="fc341" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="4" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="153" height="17"/>
-          </grid>
-        </constraints>
-        <properties>
-          <text value="Login"/>
-        </properties>
-      </component>
-      <component id="f75a7" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="153" height="17"/>
-          </grid>
-        </constraints>
-        <properties>
-          <text value="Password"/>
-        </properties>
-      </component>
-      <component id="df119" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="3" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="153" height="17"/>
-          </grid>
-        </constraints>
-        <properties>
-          <text value="Nome"/>
-        </properties>
-      </component>
-      <component id="5404f" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="4" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="153" height="17"/>
-          </grid>
-        </constraints>
-        <properties>
-          <text value="Cognome"/>
-        </properties>
-      </component>
-      <component id="436f9" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="5" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="153" height="17"/>
-          </grid>
-        </constraints>
-        <properties>
-          <text value="Email"/>
-        </properties>
-      </component>
-      <component id="541b1" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="6" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false">
-            <preferred-size width="153" height="17"/>
-          </grid>
-        </constraints>
-        <properties>
-          <text value="Corso di Laurea"/>
-        </properties>
-      </component>
       <component id="5a6e6" class="javax.swing.JTextField" binding="s_loginTextField">
         <constraints>
-          <grid row="1" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+          <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -96,7 +37,7 @@
       </component>
       <component id="59208" class="javax.swing.JTextField" binding="s_nomeTextField">
         <constraints>
-          <grid row="3" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+          <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -106,7 +47,7 @@
       </component>
       <component id="327e3" class="javax.swing.JTextField" binding="s_cognomeTextField">
         <constraints>
-          <grid row="4" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+          <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -116,7 +57,7 @@
       </component>
       <component id="5c26d" class="javax.swing.JTextField" binding="s_emailTextField">
         <constraints>
-          <grid row="5" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+          <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -126,23 +67,15 @@
       </component>
       <component id="fe5d4" class="javax.swing.JButton" binding="annullaButton" default-binding="true">
         <constraints>
-          <grid row="8" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
+          <grid row="8" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
         </constraints>
         <properties>
           <text value="Annulla"/>
         </properties>
       </component>
-      <component id="e6881" class="javax.swing.JLabel">
-        <constraints>
-          <grid row="7" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="8" fill="0" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Matricola"/>
-        </properties>
-      </component>
       <component id="e0b6e" class="javax.swing.JPasswordField" binding="s_passwordPasswordField">
         <constraints>
-          <grid row="2" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+          <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -152,7 +85,7 @@
       </component>
       <component id="c9eaf" class="javax.swing.JTextField" binding="s_corsoLaureaTextField">
         <constraints>
-          <grid row="6" column="2" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+          <grid row="6" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
@@ -162,12 +95,73 @@
       </component>
       <component id="c16fd" class="javax.swing.JTextField" binding="s_matricolaTextField">
         <constraints>
-          <grid row="7" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
+          <grid row="7" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
           </grid>
         </constraints>
         <properties>
           <text value=""/>
+        </properties>
+      </component>
+      <component id="90542" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="1" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Login"/>
+        </properties>
+      </component>
+      <component id="83f52" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="2" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Password"/>
+        </properties>
+      </component>
+      <component id="265aa" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="3" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Nome"/>
+        </properties>
+      </component>
+      <component id="6bb45" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="4" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Cognome"/>
+        </properties>
+      </component>
+      <component id="15b98" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="5" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="email"/>
+        </properties>
+      </component>
+      <component id="478a5" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="6" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="1" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Corso di Laurea"/>
+        </properties>
+      </component>
+      <vspacer id="e1eb3">
+        <constraints>
+          <grid row="1" column="0" row-span="8" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+        </constraints>
+      </vspacer>
+      <component id="5f47" class="javax.swing.JLabel">
+        <constraints>
+          <grid row="7" column="1" row-span="1" col-span="1" vsize-policy="0" hsize-policy="0" anchor="0" fill="0" indent="0" use-parent-layout="false"/>
+        </constraints>
+        <properties>
+          <text value="Matricola"/>
         </properties>
       </component>
     </children>

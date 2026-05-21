@@ -207,13 +207,10 @@ public class Controller {
 				break; // Lo abbiamo trovato, possiamo fermare il ciclo for
 			}
 		}
-
 		// Se abbiamo trovato il docente e lo studente è regolarmente loggato
 		if (docenteTrovato != null && this.studenteLoggato != null) {
-
 			// Chiamiamo il costruttore di RichiestaTirocinio passandogli lo Stato iniziale
 			RichiestaTirocinio nuovaRichiesta = new RichiestaTirocinio(Stato.ATTESA, this.studenteLoggato, docenteTrovato, argomento);
-
 			// Aggiungiamo la richiesta alla lista del controller
 			richiesteTirocinio.add(nuovaRichiesta);
 		}
@@ -239,7 +236,6 @@ public class Controller {
 	// Restituisce la colonna delle matricole
 	public ArrayList<String> getMatricolaStudentiPerTabella(){
 		ArrayList<String> matricole = new ArrayList<>();
-
 		for (RichiestaTirocinio r : richiesteTirocinio) {
 			if(r.getDocente().equals(docenteLoggato)) {
 				String matricolaS = r.getStudente().getMatricola();
@@ -263,4 +259,20 @@ public class Controller {
 		return argomenti;
 	}
 
+	// Metodo per modificare lo stato della richiesta dopo
+	 public void modificaStatoRichiesta(int rigaSelezionata,Stato nuovoStato){
+		// Qui verifichiamo che la lista di richieste non sia vuota e che l'indice sia valido:
+		 // maggiore di 0 e minore della quantià di richieste (visto che ogni riga della tabella corrisponde ad una richiesta)
+		if(richiesteTirocinio != null && rigaSelezionata >= 0 && rigaSelezionata < this.richiesteTirocinio.size()){
+			// Cerchiamo la richiesta specifica nell'array grazie alla riga selezionata
+			RichiestaTirocinio richiestaNuovoStato = this.richiesteTirocinio.get(rigaSelezionata);
+			richiestaNuovoStato.setStatoRichiesta(nuovoStato);
+		}
+	 }
+
+	 public List<RichiestaTirocinio> getRichiestaTirocinio(){
+		return this.richiesteTirocinio;
+	 }
+
+	 public Studente getStudenteLoggato(){return this.studenteLoggato;};
 }
