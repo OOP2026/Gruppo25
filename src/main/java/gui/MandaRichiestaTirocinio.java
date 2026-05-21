@@ -6,12 +6,13 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class MandaRichiestaTirocinio {
+public class MandaRichiestaTirocinio extends JFrame {
     private JButton OKButton;
     private JPanel panelRichiestaTirocinio;
     private JButton annullaButton;
     private JTextField argomentoTextField;
     private JTextField nomeDocenteTextField;
+    private JTextField cognomeDocenteTextField;
     private JFrame frame;
     private Controller controller;
 
@@ -30,8 +31,9 @@ public class MandaRichiestaTirocinio {
             public void actionPerformed(ActionEvent e) {
                 // LISTENER RIFERITO AL PULSANTE OK DELLA SCHERMATA PER MANDARE LA RICHIESTA DI TIROCINIO
                 String nomeDocente = nomeDocenteTextField.getText();
+                String cognomeDocente = cognomeDocenteTextField.getText();
                 String argomentoProf = argomentoTextField.getText();
-                if (controller.controllaRichiestaTirocinio(nomeDocente, argomentoProf)) {
+                if (MandaRichiestaTirocinio.this.controller.controllaRichiestaTirocinio(nomeDocente, cognomeDocente, argomentoProf)) {
                     JOptionPane.showMessageDialog(frame, "Attenzione inserire correttamente nome e argomento!");
                 }
                 else {
@@ -60,7 +62,15 @@ public class MandaRichiestaTirocinio {
         annullaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                
+                frame.setVisible(false);
+                FrameChiamante.setVisible(true);
+                frame.dispose();
+            }
+        });
+        cognomeDocenteTextField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
             }
         });
     }

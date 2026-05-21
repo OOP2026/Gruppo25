@@ -152,18 +152,23 @@ public class Controller {
 	}
 
 	// Metodo che controlla l'inserimento del docente e del relativo argomento nella richiesta di tirocinio
-	public boolean controllaRichiestaTirocinio(String nomeProf, String nomeArgomento){
-		ArrayList<String> argomenti = new ArrayList<>();
+	public boolean controllaRichiestaTirocinio(String nomeProf, String cognomeProf, String nomeArgomento){
+		List<String> argomenti = new ArrayList<>();
 		List<String> nomiProf = new ArrayList<>();
+		List<String> cognomiProf = new ArrayList<>();
 		// Questo for inserisce i nomi di tutti i docenti
 		for (Docente d : docenti) {
-			nomiProf.add(d.getNome() + " " + d.getCognome());
+			nomiProf.add(d.getNome());
+			cognomiProf.add(d.getCognome());
+
 		}
 		// Controlliamo se il nome esiste
-		if((nomeProf.isEmpty()) || !(nomiProf.contains(nomeProf))){return true;}
+		if((nomeProf.isEmpty()) || cognomeProf.isEmpty()){return true;}
+		else if(!(nomiProf.contains(nomeProf))){return true;}
+		else if(!(cognomiProf.contains(cognomeProf))){return true;}
 		// Inseriamo tutti gli argomenti relativi al professore selezionato
 		for(Docente d : docenti){
-			if(d.getNome().equals(nomeProf)){
+			if(d.getNome().equals(nomeProf) &&  d.getCognome().equals(cognomeProf)){
 				for (String arg : d.getArgomentiTirocinio()) {
 				argomenti.add(arg);}
 			}
