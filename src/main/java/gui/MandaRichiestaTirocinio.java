@@ -7,11 +7,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MandaRichiestaTirocinio {
-    private JComboBox comboBox1;
-    private JComboBox comboBox2;
     private JButton OKButton;
     private JPanel panelRichiestaTirocinio;
     private JButton annullaButton;
+    private JTextField argomentoTextField;
+    private JTextField nomeDocenteTextField;
     private JFrame frame;
     private Controller controller;
 
@@ -23,20 +23,45 @@ public class MandaRichiestaTirocinio {
         frame.pack();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null); //Questo metodo serve per far avviare la schermata al centro dello schermo.
+        frame.getRootPane().setDefaultButton(OKButton); // Con questo metodo il pulsante ok rileva anche l'invio da tastiera
 
         OKButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // LISTENER RIFERITO AL PULSANTE OK DELLA SCHERMATA PER MANDARE LA RICHIESTA DI TIROCINIO
-                FrameChiamante.setVisible(true);
-                frame.dispose();
+                String nomeDocente = nomeDocenteTextField.getText();
+                String argomentoProf = argomentoTextField.getText();
+                if (controller.controllaRichiestaTirocinio(nomeDocente, argomentoProf)) {
+                    JOptionPane.showMessageDialog(frame, "Attenzione inserire correttamente nome e argomento!");
+                }
+                else {
+                    JOptionPane.showMessageDialog(frame,"Richiesta inoltrata correttamente");
+                    FrameChiamante.setVisible(true);
+                    frame.dispose();
+                }
+
             }
         });
 
-        // Per poter aggiungere tutti i docenti diversi alla tendina.
-        for(String nomeProf : controller.getNomiUnaVolta()){
-            comboBox1.addItem(nomeProf);
-        }
 
+        argomentoTextField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+
+        nomeDocenteTextField.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+
+            }
+        });
+        annullaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                
+            }
+        });
     }
 }

@@ -59,7 +59,7 @@ public class RegistrazioneStudente extends JFrame {
                 // Verifico se la mail inserita è nel formato giusto
                 else if(RegistrazioneStudente.this.controller.controlloEmailStudente(email)){JOptionPane.showMessageDialog(frame,"Attenzione inserire la mail nel formato corretto!");}
                 // Verifico se la matricola è inserita correttamente
-                else if(RegistrazioneStudente.this.controller.controlloFormatoMatricola(matricola)){JOptionPane.showMessageDialog(frame,"Attenzione la matricola deve essere nella forma DExxxxxxx!");}
+                else if(RegistrazioneStudente.this.controller.controlloFormatoMatricola(matricola)){JOptionPane.showMessageDialog(frame,"Attenzione la matricola deve essere nel formato giusto");}
                 // Verifico se la matricola inserita è già presente
                 else if(RegistrazioneStudente.this.controller.controlloMatricola(matricola)){JOptionPane.showMessageDialog(frame,"Attenzione matricola già presente nel database!");}
                 else {
