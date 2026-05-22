@@ -1,6 +1,7 @@
 package gui;
 
 import controller.Controller;
+import model.Stato;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -15,6 +16,7 @@ public class ElencoRichiesteTirocinio {
     private JTable table1;
     private JButton accettaButton;
     private JButton rifiutaButton;
+    private JScrollBar scrollBar1;
     private JFrame frame;
     private Controller controller;
 
@@ -59,10 +61,11 @@ public class ElencoRichiesteTirocinio {
                 int rigaSelezionata = table1.getSelectedRow();
                 if (rigaSelezionata < 0) {
                     JOptionPane.showMessageDialog(frame,"Selezionare prima una richiesta dalla tabella.");
+                    return;
                 }
                 // Il controller aggiorna lo stato in base alla riga cliccata
-                // TODO: controller.modificaStatoRichiesta(rigaSelezionata,Stato.ACCETTATA);
-                JOptionPane.showMessageDialog(frame,"Richiesta accettata con successo.");
+                controller.modificaStatoRichiesta(rigaSelezionata, Stato.APPROVATA);
+                JOptionPane.showMessageDialog(frame,"Richiesta approvata con successo.");
             }
             // TODO: Chiamare il codice per "aggiornare" la tabella a schermo.
         });
@@ -73,10 +76,12 @@ public class ElencoRichiesteTirocinio {
                 int rigaSelezionata = table1.getSelectedRow();
                 if (rigaSelezionata < 0) {
                     JOptionPane.showMessageDialog(frame,"Selezionare prima una richiesta dalla tabella");
+                    return;
                 }
                 // Il controller aggiorna lo stato in base alla riga cliccata
-                // TODO: controller.modificaStatoRichiesta(rigaSelezionata,Stato.RIFIUTATA);
+                controller.modificaStatoRichiesta(rigaSelezionata, Stato.RIFIUTATA);
                 JOptionPane.showMessageDialog(frame,"Richiesta rifiutata con successo.");
+                // TODO: Chiamare il codice per "aggiornare" la tabella a schermo.
             }
         });
     }
