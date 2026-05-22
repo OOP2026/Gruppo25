@@ -16,7 +16,7 @@ public class RichiestaTirocinio {
     }
 
     // Implementazione dei vari metodi get e set di tutti gli attributi della classe
-    public Stato getStatoRichiesta() {return statoRichiesta;}
+    public Stato getStatoRichiesta() {return this.statoRichiesta;}
 
     public void setStatoRichiesta(Stato statoRichiesta) {
         this.statoRichiesta = statoRichiesta;
