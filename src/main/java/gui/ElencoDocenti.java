@@ -39,7 +39,7 @@ public class ElencoDocenti {
         // Creo la tabella per visualizzare docenti e argomenti dei tirocini
         table1.setModel(new DefaultTableModel(
                 new Object[][] {}, // Nessun dato iniziale
-                new String[] { "Nome Docente", "Argomento Tirocinio", "Tipologia Tirocinio" } // Intestazioni
+                new String[] { "Nome Docente", "Argomento Tirocinio", "Tipologia Tirocinio", "Nome Azienda", "Nominativo Referente" } // Intestazioni
         ));
 
         DefaultTableModel model = (DefaultTableModel) table1.getModel();
@@ -47,10 +47,12 @@ public class ElencoDocenti {
         ArrayList<String> listaNomi = controller.getNomiDocentiPerTabella();
         ArrayList<String> listaArgomenti = controller.getArgomentiPerTabella();
         ArrayList<String> listaTipologieTirocinio = controller.getTipologiePerTabella();
+        ArrayList<String> listaAzienda = controller.getNomiAziendaPerTabella();
+        ArrayList<String> listaReferenti = controller.getReferentePerTabella();
 
         if (listaNomi != null) {
             for (int i = 0; i < listaNomi.size(); i++) {
-                model.addRow(new Object[]{ listaNomi.get(i), listaArgomenti.get(i), listaTipologieTirocinio.get(i) });
+                model.addRow(new Object[]{ listaNomi.get(i), listaArgomenti.get(i), listaTipologieTirocinio.get(i), listaAzienda.get(i), listaReferenti.get(i) });
             }
         }
 

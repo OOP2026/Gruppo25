@@ -25,6 +25,7 @@ public class Controller {
 		this.studenti = new ArrayList<>();
 		this.docenti = new ArrayList<>();
 		this.richiesteTirocinio = new ArrayList<>();
+		this.listaAziende = new ArrayList<>();
 	}
 
 	public void setStudente(String login, String password, String nome, String cognome, String email, String corsoLaurea, String matricola) {
@@ -129,10 +130,26 @@ public class Controller {
 		return false;
 	}
 
-	// Metodo per aggiungere un argomento alla lista di argomenti del docente loggato.
+	/* Metodo per aggiungere un argomento alla lista di argomenti del docente loggato.
 	public void aggiungiNuovoArgomento(String argomento, String tipologiaTirocinio) {
 		if (this.docenteLoggato != null) {
 			Tirocinio tirocinio = new Tirocinio(tipologiaTirocinio, argomento);
+			this.docenteLoggato.addTirocinioProposto(tirocinio);
+			this.docenteLoggato.addArgomentoTirocinio(argomento);
+		}
+	}*/
+	// Metodo per aggiungere un argomento alla lista di argomenti del docente loggato.
+	public void aggiungiNuovoArgomento(String argomento, String tipologiaTirocinio, String nomeAz, String refAz) {
+		if (this.docenteLoggato != null) {
+			Tirocinio tirocinio = new Tirocinio(tipologiaTirocinio, argomento);
+
+			// Se è esterno, creiamo l'azienda e la incolliamo al tirocinio!
+			if (tipologiaTirocinio.equalsIgnoreCase("ESTERNO")) {
+				Azienda nuovaAzienda = new Azienda(nomeAz, refAz);
+				this.listaAziende.add(nuovaAzienda);
+				tirocinio.setAzienda(nuovaAzienda);
+			}
+
 			this.docenteLoggato.addTirocinioProposto(tirocinio);
 			this.docenteLoggato.addArgomentoTirocinio(argomento);
 		}
@@ -160,6 +177,7 @@ public class Controller {
 		return argomenti;
 	}
 
+	// Metodo che restituisce la colonna della tipologia del tirocinio
 	public ArrayList<String> getTipologiePerTabella() {
 		ArrayList<String> tipologie = new ArrayList<>();
 		for (Docente d : docenti) {
@@ -170,30 +188,30 @@ public class Controller {
 		return tipologie;
 	}
 
-	// Metodo per avere la lista dei Referenti da stampare nella tabella.
+	// Metodo che restituisce la colonna dei referenti delle aziende
 	public ArrayList<String> getReferentePerTabella(){
 		ArrayList<String> referenti = new ArrayList<>();
 		for (Docente d : docenti) {
 			for (Tirocinio t : d.getTirociniProposti()){
-				if(t.getTipologiaTirocinio().equals("ESTERNO") && t.getAzienda()!=null){
+				if(t.getTipologiaTirocinio().equalsIgnoreCase("ESTERNO") && t.getAzienda() != null){
 					referenti.add(t.getAzienda().getNominativoReferente());
-				} else{
-					referenti.add("");
+				} else {
+					referenti.add("N.D."); // Questo scatta per gli interni, salvando l'allineamento!
 				}
 			}
 		}
 		return referenti;
 	}
 
-	// Metodo per avere la lista dei Nomi delle Aziende da stampare nella tabella.
+	// Metodo che restituisce la colonna dei nomi delle aziende
 	public ArrayList<String> getNomiAziendaPerTabella(){
 		ArrayList<String> nomiAzienda = new ArrayList<>();
 		for (Docente d : docenti) {
 			for (Tirocinio t : d.getTirociniProposti()){
-				if(t.getTipologiaTirocinio().equals("ESTERNO") && t.getAzienda()!=null){
+				if(t.getTipologiaTirocinio().equalsIgnoreCase("ESTERNO") && t.getAzienda() != null){
 					nomiAzienda.add(t.getAzienda().getNomeAzienda());
 				} else {
-					nomiAzienda.add("");
+					nomiAzienda.add("N.D."); // Questo scatta per gli interni, salvando l'allineamento!
 				}
 			}
 		}
@@ -285,7 +303,7 @@ public class Controller {
 		ArrayList<String> argomenti = new ArrayList<>();
 
 		for (RichiestaTirocinio r : richiesteTirocinio) {
-			if(r.getDocente().equals(docenteLoggato)) {
+			if(r.getDocente().equals(docenteLoggato) && r.getStatoRichiesta() == Stato.ATTESA) {
 				String argomentoS = r.getArgomento();
 				argomenti.add(argomentoS);
 			}

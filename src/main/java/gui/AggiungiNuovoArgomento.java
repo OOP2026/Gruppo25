@@ -13,6 +13,8 @@ public class AggiungiNuovoArgomento {
     private JButton annullaButton;
     private JPanel panelAggArg;
     private JTextField tipologiaTirocinioTextField;
+    private JTextField nomeAziendaTextField;
+    private JTextField nominativoReferenteTextField;
     private JFrame frame;
     private Controller controller;
 
@@ -23,7 +25,11 @@ public class AggiungiNuovoArgomento {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-        frame.setLocationRelativeTo(null); //Questo metodo serve per far avviare la schermata al centro dello schermo.
+        frame.setLocationRelativeTo(null);//Questo metodo serve per far avviare la schermata al centro dello schermo.
+       /*nominativoReferenteTextField.enableInputMethods(false);
+        nomeAziendaTextField.enableInputMethods(false);*/
+        nomeAziendaTextField.setVisible(false);
+        nominativoReferenteTextField.setVisible(false);
 
         annullaButton.addActionListener(new ActionListener() {
             @Override
@@ -37,7 +43,7 @@ public class AggiungiNuovoArgomento {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Variabile per contenere l'argomento in input dal Docente.
-                String argomentoInput = nomeArgomentoText.getText().trim();
+                String argomentoInput = nomeArgomentoText.getText();
                 String tipologiaTirocinio = tipologiaTirocinioTextField.getText();
                 // Controlliamo che il campo non sia vuoto.
                 if(argomentoInput.isEmpty() || tipologiaTirocinio.isEmpty()){
@@ -46,18 +52,27 @@ public class AggiungiNuovoArgomento {
                 } else if(!(controller.controlloInserimentoTirocinio(tipologiaTirocinio))) {
                     JOptionPane.showMessageDialog(null, "Inserire correttamente la tipologia del tirocinio. [INTERNO o ESTERNO].");
                     return;
-                } else if(tipologiaTirocinio.equalsIgnoreCase("ESTERNO")){
-                    // Chiamiamo il metodo aggiungiNuovoArgomento del controller per fare aggiungere nella lista la stringa presa dal TextField.
-                    FrameChiamante.setVisible(false);
-                    frame.setVisible(false);
-                    AggiungiAziendaInfo aggiungiAziendaInfo = new AggiungiAziendaInfo(frame, controller);
-                }else {
-                    AggiungiNuovoArgomento.this.controller.aggiungiNuovoArgomento(nomeArgomentoText.getText(),tipologiaTirocinioTextField.getText());
-                    JOptionPane.showMessageDialog(null, "Argomento aggiunto correttamente.");
-                    FrameChiamante.setVisible(true);
-                    frame.dispose();
-                    return;
+                }else if(tipologiaTirocinio.equalsIgnoreCase("ESTERNO")) {
+                    nomeAziendaTextField.setVisible(true);
+                    nominativoReferenteTextField.setVisible(true);
+                    if (nomeAziendaTextField.getText().trim().isEmpty() || nominativoReferenteTextField.getText().trim().isEmpty()) {
+                        JOptionPane.showMessageDialog(null, "Devi riempire tutti i campi idoneamente.");
+                        return;
+                    } else if (controller.controlloNomeCognome(nominativoReferenteTextField.getText())) {
+                        JOptionPane.showMessageDialog(null, "Attenzione: carattere non consentito nel nome!");
+                        return;
+                    }
+                    else{
+                        AggiungiNuovoArgomento.this.controller.aggiungiNuovoArgomento(nomeArgomentoText.getText(),tipologiaTirocinioTextField.getText(),nomeAziendaTextField.getText(),nominativoReferenteTextField.getText());
+                        JOptionPane.showMessageDialog(null, "Tirocinio aggiunto correttamente.");
+                    }
                 }
+                else if(tipologiaTirocinio.equalsIgnoreCase("INTERNO")) {
+                    AggiungiNuovoArgomento.this.controller.aggiungiNuovoArgomento(nomeArgomentoText.getText(),tipologiaTirocinioTextField.getText(),nomeAziendaTextField.getText(),nominativoReferenteTextField.getText());
+                    JOptionPane.showMessageDialog(null, "Tirocinio aggiunto correttamente.");
+                }
+                FrameChiamante.setVisible(true);
+                frame.dispose();
 
             }
         });

@@ -17,7 +17,6 @@ public class StudenteHome {
     private JButton prenotaSedutaButton;
     private JPanel panelStudenteHome;
     private JButton indietroButton;
-    private JButton visualizzaInformazioniDellAziendaButton;
     private JFrame frame;
     private Controller controller;
 
@@ -82,14 +81,6 @@ public class StudenteHome {
                 frame.dispose();
             }
         });
-        visualizzaInformazioniDellAziendaButton.addComponentListener(new ComponentAdapter() {
-        });
-        visualizzaInformazioniDellAziendaButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                TirociniEsterni tirociniEsterni = new TirociniEsterni(frame, controller);
-                frame.setVisible(false);
-            }
-        });
+
     }
 }
