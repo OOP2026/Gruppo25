@@ -11,7 +11,7 @@ public class Studente extends Utente{
     private List<RichiestaTirocinio> richiestaTirocinio = new ArrayList<>();
     private String argomentoTirocinio;
 
-    //Costrutture dell'Oggetto Studente
+    //Costruttore dell'Oggetto Studente
     public Studente(String login, String password, String nome, String cognome, String email, String corsoLaurea,String matricola) {
         super(login, password, nome, cognome, email, corsoLaurea);
         this.matricola = matricola;

@@ -48,7 +48,7 @@ public class MandaRichiestaTirocinio extends JFrame {
 
             }
         });
-        
+
         annullaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
