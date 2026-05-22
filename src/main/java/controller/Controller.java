@@ -169,6 +169,36 @@ public class Controller {
 		return tipologie;
 	}
 
+	// Metodo per avere la lista dei Referenti da stampare nella tabella.
+	public ArrayList<String> getReferentePerTabella(){
+		ArrayList<String> referenti = new ArrayList<>();
+		for (Docente d : docenti) {
+			for (Tirocinio t : d.getTirociniProposti()){
+				if(t.getTipologiaTirocinio().equals("ESTERNO") && t.getAzienda()!=null){
+					referenti.add(t.getAzienda().getNominativoReferente());
+				} else{
+					referenti.add("");
+				}
+			}
+		}
+		return referenti;
+	}
+
+	// Metodo per avere la lista dei Nomi delle Aziende da stampare nella tabella.
+	public ArrayList<String> getNomiAziendaPerTabella(){
+		ArrayList<String> nomiAzienda = new ArrayList<>();
+		for (Docente d : docenti) {
+			for (Tirocinio t : d.getTirociniProposti()){
+				if(t.getTipologiaTirocinio().equals("ESTERNO") && t.getAzienda()!=null){
+					nomiAzienda.add(t.getAzienda().getNomeAzienda());
+				} else {
+					nomiAzienda.add("");
+				}
+			}
+		}
+		return nomiAzienda;
+	}
+
 	// Metodo che controlla l'inserimento del docente e del relativo argomento nella richiesta di tirocinio
 	public boolean controllaRichiestaTirocinio(String nomeProf, String cognomeProf, String nomeArgomento) {
 		List<String> argomenti = new ArrayList<>();
@@ -328,16 +358,17 @@ public class Controller {
 		return false;
 	}
 
-	// Metodo per istanziare un nuovo tirocinio chiamando il costruttore della classe Tirocinio.
-	public void creaTirocinio(String tipologiaTirocinio, String argomento, Studente studente, Docente docente){
-		 Tirocinio nuovoTirocinio = new Tirocinio( tipologiaTirocinio, argomento,  studente, docente);
-	}
-
 	// Metodo per controllare se la tipologia del tirocinio inserita sia giusta.
 	public boolean controlloInserimentoTirocinio(String tipologiaTirocinio){
 		if(tipologiaTirocinio.equalsIgnoreCase("INTERNO" ) || tipologiaTirocinio.equalsIgnoreCase("ESTERNO")){
 			return true;
 		} return false;
+	}
+
+	// Metodo per istanziare nuove aziende ed aggiungerle alla lista di tutte le Aziende.
+	public void istanziaAzienda(String nomeAzienda, String nominativoReferente){
+		Azienda nuovaAzienda = new Azienda(nomeAzienda, nominativoReferente);
+		listaAziende.add(nuovaAzienda);
 	}
 
 }
