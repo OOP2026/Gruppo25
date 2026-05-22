@@ -371,5 +371,6 @@ public class Controller {
 		Azienda nuovaAzienda = new Azienda(nomeAzienda, nominativoReferente);
 		listaAziende.add(nuovaAzienda);
 	}
+	//SDOFSONFNJVN
 
 }
