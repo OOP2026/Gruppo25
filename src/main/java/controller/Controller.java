@@ -14,6 +14,7 @@ public class Controller {
 	private List<Studente> studenti;
 	private List<Docente> docenti;
 	private List<RichiestaTirocinio> richiesteTirocinio;
+	private List<Azienda> listaAziende;
 
 	private Docente docenteLoggato;
 	private Studente studenteLoggato;
