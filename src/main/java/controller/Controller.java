@@ -270,9 +270,29 @@ public class Controller {
 		}
 	 }
 
+	 // Metodo per poter avere la lista di richieste di tirocinio.
 	 public List<RichiestaTirocinio> getRichiestaTirocinio(){
 		return this.richiesteTirocinio;
 	 }
 
+	// Metodo per poter avere i dati dello studente loggato.
 	 public Studente getStudenteLoggato(){return this.studenteLoggato;};
+
+	// Metodo per capire lo stato di una richiesta di uno Studente.
+	// Utile per poter filtrare gli studenti a cui la richiesta è stata accettata.
+	public boolean controlloRichiestaAccettata(String matricola){
+		List <RichiestaTirocinio> richiesteStudenteTrovato = null;
+		for(Studente s : studenti ){
+			if(s.getMatricola().equals(matricola)){
+				richiesteStudenteTrovato = s.getRichiestaTirocinio();
+			}
+		}
+		for(RichiestaTirocinio r : richiesteStudenteTrovato){
+			if(r.getStatoRichiesta() == Stato.APPROVATA){
+				return true;
+			}
+		}
+		return false;
+	}
+
 }
