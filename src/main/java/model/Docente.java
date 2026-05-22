@@ -9,6 +9,7 @@ public class Docente extends Utente {
     private List<Tirocinio> tirocinio = new ArrayList<>();
     private List<Tesi> tesi = new ArrayList<>();
     private List<RichiestaTirocinio> richiestaTirocinio = new ArrayList<>();
+    private List<Tirocinio> tirociniProposti = new ArrayList<>();
 
     //costruttore dell'oggetto Docente
     public Docente(String login, String password, String nome, String cognome, String email, String corsoLaurea) {
@@ -42,6 +43,16 @@ public class Docente extends Utente {
     public void setRichiestaTirocinio(ArrayList<RichiestaTirocinio> richiestaTirocinio) { this.richiestaTirocinio = richiestaTirocinio; }
 
     public Docente getDocente(){return this;}
+
+    public void addTirocinioProposto(Tirocinio tirocinio) {
+        this.tirociniProposti.add(tirocinio);
+    }
+
+    public List<Tirocinio> getTirociniProposti() {
+        return this.tirociniProposti;
+    }
+
+
 }
 
 

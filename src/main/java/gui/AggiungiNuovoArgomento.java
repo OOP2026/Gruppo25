@@ -12,6 +12,7 @@ public class AggiungiNuovoArgomento {
     private JButton okButtun;
     private JButton annullaButton;
     private JPanel panelAggArg;
+    private JTextField tipologiaTirocinioTextField;
     private JFrame frame;
     private Controller controller;
 
@@ -31,18 +32,22 @@ public class AggiungiNuovoArgomento {
                 frame.dispose();
             }
         });
+
         okButtun.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Variabile per contenere l'argomento in input dal Docente.
                 String argomentoInput = nomeArgomentoText.getText().trim();
+                String tipologiaTirocinio = tipologiaTirocinioTextField.getText();
                 // Controlliamo che il campo non sia vuoto.
                 if(argomentoInput.isEmpty()){
                     JOptionPane.showMessageDialog(null,"Devi riempire tutti i campi idoneamente.");
                     return;
+                } else if(!(controller.controlloInserimentoTirocinio(tipologiaTirocinio))) {
+                    JOptionPane.showMessageDialog(null, "Inserire correttamente la tipologia del tirocinio. [INTERNO o ESTERNO].");
                 } else {
                     // Chiamiamo il metodo aggiungiNuovoArgomento del controller per fare aggiungere nella lista la stringa presa dal TextField.
-                    AggiungiNuovoArgomento.this.controller.aggiungiNuovoArgomento(nomeArgomentoText.getText());
+                    AggiungiNuovoArgomento.this.controller.aggiungiNuovoArgomento(nomeArgomentoText.getText(),tipologiaTirocinioTextField.getText());
                     JOptionPane.showMessageDialog(null, "Argomento aggiunto correttamente.");
                 }
                 FrameChiamante.setVisible(true);

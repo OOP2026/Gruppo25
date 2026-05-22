@@ -3,7 +3,7 @@ package model;
 import java.util.ArrayList;
 
 public class Tirocinio {
-    private TipologiaTirocinio tipologiaTirocinio;
+    private String tipologiaTirocinio;
     private String argomento;
     private Boolean completato = false;
     private Azienda azienda;
@@ -11,9 +11,13 @@ public class Tirocinio {
     private Docente docente;
     private Tesi tesi;
 
+    public Tirocinio(String tipologiaTirocinio, String argomento){
+        this.tipologiaTirocinio = tipologiaTirocinio;
+        this.argomento = argomento;
+    }
 
     // Costruttore dell'Oggetto Tirocinio
-    public Tirocinio(TipologiaTirocinio tipologiaTirocinio, String argomento, Studente studente, Docente docente) {
+    public Tirocinio(String tipologiaTirocinio, String argomento, Studente studente, Docente docente) {
         this.tipologiaTirocinio = tipologiaTirocinio;
         this.argomento = argomento;
         this.completato = false;
@@ -24,11 +28,11 @@ public class Tirocinio {
     }
 
     // Implementazione dei vari metodi get e set di tutti gli attributi della classe
-    public void setTipologiaTirocinio(TipologiaTirocinio tipologiaTirocinio) {
+    public void setTipologiaTirocinio(String tipologiaTirocinio) {
         this.tipologiaTirocinio = tipologiaTirocinio;
     }
 
-    public TipologiaTirocinio getTipologiaTirocinio() {return tipologiaTirocinio;}
+    public String getTipologiaTirocinio() {return tipologiaTirocinio;}
 
     public void setArgomento(String argomento) {
         this.argomento = argomento;
@@ -44,7 +48,7 @@ public class Tirocinio {
 
     public void setAzienda(Azienda azienda) {
                 this.azienda = azienda;
-            if(this.tipologiaTirocinio == TipologiaTirocinio.ESTERNO && this.azienda != null){
+            if(this.tipologiaTirocinio.equalsIgnoreCase("ESTERNO") && this.azienda != null){
                 this.azienda.addTirocinio(this);
             }
         }

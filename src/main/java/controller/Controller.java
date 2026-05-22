@@ -1,10 +1,7 @@
 package controller;
 
 
-import model.RichiestaTirocinio;
-import model.Studente;
-import model.Docente;
-import model.Stato;
+import model.*;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -132,8 +129,10 @@ public class Controller {
 	}
 
 	// Metodo per aggiungere un argomento alla lista di argomenti del docente loggato.
-	public void aggiungiNuovoArgomento(String argomento) {
+	public void aggiungiNuovoArgomento(String argomento, String tipologiaTirocinio) {
 		if (this.docenteLoggato != null) {
+			Tirocinio tirocinio = new Tirocinio(tipologiaTirocinio, argomento);
+			this.docenteLoggato.addTirocinioProposto(tirocinio);
 			this.docenteLoggato.addArgomentoTirocinio(argomento);
 		}
 	}
@@ -141,11 +140,9 @@ public class Controller {
 	// Restituisce la colonna dei nomi dei docenti
 	public ArrayList<String> getNomiDocentiPerTabella() {
 		ArrayList<String> nomi = new ArrayList<>();
-
 		for (Docente d : docenti) {
-			// Per ogni argomento che il docente ha, aggiungiamo il suo nome nella lista
-			for (String arg : d.getArgomentiTirocinio()) {
-				nomi.add(d.getCognome() + " " + d.getNome());
+			for (Tirocinio t : d.getTirociniProposti()) { // Scorri la lista degli oggetti!
+				nomi.add("Prof. " + d.getCognome() + " " + d.getNome());
 			}
 		}
 		return nomi;
@@ -154,16 +151,23 @@ public class Controller {
 	// Restituisce la colonna degli argomenti (sincronizzata con i nomi)
 	public ArrayList<String> getArgomentiPerTabella() {
 		ArrayList<String> argomenti = new ArrayList<>();
-
 		for (Docente d : docenti) {
-			// Aggiungiamo tutti gli argomenti di questo docente
-			for (String arg : d.getArgomentiTirocinio()) {
-				argomenti.add(arg);
+			for (Tirocinio t : d.getTirociniProposti()) {
+				argomenti.add(t.getArgomento()); // Estrai l'argomento dall'oggetto
 			}
 		}
 		return argomenti;
 	}
 
+	public ArrayList<String> getTipologiePerTabella() {
+		ArrayList<String> tipologie = new ArrayList<>();
+		for (Docente d : docenti) {
+			for (Tirocinio t : d.getTirociniProposti()) {
+				tipologie.add(t.getTipologiaTirocinio().toString()); // Estrai la tipologia dall'oggetto
+			}
+		}
+		return tipologie;
+	}
 
 	// Metodo che controlla l'inserimento del docente e del relativo argomento nella richiesta di tirocinio
 	public boolean controllaRichiestaTirocinio(String nomeProf, String cognomeProf, String nomeArgomento) {
@@ -174,7 +178,6 @@ public class Controller {
 		for (Docente d : docenti) {
 			nomiProf.add(d.getNome());
 			cognomiProf.add(d.getCognome());
-
 		}
 		// Controlliamo se il nome esiste
 		if ((nomeProf.isEmpty()) || cognomeProf.isEmpty()) {
@@ -284,7 +287,6 @@ public class Controller {
 	 public Studente getStudenteLoggato(){return this.studenteLoggato;}
 
 	// Metodi per riempire la tabella dei tirocinanti(ovvero studenti la quale richiesta ha stato approvato)
-
 	public ArrayList<String> getNomiTirocinantiApprovati() {
 		ArrayList<String> nomi = new ArrayList<>();
 		for (RichiestaTirocinio r : richiesteTirocinio) {
@@ -306,6 +308,7 @@ public class Controller {
 		return matricole;
 	}
 
+	// Metodo per trovare gli argomenti dei tirocini approvati (sincronizzati con gli studenti).
 	public ArrayList<String> getArgomentiTirocinantiApprovati() {
 		ArrayList<String> argomenti = new ArrayList<>();
 		for (RichiestaTirocinio r : richiesteTirocinio) {
@@ -316,13 +319,25 @@ public class Controller {
 		return argomenti;
 	}
 
-
+	// Metodo per controllare lo stato della Richiesta del tirocinio.
 	public boolean controlloRichiesta(){
 		for(RichiestaTirocinio r : richiesteTirocinio){
 			if(r.getStudente().equals(studenteLoggato) && r.getStatoRichiesta() == Stato.ATTESA){return true;}
 			else if(r.getStudente().equals(studenteLoggato) && r.getStatoRichiesta() == Stato.APPROVATA){return true;}
 		}
 		return false;
+	}
+
+	// Metodo per istanziare un nuovo tirocinio chiamando il costruttore della classe Tirocinio.
+	public void creaTirocinio(String tipologiaTirocinio, String argomento, Studente studente, Docente docente){
+		 Tirocinio nuovoTirocinio = new Tirocinio( tipologiaTirocinio, argomento,  studente, docente);
+	}
+
+	// Metodo per controllare se la tipologia del tirocinio inserita sia giusta.
+	public boolean controlloInserimentoTirocinio(String tipologiaTirocinio){
+		if(tipologiaTirocinio.equalsIgnoreCase("INTERNO" ) || tipologiaTirocinio.equalsIgnoreCase("ESTERNO")){
+			return true;
+		} return false;
 	}
 
 }

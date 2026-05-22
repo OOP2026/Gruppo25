@@ -67,10 +67,7 @@ public class ElencoRichiesteTirocinio {
                 controller.modificaStatoRichiesta(rigaSelezionata, Stato.APPROVATA);
                 model.removeRow(rigaSelezionata);
                 JOptionPane.showMessageDialog(frame,"Richiesta approvata con successo.");
-
             }
-            // TODO: Chiamare il codice per "aggiornare" la tabella a schermo.
-
         });
 
         rifiutaButton.addActionListener(new ActionListener() {
@@ -85,7 +82,6 @@ public class ElencoRichiesteTirocinio {
                 controller.modificaStatoRichiesta(rigaSelezionata, Stato.RIFIUTATA);
                 model.removeRow(rigaSelezionata);
                 JOptionPane.showMessageDialog(frame,"Richiesta rifiutata con successo.");
-                // TODO: Chiamare il codice per "aggiornare" la tabella a schermo.
             }
         });
     }

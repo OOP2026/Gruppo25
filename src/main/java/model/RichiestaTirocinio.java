@@ -6,6 +6,7 @@ public class RichiestaTirocinio {
     private Docente docente;
     private Tirocinio tirocinioGenerato;
     private String argomento;
+    private String tipologiaTirocinio;
 
     // Costruttore dell'Oggetto RichiestaTirocinio
     public RichiestaTirocinio(Stato statoRichiesta,  Studente studente, Docente docente, String argomento) {
@@ -41,4 +42,12 @@ public class RichiestaTirocinio {
     public Tirocinio getTirocinioGenerato() {return tirocinioGenerato;}
 
     public String getArgomento(){return argomento;}
+
+    public String getTipologiaTirocinio(){
+        return this.tipologiaTirocinio;
+    }
+
+    public void setTipologiaTirocinio(String tipologiaTirocinio){
+        this.tipologiaTirocinio = tipologiaTirocinio;
+    }
 }
