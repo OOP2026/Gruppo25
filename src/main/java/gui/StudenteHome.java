@@ -28,6 +28,14 @@ public class StudenteHome {
         frame.setVisible(true);
         frame.setLocationRelativeTo(null); //Questo metodo serve per far avviare la schermata al centro dello schermo.
 
+        // Aggiungiamo un listener che si attiva quando la finestra cambia stato
+        frame.addComponentListener(new java.awt.event.ComponentAdapter() {
+            @Override
+            public void componentShown(java.awt.event.ComponentEvent e) {
+                compilaRichiestaDiTirocinioButton.setEnabled(!controller.controlloRichiesta());
+            }
+        });
+
         elencoDocentiButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

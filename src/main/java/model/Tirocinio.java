@@ -13,10 +13,10 @@ public class Tirocinio {
 
 
     // Costruttore dell'Oggetto Tirocinio
-    public Tirocinio(TipologiaTirocinio tipologiaTirocinio, String argomento, Boolean completato, Studente studente, Docente docente) {
+    public Tirocinio(TipologiaTirocinio tipologiaTirocinio, String argomento, Studente studente, Docente docente) {
         this.tipologiaTirocinio = tipologiaTirocinio;
         this.argomento = argomento;
-        this.completato = completato;
+        this.completato = false;
         this.studente = studente;
         studente.setTirocinio(this);
         this.docente = docente;

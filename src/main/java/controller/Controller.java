@@ -225,7 +225,7 @@ public class Controller {
 		ArrayList<String> nomi = new ArrayList<>();
 
 		for (RichiestaTirocinio r : richiesteTirocinio) {
-			if(r.getDocente().equals(docenteLoggato)) {
+			if(r.getDocente().equals(docenteLoggato) && r.getStatoRichiesta() == Stato.ATTESA) {
 				String nomeS = r.getStudente().getNome() + " " + r.getStudente().getCognome();
 				nomi.add(nomeS);
 			}
@@ -237,7 +237,7 @@ public class Controller {
 	public ArrayList<String> getMatricolaStudentiPerTabella(){
 		ArrayList<String> matricole = new ArrayList<>();
 		for (RichiestaTirocinio r : richiesteTirocinio) {
-			if(r.getDocente().equals(docenteLoggato)) {
+			if(r.getDocente().equals(docenteLoggato) && r.getStatoRichiesta() == Stato.ATTESA) {
 				String matricolaS = r.getStudente().getMatricola();
 				matricole.add(matricolaS);
 			}
@@ -264,7 +264,7 @@ public class Controller {
 		// 1. Creiamo una lista temporanea con SOLO le richieste del docente loggato
 		List<RichiestaTirocinio> richiesteDelDocente = new ArrayList<>();
 		for (RichiestaTirocinio r : richiesteTirocinio) {
-			if (r.getDocente().equals(this.docenteLoggato)) {
+			if (r.getDocente().equals(this.docenteLoggato) && r.getStatoRichiesta() == Stato.ATTESA) {
 				richiesteDelDocente.add(r);
 			}
 		}
@@ -316,5 +316,13 @@ public class Controller {
 		return argomenti;
 	}
 
+
+	public boolean controlloRichiesta(){
+		for(RichiestaTirocinio r : richiesteTirocinio){
+			if(r.getStudente().equals(studenteLoggato) && r.getStatoRichiesta() == Stato.ATTESA){return true;}
+			else if(r.getStudente().equals(studenteLoggato) && r.getStatoRichiesta() == Stato.APPROVATA){return true;}
+		}
+		return false;
+	}
 
 }

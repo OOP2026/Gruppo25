@@ -43,6 +43,8 @@ public class MandaRichiestaTirocinio extends JFrame {
                 else {
                     MandaRichiestaTirocinio.this.controller.aggiungiRichiestaTirocinio(nomeDocente, cognomeDocente, argomentoProf);
                     JOptionPane.showMessageDialog(frame,"Richiesta inoltrata correttamente.");
+                    FrameChiamante.revalidate();
+                    FrameChiamante.repaint();
                     MandaRichiestaTirocinio.this.controller.setArgomentoStudente(argomentoProf);
                     FrameChiamante.setVisible(true);
                     frame.dispose();
