@@ -41,18 +41,15 @@ public class ElencoTirocinanti {
         ));
         DefaultTableModel model = (DefaultTableModel) tabellaStudenteArgomentoTirocinio.getModel();
 
-        ArrayList<String> listaNomiStudenti = controller.getNomiStudentiPerTabella();
-        ArrayList<String> listaMatricole = controller.getMatricolaStudentiPerTabella();
-        ArrayList<String> listaArgomenti = controller.getArgomentiStudentiPerTabella();
+        ArrayList<String> listaNomiStudentiApprovati = controller.getNomiTirocinantiApprovati();
+        ArrayList<String> listaMatricoleApprovati = controller.getMatricoleTirocinantiApprovati();
+        ArrayList<String> listaArgomentiApprovati = controller.getArgomentiTirocinantiApprovati();
 
-        if (listaNomiStudenti != null) {
-            for (int i = 0; i < listaNomiStudenti.size(); i++) {
-                String matricola = listaMatricole.get(i);
-                if(controller.controlloRichiestaAccettata(matricola)){
-                    model.addRow(new Object[]{ listaNomiStudenti.get(i), listaMatricole.get(i), listaArgomenti.get(i) });
+        if (listaNomiStudentiApprovati != null) {
+            for (int i = 0; i < listaNomiStudentiApprovati.size(); i++) {
+                    model.addRow(new Object[]{ listaNomiStudentiApprovati.get(i), listaMatricoleApprovati.get(i), listaArgomentiApprovati.get(i) });
                 }
             }
         }
 
-    }
 }

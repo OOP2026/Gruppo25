@@ -260,19 +260,61 @@ public class Controller {
 	}
 
 	// Metodo per modificare lo stato della richiesta dopo
-	 public void modificaStatoRichiesta(int rigaSelezionata,Stato nuovoStato){
-		// Qui verifichiamo che la lista di richieste non sia vuota e che l'indice sia valido:
-		 // maggiore di 0 e minore della quantià di richieste (visto che ogni riga della tabella corrisponde ad una richiesta)
-		if(richiesteTirocinio != null && rigaSelezionata >= 0 && rigaSelezionata < this.richiesteTirocinio.size()){
-			// Cerchiamo la richiesta specifica nell'array grazie alla riga selezionata
-			RichiestaTirocinio richiestaNuovoStato = this.richiesteTirocinio.get(rigaSelezionata);
-			richiestaNuovoStato.setStatoRichiesta(nuovoStato);
+	public void modificaStatoRichiesta(int rigaSelezionata, Stato nuovoStato) {
+		// 1. Creiamo una lista temporanea con SOLO le richieste del docente loggato
+		List<RichiestaTirocinio> richiesteDelDocente = new ArrayList<>();
+		for (RichiestaTirocinio r : richiesteTirocinio) {
+			if (r.getDocente().equals(this.docenteLoggato)) {
+				richiesteDelDocente.add(r);
+			}
 		}
-	 }
+
+		// 2. Ora la riga selezionata in tabella combacia perfettamente con questa lista corta!
+		if (rigaSelezionata >= 0 && rigaSelezionata < richiesteDelDocente.size()) {
+			RichiestaTirocinio richiestaEsatta = richiesteDelDocente.get(rigaSelezionata);
+			richiestaEsatta.setStatoRichiesta(nuovoStato);
+			System.out.println("Stato aggiornato correttamente per lo studente: " + richiestaEsatta.getStudente().getMatricola());
+		}
+	}
 
 	 public List<RichiestaTirocinio> getRichiestaTirocinio(){
 		return this.richiesteTirocinio;
 	 }
 
-	 public Studente getStudenteLoggato(){return this.studenteLoggato;};
+	 public Studente getStudenteLoggato(){return this.studenteLoggato;}
+
+	// Metodi per riempire la tabella dei tirocinanti(ovvero studenti la quale richiesta ha stato approvato)
+
+	public ArrayList<String> getNomiTirocinantiApprovati() {
+		ArrayList<String> nomi = new ArrayList<>();
+		for (RichiestaTirocinio r : richiesteTirocinio) {
+			// Filtriamo per docente loggato E per stato della richiesta
+			if (r.getDocente().equals(docenteLoggato) && r.getStatoRichiesta() == Stato.APPROVATA) { // Inserisci il nome esatto del tuo Stato
+				nomi.add(r.getStudente().getNome() + " " + r.getStudente().getCognome());
+			}
+		}
+		return nomi;
+	}
+
+	public ArrayList<String> getMatricoleTirocinantiApprovati() {
+		ArrayList<String> matricole = new ArrayList<>();
+		for (RichiestaTirocinio r : richiesteTirocinio) {
+			if (r.getDocente().equals(docenteLoggato) && r.getStatoRichiesta() == Stato.APPROVATA) {
+				matricole.add(r.getStudente().getMatricola());
+			}
+		}
+		return matricole;
+	}
+
+	public ArrayList<String> getArgomentiTirocinantiApprovati() {
+		ArrayList<String> argomenti = new ArrayList<>();
+		for (RichiestaTirocinio r : richiesteTirocinio) {
+			if (r.getDocente().equals(docenteLoggato) && r.getStatoRichiesta() == Stato.APPROVATA) {
+				argomenti.add(r.getArgomento());
+			}
+		}
+		return argomenti;
+	}
+
+
 }
