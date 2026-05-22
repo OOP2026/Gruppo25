@@ -37,7 +37,7 @@ public class MandaRichiestaTirocinio extends JFrame {
                 String argomentoProf = argomentoTextField.getText();
                 if(nomeDocente.trim().isEmpty() || cognomeDocente.trim().isEmpty() || argomentoProf.trim().isEmpty() ){
                     JOptionPane.showMessageDialog(frame, "Attenzione, riempire tutti i campi!");
-                } if (MandaRichiestaTirocinio.this.controller.controllaRichiestaTirocinio(nomeDocente, cognomeDocente, argomentoProf)) {
+                } else if (MandaRichiestaTirocinio.this.controller.controllaRichiestaTirocinio(nomeDocente, cognomeDocente, argomentoProf)) {
                     JOptionPane.showMessageDialog(frame, "Attenzione, inserire correttamente i campi!");
                 }
                 else {

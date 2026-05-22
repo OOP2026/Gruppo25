@@ -16,6 +16,7 @@ public class RegistrazioneDocente extends JFrame {
     private JTextField d_CorsoLaureaText;
     private JButton annullaButton;
     private JPanel panelRegDocenti;
+    private JLabel TitoloRegistraDocenteJLabel;
     private JFrame frame;
     private Controller controller;
 
