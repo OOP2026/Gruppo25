@@ -274,5 +274,5 @@ public class Controller {
 		return this.richiesteTirocinio;
 	 }
 
-	 public Studente getStudenteLoggato(){return this.studenteLoggato;};
+	 public Studente getStudenteLoggato(){return this.studenteLoggato;}
 }
