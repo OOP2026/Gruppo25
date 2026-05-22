@@ -145,7 +145,7 @@ public class Controller {
 		for (Docente d : docenti) {
 			// Per ogni argomento che il docente ha, aggiungiamo il suo nome nella lista
 			for (String arg : d.getArgomentiTirocinio()) {
-				nomi.add("Prof. " + d.getCognome() + " " + d.getNome());
+				nomi.add(d.getCognome() + " " + d.getNome());
 			}
 		}
 		return nomi;

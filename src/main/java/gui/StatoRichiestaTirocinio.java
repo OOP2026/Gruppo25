@@ -12,7 +12,6 @@ import java.util.List;
 
 public class StatoRichiestaTirocinio {
     private JButton OKButton;
-    private JLabel stato_della_richiestaJLabel;
     private JButton annullaButton;
     private JPanel panelStatoRichiestaTirocinio;
     private JTable tableStatoRichiesta;
@@ -40,7 +39,7 @@ public class StatoRichiestaTirocinio {
         // Creo la tabella per visualizzare lo stato della richiesta.
         tableStatoRichiesta.setModel(new DefaultTableModel(
                 new Object[][] {},
-                new String[]{"Professore", "Stato della Richiesta"}
+                new String[]{"Docente", "Stato della Richiesta"}
         ));
         DefaultTableModel model = (DefaultTableModel) tableStatoRichiesta.getModel();
 
