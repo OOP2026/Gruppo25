@@ -5,6 +5,7 @@ import controller.Controller;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
 
 ;
 
@@ -16,6 +17,7 @@ public class StudenteHome {
     private JButton prenotaSedutaButton;
     private JPanel panelStudenteHome;
     private JButton indietroButton;
+    private JButton visualizzaInformazioniDellAziendaButton;
     private JFrame frame;
     private Controller controller;
 
@@ -78,6 +80,15 @@ public class StudenteHome {
             public void actionPerformed(ActionEvent e) {
                 FrameChiamante.setVisible(true);
                 frame.dispose();
+            }
+        });
+        visualizzaInformazioniDellAziendaButton.addComponentListener(new ComponentAdapter() {
+        });
+        visualizzaInformazioniDellAziendaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                TirociniEsterni tirociniEsterni = new TirociniEsterni(frame, controller);
+                frame.setVisible(false);
             }
         });
     }
