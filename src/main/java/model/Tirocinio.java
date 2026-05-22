@@ -11,6 +11,7 @@ public class Tirocinio {
     private Docente docente;
     private Tesi tesi;
 
+
     public Tirocinio(String tipologiaTirocinio, String argomento){
         this.tipologiaTirocinio = tipologiaTirocinio;
         this.argomento = argomento;

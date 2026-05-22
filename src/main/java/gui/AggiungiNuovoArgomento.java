@@ -40,18 +40,25 @@ public class AggiungiNuovoArgomento {
                 String argomentoInput = nomeArgomentoText.getText().trim();
                 String tipologiaTirocinio = tipologiaTirocinioTextField.getText();
                 // Controlliamo che il campo non sia vuoto.
-                if(argomentoInput.isEmpty()){
+                if(argomentoInput.isEmpty() || tipologiaTirocinio.isEmpty()){
                     JOptionPane.showMessageDialog(null,"Devi riempire tutti i campi idoneamente.");
                     return;
                 } else if(!(controller.controlloInserimentoTirocinio(tipologiaTirocinio))) {
                     JOptionPane.showMessageDialog(null, "Inserire correttamente la tipologia del tirocinio. [INTERNO o ESTERNO].");
-                } else {
+                    return;
+                } else if(tipologiaTirocinio.equalsIgnoreCase("ESTERNO")){
                     // Chiamiamo il metodo aggiungiNuovoArgomento del controller per fare aggiungere nella lista la stringa presa dal TextField.
+                    FrameChiamante.setVisible(false);
+                    frame.setVisible(false);
+                    AggiungiAziendaInfo aggiungiAziendaInfo = new AggiungiAziendaInfo(frame, controller);
+                }else {
                     AggiungiNuovoArgomento.this.controller.aggiungiNuovoArgomento(nomeArgomentoText.getText(),tipologiaTirocinioTextField.getText());
                     JOptionPane.showMessageDialog(null, "Argomento aggiunto correttamente.");
+                    FrameChiamante.setVisible(true);
+                    frame.dispose();
+                    return;
                 }
-                FrameChiamante.setVisible(true);
-                frame.dispose();
+
             }
         });
     }

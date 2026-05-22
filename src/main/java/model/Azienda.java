@@ -6,15 +6,13 @@ import java.util.List;
 
 public class Azienda {
     private String nomeAzienda;
-    private String partitaIva;
     private String nominativoReferente;
     private List<Tirocinio> tirocinio = new ArrayList<>();
 
     // Costruttore dell'Oggetto Azienda
-    public Azienda(String nomeAzienda,String nominativoReferente, String partitaIva) {
+    public Azienda(String nomeAzienda,String nominativoReferente ) {
         this.nomeAzienda = nomeAzienda;
         this.nominativoReferente = nominativoReferente;
-        this.partitaIva = partitaIva;
     }
 
     // Implementazione dei vari metodi get e set di tutti gli attributi della classe
@@ -27,10 +25,6 @@ public class Azienda {
     }
 
     public void setNominativoReferente(String nominativoReferente) {this.nominativoReferente = nominativoReferente;}
-
-    public String getPartitaIva() {return partitaIva;}
-
-    public void setPartitaIva(String partitaIva) {this.partitaIva = partitaIva;}
 
     public List<Tirocinio> getTirocinio() {return tirocinio;}
 
