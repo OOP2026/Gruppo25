@@ -34,6 +34,7 @@ public class StudenteHome {
             @Override
             public void componentShown(java.awt.event.ComponentEvent e) {
                 compilaRichiestaDiTirocinioButton.setEnabled(!controller.controlloRichiesta());
+                caricaTesiButton.setEnabled(!(controller.controlloTesi()));
             }
         });
 
@@ -66,6 +67,8 @@ public class StudenteHome {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // LISTENER RIFERITO AL BOTTONE PER CARICARE IL FILE DELLA TESI
+                CaricaTesi caricaTesi = new CaricaTesi(frame,controller);
+                frame.setVisible(false);
             }
         });
         prenotaSedutaButton.addActionListener(new ActionListener() {

@@ -15,6 +15,7 @@ public class Controller {
 	private List<Docente> docenti;
 	private List<RichiestaTirocinio> richiesteTirocinio;
 	private List<Azienda> listaAziende;
+	private List<Tesi> listaTesi;
 
 	private Docente docenteLoggato;
 	private Studente studenteLoggato;
@@ -26,6 +27,7 @@ public class Controller {
 		this.docenti = new ArrayList<>();
 		this.richiesteTirocinio = new ArrayList<>();
 		this.listaAziende = new ArrayList<>();
+		this.listaTesi = new ArrayList<>();
 	}
 
 	public void setStudente(String login, String password, String nome, String cognome, String email, String corsoLaurea, String matricola) {
@@ -80,7 +82,7 @@ public class Controller {
 	// Metodo per la verifica degli input di nome e cognome
 	public boolean controlloNomeCognome(String stringa) {
 		for (int i = 0; i < stringa.length(); i++) {
-			if (Character.isDigit(stringa.charAt(i))) {
+			if (!(Character.isLetter(stringa.charAt(i))) && (stringa.charAt(i)!= ' ')) {
 				return true;
 			}
 		}
@@ -130,14 +132,6 @@ public class Controller {
 		return false;
 	}
 
-	/* Metodo per aggiungere un argomento alla lista di argomenti del docente loggato.
-	public void aggiungiNuovoArgomento(String argomento, String tipologiaTirocinio) {
-		if (this.docenteLoggato != null) {
-			Tirocinio tirocinio = new Tirocinio(tipologiaTirocinio, argomento);
-			this.docenteLoggato.addTirocinioProposto(tirocinio);
-			this.docenteLoggato.addArgomentoTirocinio(argomento);
-		}
-	}*/
 	// Metodo per aggiungere un argomento alla lista di argomenti del docente loggato.
 	public void aggiungiNuovoArgomento(String argomento, String tipologiaTirocinio, String nomeAz, String refAz) {
 		if (this.docenteLoggato != null) {
@@ -325,7 +319,6 @@ public class Controller {
 		if (rigaSelezionata >= 0 && rigaSelezionata < richiesteDelDocente.size()) {
 			RichiestaTirocinio richiestaEsatta = richiesteDelDocente.get(rigaSelezionata);
 			richiestaEsatta.setStatoRichiesta(nuovoStato);
-			System.out.println("Stato aggiornato correttamente per lo studente: " + richiestaEsatta.getStudente().getMatricola());
 		}
 	}
 
@@ -384,10 +377,76 @@ public class Controller {
 		} return false;
 	}
 
-	// Metodo per istanziare nuove aziende ed aggiungerle alla lista di tutte le Aziende.
-	public void istanziaAzienda(String nomeAzienda, String nominativoReferente){
-		Azienda nuovaAzienda = new Azienda(nomeAzienda, nominativoReferente);
-		listaAziende.add(nuovaAzienda);
+	// Metodo per istanziare una nuova tesi
+	public void aggiungiNuovaTesi(Stato statotesi, String titolo, String contenuto){
+		for(RichiestaTirocinio r : richiesteTirocinio){
+			if(r.getStudente().equals(studenteLoggato) && r.getStatoRichiesta().equals(Stato.APPROVATA)){
+				Docente docente = r.getDocente();
+				Tesi nuovatesi = new Tesi(statotesi, studenteLoggato, docente, titolo, contenuto);
+				docente.addTesi(nuovatesi);
+				studenteLoggato.setTesi(nuovatesi);
+				return;
+			}
+		}
+
+	}
+
+	// Metodi per riempire la tabella dei tesisti
+	public ArrayList<String> getStudentiTesi(){
+		ArrayList<String> nomi = new ArrayList<>();
+		for(Studente s: studenti){
+			if(s.getTesi() != null){
+				nomi.add(s.getNome() + " " + s.getCognome());
+			}
+		}
+		return nomi;
+	}
+
+	public ArrayList<String> getMatricoleTesi(){
+		ArrayList<String> matricole = new ArrayList<>();
+		for(Studente s: studenti){
+			if(s.getTesi() != null){
+				matricole.add(s.getMatricola());
+			}
+		}
+		return matricole;
+	}
+
+	public ArrayList<String> getTitoliTesi(){
+		ArrayList<String> titoli = new ArrayList<>();
+		for(Studente s : studenti){
+			if(s.getTesi() != null){
+				titoli.add(s.getTesi().getTitolo());
+			}
+		}
+		return titoli;
+	}
+
+	public ArrayList<String> getContenutoTesi(){
+		ArrayList<String> contenuti = new ArrayList<>();
+		for(Studente s : studenti){
+			if(s.getTesi() != null){
+				contenuti.add(s.getTesi().getContenuto());
+			}
+		}
+		return contenuti;
+	}
+
+	// Metodo per leggere il contenuto dalla tabella data la riga
+	public String getContenutoTesiSingola(int indiceRiga) {
+		// Presumendo che docenteLoggato abbia una lista di tesi
+		Tesi tesiRichiesta = this.docenteLoggato.getTesi().get(indiceRiga);
+		return tesiRichiesta.getContenuto();
+	}
+
+	// Metodo per impedire agli studenti che non hanno terminato il tirocinio di poter caricare la tesi TODO
+	public boolean controlloTesi(){
+		for(RichiestaTirocinio r : richiesteTirocinio){
+			if(r.getStudente().equals(studenteLoggato) && studenteLoggato.getRichiestaTirocinio().isEmpty()){return true;}
+			else if (r.getStudente().equals(studenteLoggato) && r.getStatoRichiesta().equals(Stato.ATTESA)){return true;}
+			else if (r.getStudente().equals(studenteLoggato) && r.getStatoRichiesta().equals(Stato.RIFIUTATA)){return true;}
+		}
+		return false;
 	}
 
 }

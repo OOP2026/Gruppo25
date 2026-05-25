@@ -4,11 +4,15 @@ public class Tesi {
     private Stato statoTesi;
     private Studente studente;
     private Docente docente;
+    private String titolo;
+    private String contenuto;
 
     // Costruttore dell'Oggetto Tesi
-    public Tesi(Stato statoTesi, Studente studente, Docente docente) {
+    public Tesi(Stato statoTesi, Studente studente, Docente docente, String titolo, String contenuto ) {
         this.statoTesi = statoTesi;
         this.studente = studente;
+        this.titolo = titolo;
+        this.contenuto = contenuto;
         studente.setTesi(this);
         this.docente = docente;
         docente.addTesi(this);
@@ -26,5 +30,10 @@ public class Tesi {
     public Docente getDocente() {return docente;}
 
     public void setDocente(Docente docente) {this.docente = docente;}
+
+    public String getTitolo() {return titolo;}
+
+    public String getContenuto() {return contenuto;}
+
 
 }

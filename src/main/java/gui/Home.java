@@ -31,6 +31,7 @@ public class Home extends JFrame {
         frame.setLocationRelativeTo(null); //Questo metodo serve per far avviare la schermata al centro dello schermo.
         //frame.setResizable(false); //Questo metodo permetto(o non) di far ingrandire la schermata.
 
+
     }
 
     public Home() {

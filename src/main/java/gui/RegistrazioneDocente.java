@@ -45,18 +45,18 @@ public class RegistrazioneDocente extends JFrame {
                 String corsoLaurea = d_CorsoLaureaText.getText().trim();
 
                 if(login.isEmpty() || password.isEmpty() || nome.isEmpty() || cognome.isEmpty() || email.isEmpty() || corsoLaurea.isEmpty()){
-                    JOptionPane.showMessageDialog(frame, "Devi riempire tutti i campi idoneamente.");
+                    JOptionPane.showMessageDialog(frame, "Attenzione riempire correttamente tutti i campi!", "Erro", JOptionPane.ERROR_MESSAGE);
                 }
                 // verifico se la login inserita è già presente
-                else if(RegistrazioneDocente.this.controller.controlloLogin(login)){JOptionPane.showMessageDialog(frame, "Login già esistente! Utilizzare una login differente");}
+                else if(RegistrazioneDocente.this.controller.controlloLogin(login)){JOptionPane.showMessageDialog(frame, "Login già esistente! Utilizzare una login differente","Erro", JOptionPane.ERROR_MESSAGE);}
                 // Verifico che la password inserita abbia almeno 8 caratteri
-                else if(RegistrazioneDocente.this.controller.controlloPassoword(password)){JOptionPane.showMessageDialog(frame,"Attenzione inserire una password di almeno 8 caratteri!");}
+                else if(RegistrazioneDocente.this.controller.controlloPassoword(password)){JOptionPane.showMessageDialog(frame,"Attenzione inserire una password di almeno 8 caratteri!","Erro", JOptionPane.ERROR_MESSAGE);}
                 // Verifico se nel nome sono inseriti dei numeri
-                else if(RegistrazioneDocente.this.controller.controlloNomeCognome(nome)){JOptionPane.showMessageDialog(frame, "Attenzione carattere non consentito nel nome!");}
+                else if(RegistrazioneDocente.this.controller.controlloNomeCognome(nome)){JOptionPane.showMessageDialog(frame, "Attenzione carattere non consentito nel nome!","Erro", JOptionPane.ERROR_MESSAGE);}
                 // Verifico se nel cognome sono inseriti dei numeri
-                else if (RegistrazioneDocente.this.controller.controlloNomeCognome(cognome)){JOptionPane.showMessageDialog(frame,"Attenzione carattere non consentito nel cognome!");}
+                else if (RegistrazioneDocente.this.controller.controlloNomeCognome(cognome)){JOptionPane.showMessageDialog(frame,"Attenzione carattere non consentito nel cognome!","Erro", JOptionPane.ERROR_MESSAGE);}
                 // verifico che la mail sia inserita nel formato giusto
-                else if(RegistrazioneDocente.this.controller.controlloEmailDocente(email)) {JOptionPane.showMessageDialog(frame,"Attenzione inserire la mail nel formato corretto!");}
+                else if(RegistrazioneDocente.this.controller.controlloEmailDocente(email)) {JOptionPane.showMessageDialog(frame,"Attenzione inserire la mail nel formato corretto!","Erro", JOptionPane.ERROR_MESSAGE);}
                 else {
                     JOptionPane.showMessageDialog(frame, "Benvenuto Prof. " +cognome);
                     RegistrazioneDocente.this.controller.setDocente(login, password, nome, cognome, email, corsoLaurea);
