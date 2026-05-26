@@ -13,7 +13,6 @@ public class RegistrazioneDocente extends JFrame {
     private JTextField d_nomeText;
     private JTextField d_cognomeText;
     private JTextField d_emailText;
-    private JTextField d_CorsoLaureaText;
     private JButton annullaButton;
     private JPanel panelRegDocenti;
     private JLabel TitoloRegistraDocenteJLabel;
@@ -42,24 +41,23 @@ public class RegistrazioneDocente extends JFrame {
                 String nome = d_nomeText.getText().trim();
                 String cognome = d_cognomeText.getText().trim();
                 String email = d_emailText.getText().trim();
-                String corsoLaurea = d_CorsoLaureaText.getText().trim();
 
-                if(login.isEmpty() || password.isEmpty() || nome.isEmpty() || cognome.isEmpty() || email.isEmpty() || corsoLaurea.isEmpty()){
-                    JOptionPane.showMessageDialog(frame, "Attenzione riempire correttamente tutti i campi!", "Erro", JOptionPane.ERROR_MESSAGE);
+                if(login.isEmpty() || password.isEmpty() || nome.isEmpty() || cognome.isEmpty() || email.isEmpty()){
+                    JOptionPane.showMessageDialog(frame, "Attenzione riempire correttamente tutti i campi!", "Errore", JOptionPane.ERROR_MESSAGE);
                 }
                 // verifico se la login inserita è già presente
-                else if(RegistrazioneDocente.this.controller.controlloLogin(login)){JOptionPane.showMessageDialog(frame, "Login già esistente! Utilizzare una login differente","Erro", JOptionPane.ERROR_MESSAGE);}
+                else if(RegistrazioneDocente.this.controller.controlloLogin(login)){JOptionPane.showMessageDialog(frame, "Login già esistente! Utilizzare una login differente","Errore", JOptionPane.ERROR_MESSAGE);}
                 // Verifico che la password inserita abbia almeno 8 caratteri
-                else if(RegistrazioneDocente.this.controller.controlloPassoword(password)){JOptionPane.showMessageDialog(frame,"Attenzione inserire una password di almeno 8 caratteri!","Erro", JOptionPane.ERROR_MESSAGE);}
+                else if(RegistrazioneDocente.this.controller.controlloPassoword(password)){JOptionPane.showMessageDialog(frame,"Attenzione inserire una password di almeno 8 caratteri!","Errore", JOptionPane.ERROR_MESSAGE);}
                 // Verifico se nel nome sono inseriti dei numeri
-                else if(RegistrazioneDocente.this.controller.controlloNomeCognome(nome)){JOptionPane.showMessageDialog(frame, "Attenzione carattere non consentito nel nome!","Erro", JOptionPane.ERROR_MESSAGE);}
+                else if(RegistrazioneDocente.this.controller.controlloNomeCognome(nome)){JOptionPane.showMessageDialog(frame, "Attenzione carattere non consentito nel nome!","Errore", JOptionPane.ERROR_MESSAGE);}
                 // Verifico se nel cognome sono inseriti dei numeri
-                else if (RegistrazioneDocente.this.controller.controlloNomeCognome(cognome)){JOptionPane.showMessageDialog(frame,"Attenzione carattere non consentito nel cognome!","Erro", JOptionPane.ERROR_MESSAGE);}
+                else if (RegistrazioneDocente.this.controller.controlloNomeCognome(cognome)){JOptionPane.showMessageDialog(frame,"Attenzione carattere non consentito nel cognome!","Errore", JOptionPane.ERROR_MESSAGE);}
                 // verifico che la mail sia inserita nel formato giusto
-                else if(RegistrazioneDocente.this.controller.controlloEmailDocente(email)) {JOptionPane.showMessageDialog(frame,"Attenzione inserire la mail nel formato corretto!","Erro", JOptionPane.ERROR_MESSAGE);}
+                else if(RegistrazioneDocente.this.controller.controlloEmailDocente(email)) {JOptionPane.showMessageDialog(frame,"Attenzione inserire la mail nel formato corretto!","Errore", JOptionPane.ERROR_MESSAGE);}
                 else {
                     JOptionPane.showMessageDialog(frame, "Benvenuto Prof. " +cognome);
-                    RegistrazioneDocente.this.controller.setDocente(login, password, nome, cognome, email, corsoLaurea);
+                    RegistrazioneDocente.this.controller.setDocente(login, password, nome, cognome, email);
                     frameHome.setVisible(true);
                     frame.dispose();
                 }

@@ -55,7 +55,7 @@ public class AggiungiNuovoArgomento {
                     nomeAziendaTextField.setVisible(true);
                     nominativoReferenteTextField.setVisible(true);
                     if (nomeAziendaTextField.getText().trim().isEmpty() || nominativoReferenteTextField.getText().trim().isEmpty()) {
-                        JOptionPane.showMessageDialog(null, "Devi riempire tutti i campi idoneamente.","Errore",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Ora aggiungi le info dell'azienda collaboratrice.","Aggiungi Azienda",JOptionPane.INFORMATION_MESSAGE);
                         return;
                     } else if (controller.controlloNomeCognome(nominativoReferenteTextField.getText())) {
                         JOptionPane.showMessageDialog(null, "Attenzione: carattere non consentito nel nome!","Errore",JOptionPane.ERROR_MESSAGE);

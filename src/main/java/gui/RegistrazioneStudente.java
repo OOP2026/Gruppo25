@@ -14,7 +14,6 @@ public class RegistrazioneStudente extends JFrame {
     private JLabel TitoloRegistraStudenteJLabel;
     private JPanel panelRegStudenti;
     private JButton annullaButton;
-    private JTextField s_corsoLaureaTextField;
     private JPasswordField s_passwordPasswordField;
     private JTextField s_matricolaTextField;
     private JFrame frame;
@@ -42,29 +41,28 @@ public class RegistrazioneStudente extends JFrame {
                 String nome = s_nomeTextField.getText().trim();
                 String cognome = s_cognomeTextField.getText().trim();
                 String email = s_emailTextField.getText().trim();
-                String corsoLaurea = s_corsoLaureaTextField.getText().trim();
                 String matricola = s_matricolaTextField.getText().trim();
 
-                if(login.isEmpty() || password.isEmpty() || nome.isEmpty() || cognome.isEmpty() || email.isEmpty() || corsoLaurea.isEmpty() || matricola.isEmpty()){
+                if(login.isEmpty() || password.isEmpty() || nome.isEmpty() || cognome.isEmpty() || email.isEmpty()  || matricola.isEmpty()){
                     JOptionPane.showMessageDialog(frame, "Attenzione riempire correttamente tutti i campi!", "Erro", JOptionPane.ERROR_MESSAGE);
                 }
                 // Verifico se il login inserito è già presente
-                else if(RegistrazioneStudente.this.controller.controlloLogin(login)) {JOptionPane.showMessageDialog(frame, "Login già esistente! Utilizzare una login differente","Erro", JOptionPane.ERROR_MESSAGE);}
+                else if(RegistrazioneStudente.this.controller.controlloLogin(login)) {JOptionPane.showMessageDialog(frame, "Login già esistente! Utilizzare una login differente","Errore", JOptionPane.ERROR_MESSAGE);}
                 // Verifico che la password inserita abbia almeno 8 caratteri
-                else if(RegistrazioneStudente.this.controller.controlloPassoword(password)){JOptionPane.showMessageDialog(frame,"Attenzione inserire una password di almeno 8 caratteri!","Erro", JOptionPane.ERROR_MESSAGE);}
+                else if(RegistrazioneStudente.this.controller.controlloPassoword(password)){JOptionPane.showMessageDialog(frame,"Attenzione inserire una password di almeno 8 caratteri!","Errore", JOptionPane.ERROR_MESSAGE);}
                 // Verifico se nel nome sono inseriti dei numeri
-                else if(RegistrazioneStudente.this.controller.controlloNomeCognome(nome)){JOptionPane.showMessageDialog(frame, "Attenzione carattere non consentito nel nome!","Erro", JOptionPane.ERROR_MESSAGE);}
+                else if(RegistrazioneStudente.this.controller.controlloNomeCognome(nome)){JOptionPane.showMessageDialog(frame, "Attenzione carattere non consentito nel nome!","Errore", JOptionPane.ERROR_MESSAGE);}
                 // Verifico se nel cognome sono inseriti dei numeri
-                else if (RegistrazioneStudente.this.controller.controlloNomeCognome(cognome)){JOptionPane.showMessageDialog(frame,"Attenzione carattere non consentito nel cognome!","Erro", JOptionPane.ERROR_MESSAGE);}
+                else if (RegistrazioneStudente.this.controller.controlloNomeCognome(cognome)){JOptionPane.showMessageDialog(frame,"Attenzione carattere non consentito nel cognome!","Errore", JOptionPane.ERROR_MESSAGE);}
                 // Verifico se la mail inserita è nel formato giusto
-                else if(RegistrazioneStudente.this.controller.controlloEmailStudente(email)){JOptionPane.showMessageDialog(frame,"Attenzione inserire la mail nel formato corretto!","Erro", JOptionPane.ERROR_MESSAGE);}
+                else if(RegistrazioneStudente.this.controller.controlloEmailStudente(email)){JOptionPane.showMessageDialog(frame,"Attenzione inserire la mail nel formato corretto!","Errore", JOptionPane.ERROR_MESSAGE);}
                 // Verifico se la matricola è inserita correttamente
-                else if(RegistrazioneStudente.this.controller.controlloFormatoMatricola(matricola)){JOptionPane.showMessageDialog(frame,"Attenzione la matricola deve essere nel formato giusto","Erro", JOptionPane.ERROR_MESSAGE);}
+                else if(RegistrazioneStudente.this.controller.controlloFormatoMatricola(matricola)){JOptionPane.showMessageDialog(frame,"Attenzione la matricola deve essere nel formato giusto","Errore", JOptionPane.ERROR_MESSAGE);}
                 // Verifico se la matricola inserita è già presente
-                else if(RegistrazioneStudente.this.controller.controlloMatricola(matricola)){JOptionPane.showMessageDialog(frame,"Attenzione matricola già presente nel database!","Erro", JOptionPane.ERROR_MESSAGE);}
+                else if(RegistrazioneStudente.this.controller.controlloMatricola(matricola)){JOptionPane.showMessageDialog(frame,"Attenzione matricola già presente nel database!","Errore", JOptionPane.ERROR_MESSAGE);}
                 else {
                     JOptionPane.showMessageDialog(frame, "Benvenuto " + nome + " " + cognome + ".");
-                    RegistrazioneStudente.this.controller.setStudente(login, password, nome, cognome, email, corsoLaurea, matricola);
+                    RegistrazioneStudente.this.controller.setStudente(login, password, nome, cognome, email, matricola);
                     frameHome.setVisible(true);
                     frame.dispose();
                 }

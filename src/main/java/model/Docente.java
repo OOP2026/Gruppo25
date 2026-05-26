@@ -12,8 +12,8 @@ public class Docente extends Utente {
     private List<Tirocinio> tirociniProposti = new ArrayList<>();
 
     //costruttore dell'oggetto Docente
-    public Docente(String login, String password, String nome, String cognome, String email, String corsoLaurea) {
-        super(login, password, nome, cognome, email, corsoLaurea);
+    public Docente(String login, String password, String nome, String cognome, String email) {
+        super(login, password, nome, cognome, email);
 
     }
 
@@ -55,7 +55,6 @@ public class Docente extends Utente {
     public void rimuoviTesi(int indice){
         tesi.remove(indice);
     }
-
 }
 
 

@@ -6,8 +6,6 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-;
-
 public class StudenteHome {
     private JButton elencoDocentiButton;
     private JButton compilaRichiestaDiTirocinioButton;
@@ -73,12 +71,7 @@ public class StudenteHome {
                 frame.setVisible(false);
             }
         });
-        prenotaSedutaButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // LISTENER RIFERITO AL BOTTONE PER APRIRE LA FINESTRA PER PRENOTARE LA SEDUTA DI LAUREA
-            }
-        });
+
         indietroButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

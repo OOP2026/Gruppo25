@@ -77,7 +77,7 @@ public class ElencoTesisti {
             public void actionPerformed(ActionEvent e) {
                 int rigaSelezionata = table1.getSelectedRow();
                 if (rigaSelezionata < 0) {
-                    JOptionPane.showMessageDialog(frame,"Selezionare prima una richiesta dalla tabella.","Error",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(frame,"Selezionare prima una richiesta dalla tabella.","Errore",JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 // Il controller aggiorna lo stato in base alla riga cliccata
@@ -92,7 +92,7 @@ public class ElencoTesisti {
             public void actionPerformed(ActionEvent e) {
                 int rigaSelezionata = table1.getSelectedRow();
                 if (rigaSelezionata < 0) {
-                    JOptionPane.showMessageDialog(frame,"Selezionare prima una richiesta dalla tabella.","Error",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(frame,"Selezionare prima una richiesta dalla tabella.","Errore",JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 // Il controller aggiorna lo stato in base alla riga cliccata
