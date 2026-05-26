@@ -15,7 +15,6 @@ public class SedutaDiLaurea {
         this.ora = ora;
         this.aula = aula;
         this.studente = studente;
-        studente.setSedutaDiLaurea(this);
     }
 
     // Implementazione dei vari metodi get e set di tutti gli attributi della classe

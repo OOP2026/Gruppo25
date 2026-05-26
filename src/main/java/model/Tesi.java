@@ -6,9 +6,10 @@ public class Tesi {
     private Docente docente;
     private String titolo;
     private String contenuto;
+    private String sedutaDiLaurea;
 
     // Costruttore dell'Oggetto Tesi
-    public Tesi(Stato statoTesi, Studente studente, Docente docente, String titolo, String contenuto ) {
+    public Tesi(Stato statoTesi, Studente studente, Docente docente, String titolo, String contenuto, String sedutaDiLaurea ) {
         this.statoTesi = Stato.ATTESA;
         this.studente = studente;
         this.titolo = titolo;
@@ -16,6 +17,7 @@ public class Tesi {
         studente.setTesi(this);
         this.docente = docente;
         docente.addTesi(this);
+        this.sedutaDiLaurea = sedutaDiLaurea;
     }
 
     // Implementazione dei vari metodi get e set di tutti gli attributi della classe

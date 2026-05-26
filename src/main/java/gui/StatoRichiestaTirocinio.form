@@ -45,7 +45,7 @@
         </constraints>
         <properties>
           <font size="14"/>
-          <text value="Stato della Richiesta"/>
+          <text value="Stato della Richiesta Tirocinio"/>
         </properties>
       </component>
     </children>

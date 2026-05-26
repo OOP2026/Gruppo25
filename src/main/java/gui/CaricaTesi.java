@@ -16,6 +16,7 @@ public class CaricaTesi {
     private JPanel panelCaricaTesi;
     private JButton OKButton;
     private JButton annullaButton;
+    private JComboBox comboBoxDateSeduteDiLaurea;
 
     public CaricaTesi(JFrame framechiamante, Controller controller){
         this.controller = controller;
@@ -31,9 +32,11 @@ public class CaricaTesi {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (titoloTesiTextField.getText().isEmpty() || tesiTextArea.getText().isEmpty()) {
-                    JOptionPane.showMessageDialog(frame, "Attenzione riempire correttamente tutti i campi!", "Erro", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    CaricaTesi.this.controller.aggiungiNuovaTesi(Stato.ATTESA, titoloTesiTextField.getText(), tesiTextArea.getText());
+                    JOptionPane.showMessageDialog(frame, "Attenzione riempire correttamente tutti i campi!", "Errore", JOptionPane.ERROR_MESSAGE);
+                }else if (comboBoxDateSeduteDiLaurea.equals("--- Seleziona una data ---")) {
+                        JOptionPane.showMessageDialog(null, "Per favore, seleziona una data per la seduta!", "Errore", JOptionPane.ERROR_MESSAGE);
+                }else {
+                    CaricaTesi.this.controller.aggiungiNuovaTesi(Stato.ATTESA, titoloTesiTextField.getText(), tesiTextArea.getText(), (String)comboBoxDateSeduteDiLaurea.getSelectedItem());
                     frame.setVisible(false);
                     framechiamante.setVisible(true);
                     frame.dispose();
@@ -46,6 +49,11 @@ public class CaricaTesi {
                 frame.setVisible(false);
                 framechiamante.setVisible(true);
                 frame.dispose();
+            }
+        });
+        comboBoxDateSeduteDiLaurea.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
             }
         });
     }

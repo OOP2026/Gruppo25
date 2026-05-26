@@ -62,7 +62,7 @@ public class Home extends JFrame {
                 String password = new String(passwordPasswordField.getPassword()).trim();
                 // CONTROLLO PER CONVALIDARE SE I CAMPI LOGIN E PASSWORD NON SONO VUOTI.
                 if(login.isEmpty() || password.isEmpty()){
-                    JOptionPane.showMessageDialog(frame,"Ci sono dei campi vuoti.");
+                    JOptionPane.showMessageDialog(frame,"Ci sono dei campi vuoti.","Errore", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 //Controller controller = new Controller();
@@ -81,10 +81,8 @@ public class Home extends JFrame {
                     frame.setVisible(false);
                 }
                 else {
-                    JOptionPane.showMessageDialog(frame, "Accesso negato. Credenziali errate!");
+                    JOptionPane.showMessageDialog(frame, "Accesso negato. Credenziali errate!", "Errore", JOptionPane.ERROR_MESSAGE);
                 }
-
-
             }
         });
     }

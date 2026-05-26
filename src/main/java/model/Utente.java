@@ -9,17 +9,14 @@ public class Utente {
     private String nome;
     private String cognome;
     private String email;
-    private List<String> corsoLaurea = new ArrayList<>();
-
 
     // Costruttore dell'Oggetto Utente
-    public Utente(String login, String password, String nome, String cognome, String email, String corsoLaurea) {
+    public Utente(String login, String password, String nome, String cognome, String email) {
         this.login = login;
         this.password = password;
         this.nome = nome;
         this.cognome = cognome;
         this.email = email;
-        this.corsoLaurea.add(corsoLaurea);
     }
 
     // Implementazione dei vari metodi get e set di tutti gli attributi della classe
@@ -42,10 +39,6 @@ public class Utente {
     public String getEmail() {return email;}
 
     public void setEmail(String email) {this.email = email;}
-
-    public List<String> getCorsoLaurea() {return corsoLaurea;}
-
-    public void setCorsoLaurea(List<String> corsoLaurea) {this.corsoLaurea = corsoLaurea;}
 
     // Metodo che verifica che il login e la password inseriti corrispondano a quelli dell'utente
     public boolean login(String login, String password) {

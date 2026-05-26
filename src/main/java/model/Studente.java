@@ -1,19 +1,19 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class Studente extends Utente{
     private String matricola;
-    private SedutaDiLaurea sedutaDiLaurea;
     private Tirocinio tirocinio;
     private Tesi tesi;
     private List<RichiestaTirocinio> richiestaTirocinio = new ArrayList<>();
     private String argomentoTirocinio;
 
     //Costruttore dell'Oggetto Studente
-    public Studente(String login, String password, String nome, String cognome, String email, String corsoLaurea,String matricola) {
-        super(login, password, nome, cognome, email, corsoLaurea);
+    public Studente(String login, String password, String nome, String cognome, String email,String matricola) {
+        super(login, password, nome, cognome, email);
         this.matricola = matricola;
         this.richiestaTirocinio = new ArrayList<>();
     }
@@ -24,10 +24,6 @@ public class Studente extends Utente{
     public void  setMatricola(String matricola) {
         this.matricola = matricola;
     }
-
-    public SedutaDiLaurea getSedutaDiLaurea() {return sedutaDiLaurea;}
-
-    public void setSedutaDiLaurea(SedutaDiLaurea sedutaDiLaurea) {this.sedutaDiLaurea = sedutaDiLaurea;}
 
     public Tirocinio getTirocinio() {return tirocinio;}
 
@@ -46,6 +42,4 @@ public class Studente extends Utente{
     public void setArgomentoTirocinio(String argomentoTirocinio) {this.argomentoTirocinio = argomentoTirocinio;}
 
     public String getArgomentoTirocinio() {return argomentoTirocinio;}
-
-
 }
