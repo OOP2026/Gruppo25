@@ -459,7 +459,7 @@ public class Controller {
     public void modificaStatoTesi(int rigaSelezionata, Stato nuovoStato, String matricola) {
         List<Tesi> tesi = new ArrayList<>();
         for(Tesi t: docenteLoggato.getTesi()){
-            if (t.getStudente().getMatricola().equals(matricola)) {
+            if (t.getStudente().getMatricola().equals(matricola) && t.getStatoTesi().equals(Stato.ATTESA)) {
                 tesi.add(t);
             }
         }
