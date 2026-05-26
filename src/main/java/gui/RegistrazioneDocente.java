@@ -45,7 +45,7 @@ public class RegistrazioneDocente extends JFrame {
                 String corsoLaurea = d_CorsoLaureaText.getText().trim();
 
                 if(login.isEmpty() || password.isEmpty() || nome.isEmpty() || cognome.isEmpty() || email.isEmpty() || corsoLaurea.isEmpty()){
-                    JOptionPane.showMessageDialog(frame, "Attenzione riempire correttamente tutti i campi!", "Erro", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(frame, "Attenzione riempire correttamente tutti i campi!", "Errore", JOptionPane.ERROR_MESSAGE);
                 }
                 // verifico se la login inserita è già presente
                 else if(RegistrazioneDocente.this.controller.controlloLogin(login)){JOptionPane.showMessageDialog(frame, "Login già esistente! Utilizzare una login differente","Erro", JOptionPane.ERROR_MESSAGE);}

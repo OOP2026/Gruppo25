@@ -332,7 +332,7 @@ public class Controller {
 		ArrayList<String> nomi = new ArrayList<>();
 		for (RichiestaTirocinio r : richiesteTirocinio) {
 			// Filtriamo per docente loggato E per stato della richiesta
-			if (r.getDocente().equals(docenteLoggato) && r.getStatoRichiesta() == Stato.APPROVATA) { // Inserisci il nome esatto del tuo Stato
+			if (r.getDocente().equals(docenteLoggato) && r.getStatoRichiesta() == Stato.APPROVATA ) { // Inserisci il nome esatto del tuo Stato
 				nomi.add(r.getStudente().getNome() + " " + r.getStudente().getCognome());
 			}
 		}
