@@ -52,6 +52,9 @@ public class Docente extends Utente {
         return this.tirociniProposti;
     }
 
+    public void rimuoviTesi(int indice){
+        tesi.remove(indice);
+    }
 
 }
 

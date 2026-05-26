@@ -26,10 +26,9 @@ public class AggiungiNuovoArgomento {
         frame.pack();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);//Questo metodo serve per far avviare la schermata al centro dello schermo.
-       /*nominativoReferenteTextField.enableInputMethods(false);
-        nomeAziendaTextField.enableInputMethods(false);*/
         nomeAziendaTextField.setVisible(false);
         nominativoReferenteTextField.setVisible(false);
+        frame.getRootPane().setDefaultButton(okButtun); // Con questo metodo il pulsante ok rileva anche l'invio da tastiera
 
         annullaButton.addActionListener(new ActionListener() {
             @Override
@@ -47,19 +46,19 @@ public class AggiungiNuovoArgomento {
                 String tipologiaTirocinio = tipologiaTirocinioTextField.getText();
                 // Controlliamo che il campo non sia vuoto.
                 if(argomentoInput.isEmpty() || tipologiaTirocinio.isEmpty()){
-                    JOptionPane.showMessageDialog(null,"Devi riempire tutti i campi idoneamente.");
+                    JOptionPane.showMessageDialog(null,"Devi riempire tutti i campi idoneamente.","Errore",JOptionPane.ERROR_MESSAGE);
                     return;
                 } else if(!(controller.controlloInserimentoTirocinio(tipologiaTirocinio))) {
-                    JOptionPane.showMessageDialog(null, "Inserire correttamente la tipologia del tirocinio. [INTERNO o ESTERNO].");
+                    JOptionPane.showMessageDialog(null, "Inserire correttamente la tipologia del tirocinio. [INTERNO o ESTERNO].","Errore",JOptionPane.ERROR_MESSAGE);
                     return;
                 }else if(tipologiaTirocinio.equalsIgnoreCase("ESTERNO")) {
                     nomeAziendaTextField.setVisible(true);
                     nominativoReferenteTextField.setVisible(true);
                     if (nomeAziendaTextField.getText().trim().isEmpty() || nominativoReferenteTextField.getText().trim().isEmpty()) {
-                        JOptionPane.showMessageDialog(null, "Devi riempire tutti i campi idoneamente.");
+                        JOptionPane.showMessageDialog(null, "Devi riempire tutti i campi idoneamente.","Errore",JOptionPane.ERROR_MESSAGE);
                         return;
                     } else if (controller.controlloNomeCognome(nominativoReferenteTextField.getText())) {
-                        JOptionPane.showMessageDialog(null, "Attenzione: carattere non consentito nel nome!");
+                        JOptionPane.showMessageDialog(null, "Attenzione: carattere non consentito nel nome!","Errore",JOptionPane.ERROR_MESSAGE);
                         return;
                     }
                     else{

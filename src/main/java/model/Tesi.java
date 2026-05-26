@@ -9,7 +9,7 @@ public class Tesi {
 
     // Costruttore dell'Oggetto Tesi
     public Tesi(Stato statoTesi, Studente studente, Docente docente, String titolo, String contenuto ) {
-        this.statoTesi = statoTesi;
+        this.statoTesi = Stato.ATTESA;
         this.studente = studente;
         this.titolo = titolo;
         this.contenuto = contenuto;

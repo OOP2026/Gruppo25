@@ -1,6 +1,7 @@
 package gui;
 
 import controller.Controller;
+import model.Stato;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -56,7 +57,7 @@ public class ElencoTesisti {
         leggiTesiButton.addActionListener(e -> {
             int riga = table1.getSelectedRow();
             if(riga >= 0) {
-                String contenutoTesi = controller.getContenutoTesiSingola(riga);
+                String contenutoTesi = controller.getContenutoTesiSingola(listaMatricole.get(riga));
 
                 // Creiamo una JTextArea al volo solo per leggerla
                 JTextArea areaTesto = new JTextArea(contenutoTesi);
@@ -68,6 +69,36 @@ public class ElencoTesisti {
                 scrollPane.setPreferredSize(new Dimension(500, 300));
 
                 JOptionPane.showMessageDialog(null, scrollPane, "Lettura Tesi", JOptionPane.INFORMATION_MESSAGE);
+            }
+        });
+
+        approvaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int rigaSelezionata = table1.getSelectedRow();
+                if (rigaSelezionata < 0) {
+                    JOptionPane.showMessageDialog(frame,"Selezionare prima una richiesta dalla tabella.","Error",JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                // Il controller aggiorna lo stato in base alla riga cliccata
+                controller.modificaStatoTesi(rigaSelezionata,Stato.APPROVATA, listaMatricole.get(rigaSelezionata));
+                model.removeRow(rigaSelezionata);
+                JOptionPane.showMessageDialog(frame,"Tesi approvata con successo.");
+            }
+        });
+
+        rifiutaButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int rigaSelezionata = table1.getSelectedRow();
+                if (rigaSelezionata < 0) {
+                    JOptionPane.showMessageDialog(frame,"Selezionare prima una richiesta dalla tabella.","Error",JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                // Il controller aggiorna lo stato in base alla riga cliccata
+                controller.modificaStatoTesi(rigaSelezionata,Stato.RIFIUTATA,listaMatricole.get(rigaSelezionata));
+                model.removeRow(rigaSelezionata);
+                JOptionPane.showMessageDialog(frame,"Tesi non approvata.");
             }
         });
     }

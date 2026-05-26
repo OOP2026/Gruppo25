@@ -5,7 +5,6 @@ import controller.Controller;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ComponentAdapter;
 
 ;
 
@@ -17,6 +16,7 @@ public class StudenteHome {
     private JButton prenotaSedutaButton;
     private JPanel panelStudenteHome;
     private JButton indietroButton;
+    private JButton visualizzaStatoTesiButton;
     private JFrame frame;
     private Controller controller;
 
@@ -28,13 +28,15 @@ public class StudenteHome {
         frame.pack();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null); //Questo metodo serve per far avviare la schermata al centro dello schermo.
+        compilaRichiestaDiTirocinioButton.setEnabled(controller.controlloRichiesta());
+        caricaTesiButton.setEnabled(controller.controlloTesiButton());
 
         // Aggiungiamo un listener che si attiva quando la finestra cambia stato
         frame.addComponentListener(new java.awt.event.ComponentAdapter() {
             @Override
             public void componentShown(java.awt.event.ComponentEvent e) {
-                compilaRichiestaDiTirocinioButton.setEnabled(!controller.controlloRichiesta());
-                caricaTesiButton.setEnabled(!(controller.controlloTesi()));
+                compilaRichiestaDiTirocinioButton.setEnabled(controller.controlloRichiesta());
+                caricaTesiButton.setEnabled(controller.controlloTesiButton());
             }
         });
 
@@ -85,5 +87,12 @@ public class StudenteHome {
             }
         });
 
+        visualizzaStatoTesiButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                StatoTesi statoTesi = new StatoTesi(frame,controller);
+                frame.setVisible(false);
+            }
+        });
     }
 }

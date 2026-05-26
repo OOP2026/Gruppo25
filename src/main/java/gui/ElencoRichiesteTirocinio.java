@@ -60,12 +60,13 @@ public class ElencoRichiesteTirocinio {
             public void actionPerformed(ActionEvent e) {
                 int rigaSelezionata = table1.getSelectedRow();
                 if (rigaSelezionata < 0) {
-                    JOptionPane.showMessageDialog(frame,"Selezionare prima una richiesta dalla tabella.");
+                    JOptionPane.showMessageDialog(frame,"Selezionare prima una richiesta dalla tabella.","Errore",JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 // Il controller aggiorna lo stato in base alla riga cliccata
                 controller.modificaStatoRichiesta(rigaSelezionata, Stato.APPROVATA);
                 model.removeRow(rigaSelezionata);
+                controller.setTirocinio(listaMatricole.get(rigaSelezionata));
                 JOptionPane.showMessageDialog(frame,"Richiesta approvata con successo.");
             }
         });
@@ -75,13 +76,13 @@ public class ElencoRichiesteTirocinio {
             public void actionPerformed(ActionEvent e) {
                 int rigaSelezionata = table1.getSelectedRow();
                 if (rigaSelezionata < 0) {
-                    JOptionPane.showMessageDialog(frame,"Selezionare prima una richiesta dalla tabella");
+                    JOptionPane.showMessageDialog(frame,"Selezionare prima una richiesta dalla tabella","Errore",JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 // Il controller aggiorna lo stato in base alla riga cliccata
                 controller.modificaStatoRichiesta(rigaSelezionata, Stato.RIFIUTATA);
                 model.removeRow(rigaSelezionata);
-                JOptionPane.showMessageDialog(frame,"Richiesta rifiutata con successo.");
+                JOptionPane.showMessageDialog(frame,"Richiesta rifiutata.");
             }
         });
     }

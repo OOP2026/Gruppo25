@@ -19,7 +19,7 @@ public class CaricaTesi {
 
     public CaricaTesi(JFrame framechiamante, Controller controller){
         this.controller = controller;
-        frame = new JFrame("Home Studente");
+        frame = new JFrame("Carica Tesi");
         frame.setContentPane(panelCaricaTesi);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();

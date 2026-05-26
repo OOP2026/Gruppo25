@@ -1,7 +1,7 @@
 package gui;
 
 import controller.Controller;
-import model.Studente;
+import model.Stato;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -14,6 +14,7 @@ public class ElencoTirocinanti {
     private JTable tabellaStudenteArgomentoTirocinio;
     private JPanel panelElencoTirocinanti;
     private JScrollBar scrollBar1;
+    private JButton terminaTirocinioButton;
     private JFrame frame;
     private Controller controller;
 
@@ -50,6 +51,22 @@ public class ElencoTirocinanti {
                     model.addRow(new Object[]{ listaNomiStudentiApprovati.get(i), listaMatricoleApprovati.get(i), listaArgomentiApprovati.get(i) });
                 }
             }
-        }
+
+
+        terminaTirocinioButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                int rigaSelezionata = tabellaStudenteArgomentoTirocinio.getSelectedRow();
+                if (rigaSelezionata < 0) {
+                    JOptionPane.showMessageDialog(frame,"Selezionare prima un tirocinio dalla tabella.","Errore",JOptionPane.ERROR_MESSAGE);
+                    return;
+                }
+                // Il controller aggiorna lo stato in base alla riga cliccata
+                controller.setTerminaTirocinio(rigaSelezionata);
+                model.removeRow(rigaSelezionata);
+                JOptionPane.showMessageDialog(frame,"Tirocinio terminato con successo.");
+            }
+        });
+    }
 
 }

@@ -28,6 +28,11 @@ public class Tirocinio {
         docente.addTirocinio(this);
     }
 
+    // Secondo costruttore dell'Oggetto Tirocinio
+    public Tirocinio(Studente studente, Docente docente){
+        this.studente = studente;
+        this.docente = docente;
+    }
     // Implementazione dei vari metodi get e set di tutti gli attributi della classe
     public void setTipologiaTirocinio(String tipologiaTirocinio) {
         this.tipologiaTirocinio = tipologiaTirocinio;

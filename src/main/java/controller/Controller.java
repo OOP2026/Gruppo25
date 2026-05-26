@@ -3,7 +3,6 @@ package controller;
 
 import model.*;
 
-import javax.swing.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +14,7 @@ public class Controller {
 	private List<Docente> docenti;
 	private List<RichiestaTirocinio> richiesteTirocinio;
 	private List<Azienda> listaAziende;
-	private List<Tesi> listaTesi;
+	//private List<Tesi> listaTesi;
 
 	private Docente docenteLoggato;
 	private Studente studenteLoggato;
@@ -27,7 +26,7 @@ public class Controller {
 		this.docenti = new ArrayList<>();
 		this.richiesteTirocinio = new ArrayList<>();
 		this.listaAziende = new ArrayList<>();
-		this.listaTesi = new ArrayList<>();
+		//this.listaTesi = new ArrayList<>();
 	}
 
 	public void setStudente(String login, String password, String nome, String cognome, String email, String corsoLaurea, String matricola) {
@@ -305,7 +304,7 @@ public class Controller {
 		return argomenti;
 	}
 
-	// Metodo per modificare lo stato della richiesta dopo
+	// Metodo per modificare lo stato della richiesta del tirocinio
 	public void modificaStatoRichiesta(int rigaSelezionata, Stato nuovoStato) {
 		// 1. Creiamo una lista temporanea con SOLO le richieste del docente loggato
 		List<RichiestaTirocinio> richiesteDelDocente = new ArrayList<>();
@@ -363,11 +362,15 @@ public class Controller {
 
 	// Metodo per controllare lo stato della Richiesta del tirocinio.
 	public boolean controlloRichiesta(){
+        if(docenti.isEmpty()){return false;}
+        for(Docente d : docenti){
+            if (d.getArgomentiTirocinio().isEmpty()){return false;}
+        }
 		for(RichiestaTirocinio r : richiesteTirocinio){
-			if(r.getStudente().equals(studenteLoggato) && r.getStatoRichiesta() == Stato.ATTESA){return true;}
-			else if(r.getStudente().equals(studenteLoggato) && r.getStatoRichiesta() == Stato.APPROVATA){return true;}
+			if(r.getStudente().equals(studenteLoggato) && r.getStatoRichiesta() == Stato.ATTESA){return false;}
+			else if(r.getStudente().equals(studenteLoggato) && r.getStatoRichiesta() == Stato.APPROVATA){return false;}
 		}
-		return false;
+		return true;
 	}
 
 	// Metodo per controllare se la tipologia del tirocinio inserita sia giusta.
@@ -378,11 +381,11 @@ public class Controller {
 	}
 
 	// Metodo per istanziare una nuova tesi
-	public void aggiungiNuovaTesi(Stato statotesi, String titolo, String contenuto){
+	public void aggiungiNuovaTesi(Stato statoTesi, String titolo, String contenuto){
 		for(RichiestaTirocinio r : richiesteTirocinio){
 			if(r.getStudente().equals(studenteLoggato) && r.getStatoRichiesta().equals(Stato.APPROVATA)){
 				Docente docente = r.getDocente();
-				Tesi nuovatesi = new Tesi(statotesi, studenteLoggato, docente, titolo, contenuto);
+				Tesi nuovatesi = new Tesi(statoTesi, studenteLoggato, docente, titolo, contenuto);
 				docente.addTesi(nuovatesi);
 				studenteLoggato.setTesi(nuovatesi);
 				return;
@@ -395,7 +398,7 @@ public class Controller {
 	public ArrayList<String> getStudentiTesi(){
 		ArrayList<String> nomi = new ArrayList<>();
 		for(Studente s: studenti){
-			if(s.getTesi() != null){
+			if(s.getTesi() != null && s.getTesi().getStatoTesi().equals(Stato.ATTESA)){
 				nomi.add(s.getNome() + " " + s.getCognome());
 			}
 		}
@@ -405,7 +408,7 @@ public class Controller {
 	public ArrayList<String> getMatricoleTesi(){
 		ArrayList<String> matricole = new ArrayList<>();
 		for(Studente s: studenti){
-			if(s.getTesi() != null){
+			if(s.getTesi() != null && s.getTesi().getStatoTesi().equals(Stato.ATTESA)){
 				matricole.add(s.getMatricola());
 			}
 		}
@@ -415,7 +418,7 @@ public class Controller {
 	public ArrayList<String> getTitoliTesi(){
 		ArrayList<String> titoli = new ArrayList<>();
 		for(Studente s : studenti){
-			if(s.getTesi() != null){
+			if(s.getTesi() != null && s.getTesi().getStatoTesi().equals(Stato.ATTESA)){
 				titoli.add(s.getTesi().getTitolo());
 			}
 		}
@@ -425,7 +428,7 @@ public class Controller {
 	public ArrayList<String> getContenutoTesi(){
 		ArrayList<String> contenuti = new ArrayList<>();
 		for(Studente s : studenti){
-			if(s.getTesi() != null){
+			if(s.getTesi() != null && s.getTesi().getStatoTesi().equals(Stato.ATTESA)){
 				contenuti.add(s.getTesi().getContenuto());
 			}
 		}
@@ -433,20 +436,76 @@ public class Controller {
 	}
 
 	// Metodo per leggere il contenuto dalla tabella data la riga
-	public String getContenutoTesiSingola(int indiceRiga) {
-		// Presumendo che docenteLoggato abbia una lista di tesi
-		Tesi tesiRichiesta = this.docenteLoggato.getTesi().get(indiceRiga);
-		return tesiRichiesta.getContenuto();
+	public String getContenutoTesiSingola(String matricola) {
+        String contenutoTesiRichiesta = "";
+        for(Studente s : studenti){
+            if(s.getMatricola().equals(matricola)){
+                contenutoTesiRichiesta = s.getTesi().getContenuto();
+            }
+        }
+		return contenutoTesiRichiesta;
 	}
 
 	// Metodo per impedire agli studenti che non hanno terminato il tirocinio di poter caricare la tesi TODO
-	public boolean controlloTesi(){
-		for(RichiestaTirocinio r : richiesteTirocinio){
-			if(r.getStudente().equals(studenteLoggato) && studenteLoggato.getRichiestaTirocinio().isEmpty()){return true;}
-			else if (r.getStudente().equals(studenteLoggato) && r.getStatoRichiesta().equals(Stato.ATTESA)){return true;}
-			else if (r.getStudente().equals(studenteLoggato) && r.getStatoRichiesta().equals(Stato.RIFIUTATA)){return true;}
-		}
-		return false;
+	public boolean controlloTesiButton(){
+        if(studenteLoggato.getTirocinio() == null){return false;}
+        else if(studenteLoggato.getTirocinio().getCompletato() ==  false){return false;}
+        //else if(studenteLoggato.getTesi().getStatoTesi().equals(Stato.ATTESA)){return false;}
+        else if(studenteLoggato.getTesi() != null && studenteLoggato.getTesi().getStatoTesi().equals(Stato.APPROVATA)){return false;}
+		return true;
 	}
 
+    // Metodo per modificare lo stato della tesi
+    public void modificaStatoTesi(int rigaSelezionata, Stato nuovoStato, String matricola) {
+        List<Tesi> tesi = new ArrayList<>();
+        for(Tesi t: docenteLoggato.getTesi()){
+            if (t.getStudente().getMatricola().equals(matricola)) {
+                tesi.add(t);
+            }
+        }
+        if (rigaSelezionata >= 0 && rigaSelezionata < tesi.size()) {
+            Tesi tesiEsatta = tesi.get(rigaSelezionata);
+            tesiEsatta.setStatoTesi(nuovoStato);
+            docenteLoggato.rimuoviTesi(rigaSelezionata);
+        }
+    }
+
+    // Metodi per la tabella dello stato della tesi
+    // Metodo per visualizzare lo stato della tesi
+    public String getStatoTesiTabella(){
+        String statoTesi = studenteLoggato.getTesi().getStatoTesi().toString();
+        return  statoTesi;
+    }
+
+    public String getDocenteTesiTabella(){
+        String nomeDocenteTesi = studenteLoggato.getTesi().getDocente().getNome();
+        String cognomeDocenteTesi = studenteLoggato.getTesi().getDocente().getCognome();
+        return (nomeDocenteTesi + " " + cognomeDocenteTesi);
+    }
+
+    public String getTitotoTabella(){
+        String titolo = studenteLoggato.getTesi().getTitolo();
+        return titolo;
+    }
+
+    // Metodo per istanziare il tirocinio quando il docente approva la richiesta
+    public void setTirocinio(String matricola){
+        for(RichiestaTirocinio r  : richiesteTirocinio){
+            if(r.getStudente().getMatricola().equals(matricola)){
+                Studente studenteCorrente = r.getStudente();
+                Tirocinio nuovoTirocinio = new Tirocinio(studenteCorrente, docenteLoggato);
+                studenteCorrente.setTirocinio(nuovoTirocinio);
+                docenteLoggato.addTirocinio(nuovoTirocinio);
+            }
+        }
+    }
+
+    // Metodo per terminare il tirocinio
+    public void setTerminaTirocinio(int rigaSelezionata){
+        List<Tirocinio> tirocinio = this.docenteLoggato.getTirocinio();
+        if (rigaSelezionata >= 0 && rigaSelezionata < tirocinio.size()) {
+            Tirocinio tirocinioEsatto = tirocinio.get(rigaSelezionata);
+            tirocinioEsatto.setCompletato(true);
+        }
+    }
 }
