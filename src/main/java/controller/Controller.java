@@ -29,13 +29,13 @@ public class Controller {
 		//this.listaTesi = new ArrayList<>();
 	}
 
-	public void setStudente(String login, String password, String nome, String cognome, String email, String corsoLaurea, String matricola) {
-		Studente studente = new Studente(login, password, nome, cognome, email, corsoLaurea, matricola);
+	public void setStudente(String login, String password, String nome, String cognome, String email, String matricola) {
+		Studente studente = new Studente(login, password, nome, cognome, email, matricola);
 		studenti.add(studente);
 	}
 
-	public void setDocente(String login, String password, String nome, String cognome, String email, String corsoLaurea) {
-		Docente docente = new Docente(login, password, nome, cognome, email, corsoLaurea);
+	public void setDocente(String login, String password, String nome, String cognome, String email) {
+		Docente docente = new Docente(login, password, nome, cognome, email);
 		docenti.add(docente);
 	}
 
@@ -331,9 +331,12 @@ public class Controller {
 	public ArrayList<String> getNomiTirocinantiApprovati() {
 		ArrayList<String> nomi = new ArrayList<>();
 		for (RichiestaTirocinio r : richiesteTirocinio) {
+			Studente s = r.getStudente();
 			// Filtriamo per docente loggato E per stato della richiesta
 			if (r.getDocente().equals(docenteLoggato) && r.getStatoRichiesta() == Stato.APPROVATA ) { // Inserisci il nome esatto del tuo Stato
+				if(s.getTirocinio() != null && s.getTirocinio().getCompletato()== false){
 				nomi.add(r.getStudente().getNome() + " " + r.getStudente().getCognome());
+				}
 			}
 		}
 		return nomi;
@@ -342,8 +345,11 @@ public class Controller {
 	public ArrayList<String> getMatricoleTirocinantiApprovati() {
 		ArrayList<String> matricole = new ArrayList<>();
 		for (RichiestaTirocinio r : richiesteTirocinio) {
+			Studente s = r.getStudente();
 			if (r.getDocente().equals(docenteLoggato) && r.getStatoRichiesta() == Stato.APPROVATA) {
+				if(s.getTirocinio() != null && s.getTirocinio().getCompletato()== false){
 				matricole.add(r.getStudente().getMatricola());
+				}
 			}
 		}
 		return matricole;
@@ -353,8 +359,11 @@ public class Controller {
 	public ArrayList<String> getArgomentiTirocinantiApprovati() {
 		ArrayList<String> argomenti = new ArrayList<>();
 		for (RichiestaTirocinio r : richiesteTirocinio) {
+			Studente s = r.getStudente();
 			if (r.getDocente().equals(docenteLoggato) && r.getStatoRichiesta() == Stato.APPROVATA) {
+				if(s.getTirocinio() != null && s.getTirocinio().getCompletato()== false){
 				argomenti.add(r.getArgomento());
+				}
 			}
 		}
 		return argomenti;
@@ -381,11 +390,11 @@ public class Controller {
 	}
 
 	// Metodo per istanziare una nuova tesi
-	public void aggiungiNuovaTesi(Stato statoTesi, String titolo, String contenuto){
+	public void aggiungiNuovaTesi(Stato statoTesi, String titolo, String contenuto, String data){
 		for(RichiestaTirocinio r : richiesteTirocinio){
 			if(r.getStudente().equals(studenteLoggato) && r.getStatoRichiesta().equals(Stato.APPROVATA)){
 				Docente docente = r.getDocente();
-				Tesi nuovatesi = new Tesi(statoTesi, studenteLoggato, docente, titolo, contenuto);
+				Tesi nuovatesi = new Tesi(statoTesi, studenteLoggato, docente, titolo, contenuto, data);
 				docente.addTesi(nuovatesi);
 				studenteLoggato.setTesi(nuovatesi);
 				return;
@@ -451,7 +460,8 @@ public class Controller {
         if(studenteLoggato.getTirocinio() == null){return false;}
         else if(studenteLoggato.getTirocinio().getCompletato() ==  false){return false;}
         //else if(studenteLoggato.getTesi().getStatoTesi().equals(Stato.ATTESA)){return false;}
-        else if(studenteLoggato.getTesi() != null && studenteLoggato.getTesi().getStatoTesi().equals(Stato.APPROVATA)){return false;}
+        else if(studenteLoggato.getTesi() != null && (studenteLoggato.getTesi().getStatoTesi().equals(Stato.APPROVATA) ||
+				studenteLoggato.getTesi().getStatoTesi().equals(Stato.ATTESA))){return false;}
 		return true;
 	}
 
@@ -508,4 +518,9 @@ public class Controller {
             tirocinioEsatto.setCompletato(true);
         }
     }
+
+	// Metodo per verificare che uno studente possa visualizzare lo stato della tesi
+	public boolean haTesi() {
+		return this.studenteLoggato.getTesi() != null;
+	}
 }

@@ -37,5 +37,6 @@ public class Tesi {
 
     public String getContenuto() {return contenuto;}
 
+    public String getSedutaDiLaurea() {return sedutaDiLaurea;}
 
 }

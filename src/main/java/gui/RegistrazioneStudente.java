@@ -44,7 +44,7 @@ public class RegistrazioneStudente extends JFrame {
                 String matricola = s_matricolaTextField.getText().trim();
 
                 if(login.isEmpty() || password.isEmpty() || nome.isEmpty() || cognome.isEmpty() || email.isEmpty()  || matricola.isEmpty()){
-                    JOptionPane.showMessageDialog(frame, "Attenzione riempire correttamente tutti i campi!", "Erro", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(frame, "Attenzione riempire correttamente tutti i campi!", "Errore", JOptionPane.ERROR_MESSAGE);
                 }
                 // Verifico se il login inserito è già presente
                 else if(RegistrazioneStudente.this.controller.controlloLogin(login)) {JOptionPane.showMessageDialog(frame, "Login già esistente! Utilizzare una login differente","Errore", JOptionPane.ERROR_MESSAGE);}
