@@ -12,11 +12,6 @@ public class Tirocinio {
     private Tesi tesi;
 
 
-    public Tirocinio(String tipologiaTirocinio, String argomento){
-        this.tipologiaTirocinio = tipologiaTirocinio;
-        this.argomento = argomento;
-    }
-
     // Costruttore dell'Oggetto Tirocinio
     public Tirocinio(String tipologiaTirocinio, String argomento, Studente studente, Docente docente) {
         this.tipologiaTirocinio = tipologiaTirocinio;
@@ -33,6 +28,7 @@ public class Tirocinio {
         this.studente = studente;
         this.docente = docente;
     }
+    
     // Implementazione dei vari metodi get e set di tutti gli attributi della classe
     public void setTipologiaTirocinio(String tipologiaTirocinio) {
         this.tipologiaTirocinio = tipologiaTirocinio;
