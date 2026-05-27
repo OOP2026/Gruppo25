@@ -11,7 +11,6 @@ public class StudenteHome {
     private JButton compilaRichiestaDiTirocinioButton;
     private JButton visualizzaStatoRichiestaTirocinioButton;
     private JButton caricaTesiButton;
-    private JButton prenotaSedutaButton;
     private JPanel panelStudenteHome;
     private JButton indietroButton;
     private JButton visualizzaStatoTesiButton;

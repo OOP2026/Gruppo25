@@ -12,7 +12,6 @@ import java.util.List;
 
 public class StatoRichiestaTirocinio {
     private JButton OKButton;
-    private JButton annullaButton;
     private JPanel panelStatoRichiestaTirocinio;
     private JTable tableStatoRichiesta;
     private JFrame frame;

@@ -21,7 +21,7 @@ public class ElencoTesisti {
     private JFrame frame;
     private Controller controller;
 
-    public ElencoTesisti(JFrame FrameChiamante, Controller controller) {
+    public ElencoTesisti(JFrame frameChiamante, Controller controller) {
         this.controller = controller;
         frame = new JFrame("Elenco Tesisti");
         frame.setContentPane(panelElencoTesisti);
@@ -32,7 +32,7 @@ public class ElencoTesisti {
         ritornaAllaHomeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FrameChiamante.setVisible(true);
+                frameChiamante.setVisible(true);
                 frame.dispose();
             }
         });

@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 public class AggiungiNuovoArgomento {
     private JLabel nomeArgomentoLabel;
     private JTextField nomeArgomentoText;
-    private JButton okButtun;
+    private JButton OKButton;
     private JButton annullaButton;
     private JPanel panelAggArg;
     private JTextField tipologiaTirocinioTextField;
@@ -28,7 +28,7 @@ public class AggiungiNuovoArgomento {
         frame.setLocationRelativeTo(null);//Questo metodo serve per far avviare la schermata al centro dello schermo.
         nomeAziendaTextField.setVisible(false);
         nominativoReferenteTextField.setVisible(false);
-        frame.getRootPane().setDefaultButton(okButtun); // Con questo metodo il pulsante ok rileva anche l'invio da tastiera
+        frame.getRootPane().setDefaultButton(OKButton); // Con questo metodo il pulsante ok rileva anche l'invio da tastiera
 
         annullaButton.addActionListener(new ActionListener() {
             @Override
@@ -38,7 +38,7 @@ public class AggiungiNuovoArgomento {
             }
         });
 
-        okButtun.addActionListener(new ActionListener() {
+        OKButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Variabile per contenere l'argomento in input dal Docente.

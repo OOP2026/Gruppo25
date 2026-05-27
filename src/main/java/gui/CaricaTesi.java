@@ -11,14 +11,14 @@ import java.awt.event.ActionListener;
 public class CaricaTesi {
     private JTextField titoloTesiTextField;
     private JTextArea tesiTextArea;
-    private Controller controller;
-    private JFrame frame;
     private JPanel panelCaricaTesi;
     private JButton OKButton;
     private JButton annullaButton;
     private JComboBox comboBoxDateSeduteDiLaurea;
+    private JFrame frame;
+    private Controller controller;
 
-    public CaricaTesi(JFrame framechiamante, Controller controller){
+    public CaricaTesi(JFrame frameChiamante, Controller controller){
         this.controller = controller;
         frame = new JFrame("Carica Tesi");
         frame.setContentPane(panelCaricaTesi);
@@ -38,7 +38,7 @@ public class CaricaTesi {
                 }else {
                     CaricaTesi.this.controller.aggiungiNuovaTesi(Stato.ATTESA, titoloTesiTextField.getText(), tesiTextArea.getText(), (String)comboBoxDateSeduteDiLaurea.getSelectedItem());
                     frame.setVisible(false);
-                    framechiamante.setVisible(true);
+                    frameChiamante.setVisible(true);
                     frame.dispose();
                 }
             }
@@ -47,7 +47,7 @@ public class CaricaTesi {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                framechiamante.setVisible(true);
+                frameChiamante.setVisible(true);
                 frame.dispose();
             }
         });

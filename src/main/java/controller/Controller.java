@@ -455,7 +455,7 @@ public class Controller {
 		return contenutoTesiRichiesta;
 	}
 
-	// Metodo per impedire agli studenti che non hanno terminato il tirocinio di poter caricare la tesi TODO
+	// Metodo per impedire agli studenti che non hanno terminato il tirocinio di poter caricare la tesi
 	public boolean controlloTesiButton(){
         if(studenteLoggato.getTirocinio() == null){return false;}
         else if(studenteLoggato.getTirocinio().getCompletato() ==  false){return false;}

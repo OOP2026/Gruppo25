@@ -10,7 +10,6 @@ import java.util.ArrayList;
 
 public class ElencoDocenti {
     private JScrollBar scrollBar1;
-    private JList argomentilist2;
     private JButton IndietroButton;
     private JPanel panelElencoDocenti;
     private JTable table1;

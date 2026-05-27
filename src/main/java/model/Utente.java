@@ -39,10 +39,4 @@ public class Utente {
     public String getEmail() {return email;}
 
     public void setEmail(String email) {this.email = email;}
-
-    // Metodo che verifica che il login e la password inseriti corrispondano a quelli dell'utente
-    public boolean login(String login, String password) {
-        return ( login.equals(this.login) && password.equals(this.password));
-    }
-    //PROVA
 }
