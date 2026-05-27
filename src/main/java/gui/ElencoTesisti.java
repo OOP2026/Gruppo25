@@ -28,7 +28,8 @@ public class ElencoTesisti {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
-        frame.setLocationRelativeTo(null); //Questo metodo serve per far avviare la schermata al centro dello schermo.
+        frame.setLocationRelativeTo(null);//Questo metodo serve per far avviare la schermata al centro dello schermo.
+
         ritornaAllaHomeButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

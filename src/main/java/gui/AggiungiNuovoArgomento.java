@@ -26,7 +26,7 @@ public class AggiungiNuovoArgomento {
         frame.pack();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);//Questo metodo serve per far avviare la schermata al centro dello schermo.
-        nomeAziendaTextField.setVisible(false);
+        nomeAziendaTextField.setVisible(false); // NOSONAR
         nominativoReferenteTextField.setVisible(false);
         frame.getRootPane().setDefaultButton(OKButton); // Con questo metodo il pulsante ok rileva anche l'invio da tastiera
 

@@ -94,7 +94,7 @@ public class Controller {
 			return true;
 		}
 
-		return !(matricola.matches("^D[A-Z]\\d{7}|N\\d{8}$"));
+		return !(matricola.matches("^(D[A-Z]\\d{7}|N\\d{8})$"));
 	}
 
 	// Metodo per la verifica dell`unicità della matricola
