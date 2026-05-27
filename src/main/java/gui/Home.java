@@ -13,7 +13,7 @@ public class Home extends JFrame {
     private JButton registratiComeDocenteButton;
     private JPanel panelHome;
     private JButton inviaButton;
-    private final Controller controller;
+    private final transient Controller controller;
 
     public static void main(String[] args) {
        // TRY-CATCH PER SETTARE LA GUI IN BASE AL TEMA DELLA MACCHINA.
@@ -24,7 +24,7 @@ public class Home extends JFrame {
         }
         frame = new JFrame("Home"); // finestra nella quale ci sono gli elementi da visualizzare, qui è incluso anche il JPanel, e attraverso questo possiamo specificare il contenuto delle GUI
         frame.setContentPane(new Home().panelHome);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
         //frame.setLocation(300,300); Questo metodo serve per far avviare l'applicazione in un determinato punto dello schermo.
@@ -41,7 +41,7 @@ public class Home extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // LISTENER RIFERITO AL PULSANTE PER REGISTRARSI COME STUDENTE
-                RegistrazioneStudente guiRegistrazioneStudente = new RegistrazioneStudente(frame,controller);
+                new RegistrazioneStudente(frame,controller);
                 frame.setVisible(false);
             }
         });
@@ -49,7 +49,7 @@ public class Home extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // LISTENER RIFERITO AL PULSANTE PER REGISTRARSI COME DOCENTE.
-                RegistrazioneDocente guiRegistrazione = new RegistrazioneDocente(frame,controller);
+                new RegistrazioneDocente(frame,controller);
                 frame.setVisible(false);
             }
         });
@@ -65,19 +65,18 @@ public class Home extends JFrame {
                     JOptionPane.showMessageDialog(frame,"Ci sono dei campi vuoti.","Errore", JOptionPane.ERROR_MESSAGE);
                     return;
                 }
-                //Controller controller = new Controller();
                 String ruolo = controller.effettuaLogin(login, password);
                 // CONTROLLO PER VERIFICARE SE L'ACCESSO LO FA UNO STUDENTE O UN DOCENTE.
                 if (ruolo.equals("STUDENTE")) {
                     JOptionPane.showMessageDialog(frame, "Accesso eseguito come studente.");
                     // ora possiamo aprire la HomeStudente
-                    StudenteHome studenteHome = new StudenteHome(frame,controller);
+                    new StudenteHome(frame,controller);
                     frame.setVisible(false);
 
                 } else if (ruolo.equals("DOCENTE")) {
                     JOptionPane.showMessageDialog(frame, "Accesso eseguito come docente.");
                     // ora possiamo aprire la HomeDocente
-                    DocenteHome docenteHome = new DocenteHome(frame,controller);
+                    new DocenteHome(frame,controller);
                     frame.setVisible(false);
                 }
                 else {

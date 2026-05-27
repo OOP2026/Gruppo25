@@ -7,9 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class AggiungiNuovoArgomento {
-    private JLabel nomeArgomentoLabel;
+    private JLabel nomeArgomentoLabel; //NOSONAR
     private JTextField nomeArgomentoText;
-    private JButton OKButton;
+    private JButton okbutton;
     private JButton annullaButton;
     private JPanel panelAggArg;
     private JTextField tipologiaTirocinioTextField;
@@ -17,28 +17,29 @@ public class AggiungiNuovoArgomento {
     private JTextField nominativoReferenteTextField;
     private JFrame frame;
     private Controller controller;
+    private static final String TITOLO_ERRORE = "Errore";
 
-    public AggiungiNuovoArgomento(JFrame FrameChiamante, Controller controller) {
+    public AggiungiNuovoArgomento(JFrame frameChiamante, Controller controller) {
         this.controller = controller;
         frame = new JFrame("Aggiungi Argomento di Tirocinio");
         frame.setContentPane(panelAggArg);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);//Questo metodo serve per far avviare la schermata al centro dello schermo.
         nomeAziendaTextField.setVisible(false); // NOSONAR
         nominativoReferenteTextField.setVisible(false);
-        frame.getRootPane().setDefaultButton(OKButton); // Con questo metodo il pulsante ok rileva anche l'invio da tastiera
+        frame.getRootPane().setDefaultButton(okbutton); // Con questo metodo il pulsante ok rileva anche l'invio da tastiera
 
         annullaButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FrameChiamante.setVisible(true);
+                frameChiamante.setVisible(true);
                 frame.dispose();
             }
         });
 
-        OKButton.addActionListener(new ActionListener() {
+        okbutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // Variabile per contenere l'argomento in input dal Docente.
@@ -46,10 +47,10 @@ public class AggiungiNuovoArgomento {
                 String tipologiaTirocinio = tipologiaTirocinioTextField.getText();
                 // Controlliamo che il campo non sia vuoto.
                 if(argomentoInput.isEmpty() || tipologiaTirocinio.isEmpty()){
-                    JOptionPane.showMessageDialog(null,"Devi riempire tutti i campi idoneamente.","Errore",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null,"Devi riempire tutti i campi idoneamente.",TITOLO_ERRORE,JOptionPane.ERROR_MESSAGE);
                     return;
                 } else if(!(controller.controlloInserimentoTirocinio(tipologiaTirocinio))) {
-                    JOptionPane.showMessageDialog(null, "Inserire correttamente la tipologia del tirocinio. [INTERNO o ESTERNO].","Errore",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(null, "Inserire correttamente la tipologia del tirocinio. [INTERNO o ESTERNO].",TITOLO_ERRORE,JOptionPane.ERROR_MESSAGE);
                     return;
                 }else if(tipologiaTirocinio.equalsIgnoreCase("ESTERNO")) {
                     nomeAziendaTextField.setVisible(true);
@@ -58,7 +59,7 @@ public class AggiungiNuovoArgomento {
                         JOptionPane.showMessageDialog(null, "Ora aggiungi le info dell'azienda collaboratrice.","Aggiungi Azienda",JOptionPane.INFORMATION_MESSAGE);
                         return;
                     } else if (controller.controlloNomeCognome(nominativoReferenteTextField.getText())) {
-                        JOptionPane.showMessageDialog(null, "Attenzione: carattere non consentito nel nome!","Errore",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Attenzione: carattere non consentito nel nome!",TITOLO_ERRORE,JOptionPane.ERROR_MESSAGE);
                         return;
                     }
                     else{
@@ -70,7 +71,7 @@ public class AggiungiNuovoArgomento {
                     AggiungiNuovoArgomento.this.controller.aggiungiNuovoArgomento(nomeArgomentoText.getText(),tipologiaTirocinioTextField.getText(),nomeAziendaTextField.getText(),nominativoReferenteTextField.getText());
                     JOptionPane.showMessageDialog(null, "Tirocinio aggiunto correttamente.");
                 }
-                FrameChiamante.setVisible(true);
+                frameChiamante.setVisible(true);
                 frame.dispose();
 
             }

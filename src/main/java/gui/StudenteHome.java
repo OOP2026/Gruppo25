@@ -17,11 +17,11 @@ public class StudenteHome {
     private JFrame frame;
     private Controller controller;
 
-    public StudenteHome(JFrame FrameChiamante, Controller controller) {
+    public StudenteHome(JFrame frameChiamante, Controller controller) {
         this.controller = controller;
         frame = new JFrame("Home Studente");
         frame.setContentPane(panelStudenteHome);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null); //Questo metodo serve per far avviare la schermata al centro dello schermo.
@@ -44,7 +44,7 @@ public class StudenteHome {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // LISTENER RIFERITO AL BOTTONE PER APRIRE LA FINESTRA DELL'ELENCO DEI DOCENTI
-                ElencoDocenti elencoDocenti = new ElencoDocenti(frame,controller);
+                new ElencoDocenti(frame,controller);
                 frame.setVisible(false);
             }
         });
@@ -52,7 +52,7 @@ public class StudenteHome {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // LISTENER RIFERITO AL BOTTONE PER APRIRE LA FINESTRA PER COMPILARE LA RICHIESTA DI TIROCINIO
-                MandaRichiestaTirocinio mandaRichiestaTirocinio = new MandaRichiestaTirocinio(frame,controller);
+                new MandaRichiestaTirocinio(frame,controller);
                 frame.setVisible(false);
             }
         });
@@ -60,7 +60,7 @@ public class StudenteHome {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // LISTENER RIFERITO AL BOTTONE PER APRIRE LA FINESTRA PER VISUALIZZARE LO STATO DELLA RICHIESTA DEL TIROCINIO
-                StatoRichiestaTirocinio statoRichiestaTirocinio = new StatoRichiestaTirocinio(frame,controller);
+                new StatoRichiestaTirocinio(frame,controller);
                 frame.setVisible(false);
             }
         });
@@ -68,7 +68,7 @@ public class StudenteHome {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // LISTENER RIFERITO AL BOTTONE PER CARICARE IL FILE DELLA TESI
-                CaricaTesi caricaTesi = new CaricaTesi(frame,controller);
+                new CaricaTesi(frame,controller);
                 frame.setVisible(false);
             }
         });
@@ -76,7 +76,7 @@ public class StudenteHome {
         indietroButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FrameChiamante.setVisible(true);
+                frameChiamante.setVisible(true);
                 frame.dispose();
             }
         });
@@ -84,7 +84,7 @@ public class StudenteHome {
         visualizzaStatoTesiButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                StatoTesi statoTesi = new StatoTesi(frame,controller);
+                new StatoTesi(frame,controller);
                 frame.setVisible(false);
             }
         });

@@ -12,9 +12,9 @@ public class CaricaTesi {
     private JTextField titoloTesiTextField;
     private JTextArea tesiTextArea;
     private JPanel panelCaricaTesi;
-    private JButton OKButton;
+    private JButton okbutton;
     private JButton annullaButton;
-    private JComboBox comboBoxDateSeduteDiLaurea;
+    private JComboBox<String> comboBoxDateSeduteDiLaurea;
     private JFrame frame;
     private Controller controller;
 
@@ -22,13 +22,13 @@ public class CaricaTesi {
         this.controller = controller;
         frame = new JFrame("Carica Tesi");
         frame.setContentPane(panelCaricaTesi);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
 
 
-        OKButton.addActionListener(new ActionListener() { // NOSONAR
+        okbutton.addActionListener(new ActionListener() { // NOSONAR
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (titoloTesiTextField.getText().isEmpty() || tesiTextArea.getText().isEmpty()) {
@@ -36,7 +36,7 @@ public class CaricaTesi {
                 }else if (comboBoxDateSeduteDiLaurea.getSelectedItem().equals("--- Seleziona una data ---")) {
                         JOptionPane.showMessageDialog(null, "Per favore, seleziona una data per la seduta!", "Errore", JOptionPane.ERROR_MESSAGE);
                 }else {
-                    CaricaTesi.this.controller.aggiungiNuovaTesi(Stato.ATTESA, titoloTesiTextField.getText(), tesiTextArea.getText(), (String)comboBoxDateSeduteDiLaurea.getSelectedItem());
+                    CaricaTesi.this.controller.aggiungiNuovaTesi(Stato.ATTESA, titoloTesiTextField.getText(), tesiTextArea.getText(), comboBoxDateSeduteDiLaurea.getSelectedItem().toString());
                     frame.setVisible(false);
                     frameChiamante.setVisible(true);
                     frame.dispose();
@@ -51,11 +51,7 @@ public class CaricaTesi {
                 frame.dispose();
             }
         });
-        comboBoxDateSeduteDiLaurea.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-            }
-        });
+
     }
 
 

@@ -16,11 +16,11 @@ public class DocenteHome {
     private JFrame frame;
     private Controller controller;
 
-    public DocenteHome(JFrame FrameChiamante, Controller controller) {
+    public DocenteHome(JFrame frameChiamante, Controller controller) {
         this.controller = controller;
         frame = new JFrame("Home Docente");
         frame.setContentPane(panelDocenteHome);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null); //Questo metodo serve per far avviare la schermata al centro dello schermo.
@@ -28,7 +28,7 @@ public class DocenteHome {
         aggiungiTirocinioButton.addActionListener(new ActionListener() { // NOSONAR
             @Override
             public void actionPerformed(ActionEvent e) {
-                AggiungiNuovoArgomento aggiungiNuovoArgomento = new AggiungiNuovoArgomento(frame,controller);
+                new AggiungiNuovoArgomento(frame,controller);
                 frame.setVisible(false);
             }
         });
@@ -36,7 +36,7 @@ public class DocenteHome {
         visualizzaElencoDelleRichiesteButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ElencoRichiesteTirocinio elencoRichiesteTirocinio = new ElencoRichiesteTirocinio(frame,controller);
+                new ElencoRichiesteTirocinio(frame,controller);
                 frame.setVisible(false);
             }
         });
@@ -44,21 +44,21 @@ public class DocenteHome {
         visualizzaTirocininantiButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ElencoTirocinanti elencoTirocinanti = new ElencoTirocinanti(frame,controller);
+                new ElencoTirocinanti(frame,controller);
                 frame.setVisible(false);
             }
         });
         visualizzaTesiInCorsoButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                ElencoTesisti elencoTesisti = new ElencoTesisti(frame,controller);
+                new ElencoTesisti(frame,controller);
                 frame.setVisible(false);
             }
         });
         indietroButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                FrameChiamante.setVisible(true);
+                frameChiamante.setVisible(true);
                 frame.dispose();
             }
         });

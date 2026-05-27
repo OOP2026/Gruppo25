@@ -13,7 +13,7 @@ import java.util.List;
 public class ElencoTesisti {
     private JButton ritornaAllaHomeButton;
     private JPanel panelElencoTesisti;
-    private JScrollBar scrollBar1;
+    private JScrollBar scrollBar1; // NOSONAR
     private JTable table1;
     private JButton approvaButton;
     private JButton rifiutaButton;
@@ -25,7 +25,7 @@ public class ElencoTesisti {
         this.controller = controller;
         frame = new JFrame("Elenco Tesisti");
         frame.setContentPane(panelElencoTesisti);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);//Questo metodo serve per far avviare la schermata al centro dello schermo.

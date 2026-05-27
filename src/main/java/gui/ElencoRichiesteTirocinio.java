@@ -16,15 +16,15 @@ public class ElencoRichiesteTirocinio {
     private JTable table1;
     private JButton accettaButton;
     private JButton rifiutaButton;
-    private JScrollBar scrollBar1;
+    private JScrollBar scrollBar1; // NOSONAR
     private JFrame frame;
     private Controller controller;
 
-    public ElencoRichiesteTirocinio(JFrame FrameChiamante, Controller controller) {
+    public ElencoRichiesteTirocinio(JFrame frameChiamante, Controller controller) {
         this.controller = controller;
         frame = new JFrame("Elenco Richieste di Tirocinio");
         frame.setContentPane(panelElencoRichiesteTirocinio);
-        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null); //Questo metodo serve per far avviare la schermata al centro dello schermo.
@@ -32,7 +32,7 @@ public class ElencoRichiesteTirocinio {
         ritornaAllaHomeButton.addActionListener(new ActionListener() { // NOSONAR
             @Override
             public void actionPerformed(ActionEvent e) {
-                FrameChiamante.setVisible(true);
+                frameChiamante.setVisible(true);
                 frame.dispose();
             }
         });

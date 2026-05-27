@@ -17,7 +17,7 @@
           <text value="Registrati come nuovo Studente"/>
         </properties>
       </component>
-      <component id="b5f6f" class="javax.swing.JButton" binding="s_confermaButton">
+      <component id="b5f6f" class="javax.swing.JButton" binding="sConfermaButton">
         <constraints>
           <grid row="7" column="2" row-span="1" col-span="2" vsize-policy="0" hsize-policy="3" anchor="4" fill="0" indent="0" use-parent-layout="false"/>
         </constraints>
@@ -25,7 +25,7 @@
           <text value="Conferma"/>
         </properties>
       </component>
-      <component id="5a6e6" class="javax.swing.JTextField" binding="s_loginTextField">
+      <component id="5a6e6" class="javax.swing.JTextField" binding="sLoginTextField">
         <constraints>
           <grid row="1" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -35,7 +35,7 @@
           <text value=""/>
         </properties>
       </component>
-      <component id="59208" class="javax.swing.JTextField" binding="s_nomeTextField">
+      <component id="59208" class="javax.swing.JTextField" binding="sNomeTextField">
         <constraints>
           <grid row="3" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -45,7 +45,7 @@
           <text value=""/>
         </properties>
       </component>
-      <component id="327e3" class="javax.swing.JTextField" binding="s_cognomeTextField">
+      <component id="327e3" class="javax.swing.JTextField" binding="sCognomeTextField">
         <constraints>
           <grid row="4" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -55,7 +55,7 @@
           <text value=""/>
         </properties>
       </component>
-      <component id="5c26d" class="javax.swing.JTextField" binding="s_emailTextField">
+      <component id="5c26d" class="javax.swing.JTextField" binding="sEmailTextField">
         <constraints>
           <grid row="5" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -73,7 +73,7 @@
           <text value="Annulla"/>
         </properties>
       </component>
-      <component id="e0b6e" class="javax.swing.JPasswordField" binding="s_passwordPasswordField">
+      <component id="e0b6e" class="javax.swing.JPasswordField" binding="sPasswordPasswordField">
         <constraints>
           <grid row="2" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
@@ -83,7 +83,7 @@
           <text value=""/>
         </properties>
       </component>
-      <component id="c16fd" class="javax.swing.JTextField" binding="s_matricolaTextField">
+      <component id="c16fd" class="javax.swing.JTextField" binding="sMatricolaTextField">
         <constraints>
           <grid row="6" column="3" row-span="1" col-span="1" vsize-policy="0" hsize-policy="6" anchor="8" fill="0" indent="0" use-parent-layout="false">
             <preferred-size width="150" height="-1"/>
