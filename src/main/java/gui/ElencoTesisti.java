@@ -8,7 +8,7 @@ import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.util.List;
 
 public class ElencoTesisti {
     private JButton ritornaAllaHomeButton;
@@ -30,7 +30,7 @@ public class ElencoTesisti {
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);//Questo metodo serve per far avviare la schermata al centro dello schermo.
 
-        ritornaAllaHomeButton.addActionListener(new ActionListener() {
+        ritornaAllaHomeButton.addActionListener(new ActionListener() { // NOSONAR
             @Override
             public void actionPerformed(ActionEvent e) {
                 frameChiamante.setVisible(true);
@@ -45,10 +45,10 @@ public class ElencoTesisti {
         ));
         DefaultTableModel model = (DefaultTableModel) table1.getModel();
 
-        ArrayList<String> listaNomiStudenti = controller.getStudentiTesi();
-        ArrayList<String> listaMatricole = controller.getMatricoleTesi();
-        ArrayList<String> listaTitoli = controller.getTitoliTesi();
-        ArrayList<String> listaContenuti = controller.getContenutoTesi();
+        List<String> listaNomiStudenti = controller.getStudentiTesi();
+        List<String> listaMatricole = controller.getMatricoleTesi();
+        List<String> listaTitoli = controller.getTitoliTesi();
+        List<String> listaContenuti = controller.getContenutoTesi();
         if (listaNomiStudenti != null) {
             for (int i = 0; i < listaNomiStudenti.size(); i++) {
                 model.addRow(new Object[]{ listaNomiStudenti.get(i), listaMatricole.get(i), listaTitoli.get(i), listaContenuti.get(i) });

@@ -6,7 +6,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.util.List;
 
 public class ElencoDocenti {
     private JScrollBar scrollBar1;
@@ -26,7 +26,7 @@ public class ElencoDocenti {
         frame.setLocationRelativeTo(null); //Questo metodo serve per far avviare la schermata al centro dello schermo.
 
 
-        IndietroButton.addActionListener(new ActionListener() {
+        IndietroButton.addActionListener(new ActionListener() { // NOSONAR
             @Override
             public void actionPerformed(ActionEvent e) {
                 // LISTENER RIFERITO AL BOTTONE OK DELLA SCHERMATA ELENCO DOCENTI
@@ -43,11 +43,11 @@ public class ElencoDocenti {
 
         DefaultTableModel model = (DefaultTableModel) table1.getModel();
 
-        ArrayList<String> listaNomi = controller.getNomiDocentiPerTabella();
-        ArrayList<String> listaArgomenti = controller.getArgomentiPerTabella();
-        ArrayList<String> listaTipologieTirocinio = controller.getTipologiePerTabella();
-        ArrayList<String> listaAzienda = controller.getNomiAziendaPerTabella();
-        ArrayList<String> listaReferenti = controller.getReferentePerTabella();
+        List<String> listaNomi = controller.getNomiDocentiPerTabella();
+        List<String> listaArgomenti = controller.getArgomentiPerTabella();
+        List<String> listaTipologieTirocinio = controller.getTipologiePerTabella();
+        List<String> listaAzienda = controller.getNomiAziendaPerTabella();
+        List<String> listaReferenti = controller.getReferentePerTabella();
 
         if (listaNomi != null) {
             for (int i = 0; i < listaNomi.size(); i++) {

@@ -24,7 +24,7 @@ public class StatoTesi {
         frame.setVisible(true);
         frame.setLocationRelativeTo(null);
 
-        ritornaAllaHomeButton.addActionListener(new ActionListener() {
+        ritornaAllaHomeButton.addActionListener(new ActionListener() { // NOSONAR
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);

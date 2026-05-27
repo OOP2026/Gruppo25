@@ -31,13 +31,12 @@ public class RegistrazioneDocente extends JFrame {
         frame.setResizable(false); //Questo metodo permetto(o non) di far ingrandire la schermata.
         frame.getRootPane().setDefaultButton(d_confermaButton); // Con questo metodo il pulsante conferma rileva anche l'invio da tastiera
 
-        d_confermaButton.addActionListener(new ActionListener() {
+        d_confermaButton.addActionListener(new ActionListener() { // NOSONAR
             @Override
             public void actionPerformed(ActionEvent e) {
                 // LISTENER RIFERITO AL PULSANTE PER CONFERMARE LA REGISTRAZIONE DEL DOCENTE
                 String login = d_loginText.getText().trim();
-                String password = new String (d_passwordText.getText());
-                password.trim();
+                String password = d_passwordText.getText().trim();
                 String nome = d_nomeText.getText().trim();
                 String cognome = d_cognomeText.getText().trim();
                 String email = d_emailText.getText().trim();

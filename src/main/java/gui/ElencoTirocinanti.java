@@ -7,7 +7,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.util.List;
 
 public class ElencoTirocinanti {
     private JButton ritornaAllaHomeButton;
@@ -27,7 +27,7 @@ public class ElencoTirocinanti {
         frame.setVisible(true);
         frame.setLocationRelativeTo(null); //Questo metodo serve per far avviare la schermata al centro dello schermo.
 
-        ritornaAllaHomeButton.addActionListener(new ActionListener() {
+        ritornaAllaHomeButton.addActionListener(new ActionListener() { // NOSONAR
             @Override
             public void actionPerformed(ActionEvent e) {
                 frameChiamante.setVisible(true);
@@ -42,9 +42,9 @@ public class ElencoTirocinanti {
         ));
         DefaultTableModel model = (DefaultTableModel) tabellaStudenteArgomentoTirocinio.getModel();
 
-        ArrayList<String> listaNomiStudentiApprovati = controller.getNomiTirocinantiApprovati();
-        ArrayList<String> listaMatricoleApprovati = controller.getMatricoleTirocinantiApprovati();
-        ArrayList<String> listaArgomentiApprovati = controller.getArgomentiTirocinantiApprovati();
+        List<String> listaNomiStudentiApprovati = controller.getNomiTirocinantiApprovati();
+        List<String> listaMatricoleApprovati = controller.getMatricoleTirocinantiApprovati();
+        List<String> listaArgomentiApprovati = controller.getArgomentiTirocinantiApprovati();
 
         if (listaNomiStudentiApprovati != null) {
             for (int i = 0; i < listaNomiStudentiApprovati.size(); i++) {

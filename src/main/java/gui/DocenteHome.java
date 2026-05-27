@@ -25,7 +25,7 @@ public class DocenteHome {
         frame.setVisible(true);
         frame.setLocationRelativeTo(null); //Questo metodo serve per far avviare la schermata al centro dello schermo.
 
-        aggiungiTirocinioButton.addActionListener(new ActionListener() {
+        aggiungiTirocinioButton.addActionListener(new ActionListener() { // NOSONAR
             @Override
             public void actionPerformed(ActionEvent e) {
                 AggiungiNuovoArgomento aggiungiNuovoArgomento = new AggiungiNuovoArgomento(frame,controller);

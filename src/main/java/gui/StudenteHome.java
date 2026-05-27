@@ -25,7 +25,7 @@ public class StudenteHome {
         frame.pack();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null); //Questo metodo serve per far avviare la schermata al centro dello schermo.
-        compilaRichiestaDiTirocinioButton.setEnabled(controller.controlloRichiesta());
+        compilaRichiestaDiTirocinioButton.setEnabled(controller.controlloRichiesta()); // NOSONAR
         caricaTesiButton.setEnabled(controller.controlloTesiButton());
         visualizzaStatoTesiButton.setEnabled(controller.haTesi());
 

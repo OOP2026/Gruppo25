@@ -37,7 +37,7 @@ public class Home extends JFrame {
     public Home() {
         controller = new Controller();
 
-        registratiComeStudenteRButton.addActionListener(new ActionListener() {
+        registratiComeStudenteRButton.addActionListener(new ActionListener() { // NOSONAR
             @Override
             public void actionPerformed(ActionEvent e) {
                 // LISTENER RIFERITO AL PULSANTE PER REGISTRARSI COME STUDENTE

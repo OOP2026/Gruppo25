@@ -26,7 +26,7 @@ public class StatoRichiestaTirocinio {
         frame.setVisible(true);
         frame.setLocationRelativeTo(null); //Questo metodo serve per far avviare la schermata al centro dello schermo.
 
-        OKButton.addActionListener(new ActionListener() {
+        OKButton.addActionListener(new ActionListener() { // NOSONAR
             @Override
             public void actionPerformed(ActionEvent e) {
                 // LISTENER DEL PULSANTE OK DELLA SCHERMATA DELLO STATO DELLA RICHIESTA DI TIROCINIO

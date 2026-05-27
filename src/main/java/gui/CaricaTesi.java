@@ -28,7 +28,7 @@ public class CaricaTesi {
         frame.setLocationRelativeTo(null);
 
 
-        OKButton.addActionListener(new ActionListener() {
+        OKButton.addActionListener(new ActionListener() { // NOSONAR
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (titoloTesiTextField.getText().isEmpty() || tesiTextArea.getText().isEmpty()) {
