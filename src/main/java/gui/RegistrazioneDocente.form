@@ -103,7 +103,7 @@
       </component>
       <vspacer id="e3614">
         <constraints>
-          <grid row="2" column="0" row-span="6" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
+          <grid row="1" column="0" row-span="7" col-span="1" vsize-policy="6" hsize-policy="1" anchor="0" fill="2" indent="0" use-parent-layout="false"/>
         </constraints>
       </vspacer>
       <component id="3295" class="javax.swing.JLabel" binding="titoloRegistraDocenteJLabel">

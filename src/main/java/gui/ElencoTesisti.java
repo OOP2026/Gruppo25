@@ -13,11 +13,11 @@ import java.util.List;
 public class ElencoTesisti {
     private JButton ritornaAllaHomeButton;
     private JPanel panelElencoTesisti;
-    private JScrollBar scrollBar1; // NOSONAR
     private JTable table1;
     private JButton approvaButton;
     private JButton rifiutaButton;
     private JButton leggiTesiButton;
+    private JScrollBar scrollBar1; // NOSONAR
     private JFrame frame;
     private Controller controller;
 

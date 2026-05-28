@@ -9,10 +9,10 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 public class ElencoDocenti {
-    private JScrollBar scrollBar1;
     private JButton indietroButton;
     private JPanel panelElencoDocenti;
     private JTable table1;
+    private JScrollBar scrollBar1; // NOSONAR
     private JFrame frame;
     private Controller controller;
 

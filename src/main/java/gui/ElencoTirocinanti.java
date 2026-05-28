@@ -12,8 +12,8 @@ public class ElencoTirocinanti {
     private JButton ritornaAllaHomeButton;
     private JTable tabellaStudenteArgomentoTirocinio;
     private JPanel panelElencoTirocinanti;
-    private JScrollBar scrollBar1;
     private JButton terminaTirocinioButton;
+    private JScrollBar scrollBar1; // NOSONAR
     private JFrame frame;
     private Controller controller;
 

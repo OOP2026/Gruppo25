@@ -24,7 +24,7 @@ public class Studente extends Utente{
         this.matricola = matricola;
     }
 
-    public Tirocinio getTirocinio() {return tirocinio;}
+    public Tirocinio getTirocinio() {return this.tirocinio;}
 
     public void setTirocinio(Tirocinio tirocinio) {this.tirocinio = tirocinio;}
 

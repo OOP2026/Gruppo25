@@ -3,7 +3,7 @@ package model;
 public class Tirocinio {
     private String tipologiaTirocinio;
     private String argomento;
-    private Boolean completato = false;
+    private boolean completato = false;
     private Azienda azienda;
     private Studente studente;
     private Docente docente;
@@ -50,7 +50,7 @@ public class Tirocinio {
         this.completato = completato;
     }
 
-    public Boolean getCompletato() {return completato;}
+    public boolean getCompletato() {return this.completato;}
 
     public void setAzienda(Azienda azienda) {
                 this.azienda = azienda;

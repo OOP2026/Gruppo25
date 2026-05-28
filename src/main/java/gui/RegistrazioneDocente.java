@@ -72,6 +72,5 @@ public class RegistrazioneDocente extends JFrame {
                 frame.dispose();
             }
         });
-
     };
 }
