@@ -1,7 +1,6 @@
 package gui;
 
 import controller.Controller;
-import model.Stato;
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;

@@ -1,15 +1,13 @@
 package gui;
 
 import controller.Controller;
-import model.Docente;
-import model.Studente;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MandaRichiestaTirocinio extends JFrame {
-    private JButton OKButton;
+    private JButton okbutton;
     private JPanel panelRichiestaTirocinio;
     private JButton annullaButton;
     private JTextField argomentoTextField;
@@ -18,7 +16,7 @@ public class MandaRichiestaTirocinio extends JFrame {
     private JFrame frame;
     private Controller controller;
 
-    public MandaRichiestaTirocinio(JFrame FrameChiamante, Controller controller) {
+    public MandaRichiestaTirocinio(JFrame frameChiamante, Controller controller) {
         this.controller = controller;
         frame = new JFrame("Richiesta Tirocinio");
         frame.setContentPane(panelRichiestaTirocinio);
@@ -26,9 +24,9 @@ public class MandaRichiestaTirocinio extends JFrame {
         frame.pack();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null); //Questo metodo serve per far avviare la schermata al centro dello schermo.
-        frame.getRootPane().setDefaultButton(OKButton); // Con questo metodo il pulsante ok rileva anche l'invio da tastiera
+        frame.getRootPane().setDefaultButton(okbutton); // Con questo metodo il pulsante ok rileva anche l'invio da tastiera
 
-        OKButton.addActionListener(new ActionListener() { // NOSONAR
+        okbutton.addActionListener(new ActionListener() { // NOSONAR
             @Override
             public void actionPerformed(ActionEvent e) {
                 // LISTENER RIFERITO AL PULSANTE OK DELLA SCHERMATA PER MANDARE LA RICHIESTA DI TIROCINIO
@@ -43,10 +41,10 @@ public class MandaRichiestaTirocinio extends JFrame {
                 else {
                     MandaRichiestaTirocinio.this.controller.aggiungiRichiestaTirocinio(nomeDocente, cognomeDocente, argomentoProf);
                     JOptionPane.showMessageDialog(frame,"Richiesta inoltrata correttamente.");
-                    FrameChiamante.revalidate();
-                    FrameChiamante.repaint();
+                    frameChiamante.revalidate();
+                    frameChiamante.repaint();
                     MandaRichiestaTirocinio.this.controller.setArgomentoStudente(argomentoProf);
-                    FrameChiamante.setVisible(true);
+                    frameChiamante.setVisible(true);
                     frame.dispose();
                 }
 
@@ -57,7 +55,7 @@ public class MandaRichiestaTirocinio extends JFrame {
             @Override
             public void actionPerformed(ActionEvent e) {
                 frame.setVisible(false);
-                FrameChiamante.setVisible(true);
+                frameChiamante.setVisible(true);
                 frame.dispose();
             }
         });

@@ -9,7 +9,7 @@ public class RichiestaTirocinio {
     private String tipologiaTirocinio;
 
     // Costruttore dell'Oggetto RichiestaTirocinio
-    public RichiestaTirocinio(Stato statoRichiesta,  Studente studente, Docente docente, String argomento) {
+    public RichiestaTirocinio(Studente studente, Docente docente, String argomento) {
         this.statoRichiesta = Stato.ATTESA;
         this.studente = studente;
         this.docente = docente;

@@ -10,13 +10,13 @@ import java.util.List;
 
 public class ElencoDocenti {
     private JScrollBar scrollBar1;
-    private JButton IndietroButton;
+    private JButton indietroButton;
     private JPanel panelElencoDocenti;
     private JTable table1;
     private JFrame frame;
     private Controller controller;
 
-    public ElencoDocenti(JFrame FrameChiamante, Controller controller) {
+    public ElencoDocenti(JFrame frameChiamante, Controller controller) {
         this.controller = controller;
         frame = new JFrame("Elenco Docenti");
         frame.setContentPane(panelElencoDocenti);
@@ -26,11 +26,11 @@ public class ElencoDocenti {
         frame.setLocationRelativeTo(null); //Questo metodo serve per far avviare la schermata al centro dello schermo.
 
 
-        IndietroButton.addActionListener(new ActionListener() { // NOSONAR
+        indietroButton.addActionListener(new ActionListener() { // NOSONAR
             @Override
             public void actionPerformed(ActionEvent e) {
                 // LISTENER RIFERITO AL BOTTONE OK DELLA SCHERMATA ELENCO DOCENTI
-                FrameChiamante.setVisible(true);
+                frameChiamante.setVisible(true);
                 frame.dispose();
             }
         });

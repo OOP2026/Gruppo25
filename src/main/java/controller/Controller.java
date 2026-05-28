@@ -10,7 +10,7 @@ public class Controller {
 
     // Variabili di sessione per ricordare chi sono i docenti/studenti che sono nel sistema
     // Creiamo delle list momentanee per contenere i riferimenti agli studenti e ai docenti
-    private List<Studente> studenti;
+    private List<Studente>  studenti;
     private List<Docente> docenti;
     private List<RichiestaTirocinio> richiesteTirocinio;
     private List<Azienda> listaAziende;
@@ -240,7 +240,7 @@ public class Controller {
         // Se abbiamo trovato il docente e lo studente è regolarmente loggato
         if (docenteTrovato != null && this.studenteLoggato != null) {
             // Chiamiamo il costruttore di RichiestaTirocinio passandogli lo Stato iniziale
-            RichiestaTirocinio nuovaRichiesta = new RichiestaTirocinio(Stato.ATTESA, this.studenteLoggato, docenteTrovato, argomento);
+            RichiestaTirocinio nuovaRichiesta = new RichiestaTirocinio(this.studenteLoggato, docenteTrovato, argomento);
             // Aggiungiamo la richiesta alla lista del controller
             richiesteTirocinio.add(nuovaRichiesta);
         }
@@ -452,14 +452,11 @@ public class Controller {
 
     // Metodo per impedire agli studenti che non hanno terminato il tirocinio di poter caricare la tesi
     public boolean controlloTesiButton() {
-        if (studenteLoggato.getTirocinio() == null ||
+        return !(studenteLoggato.getTirocinio() == null ||
                 !studenteLoggato.getTirocinio().getCompletato() ||
                 (studenteLoggato.getTesi() != null &&
                         (studenteLoggato.getTesi().getStatoTesi() == Stato.APPROVATA ||
-                                studenteLoggato.getTesi().getStatoTesi() == Stato.ATTESA))) {
-            return false;
-        }
-        return true;
+                                studenteLoggato.getTesi().getStatoTesi() == Stato.ATTESA)));
     }
 
     // Metodo per modificare lo stato della tesi
