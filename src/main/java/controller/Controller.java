@@ -385,11 +385,11 @@ public class Controller {
     }
 
     // Metodo per istanziare una nuova tesi
-    public void aggiungiNuovaTesi(Stato statoTesi, String titolo, String contenuto, String data) {
+    public void aggiungiNuovaTesi(String titolo, String contenuto, String data) {
         for (RichiestaTirocinio r : richiesteTirocinio) {
             if (r.getStudente().equals(studenteLoggato) && r.getStatoRichiesta().equals(Stato.APPROVATA)) {
                 Docente docente = r.getDocente();
-                Tesi nuovatesi = new Tesi(statoTesi, studenteLoggato, docente, titolo, contenuto, data);
+                Tesi nuovatesi = new Tesi(studenteLoggato, docente, titolo, contenuto, data);
                 docente.addTesi(nuovatesi);
                 studenteLoggato.setTesi(nuovatesi);
                 return;
