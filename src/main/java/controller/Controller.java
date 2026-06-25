@@ -243,6 +243,7 @@ public class Controller {
             RichiestaTirocinio nuovaRichiesta = new RichiestaTirocinio(this.studenteLoggato, docenteTrovato, argomento);
             // Aggiungiamo la richiesta alla lista del controller
             richiesteTirocinio.add(nuovaRichiesta);
+
         }
     }
 
