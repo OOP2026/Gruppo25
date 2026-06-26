@@ -1,8 +1,11 @@
 package controller;
 
 
+import dao.StudenteDAO;
+import implementazioneDao.StudentePostgresDAO;
 import model.*;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,6 +33,20 @@ public class Controller {
     public void setStudente(String login, String password, String nome, String cognome, String email, String matricola) {
         Studente studente = new Studente(login, password, nome, cognome, email, matricola);
         studenti.add(studente);
+        StudenteDAO studenteDAO = new StudentePostgresDAO();
+        try {
+            // Passiamo i dati "sciolti" al DAO come concordato
+            studenteDAO.inserisciStudente(matricola, nome, cognome, email, login, password);
+            System.out.println("Salvataggio nel Database completato per: " + matricola);
+
+        } catch (SQLException e) {
+            System.err.println("Errore critico durante il salvataggio dello studente nel Database.");
+            e.printStackTrace();
+
+            // ATTENZIONE: Se l'inserimento nel DB fallisce (es. email già esistente),
+            // potresti voler rimuovere lo studente dalla lista temporanea per mantenere coerenza!
+            studenti.remove(studente);
+        }
     }
 
     public void setDocente(String login, String password, String nome, String cognome, String email) {
