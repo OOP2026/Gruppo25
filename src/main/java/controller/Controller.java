@@ -1,8 +1,10 @@
 package controller;
 
 
+import dao.DocenteDAO;
 import dao.StudenteDAO;
-import implementazioneDao.StudentePostgresDAO;
+import implementazioneDao.DocenteImplementazioneDAO;
+import implementazioneDao.StudenteImplementazioneDAO;
 import model.*;
 
 import java.sql.SQLException;
@@ -33,9 +35,9 @@ public class Controller {
     public void setStudente(String login, String password, String nome, String cognome, String email, String matricola) {
         Studente studente = new Studente(login, password, nome, cognome, email, matricola);
         studenti.add(studente);
-        StudenteDAO studenteDAO = new StudentePostgresDAO();
+        StudenteDAO studenteDAO = new StudenteImplementazioneDAO();
         try {
-            // Passiamo i dati "sciolti" al DAO come concordato
+
             studenteDAO.inserisciStudente(matricola, nome, cognome, email, login, password);
             System.out.println("Salvataggio nel Database completato per: " + matricola);
 
@@ -43,8 +45,6 @@ public class Controller {
             System.err.println("Errore critico durante il salvataggio dello studente nel Database.");
             e.printStackTrace();
 
-            // ATTENZIONE: Se l'inserimento nel DB fallisce (es. email già esistente),
-            // potresti voler rimuovere lo studente dalla lista temporanea per mantenere coerenza!
             studenti.remove(studente);
         }
     }
@@ -52,24 +52,57 @@ public class Controller {
     public void setDocente(String login, String password, String nome, String cognome, String email) {
         Docente docente = new Docente(login, password, nome, cognome, email);
         docenti.add(docente);
+        DocenteDAO docenteDAO = new DocenteImplementazioneDAO();
+        try{
+            docenteDAO.inserisciDocente(login,password,nome,cognome,email);
+            System.out.println("Docente inserito");
+        } catch (SQLException e) {
+            System.err.println("Errore critico durante il salvataggio del docente nel Database.");
+            e.printStackTrace();
+
+            docenti.remove(docente);
+        }
     }
 
     // Metodo per verificare se la login e la password inseriti corrispondono ad uno Studente, ad un Docente o non esiste
     public String effettuaLogin(String login, String password) {
         // 1. Cerca tra gli studenti
-        for (Studente s : studenti) {
-            if (s.getLogin().equals(login) && s.getPassword().equals(password)) {
-                this.studenteLoggato = s;
-                return "STUDENTE";
+        StudenteDAO studenteDAO = new StudenteImplementazioneDAO();
+        ArrayList<String> datiStudente = new ArrayList<>();
 
+        try{
+            boolean loginStudenteRiuscito = studenteDAO.verificaCredenziali(login,password,datiStudente);
+            if(loginStudenteRiuscito){
+                String nome = datiStudente.get(0);
+                String cognome = datiStudente.get(1);
+                String email = datiStudente.get(2);
+                String matricola = datiStudente.get(3);
+
+                this.studenteLoggato = new Studente(login,password,nome,cognome,email,matricola);
+                return "STUDENTE";
             }
+        } catch (SQLException e){
+            System.err.println("Errore di connesione durante il login");
+            e.printStackTrace();
         }
+
         // 2. Cerca tra i docenti
-        for (Docente d : docenti) {
-            if (d.getLogin().equals(login) && d.getPassword().equals(password)) {
-                this.docenteLoggato = d;
+        DocenteDAO docenteDAO = new DocenteImplementazioneDAO();
+        ArrayList<String> datiDocente = new ArrayList<>();
+
+        try{
+            boolean loginDocenteRiuscito = docenteDAO.verificaCredenziali(login,password,datiDocente);
+            if(loginDocenteRiuscito){
+                String nome = datiDocente.get(0);
+                String cognome = datiDocente.get(1);
+                String email = datiDocente.get(2);
+
+                this.docenteLoggato = new Docente(login,password,nome,cognome,email);
                 return "DOCENTE";
             }
+        } catch (SQLException e){
+            System.err.println("Errore di connesione durante il login");
+            e.printStackTrace();
         }
         // 3. Se non trova nessuno
         return "NON_TROVATO";
