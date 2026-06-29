@@ -209,68 +209,18 @@ public class Controller {
             return false;
         }
     }
+    
 
-    // Restituisce la colonna dei nomi dei docenti
-    public List<String> getNomiDocentiPerTabella() {
-        ArrayList<String> nomi = new ArrayList<>();
-        for (Docente d : docenti) {
-            for (Tirocinio t : d.getTirociniProposti()) { // Scorri la lista degli oggetti!
-                nomi.add("Prof. " + d.getCognome() + " " + d.getNome());
-            }
+    public List<String[]> getDatiTabellaElencoTirocini() {
+        DocenteDAO docenteDAO = new DocenteImplementazioneDAO();
+        try {
+            // Chiede i dati al DB e li restituisce dritti alla GUI
+            return docenteDAO.ottieniCatalogoArgomenti();
+        } catch (SQLException e) {
+            System.err.println("Errore nel caricamento del catalogo tirocini.");
+            e.printStackTrace();
+            return new ArrayList<>(); // Restituisce lista vuota in caso di errore
         }
-        return nomi;
-    }
-
-    // Restituisce la colonna degli argomenti (sincronizzata con i nomi)
-    public List<String> getArgomentiPerTabella() {
-        ArrayList<String> argomenti = new ArrayList<>();
-        for (Docente d : docenti) {
-            for (Tirocinio t : d.getTirociniProposti()) {
-                argomenti.add(t.getArgomento()); // Estrai l'argomento dall'oggetto
-            }
-        }
-        return argomenti;
-    }
-
-    // Metodo che restituisce la colonna della tipologia del tirocinio
-    public List<String> getTipologiePerTabella() {
-        ArrayList<String> tipologie = new ArrayList<>();
-        for (Docente d : docenti) {
-            for (Tirocinio t : d.getTirociniProposti()) {
-                tipologie.add(t.getTipologiaTirocinio());
-            }
-        }
-        return tipologie;
-    }
-
-    // Metodo che restituisce la colonna dei referenti delle aziende
-    public List<String> getReferentePerTabella() {
-        ArrayList<String> referenti = new ArrayList<>();
-        for (Docente d : docenti) {
-            for (Tirocinio t : d.getTirociniProposti()) {
-                if (t.getTipologiaTirocinio().equalsIgnoreCase(TIPO_ESTERNO) && t.getAzienda() != null) {
-                    referenti.add(t.getAzienda().getNominativoReferente());
-                } else {
-                    referenti.add("N.D."); // Questo scatta per gli interni, salvando l'allineamento!
-                }
-            }
-        }
-        return referenti;
-    }
-
-    // Metodo che restituisce la colonna dei nomi delle aziende
-    public List<String> getNomiAziendaPerTabella() {
-        ArrayList<String> nomiAzienda = new ArrayList<>();
-        for (Docente d : docenti) {
-            for (Tirocinio t : d.getTirociniProposti()) {
-                if (t.getTipologiaTirocinio().equalsIgnoreCase(TIPO_ESTERNO) && t.getAzienda() != null) {
-                    nomiAzienda.add(t.getAzienda().getNomeAzienda());
-                } else {
-                    nomiAzienda.add("N.D."); // Questo scatta per gli interni, salvando l'allineamento!
-                }
-            }
-        }
-        return nomiAzienda;
     }
 
     // Metodo che controlla l'inserimento del docente e del relativo argomento nella richiesta di tirocinio

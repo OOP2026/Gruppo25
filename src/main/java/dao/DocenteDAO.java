@@ -3,6 +3,7 @@ package dao;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public interface DocenteDAO {
 
@@ -14,4 +15,7 @@ public interface DocenteDAO {
 
     // Metodo per inserire l'argomento nel db
     void inserisciArgomento(String argomento,String login) throws SQLException;
+
+    // Metodo per popolare le tabelle della gui con la lista dei docenti
+    List<String[]> ottieniCatalogoArgomenti() throws SQLException;
 }

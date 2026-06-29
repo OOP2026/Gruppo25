@@ -6,6 +6,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 public class DocenteImplementazioneDAO implements DocenteDAO{
 
@@ -66,6 +67,37 @@ public class DocenteImplementazioneDAO implements DocenteDAO{
             preparedStatement.executeUpdate();
             System.out.println("Argomento inserito");
         }
+    }
+
+    @Override
+    public List<String[]> ottieniCatalogoArgomenti() throws SQLException {
+        List<String[]> righeTabella = new ArrayList<>();
+
+        // La JOIN fa il lavoro sporco: incrocia docenti, argomenti e aziende
+        String query = "SELECT d.nome, d.cognome, a.argomento, az.nomeazienda " +
+                "FROM docente d " +
+                "JOIN argomentotirocinio a ON d.login = a.docente " +
+                "LEFT JOIN azienda az ON a.id_azienda = az.id_azienda";
+
+        try (PreparedStatement ps = connection.prepareStatement(query);
+             ResultSet rs = ps.executeQuery()) {
+
+            while (rs.next()) {
+                // Estraiamo i dati della riga
+                String prof = "Prof. " + rs.getString("nome") + " " + rs.getString("cognome");
+                String argomento = rs.getString("argomento");
+                String azienda = rs.getString("nomeazienda");
+
+                // Se l'azienda è NULL (perché il tirocinio è INTERNO), mettiamo "N.D."
+                if (azienda == null) {
+                    azienda = "N.D.";
+                }
+
+                // Assembliamo la riga come array di stringhe e la aggiungiamo alla lista
+                righeTabella.add(new String[]{prof, argomento, azienda});
+            }
+        }
+        return righeTabella;
     }
 }
 

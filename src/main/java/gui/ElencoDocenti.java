@@ -38,22 +38,26 @@ public class ElencoDocenti {
         // Creo la tabella per visualizzare docenti e argomenti dei tirocini
         table1.setModel(new DefaultTableModel(
                 new Object[][] {}, // Nessun dato iniziale
-                new String[] { "Nome Docente", "Argomento Tirocinio", "Tipologia Tirocinio", "Nome Azienda", "Nominativo Referente" } // Intestazioni
+                new String[] { "Nome Docente", "Argomento Tirocinio", "Nome Azienda", "Nominativo Referente" } // Intestazioni
         ));
 
-        DefaultTableModel model = (DefaultTableModel) table1.getModel();
+        // 1. Crei il modello della tua tabella
+        DefaultTableModel model = new DefaultTableModel();
+        table1.setRowHeight(30);
+        model.addColumn("Docente");
+        model.addColumn("Argomento");
+        model.addColumn("Azienda");
 
-        List<String> listaNomi = controller.getNomiDocentiPerTabella();
-        List<String> listaArgomenti = controller.getArgomentiPerTabella();
-        List<String> listaTipologieTirocinio = controller.getTipologiePerTabella();
-        List<String> listaAzienda = controller.getNomiAziendaPerTabella();
-        List<String> listaReferenti = controller.getReferentePerTabella();
+// 2. Chiami il Controller per farti dare TUTTE le righe già pronte
+        List<String[]> righeDalDatabase = controller.getDatiTabellaElencoTirocini();
 
-        if (listaNomi != null) {
-            for (int i = 0; i < listaNomi.size(); i++) {
-                model.addRow(new Object[]{ listaNomi.get(i), listaArgomenti.get(i), listaTipologieTirocinio.get(i), listaAzienda.get(i), listaReferenti.get(i) });
-            }
+// 3. Aggiungi le righe al modello
+        for (String[] riga : righeDalDatabase) {
+            model.addRow(riga);
         }
+
+// 4. Assegni il modello alla tua JTable grafica
+        table1.setModel(model);
 
     }
 }
