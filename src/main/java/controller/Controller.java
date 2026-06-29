@@ -1,10 +1,14 @@
 package controller;
 
 
+import dao.AziendaDAO;
 import dao.DocenteDAO;
 import dao.StudenteDAO;
+import dao.UtenteDAO;
+import implementazioneDao.AziendaImplementazioneDAO;
 import implementazioneDao.DocenteImplementazioneDAO;
 import implementazioneDao.StudenteImplementazioneDAO;
+import implementazioneDao.UtenteImplementazioneDao;
 import model.*;
 
 import java.sql.SQLException;
@@ -82,7 +86,7 @@ public class Controller {
                 return "STUDENTE";
             }
         } catch (SQLException e){
-            System.err.println("Errore di connesione durante il login");
+            System.err.println("Errore di connessione durante il login");
             e.printStackTrace();
         }
 
@@ -101,7 +105,7 @@ public class Controller {
                 return "DOCENTE";
             }
         } catch (SQLException e){
-            System.err.println("Errore di connesione durante il login");
+            System.err.println("Errore di connessione durante il login");
             e.printStackTrace();
         }
         // 3. Se non trova nessuno
@@ -109,23 +113,16 @@ public class Controller {
     }
 
     // Metodo per verificare che la login inserita non esista giá
-    public boolean controlloLogin(String login) {
-        // cerca tra gli Studenti
-        for (Studente s : studenti) {
-            if (s.getLogin().equals(login)) {
-                return true;
-            }
-
+    public boolean controlloLogin(String login) throws SQLException {
+        UtenteDAO utenteDAO = new UtenteImplementazioneDao();
+        try {
+            return utenteDAO.controlloLogin(login);
+        } catch (SQLException e) {
+            System.err.println("Errore di connessione durante il login");
+            e.printStackTrace();
+            return true;
         }
-        for (Docente d : docenti) {
-            if (d.getLogin().equals(login)) {
-                return true;
-            }
-
-        }
-        return false;
     }
-
     // Metodo per la verifica degli input di nome e cognome
     public boolean controlloNomeCognome(String stringa) {
         for (int i = 0; i < stringa.length(); i++) {
@@ -147,12 +144,14 @@ public class Controller {
 
     // Metodo per la verifica dell`unicità della matricola
     public boolean controlloMatricola(String matricola) {
-        for (Studente s : studenti) {
-            if (s.getMatricola().equals(matricola)) {
-                return true;
-            }
+        StudenteDAO studenteDAO =  new StudenteImplementazioneDAO();
+        try {
+            return studenteDAO.verificaMatricola(matricola);
+        } catch (SQLException e) {
+            System.err.println("Errore di connessione durante il controllo matricola");
+            e.printStackTrace();
+            return true;
         }
-        return false;
     }
 
     // Metodo per la verifica del formato della mail di studente
@@ -171,19 +170,43 @@ public class Controller {
     }
 
     // Metodo per aggiungere un argomento alla lista di argomenti del docente loggato.
-    public void aggiungiNuovoArgomento(String argomento, String tipologiaTirocinio, String nomeAz, String refAz) {
-        if (this.docenteLoggato != null) {
-            Tirocinio tirocinio = new Tirocinio(tipologiaTirocinio, argomento);
+    public boolean aggiungiNuovoArgomento(String argomento, String tipologiaTirocinio, String nomeAz, String refAz) {
+        if (this.docenteLoggato == null) {
+            return false;
+        }
 
-            // Se è esterno, creiamo l'azienda e la incolliamo al tirocinio!
+        try {
+
+            // Costruiamo gli oggetti del model
+            Azienda nuovaAzienda = null;
+
+            // Controlliamo se l'azienda è esterna
             if (tipologiaTirocinio.equalsIgnoreCase(TIPO_ESTERNO)) {
-                Azienda nuovaAzienda = new Azienda(nomeAz, refAz);
-                this.listaAziende.add(nuovaAzienda);
-                tirocinio.setAzienda(nuovaAzienda);
+                AziendaDAO aziendaDAO = new AziendaImplementazioneDAO();
+                // se esiste nel db la creiamo anche nel model
+                if (aziendaDAO.validaAzienda(refAz, nomeAz)) {
+                    nuovaAzienda = new Azienda(nomeAz, refAz);
+                } else {
+                    return false; // Blocco l'operazione se l'azienda non è valida
+                }
             }
-
-            this.docenteLoggato.addTirocinioProposto(tirocinio);
+            // Salviamo l'argomento nel DB
+            DocenteDAO docenteDAO = new DocenteImplementazioneDAO();
+            docenteDAO.inserisciArgomento(argomento, docenteLoggato.getLogin());
+            if (nuovaAzienda != null) {
+                this.listaAziende.add(nuovaAzienda);
+            }
             this.docenteLoggato.addArgomentoTirocinio(argomento);
+
+            System.out.println("Argomento (e Azienda) salvati con successo.");
+            return true; // Tutto perfetto, restituiamo true alla GUI!
+
+        } catch (SQLException e) {
+            // Se un qualsiasi DAO fallisce (Argomento, Azienda o Tirocinio),
+            // l'esecuzione salta direttamente qui. Il Model in RAM è salvo!
+            System.err.println("Errore critico durante il salvataggio nel Database. Operazione annullata.");
+            e.printStackTrace();
+            return false;
         }
     }
 

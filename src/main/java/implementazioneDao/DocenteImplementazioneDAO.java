@@ -55,5 +55,17 @@ public class DocenteImplementazioneDAO implements DocenteDAO{
             return false;
         }
     }
+
+    @Override
+    public void inserisciArgomento(String argomento,String login) throws SQLException{
+        String query = "INSERT INTO argomentotirocinio(argomento,docente) VALUES (?,?)";
+        try (PreparedStatement preparedStatement = connection.prepareStatement(query)){
+            preparedStatement.setString(1, argomento);
+            preparedStatement.setString(2, login);
+
+            preparedStatement.executeUpdate();
+            System.out.println("Argomento inserito");
+        }
+    }
 }
 

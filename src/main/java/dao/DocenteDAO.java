@@ -11,4 +11,7 @@ public interface DocenteDAO {
 
     // Metodo per verificare la presenza di un docente nel db
     boolean verificaCredenziali(String login, String password, ArrayList<String> datiDocente) throws SQLException;
+
+    // Metodo per inserire l'argomento nel db
+    void inserisciArgomento(String argomento,String login) throws SQLException;
 }

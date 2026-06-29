@@ -32,7 +32,7 @@ public class MandaRichiestaTirocinio extends JFrame {
                 // LISTENER RIFERITO AL PULSANTE OK DELLA SCHERMATA PER MANDARE LA RICHIESTA DI TIROCINIO
                 String nomeDocente = nomeDocenteTextField.getText();
                 String cognomeDocente = cognomeDocenteTextField.getText();
-                String argomentoProf = argomentoTextField.getText();
+                String argomentoProf = argomentoTextField.getText().toLowerCase();
                 if(nomeDocente.trim().isEmpty() || cognomeDocente.trim().isEmpty() || argomentoProf.trim().isEmpty() ){
                     JOptionPane.showMessageDialog(frame, "Attenzione riempire correttamente tutti i campi!", "Errore", JOptionPane.ERROR_MESSAGE);
                 } else if (MandaRichiestaTirocinio.this.controller.controllaRichiestaTirocinio(nomeDocente, cognomeDocente, argomentoProf)) {

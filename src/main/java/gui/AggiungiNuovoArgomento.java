@@ -63,13 +63,22 @@ public class AggiungiNuovoArgomento {
                         return;
                     }
                     else{
-                        AggiungiNuovoArgomento.this.controller.aggiungiNuovoArgomento(nomeArgomentoText.getText(),tipologiaTirocinioTextField.getText(),nomeAziendaTextField.getText(),nominativoReferenteTextField.getText());
-                        JOptionPane.showMessageDialog(null, "Tirocinio aggiunto correttamente.");
+                        boolean successo = controller.aggiungiNuovoArgomento(nomeArgomentoText.getText().toLowerCase(),tipologiaTirocinioTextField.getText().toLowerCase(),nomeAziendaTextField.getText().toLowerCase(),nominativoReferenteTextField.getText().toLowerCase());
+                        if (successo){
+                            JOptionPane.showMessageDialog(null, "Tirocinio aggiunto correttamente.");
+                        } else{
+                            JOptionPane.showMessageDialog(null,"Errore nel salvataggio dei dati nel DataBase",TITOLO_ERRORE,JOptionPane.ERROR_MESSAGE);
+                        }
+
                     }
                 }
                 else if(tipologiaTirocinio.equalsIgnoreCase("INTERNO")) {
-                    AggiungiNuovoArgomento.this.controller.aggiungiNuovoArgomento(nomeArgomentoText.getText(),tipologiaTirocinioTextField.getText(),nomeAziendaTextField.getText(),nominativoReferenteTextField.getText());
-                    JOptionPane.showMessageDialog(null, "Tirocinio aggiunto correttamente.");
+                    boolean successo = controller.aggiungiNuovoArgomento(nomeArgomentoText.getText(),tipologiaTirocinioTextField.getText(),nomeAziendaTextField.getText(),nominativoReferenteTextField.getText());
+                    if (successo){
+                        JOptionPane.showMessageDialog(null, "Tirocinio aggiunto correttamente.");
+                    } else{
+                        JOptionPane.showMessageDialog(null,"Errore nel salvataggio dei dati nel DataBase",TITOLO_ERRORE,JOptionPane.ERROR_MESSAGE);
+                    }
                 }
                 frameChiamante.setVisible(true);
                 frame.dispose();

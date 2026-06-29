@@ -5,6 +5,7 @@ import controller.Controller;
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class RegistrazioneDocente extends JFrame {
     private JButton dConfermaButton;
@@ -46,20 +47,26 @@ public class RegistrazioneDocente extends JFrame {
                     JOptionPane.showMessageDialog(frame, "Attenzione riempire correttamente tutti i campi!", TITOLO_ERRORE, JOptionPane.ERROR_MESSAGE);
                 }
                 // verifico se la login inserita è già presente
-                else if(RegistrazioneDocente.this.controller.controlloLogin(login)){JOptionPane.showMessageDialog(frame, "Login già esistente! Utilizzare una login differente",TITOLO_ERRORE, JOptionPane.ERROR_MESSAGE);}
-                // Verifico che la password inserita abbia almeno 8 caratteri
-                else if(RegistrazioneDocente.this.controller.controlloPassoword(password)){JOptionPane.showMessageDialog(frame,"Attenzione inserire una password di almeno 8 caratteri!",TITOLO_ERRORE, JOptionPane.ERROR_MESSAGE);}
-                // Verifico se nel nome sono inseriti dei numeri
-                else if(RegistrazioneDocente.this.controller.controlloNomeCognome(nome)){JOptionPane.showMessageDialog(frame, "Attenzione carattere non consentito nel nome!",TITOLO_ERRORE, JOptionPane.ERROR_MESSAGE);}
-                // Verifico se nel cognome sono inseriti dei numeri
-                else if (RegistrazioneDocente.this.controller.controlloNomeCognome(cognome)){JOptionPane.showMessageDialog(frame,"Attenzione carattere non consentito nel cognome!",TITOLO_ERRORE, JOptionPane.ERROR_MESSAGE);}
-                // verifico che la mail sia inserita nel formato giusto
-                else if(RegistrazioneDocente.this.controller.controlloEmailDocente(email)) {JOptionPane.showMessageDialog(frame,"Attenzione inserire la mail nel formato corretto!",TITOLO_ERRORE, JOptionPane.ERROR_MESSAGE);}
                 else {
-                    JOptionPane.showMessageDialog(frame, "Benvenuto Prof. " +cognome);
-                    RegistrazioneDocente.this.controller.setDocente(login, password, nome, cognome, email);
-                    frameHome.setVisible(true);
-                    frame.dispose();
+                    try {
+                        if(RegistrazioneDocente.this.controller.controlloLogin(login)){JOptionPane.showMessageDialog(frame, "Login già esistente! Utilizzare una login differente",TITOLO_ERRORE, JOptionPane.ERROR_MESSAGE);}
+                        // Verifico che la password inserita abbia almeno 8 caratteri
+                        else if(RegistrazioneDocente.this.controller.controlloPassoword(password)){JOptionPane.showMessageDialog(frame,"Attenzione inserire una password di almeno 8 caratteri!",TITOLO_ERRORE, JOptionPane.ERROR_MESSAGE);}
+                        // Verifico se nel nome sono inseriti dei numeri
+                        else if(RegistrazioneDocente.this.controller.controlloNomeCognome(nome)){JOptionPane.showMessageDialog(frame, "Attenzione carattere non consentito nel nome!",TITOLO_ERRORE, JOptionPane.ERROR_MESSAGE);}
+                        // Verifico se nel cognome sono inseriti dei numeri
+                        else if (RegistrazioneDocente.this.controller.controlloNomeCognome(cognome)){JOptionPane.showMessageDialog(frame,"Attenzione carattere non consentito nel cognome!",TITOLO_ERRORE, JOptionPane.ERROR_MESSAGE);}
+                        // verifico che la mail sia inserita nel formato giusto
+                        else if(RegistrazioneDocente.this.controller.controlloEmailDocente(email)) {JOptionPane.showMessageDialog(frame,"Attenzione inserire la mail nel formato corretto!",TITOLO_ERRORE, JOptionPane.ERROR_MESSAGE);}
+                        else {
+                            JOptionPane.showMessageDialog(frame, "Benvenuto Prof. " +cognome);
+                            RegistrazioneDocente.this.controller.setDocente(login, password, nome, cognome, email);
+                            frameHome.setVisible(true);
+                            frame.dispose();
+                        }
+                    } catch (SQLException ex) {
+                        throw new RuntimeException(ex);
+                    }
                 }
             }
         });

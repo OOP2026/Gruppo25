@@ -62,4 +62,19 @@ public class StudenteImplementazioneDAO implements StudenteDAO {
             return false;
         }
     }
+
+    @Override
+    public boolean verificaMatricola(String matricola) throws SQLException {
+
+        String query = "SELECT matricola FROM studente WHERE matricola = ?";
+        try(PreparedStatement ps = connection.prepareStatement(query)){
+            ps.setString(1, matricola);
+            try (ResultSet rs = ps.executeQuery()){
+                if(rs.next()){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
 }
