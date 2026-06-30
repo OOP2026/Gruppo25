@@ -14,5 +14,5 @@ public interface StudenteDAO {
     // Metodo per verificare l'unicità della matricola
     boolean verificaMatricola(String matricola) throws SQLException;
 
-
+    // Metodo per aggiungere il tiro
 }

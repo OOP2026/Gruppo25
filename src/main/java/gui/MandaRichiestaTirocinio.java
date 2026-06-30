@@ -33,7 +33,7 @@ public class MandaRichiestaTirocinio extends JFrame {
                 // LISTENER RIFERITO AL PULSANTE OK DELLA SCHERMATA PER MANDARE LA RICHIESTA DI TIROCINIO
                 String nomeDocente = nomeDocenteTextField.getText();
                 String cognomeDocente = cognomeDocenteTextField.getText();
-                String argomentoProf = argomentoTextField.getText().toLowerCase();
+                String argomentoProf = argomentoTextField.getText();
                 String email = emailDocenteTextField.getText();
                 if(nomeDocente.trim().isEmpty() || cognomeDocente.trim().isEmpty() || argomentoProf.trim().isEmpty() || email.trim().isEmpty() ) {
                     JOptionPane.showMessageDialog(frame, "Attenzione riempire correttamente tutti i campi!", "Errore", JOptionPane.ERROR_MESSAGE);
@@ -41,13 +41,16 @@ public class MandaRichiestaTirocinio extends JFrame {
                     JOptionPane.showMessageDialog(frame, "Attenzione riempire correttamente tutti i campi!", "Errore", JOptionPane.ERROR_MESSAGE);
                 }
                 else {
-                    MandaRichiestaTirocinio.this.controller.aggiungiRichiestaTirocinio(email, argomentoProf);
-                    JOptionPane.showMessageDialog(frame,"Richiesta inoltrata correttamente.");
-                    frameChiamante.revalidate();
-                    frameChiamante.repaint();
-                    MandaRichiestaTirocinio.this.controller.setArgomentoStudente(argomentoProf);
-                    frameChiamante.setVisible(true);
-                    frame.dispose();
+                    if(MandaRichiestaTirocinio.this.controller.aggiungiRichiestaTirocinio(email, argomentoProf)){
+                        JOptionPane.showMessageDialog(frame,"Richiesta inoltrata correttamente.");
+                        frameChiamante.revalidate();
+                        frameChiamante.repaint();
+                        MandaRichiestaTirocinio.this.controller.setArgomentoStudente(argomentoProf);
+                        frameChiamante.setVisible(true);
+                        frame.dispose();
+                    } else{
+                        JOptionPane.showMessageDialog(frame, "Errore di connessione al Server o Email docente errata. Riprova","Errore",JOptionPane.ERROR_MESSAGE);
+                    }
                 }
 
             }

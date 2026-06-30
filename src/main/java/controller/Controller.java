@@ -237,40 +237,51 @@ public class Controller {
     }
 
     // Metodo per cercare il docente e inserire la nuova richiesta di tirocinio
-    public void aggiungiRichiestaTirocinio(String email, String argomento) {
+    public boolean aggiungiRichiestaTirocinio(String email, String argomento) {
         ArrayList<String> datiDocenteTrovato = new ArrayList<>();
         DocenteDAO docenteDAO = new DocenteImplementazioneDAO();
+        RichiestaTirocinioDAO richiestaTirocinioDAO = new RichiestaTirocinioImplementazioneDAO();
+
         try {
             // Cerchiamo tra i docenti quello con la email corrispondente a quella inserita, per evitare problemi relativi a docenti omonimi
             boolean trovaDocente = docenteDAO.getDocenteDaEmail(email, datiDocenteTrovato);
+
             if(trovaDocente) {
                 String nome = datiDocenteTrovato.get(0);
                 String cognome = datiDocenteTrovato.get(1);
                 String login = datiDocenteTrovato.get(2);
                 String password = datiDocenteTrovato.get(3);
+
+
                 // Se esiste un docente con i dati inseriti dallo studente al momento della compilazione creiamo un nuovo oggetto docente, e la richiesta del tirocinio con quei dati
+                Integer id_argomento = docenteDAO.getIdArgomento(login, argomento);
+                if(id_argomento == null) {
+                    System.err.println("Impossibile trovare l'argomento");
+                    return false;
+                }
+
+                richiestaTirocinioDAO.inserisciRichiesta(this.studenteLoggato.getMatricola(), login, id_argomento);
+
                 Docente docenteTrovato = new Docente(login,password,nome,cognome,email);
                 RichiestaTirocinio nuovaRichiesta = new RichiestaTirocinio(this.studenteLoggato, docenteTrovato, argomento);
-                RichiestaTirocinioDAO richiestaTirocinioDAO = new RichiestaTirocinioImplementazioneDAO();
-                try {
-                    Integer id_argomento = docenteDAO.getIdArgomento(login, argomento);
-                    richiestaTirocinioDAO.inserisciRichiesta(this.studenteLoggato.getMatricola(), login, id_argomento);
-                } catch (SQLException e) {
-                    System.err.println("Errore nel caricamento del catalogo tirocini.");
-                    e.printStackTrace();
-                }
+
                 // Aggiungiamo la richiesta alla lista del controller
-                richiesteTirocinio.add(nuovaRichiesta);
+                this.richiesteTirocinio.add(nuovaRichiesta);
+                return true;
             }
-        } catch (Exception e) {
-            System.err.println("Errore docente non trovato.");
+            System.err.println("Non trovato nessun docente con la email fornita.");
+            return false;
+        } catch (SQLException e) {
+            System.err.println("Errore SQL durante l'inserimento della richiesta.");
             e.printStackTrace();
+            return false;
         }
     }
 
     // Metodo per aggiungere l'argomento del tirocinio allo studente
     public void setArgomentoStudente(String argomentoStudente) {
         this.studenteLoggato.setArgomentoTirocinio(argomentoStudente);
+
     }
 
     // Metodi per riempire la tabella delle richieste del tirocinio per il docente
