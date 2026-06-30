@@ -5,10 +5,8 @@ import dao.AziendaDAO;
 import dao.DocenteDAO;
 import dao.StudenteDAO;
 import dao.UtenteDAO;
-import implementazioneDao.AziendaImplementazioneDAO;
-import implementazioneDao.DocenteImplementazioneDAO;
-import implementazioneDao.StudenteImplementazioneDAO;
-import implementazioneDao.UtenteImplementazioneDao;
+import dao.RichiestaTirocinioDAO;
+import implementazioneDao.*;
 import model.*;
 
 import java.sql.SQLException;
@@ -179,20 +177,22 @@ public class Controller {
 
             // Costruiamo gli oggetti del model
             Azienda nuovaAzienda = null;
-
+            Integer id_azienda = null;
             // Controlliamo se l'azienda è esterna
             if (tipologiaTirocinio.equalsIgnoreCase(TIPO_ESTERNO)) {
                 AziendaDAO aziendaDAO = new AziendaImplementazioneDAO();
-                // se esiste nel db la creiamo anche nel model
+                // se esiste nel db la creiamo anche nel Model
                 if (aziendaDAO.validaAzienda(refAz, nomeAz)) {
                     nuovaAzienda = new Azienda(nomeAz, refAz);
+                    id_azienda = aziendaDAO.getIdAzienda(refAz,nomeAz);
                 } else {
                     return false; // Blocco l'operazione se l'azienda non è valida
                 }
             }
             // Salviamo l'argomento nel DB
             DocenteDAO docenteDAO = new DocenteImplementazioneDAO();
-            docenteDAO.inserisciArgomento(argomento, docenteLoggato.getLogin());
+
+            docenteDAO.inserisciArgomento(argomento, docenteLoggato.getLogin(),id_azienda);
             if (nuovaAzienda != null) {
                 this.listaAziende.add(nuovaAzienda);
             }
@@ -209,7 +209,7 @@ public class Controller {
             return false;
         }
     }
-    
+
 
     public List<String[]> getDatiTabellaElencoTirocini() {
         DocenteDAO docenteDAO = new DocenteImplementazioneDAO();
@@ -225,48 +225,46 @@ public class Controller {
 
     // Metodo che controlla l'inserimento del docente e del relativo argomento nella richiesta di tirocinio
     public boolean controllaRichiestaTirocinio(String nomeProf, String cognomeProf, String nomeArgomento) {
-        List<String> argomenti = new ArrayList<>();
-        List<String> nomiProf = new ArrayList<>();
-        List<String> cognomiProf = new ArrayList<>();
-        // Questo for inserisce i nomi di tutti i docenti
-        for (Docente d : docenti) {
-            nomiProf.add(d.getNome());
-            cognomiProf.add(d.getCognome());
-        }
-        // Controlliamo se il nome o il cognome non sono validi o non esistono
-        if (nomeProf.isEmpty() || cognomeProf.isEmpty() || !nomiProf.contains(nomeProf) || !cognomiProf.contains(cognomeProf)) {
-            return true;
-        }
-        // Inseriamo tutti gli argomenti relativi al professore selezionato
-        for (Docente d : docenti) {
-            if (d.getNome().equalsIgnoreCase(nomeProf) && d.getCognome().equalsIgnoreCase(cognomeProf)) {
-                for (String arg : d.getArgomentiTirocinio()) {
-                    argomenti.add(arg);
-                }
-            }
-        }
-        // Controlliamo che l'argomento sia stato inserito dal prof
-        return !(argomenti.contains(nomeArgomento));
+
+        DocenteDAO docenteDAO = new DocenteImplementazioneDAO();
+       try {
+           return docenteDAO.verificaEsistenzaArgomento(nomeProf, cognomeProf, nomeArgomento);
+       } catch (SQLException e) {
+           System.err.println("Non trovato.");
+           e.printStackTrace();
+           return false;
+       }
     }
 
     // Metodo per cercare il docente e inserire la nuova richiesta di tirocinio
-    public void aggiungiRichiestaTirocinio(String nomeProf, String cognomeProf, String argomento) {
-        Docente docenteTrovato = null;
-
-        // Scorriamo la lista dei docenti per trovare l'oggetto che corrisponde al testo inserito
-        for (Docente d : docenti) {
-            if (d.getNome().equalsIgnoreCase(nomeProf) && d.getCognome().equalsIgnoreCase(cognomeProf)) {
-                docenteTrovato = d;
-                break; // Lo abbiamo trovato, possiamo fermare il ciclo for
+    public void aggiungiRichiestaTirocinio(String email, String argomento) {
+        ArrayList<String> datiDocenteTrovato = new ArrayList<>();
+        DocenteDAO docenteDAO = new DocenteImplementazioneDAO();
+        try {
+            // Cerchiamo tra i docenti quello con la email corrispondente a quella inserita, per evitare problemi relativi a docenti omonimi
+            boolean trovaDocente = docenteDAO.getDocenteDaEmail(email, datiDocenteTrovato);
+            if(trovaDocente) {
+                String nome = datiDocenteTrovato.get(0);
+                String cognome = datiDocenteTrovato.get(1);
+                String login = datiDocenteTrovato.get(2);
+                String password = datiDocenteTrovato.get(3);
+                // Se esiste un docente con i dati inseriti dallo studente al momento della compilazione creiamo un nuovo oggetto docente, e la richiesta del tirocinio con quei dati
+                Docente docenteTrovato = new Docente(login,password,nome,cognome,email);
+                RichiestaTirocinio nuovaRichiesta = new RichiestaTirocinio(this.studenteLoggato, docenteTrovato, argomento);
+                RichiestaTirocinioDAO richiestaTirocinioDAO = new RichiestaTirocinioImplementazioneDAO();
+                try {
+                    Integer id_argomento = docenteDAO.getIdArgomento(login, argomento);
+                    richiestaTirocinioDAO.inserisciRichiesta(this.studenteLoggato.getMatricola(), login, id_argomento);
+                } catch (SQLException e) {
+                    System.err.println("Errore nel caricamento del catalogo tirocini.");
+                    e.printStackTrace();
+                }
+                // Aggiungiamo la richiesta alla lista del controller
+                richiesteTirocinio.add(nuovaRichiesta);
             }
-        }
-        // Se abbiamo trovato il docente e lo studente è regolarmente loggato
-        if (docenteTrovato != null && this.studenteLoggato != null) {
-            // Chiamiamo il costruttore di RichiestaTirocinio passandogli lo Stato iniziale
-            RichiestaTirocinio nuovaRichiesta = new RichiestaTirocinio(this.studenteLoggato, docenteTrovato, argomento);
-            // Aggiungiamo la richiesta alla lista del controller
-            richiesteTirocinio.add(nuovaRichiesta);
-
+        } catch (Exception e) {
+            System.err.println("Errore docente non trovato.");
+            e.printStackTrace();
         }
     }
 

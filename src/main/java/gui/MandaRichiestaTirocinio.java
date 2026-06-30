@@ -13,6 +13,7 @@ public class MandaRichiestaTirocinio extends JFrame {
     private JTextField argomentoTextField;
     private JTextField nomeDocenteTextField;
     private JTextField cognomeDocenteTextField;
+    private JTextField emailDocenteTextField;
     private JFrame frame;
     private Controller controller;
 
@@ -33,13 +34,14 @@ public class MandaRichiestaTirocinio extends JFrame {
                 String nomeDocente = nomeDocenteTextField.getText();
                 String cognomeDocente = cognomeDocenteTextField.getText();
                 String argomentoProf = argomentoTextField.getText().toLowerCase();
-                if(nomeDocente.trim().isEmpty() || cognomeDocente.trim().isEmpty() || argomentoProf.trim().isEmpty() ){
+                String email = emailDocenteTextField.getText();
+                if(nomeDocente.trim().isEmpty() || cognomeDocente.trim().isEmpty() || argomentoProf.trim().isEmpty() || email.trim().isEmpty() ) {
                     JOptionPane.showMessageDialog(frame, "Attenzione riempire correttamente tutti i campi!", "Errore", JOptionPane.ERROR_MESSAGE);
-                } else if (MandaRichiestaTirocinio.this.controller.controllaRichiestaTirocinio(nomeDocente, cognomeDocente, argomentoProf)) {
+                } else if (!MandaRichiestaTirocinio.this.controller.controllaRichiestaTirocinio(nomeDocente, cognomeDocente, argomentoProf)) {
                     JOptionPane.showMessageDialog(frame, "Attenzione riempire correttamente tutti i campi!", "Errore", JOptionPane.ERROR_MESSAGE);
                 }
                 else {
-                    MandaRichiestaTirocinio.this.controller.aggiungiRichiestaTirocinio(nomeDocente, cognomeDocente, argomentoProf);
+                    MandaRichiestaTirocinio.this.controller.aggiungiRichiestaTirocinio(email, argomentoProf);
                     JOptionPane.showMessageDialog(frame,"Richiesta inoltrata correttamente.");
                     frameChiamante.revalidate();
                     frameChiamante.repaint();

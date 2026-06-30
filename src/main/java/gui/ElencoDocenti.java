@@ -45,6 +45,7 @@ public class ElencoDocenti {
         DefaultTableModel model = new DefaultTableModel();
         table1.setRowHeight(30);
         model.addColumn("Docente");
+        model.addColumn("Email");
         model.addColumn("Argomento");
         model.addColumn("Azienda");
 

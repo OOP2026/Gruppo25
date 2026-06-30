@@ -17,6 +17,7 @@ public class Docente extends Utente {
 
     }
 
+
     public void addArgomentoTirocinio(String argomento){this.argomentiTirocinio.add(argomento);}
 
     public List<String> getArgomentiTirocinio(){return this.argomentiTirocinio;}
