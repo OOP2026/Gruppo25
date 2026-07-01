@@ -1,11 +1,7 @@
 package controller;
 
 
-import dao.AziendaDAO;
-import dao.DocenteDAO;
-import dao.StudenteDAO;
-import dao.UtenteDAO;
-import dao.RichiestaTirocinioDAO;
+import dao.*;
 import implementazioneDao.*;
 import model.*;
 
@@ -285,59 +281,30 @@ public class Controller {
     }
 
     // Metodi per riempire la tabella delle richieste del tirocinio per il docente
-    // Restituisce la colonna dei nomi e cognomi
-    public List<String> getNomiStudentiPerTabella() {
-        ArrayList<String> nomi = new ArrayList<>();
+    public List<String[]> getDatiTabellaRichiesteTirocinio(){
 
-        for (RichiestaTirocinio r : richiesteTirocinio) {
-            if (r.getDocente().equals(docenteLoggato) && r.getStatoRichiesta() == Stato.ATTESA) {
-                String nomeS = r.getStudente().getNome() + " " + r.getStudente().getCognome();
-                nomi.add(nomeS);
-            }
+        RichiestaTirocinioDAO richiestaTirocinioDAO = new RichiestaTirocinioImplementazioneDAO();
+        try{
+            return richiestaTirocinioDAO.ottieniCatalogoRichieste(docenteLoggato.getLogin());
+        } catch (SQLException e) {
+            System.err.println("Errore nel caricamento del catalogo delle richieste di tirocinio.");
+            e.printStackTrace();
+            return new ArrayList<>();
         }
-        return nomi;
-    }
 
-    // Restituisce la colonna delle matricole
-    public List<String> getMatricolaStudentiPerTabella() {
-        ArrayList<String> matricole = new ArrayList<>();
-        for (RichiestaTirocinio r : richiesteTirocinio) {
-            if (r.getDocente().equals(docenteLoggato) && r.getStatoRichiesta() == Stato.ATTESA) {
-                String matricolaS = r.getStudente().getMatricola();
-                matricole.add(matricolaS);
-            }
-        }
-        return matricole;
-    }
-
-
-    // Restituisce la colonna degli argomenti (sincronizzata con i nomi)
-    public List<String> getArgomentiStudentiPerTabella() {
-        ArrayList<String> argomenti = new ArrayList<>();
-
-        for (RichiestaTirocinio r : richiesteTirocinio) {
-            if (r.getDocente().equals(docenteLoggato) && r.getStatoRichiesta() == Stato.ATTESA) {
-                String argomentoS = r.getArgomento();
-                argomenti.add(argomentoS);
-            }
-        }
-        return argomenti;
     }
 
     // Metodo per modificare lo stato della richiesta del tirocinio
-    public void modificaStatoRichiesta(int rigaSelezionata, Stato nuovoStato) {
-        // 1. Creiamo una lista temporanea con SOLO le richieste del docente loggato
-        List<RichiestaTirocinio> richiesteDelDocente = new ArrayList<>();
-        for (RichiestaTirocinio r : richiesteTirocinio) {
-            if (r.getDocente().equals(this.docenteLoggato) && r.getStatoRichiesta() == Stato.ATTESA) {
-                richiesteDelDocente.add(r);
-            }
-        }
+    public boolean modificaStatoRichiesta(String matricola, Stato nuovoStato) {
+        RichiestaTirocinioDAO richiestaTirocinioDAO  = new RichiestaTirocinioImplementazioneDAO();
 
-        // 2. Ora la riga selezionata in tabella combacia perfettamente con questa lista corta!
-        if (rigaSelezionata >= 0 && rigaSelezionata < richiesteDelDocente.size()) {
-            RichiestaTirocinio richiestaEsatta = richiesteDelDocente.get(rigaSelezionata);
-            richiestaEsatta.setStatoRichiesta(nuovoStato);
+        try{
+            richiestaTirocinioDAO.setStatoRichiestaDAO(matricola,this.docenteLoggato.getLogin(),nuovoStato.toString());
+            return true;
+        } catch (SQLException e) {
+            System.err.println("Errore durante l'aggiornamento della richiesta.");
+            e.printStackTrace();
+            return false;
         }
     }
 
@@ -349,67 +316,29 @@ public class Controller {
         return this.studenteLoggato;
     }
 
-    // Metodi per riempire la tabella dei tirocinanti(ovvero studenti la quale richiesta ha stato approvato)
-    public List<String> getNomiTirocinantiApprovati() {
-        ArrayList<String> nomi = new ArrayList<>();
-        for (RichiestaTirocinio r : richiesteTirocinio) {
-            Studente s = r.getStudente();
-            // Filtriamo per docenteLoggato e per stato della richiesta
-            if (r.getDocente().equals(docenteLoggato) &&
-                    r.getStatoRichiesta() == Stato.APPROVATA &&
-                    s.getTirocinio() != null &&
-                    !s.getTirocinio().getCompletato()) {
-                nomi.add(r.getStudente().getNome() + " " + r.getStudente().getCognome());
-            }
+    // Metodo per riempire la tabella dei tirocinanti(ovvero studenti la quale richiesta ha stato approvato)
+    public List<String[]> getDatiTabellaTirocinanti() {
+        TirocinioDAO tirocinioDAO = new TirocinioImplementazioneDAO();
+        try{
+            return tirocinioDAO.ottieniCatalogoTirocinanti(docenteLoggato.getLogin());
+        } catch (SQLException e) {
+            System.err.println("Errore nel caricamento del catalogo dei tirocinanti.");
+            e.printStackTrace();
+            return new ArrayList<>();
         }
-        return nomi;
     }
 
-    public List<String> getMatricoleTirocinantiApprovati() {
-        ArrayList<String> matricole = new ArrayList<>();
-        for (RichiestaTirocinio r : richiesteTirocinio) {
-            Studente s = r.getStudente();
-            if (r.getDocente().equals(docenteLoggato) &&
-                    r.getStatoRichiesta() == Stato.APPROVATA &&
-                    s.getTirocinio() != null &&
-                    !s.getTirocinio().getCompletato()) {
-                matricole.add(r.getStudente().getMatricola());
-            }
-        }
-        return matricole;
-    }
-
-    public List<String> getArgomentiTirocinantiApprovati() {
-        ArrayList<String> argomenti = new ArrayList<>();
-        for (RichiestaTirocinio r : richiesteTirocinio) {
-            Studente s = r.getStudente();
-            if (r.getDocente().equals(docenteLoggato) &&
-                    r.getStatoRichiesta() == Stato.APPROVATA &&
-                    s.getTirocinio() != null &&
-                    !s.getTirocinio().getCompletato()) {
-                argomenti.add(r.getArgomento());
-            }
-        }
-        return argomenti;
-    }
 
     // Metodo per controllare lo stato della Richiesta del tirocinio.
     public boolean controlloRichiesta() {
-        if (docenti.isEmpty()) {
+        RichiestaTirocinioDAO richiestaTirocinioDAO =  new RichiestaTirocinioImplementazioneDAO();
+        try{
+            return richiestaTirocinioDAO.controlloStatoRichiesta(studenteLoggato.getMatricola());
+        } catch (SQLException e) {
+            System.err.println("Errore nel controllo dello stato delle richieste.");
+            e.printStackTrace();
             return false;
         }
-        for (Docente d : docenti) {
-            if (d.getArgomentiTirocinio().isEmpty()) {
-                return false;
-            }
-        }
-        for (RichiestaTirocinio r : richiesteTirocinio) {
-            if (r.getStudente().equals(studenteLoggato) &&
-                    (r.getStatoRichiesta() == Stato.ATTESA || r.getStatoRichiesta() == Stato.APPROVATA)) {
-                return false;
-            }
-        }
-        return true;
     }
 
     // Metodo per controllare se la tipologia del tirocinio inserita sia giusta.
@@ -418,15 +347,25 @@ public class Controller {
     }
 
     // Metodo per istanziare una nuova tesi
-    public void aggiungiNuovaTesi(String titolo, String contenuto, String data) {
-        for (RichiestaTirocinio r : richiesteTirocinio) {
-            if (r.getStudente().equals(studenteLoggato) && r.getStatoRichiesta().equals(Stato.APPROVATA)) {
-                Docente docente = r.getDocente();
-                Tesi nuovatesi = new Tesi(studenteLoggato, docente, titolo, contenuto, data);
-                docente.addTesi(nuovatesi);
-                studenteLoggato.setTesi(nuovatesi);
-                return;
+    public boolean aggiungiNuovaTesi(String titolo, String contenuto, String data) {
+        TirocinioDAO tirocinioDAO = new TirocinioImplementazioneDAO();
+        TesiDAO tesiDAO = new TesiImplementazioneDAO();
+        try {
+            Integer id_tirocinio = tirocinioDAO.getTirocinio(studenteLoggato.getMatricola());
+            tesiDAO.inserisciTesi(titolo,contenuto,data,id_tirocinio,studenteLoggato.getMatricola());
+            for (RichiestaTirocinio r : richiesteTirocinio) {
+                if (r.getStudente().equals(studenteLoggato) && r.getStatoRichiesta().equals(Stato.APPROVATA)) {
+                    Docente docente = r.getDocente();
+                    Tesi nuovatesi = new Tesi(studenteLoggato, docente, titolo, contenuto, data);
+                    docente.addTesi(nuovatesi);
+                    studenteLoggato.setTesi(nuovatesi);
+                }
             }
+            return true;
+        } catch (SQLException e) {
+            System.err.println("Errore nel caricamento della tesi nel db.");
+            e.printStackTrace();
+            return false;
         }
 
     }
@@ -524,23 +463,48 @@ public class Controller {
     }
 
     // Metodo per istanziare il tirocinio quando il docente approva la richiesta
-    public void setTirocinio(String matricola) {
-        for (RichiestaTirocinio r : richiesteTirocinio) {
-            if (r.getStudente().getMatricola().equals(matricola)) {
-                Studente studenteCorrente = r.getStudente();
-                Tirocinio nuovoTirocinio = new Tirocinio(studenteCorrente, docenteLoggato);
-                studenteCorrente.setTirocinio(nuovoTirocinio);
-                docenteLoggato.addTirocinio(nuovoTirocinio);
+    public boolean setTirocinio(String nomeAzienda,String nominativoReferente,String argomentoTirocinio,String matricola) {
+        TirocinioDAO tirocinioDAO = new TirocinioImplementazioneDAO();
+        RichiestaTirocinioDAO richiestaTirocinioDAO = new RichiestaTirocinioImplementazioneDAO();
+        AziendaDAO aziendaDAO = new  AziendaImplementazioneDAO();
+        DocenteDAO docenteDAO = new DocenteImplementazioneDAO();
+
+        try{
+            // Recupero dei vari id richiesti per la insert del tirocinio del DataBase
+            Integer id_richiesta = richiestaTirocinioDAO.getIdRichiesta(matricola,docenteLoggato.getLogin());
+            Integer id_azienda = aziendaDAO.getIdAzienda(nominativoReferente,nomeAzienda);
+            Integer id_argomento = docenteDAO.getIdArgomento(docenteLoggato.getLogin(),argomentoTirocinio);
+
+            // Una volta recuperati gli id con i dati della tabella possiamo chiamare il metodo che inserisce il tirocinio e contestualmente crearlo nel Model
+            tirocinioDAO.inserisciTirocinio(id_richiesta,id_azienda,docenteLoggato.getLogin(),id_argomento);
+            for (RichiestaTirocinio r : richiesteTirocinio) {
+                if (r.getStudente().getMatricola().equals(matricola)) {
+                    Studente studenteCorrente = r.getStudente();
+                    Tirocinio nuovoTirocinio = new Tirocinio(studenteCorrente, docenteLoggato);
+                    studenteCorrente.setTirocinio(nuovoTirocinio);
+                    docenteLoggato.addTirocinio(nuovoTirocinio);
+                }
             }
+            return true;
+        } catch (SQLException ex) {
+            System.err.println("Errore nell'inserimento del tirocinio nel DataBase.");
+            ex.printStackTrace();
+            return false;
         }
     }
 
     // Metodo per terminare il tirocinio
-    public void setTerminaTirocinio(int rigaSelezionata) {
-        List<Tirocinio> tirocinio = this.docenteLoggato.getTirocinio();
-        if (rigaSelezionata >= 0 && rigaSelezionata < tirocinio.size()) {
-            Tirocinio tirocinioEsatto = tirocinio.get(rigaSelezionata);
-            tirocinioEsatto.setCompletato(true);
+    public boolean setTerminaTirocinio(String matricolaStudente) {
+        RichiestaTirocinioDAO richiestaTirocinioDAO = new RichiestaTirocinioImplementazioneDAO();
+        TirocinioDAO tirocinioDAO = new TirocinioImplementazioneDAO();
+        try{
+            Integer id_richiesta = richiestaTirocinioDAO.getIdRichiesta(matricolaStudente,docenteLoggato.getLogin());
+            tirocinioDAO.terminaTirocinio(id_richiesta);
+            return true;
+        } catch (SQLException e) {
+            System.err.println("Errore nella modifica dello stato del tirocinio");
+            e.printStackTrace();
+            return false;
         }
     }
 

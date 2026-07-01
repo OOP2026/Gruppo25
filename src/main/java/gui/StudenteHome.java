@@ -25,16 +25,16 @@ public class StudenteHome {
         frame.pack();
         frame.setVisible(true);
         frame.setLocationRelativeTo(null); //Questo metodo serve per far avviare la schermata al centro dello schermo.
-        //compilaRichiestaDiTirocinioButton.setEnabled(controller.controlloRichiesta()); // NOSONAR
-        caricaTesiButton.setEnabled(controller.controlloTesiButton());
+        compilaRichiestaDiTirocinioButton.setEnabled(controller.controlloRichiesta()); // NOSONAR
+        //caricaTesiButton.setEnabled(controller.controlloTesiButton());
         visualizzaStatoTesiButton.setEnabled(controller.haTesi());
 
         // Aggiungiamo un listener che si attiva quando la finestra cambia stato
         frame.addComponentListener(new java.awt.event.ComponentAdapter() {
             @Override
             public void componentShown(java.awt.event.ComponentEvent e) {
-                //compilaRichiestaDiTirocinioButton.setEnabled(controller.controlloRichiesta());
-                caricaTesiButton.setEnabled(controller.controlloTesiButton());
+                compilaRichiestaDiTirocinioButton.setEnabled(controller.controlloRichiesta());
+                //caricaTesiButton.setEnabled(controller.controlloTesiButton());
                 visualizzaStatoTesiButton.setEnabled(controller.haTesi());
             }
         });

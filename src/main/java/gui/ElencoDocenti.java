@@ -41,7 +41,7 @@ public class ElencoDocenti {
                 new String[] { "Nome Docente", "Argomento Tirocinio", "Nome Azienda", "Nominativo Referente" } // Intestazioni
         ));
 
-        // 1. Crei il modello della tua tabella
+        // 1. Creo il modello della tabella
         DefaultTableModel model = new DefaultTableModel();
         table1.setRowHeight(30);
         model.addColumn("Docente");
@@ -49,15 +49,15 @@ public class ElencoDocenti {
         model.addColumn("Argomento");
         model.addColumn("Azienda");
 
-// 2. Chiami il Controller per farti dare TUTTE le righe già pronte
+    // 2. Chiamo il Controller per farti dare le righe della tabella
         List<String[]> righeDalDatabase = controller.getDatiTabellaElencoTirocini();
 
-// 3. Aggiungi le righe al modello
+    // 3. Aggiungo le righe al modello
         for (String[] riga : righeDalDatabase) {
             model.addRow(riga);
         }
 
-// 4. Assegni il modello alla tua JTable grafica
+    // 4. Assegno il modello alla tua JTable grafica
         table1.setModel(model);
 
     }

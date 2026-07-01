@@ -74,7 +74,7 @@ public class DocenteImplementazioneDAO implements DocenteDAO{
     public List<String[]> ottieniCatalogoArgomenti() throws SQLException {
         List<String[]> righeTabella = new ArrayList<>();
 
-        // La JOIN fa il lavoro sporco: incrocia docenti, argomenti e aziende
+        // Join per incrociare i dati del docente dell'azienda e l'argomento
         String query = "SELECT d.nome, d.cognome, d.email, a.argomento, az.nomeazienda " +
                 "FROM docente d " +
                 "JOIN argomentotirocinio a ON d.login = a.docente " +

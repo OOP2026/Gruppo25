@@ -14,5 +14,6 @@ public interface StudenteDAO {
     // Metodo per verificare l'unicità della matricola
     boolean verificaMatricola(String matricola) throws SQLException;
 
-    // Metodo per aggiungere il tiro
+    // Metodo per aggiungere la richiesta di tirocinio allo studente quando la inoltra
+    //void inserisciRichiesta(String matricola,)
 }

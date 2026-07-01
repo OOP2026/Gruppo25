@@ -37,19 +37,26 @@ public class ElencoTirocinanti {
         // Creo la tabella per visualizzare gli Studenti con un tirocinio in corso (ovvero la quale richiesta è stata accettata).
         tabellaStudenteArgomentoTirocinio.setModel(new DefaultTableModel(
                 new Object[][] {},
-                new String[]{"Studente" , "Matricola" , "Argomento"}
+                new String[]{"Nome Studente" , "Matricola" , "Nome Azienda", "Referente", "Argomento"}
         ));
-        DefaultTableModel model = (DefaultTableModel) tabellaStudenteArgomentoTirocinio.getModel();
 
-        List<String> listaNomiStudentiApprovati = controller.getNomiTirocinantiApprovati();
-        List<String> listaMatricoleApprovati = controller.getMatricoleTirocinantiApprovati();
-        List<String> listaArgomentiApprovati = controller.getArgomentiTirocinantiApprovati();
+        DefaultTableModel model = new DefaultTableModel();
+        tabellaStudenteArgomentoTirocinio.setRowHeight(30);
+        model.addColumn("Nome Studente");
+        model.addColumn("Matricola");
+        model.addColumn("Nome Azienda");
+        model.addColumn("Referente");
+        model.addColumn("Argomento");
 
-        if (listaNomiStudentiApprovati != null) {
-            for (int i = 0; i < listaNomiStudentiApprovati.size(); i++) {
-                    model.addRow(new Object[]{ listaNomiStudentiApprovati.get(i), listaMatricoleApprovati.get(i), listaArgomentiApprovati.get(i) });
-                }
-            }
+        // Chiamiamo il metodo del controller
+        List<String[]> righeDalDataBase = controller.getDatiTabellaTirocinanti();
+        for(String [] riga : righeDalDataBase) {
+            model.addRow(riga);
+        }
+        tabellaStudenteArgomentoTirocinio.setModel(model);
+
+
+
 
 
         terminaTirocinioButton.addActionListener(new ActionListener() {
@@ -60,10 +67,14 @@ public class ElencoTirocinanti {
                     JOptionPane.showMessageDialog(frame,"Selezionare prima un tirocinio dalla tabella.","Errore",JOptionPane.ERROR_MESSAGE);
                     return;
                 }
+                String matricola = tabellaStudenteArgomentoTirocinio.getValueAt(rigaSelezionata,1).toString();
                 // Il controller aggiorna lo stato in base alla riga cliccata
-                controller.setTerminaTirocinio(rigaSelezionata);
-                model.removeRow(rigaSelezionata);
-                JOptionPane.showMessageDialog(frame,"Tirocinio terminato con successo.");
+                if(controller.setTerminaTirocinio(matricola)){
+                    model.removeRow(rigaSelezionata);
+                    JOptionPane.showMessageDialog(frame,"Tirocinio terminato con successo.");
+                } else {
+                    JOptionPane.showMessageDialog(frame,"Errore nella connesione con il DataBase.","Errore",JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
     }
