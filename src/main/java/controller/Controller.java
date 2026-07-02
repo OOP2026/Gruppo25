@@ -301,7 +301,7 @@ public class Controller {
             // Chiede i dati al DB e li restituisce dritti alla GUI
             return docenteDAO.ottieniCatalogoArgomenti();
         } catch (SQLException e) {
-            LOGGER.log(Level.SEVERE, "Errore durante il caricamento del catalogo dal database",e);
+            LOGGER.log(Level.SEVERE, "Errore durante il caricamento del catalogo dei tirocini dal database",e);
             return new ArrayList<>(); // Restituisce lista vuota in caso di errore
         }
     }
@@ -397,7 +397,7 @@ public class Controller {
         try{
             return richiestaTirocinioDAO.ottieniCatalogoRichieste(docenteLoggato.getLogin());
         } catch (SQLException e) {
-            LOGGER.log(Level.SEVERE, "Errore durante il caricamento del catalogo dal database",e);
+            LOGGER.log(Level.SEVERE, "Errore durante il caricamento del catalogo delle richieste di tirocinio del docente dal database",e);
             return new ArrayList<>();
         }
 
@@ -434,7 +434,7 @@ public class Controller {
         try{
             return richiestaTirocinioDAO.ottieniCatalogoRichiesteStudente(studenteLoggato.getMatricola());
         } catch (SQLException e) {
-            LOGGER.log(Level.SEVERE, "Errore durante il caricamento del catalogo nel database",e);
+            LOGGER.log(Level.SEVERE, "Errore durante il caricamento del catalogo delle richieste di tirocinio dello studente nel database",e);
             return new ArrayList<>();
         }
     }
