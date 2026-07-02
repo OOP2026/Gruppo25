@@ -5,9 +5,12 @@ import dao.*;
 import implementazioneDao.*;
 import model.*;
 
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Logger;
+import java.util.logging.Level;
 
 /**
  * The type Controller.
@@ -24,6 +27,7 @@ public class Controller {
     private Studente studenteLoggato;
     private static final String TIPO_ESTERNO = "ESTERNO";
     private static final String TIPO_INTERNO = "INTERNO";
+    private static final Logger LOGGER = Logger.getLogger(Controller.class.getName());
 
     /**
      * Instantiates a new Controller.
@@ -56,9 +60,7 @@ public class Controller {
             System.out.println("Salvataggio nel Database completato per: " + matricola);
 
         } catch (SQLException e) {
-            System.err.println("Errore critico durante il salvataggio dello studente nel Database.");
-            e.printStackTrace();
-
+            LOGGER.log(Level.SEVERE, "Errore durante il salvataggio dello studente nel database",e);
             studenti.remove(studente);
         }
     }
@@ -80,8 +82,7 @@ public class Controller {
             docenteDAO.inserisciDocente(login,password,nome,cognome,email);
             System.out.println("Docente inserito");
         } catch (SQLException e) {
-            System.err.println("Errore critico durante il salvataggio del docente nel Database.");
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Errore durante il salvataggio del docente  nel database",e);
 
             docenti.remove(docente);
         }
@@ -112,8 +113,7 @@ public class Controller {
                 return "STUDENTE";
             }
         } catch (SQLException e){
-            System.err.println("Errore di connessione durante il login");
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Errore durante la connessione al database",e);
         }
 
         // 2. Cerca tra i docenti
@@ -131,8 +131,7 @@ public class Controller {
                 return "DOCENTE";
             }
         } catch (SQLException e){
-            System.err.println("Errore di connessione durante il login");
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Errore durante la connessione al database",e);
         }
         // 3. Se non trova nessuno
         return "NON_TROVATO";
@@ -151,8 +150,7 @@ public class Controller {
         try {
             return utenteDAO.controlloLogin(login);
         } catch (SQLException e) {
-            System.err.println("Errore di connessione durante il login");
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Errore durante la connessione al database",e);
             return true;
         }
     }
@@ -200,8 +198,7 @@ public class Controller {
         try {
             return studenteDAO.verificaMatricola(matricola);
         } catch (SQLException e) {
-            System.err.println("Errore di connessione durante il controllo matricola");
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Errore durante la ricerca della matricola al database",e);
             return true;
         }
     }
@@ -280,13 +277,10 @@ public class Controller {
             this.docenteLoggato.addArgomentoTirocinio(argomento);
 
             System.out.println("Argomento (e Azienda) salvati con successo.");
-            return true; // Tutto perfetto, restituiamo true alla GUI!
+            return true;
 
         } catch (SQLException e) {
-            // Se un qualsiasi DAO fallisce (Argomento, Azienda o Tirocinio),
-            // l'esecuzione salta direttamente qui. Il Model in RAM è salvo!
-            System.err.println("Errore critico durante il salvataggio nel Database. Operazione annullata.");
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Errore durante il salvataggio dell'argomento nel database",e);
             return false;
         }
     }
@@ -303,8 +297,7 @@ public class Controller {
             // Chiede i dati al DB e li restituisce dritti alla GUI
             return docenteDAO.ottieniCatalogoArgomenti();
         } catch (SQLException e) {
-            System.err.println("Errore nel caricamento del catalogo tirocini.");
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Errore durante il caricamento del catalogo dal database",e);
             return new ArrayList<>(); // Restituisce lista vuota in caso di errore
         }
     }
@@ -324,8 +317,7 @@ public class Controller {
        try {
            return docenteDAO.verificaEsistenzaArgomento(nomeProf, cognomeProf, nomeArgomento);
        } catch (SQLException e) {
-           System.err.println("Non trovato.");
-           e.printStackTrace();
+           LOGGER.log(Level.SEVERE, "Errore durante la ricerca nel database",e);
            return false;
        }
     }
@@ -373,8 +365,7 @@ public class Controller {
             System.err.println("Non trovato nessun docente con la email fornita.");
             return false;
         } catch (SQLException e) {
-            System.err.println("Errore SQL durante l'inserimento della richiesta.");
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Errore durante il salvataggio della richiesta nel database",e);
             return false;
         }
     }
@@ -402,8 +393,7 @@ public class Controller {
         try{
             return richiestaTirocinioDAO.ottieniCatalogoRichieste(docenteLoggato.getLogin());
         } catch (SQLException e) {
-            System.err.println("Errore nel caricamento del catalogo delle richieste di tirocinio.");
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Errore durante il caricamento del catalogo dal database",e);
             return new ArrayList<>();
         }
 
@@ -424,8 +414,7 @@ public class Controller {
             richiestaTirocinioDAO.setStatoRichiestaDAO(matricola,this.docenteLoggato.getLogin(),nuovoStato.toString());
             return true;
         } catch (SQLException e) {
-            System.err.println("Errore durante l'aggiornamento della richiesta.");
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Errore durante la modifica nel database",e);
             return false;
         }
     }
@@ -441,8 +430,7 @@ public class Controller {
         try{
             return richiestaTirocinioDAO.ottieniCatalogoRichiesteStudente(studenteLoggato.getMatricola());
         } catch (SQLException e) {
-            System.err.println("Errore nel caricamento del catalogo delle richieste di tirocinio.");
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Errore durante il caricamento del catalogo nel database",e);
             return new ArrayList<>();
         }
     }
@@ -468,8 +456,7 @@ public class Controller {
         try{
             return tirocinioDAO.ottieniCatalogoTirocinanti(docenteLoggato.getLogin());
         } catch (SQLException e) {
-            System.err.println("Errore nel caricamento del catalogo dei tirocinanti.");
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Errore durante il caricamento del catalogo nel database",e);
             return new ArrayList<>();
         }
     }
@@ -486,8 +473,7 @@ public class Controller {
         try{
             return richiestaTirocinioDAO.controlloStatoRichiesta(studenteLoggato.getMatricola());
         } catch (SQLException e) {
-            System.err.println("Errore nel controllo dello stato delle richieste.");
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Errore durante il controllo delle richieste nel database",e);
             return false;
         }
     }
@@ -535,8 +521,7 @@ public class Controller {
             }
             return true;
         } catch (SQLException e) {
-            System.err.println("Errore nel caricamento della tesi nel db.");
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Errore durante il salvataggio della tesi nel database",e);
             return false;
         }
 
@@ -553,8 +538,7 @@ public class Controller {
         try{
            return tesiDAO.ottieniCatalogoTesisti(docenteLoggato.getLogin());
         } catch (SQLException e) {
-            System.err.println("Errore nel caricamento del catalogo dei tesisti.");
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Errore durante il caricamento del catalogo dal database",e);
             return new ArrayList<>();
         }
     }
@@ -571,8 +555,7 @@ public class Controller {
         try{
             return tesiDAO.leggiContenutoTesi(matricola);
         } catch (SQLException e) {
-            System.err.println("Errore nel caricamento del contenuto della tesi.");
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Errore durante il caricamento della tesi dal database",e);
             return "";
         }
     }
@@ -588,8 +571,7 @@ public class Controller {
         try {
             return tirocinioDAO.validaCompletamentoTirocinio(studenteLoggato.getMatricola());
         } catch (SQLException e) {
-            System.err.println("Errore nel controllo dell'attributo completato.");
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Errore durante il controllo dell'attributo dal database",e);
             return false;
         }
 
@@ -609,8 +591,7 @@ public class Controller {
             tesiDAO.setStatoTesi(matricola,nuovoStato.toString());
             return true;
         } catch (SQLException e) {
-            System.err.println("Errore nella modifica dello stato della tesi.");
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Errore durante la modifica dello stato nel database",e);
             return false;
         }
     }
@@ -627,8 +608,7 @@ public class Controller {
              return tesiDAO.ottieniCatalogoStatoTesiStudente(studenteLoggato.getMatricola());
 
         } catch (SQLException e) {
-            System.err.println("Errore nel caricamento del stato della tesi.");
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Errore durante il caricamento dello stato dal database",e);
             return new ArrayList<>();
         }
     }
@@ -667,9 +647,8 @@ public class Controller {
                 }
             }
             return true;
-        } catch (SQLException ex) {
-            System.err.println("Errore nell'inserimento del tirocinio nel DataBase.");
-            ex.printStackTrace();
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Errore durante il salvataggio del tirocinio nel database",e);
             return false;
         }
     }
@@ -689,8 +668,7 @@ public class Controller {
             tirocinioDAO.terminaTirocinio(id_richiesta);
             return true;
         } catch (SQLException e) {
-            System.err.println("Errore nella modifica dello stato del tirocinio");
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Errore durante la modifica dello stato nel database",e);
             return false;
         }
     }
@@ -708,8 +686,7 @@ public class Controller {
             return tesiDAO.haTesiDAO(studenteLoggato.getMatricola());
 
         } catch (SQLException e) {
-            System.err.println("Errore nel controllo della tesi.");
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Errore durante il controllo dell'attributo nel database",e);
             return false;
         }
     }
