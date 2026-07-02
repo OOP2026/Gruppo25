@@ -6,16 +6,18 @@ import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 public class UtenteImplementazioneDao implements UtenteDAO {
     private Connection connection;
+    private static final Logger LOGGER = Logger.getLogger(UtenteImplementazioneDao.class.getName());
     public UtenteImplementazioneDao() throws SQLException {
         try{
             this.connection = ConnessioneDatabase.getInstance().getConnection();
         } catch (SQLException e) {
-            System.err.println("Errore di connessione nel costruttore del DAO.");
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Errore di connessione nel costruttore del DAO. ",e);
         }
     }
     @Override

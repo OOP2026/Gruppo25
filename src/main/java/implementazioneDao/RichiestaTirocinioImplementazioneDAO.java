@@ -7,16 +7,18 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class RichiestaTirocinioImplementazioneDAO implements RichiestaTirocinioDAO {
 
     private Connection connection;
+    private static final Logger LOGGER = Logger.getLogger(RichiestaTirocinioImplementazioneDAO.class.getName());
     public RichiestaTirocinioImplementazioneDAO(){
         try{
             this.connection = ConnessioneDatabase.getInstance().getConnection();
         } catch (SQLException e) {
-            System.err.println("Errore di connessione nel costruttore del DAO.");
-            e.printStackTrace();
+            LOGGER.log(Level.SEVERE, "Errore di connessione nel costruttore del DAO. ",e);
         }
     }
 
