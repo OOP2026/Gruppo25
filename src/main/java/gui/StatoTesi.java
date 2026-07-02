@@ -36,13 +36,14 @@ public class StatoTesi {
         // Creo la tabella per visualizzare lo stato della tesi.
         table1.setModel(new DefaultTableModel(
                 new Object[][] {},
-                new String[]{"Titolo", "Contenuto", "Docente", "Stato Tesi"}
+                new String[]{"Titolo", "Contenuto","Data Seduta" , "Docente", "Stato Tesi"}
         ));
         DefaultTableModel model = new  DefaultTableModel();
         table1.setRowHeight(30);
         model.addColumn("Titolo");
         model.addColumn("Contenuto");
         model.addColumn("Docente");
+        model.addColumn("Data Seduta");
         model.addColumn("Stato Tesi");
 
 

@@ -116,7 +116,7 @@ public class TesiImplementazioneDAO implements TesiDAO {
     public List<String[]> ottieniCatalogoStatoTesiStudente(String matricolaStudente) throws SQLException {
         List<String[]> righeTabella = new ArrayList<>();
 
-        String query = "SELECT t.titolo,t.contenuto,t.statotesi,d.nome,d.cognome FROM tesi t " +
+        String query = "SELECT t.titolo,t.contenuto,t.statotesi,d.nome,d.cognome,t.dataseduta FROM tesi t " +
                 "JOIN supervisione superv ON t.id_tesi = superv.idtesi " +
                 "JOIN docente d ON superv.logindocente = d.login " +
                 "WHERE t.matricola_studente = ?";
@@ -128,8 +128,9 @@ public class TesiImplementazioneDAO implements TesiDAO {
                 String contenuto = rs.getString("contenuto");
                 String nomeDocente = rs.getString("nome") +  " " + rs.getString("cognome");
                 String stato = rs.getString("statotesi");
+                String dataseduta = rs.getString("dataseduta");
 
-                righeTabella.add(new String[]{titolo,contenuto,nomeDocente,stato});
+                righeTabella.add(new String[]{titolo,contenuto,nomeDocente,dataseduta,stato});
             }
         }
         return righeTabella;
