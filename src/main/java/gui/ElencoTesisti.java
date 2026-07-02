@@ -82,14 +82,18 @@ public class ElencoTesisti {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int rigaSelezionata = table1.getSelectedRow();
+                String matricola = table1.getValueAt(rigaSelezionata,1).toString();
                 if (rigaSelezionata < 0) {
                     JOptionPane.showMessageDialog(frame,"Selezionare prima una richiesta dalla tabella.","Errore",JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 // Il controller aggiorna lo stato in base alla riga cliccata
-                //controller.modificaStatoTesi(rigaSelezionata,Stato.APPROVATA, listaMatricole.get(rigaSelezionata));
-                model.removeRow(rigaSelezionata);
-                JOptionPane.showMessageDialog(frame,"Tesi approvata con successo.");
+                if(controller.modificaStatoTesi(Stato.APPROVATA,matricola)){
+                    model.removeRow(rigaSelezionata);
+                    JOptionPane.showMessageDialog(frame,"Tesi approvata con successo.");
+                } else{
+                    JOptionPane.showMessageDialog(frame,"Modifica stato tesi fallita.","Errore",JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
 
@@ -97,14 +101,18 @@ public class ElencoTesisti {
             @Override
             public void actionPerformed(ActionEvent e) {
                 int rigaSelezionata = table1.getSelectedRow();
+                String matricola = table1.getValueAt(rigaSelezionata,1).toString();
                 if (rigaSelezionata < 0) {
                     JOptionPane.showMessageDialog(frame,"Selezionare prima una richiesta dalla tabella.","Errore",JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 // Il controller aggiorna lo stato in base alla riga cliccata
-                //controller.modificaStatoTesi(rigaSelezionata,Stato.RIFIUTATA,listaMatricole.get(rigaSelezionata));
-                model.removeRow(rigaSelezionata);
-                JOptionPane.showMessageDialog(frame,"Tesi non approvata.");
+                if(controller.modificaStatoTesi(Stato.RIFIUTATA,matricola)){
+                    model.removeRow(rigaSelezionata);
+                    JOptionPane.showMessageDialog(frame,"Tesi rifiutata.");
+                } else{
+                    JOptionPane.showMessageDialog(frame,"Modifica stato tesi fallita.","Errore",JOptionPane.ERROR_MESSAGE);
+                }
             }
         });
     }

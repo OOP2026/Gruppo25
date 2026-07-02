@@ -97,24 +97,21 @@ public class TirocinioImplementazioneDAO implements TirocinioDAO {
         // Cerchiamo un tirocinio completato che NON abbia una tesi associata
         String query = "SELECT tir.id_tirocinio FROM tirocinio tir " +
                 "JOIN richiestatirocinio rich ON tir.id_richiesta = rich.id_richiestatirocinio " +
-                "LEFT JOIN tesi t ON tir.id_tirocinio = t.tirocinio " +
+                "LEFT JOIN tesi t ON tir.id_tirocinio = t.tirocinio AND t.statotesi != 'RIFIUTATA' " +
                 "WHERE rich.matricola_studente = ? " +
-                "AND tir.completato = true " + // Il tirocinio DEVE essere completato
-                "AND t.tirocinio IS NULL";     // NON deve esserci nessuna tesi associata
-
+                "AND tir.completato = true " +
+                "AND t.tirocinio IS NULL";
         try (PreparedStatement ps = this.connection.prepareStatement(query)) {
             ps.setString(1, matricolaStudente);
 
             try (ResultSet rs = ps.executeQuery()) {
-                // Se rs.next() è vero, significa che il DB ha trovato un tirocinio
-                // concluso e senza tesi. Quindi: SI, lo studente può caricare la tesi!
+
                 if (rs.next()) {
                     return true;
                 }
             }
         }
 
-        // Se non trova nulla (o il tirocinio non è finito, o c'è già una tesi)
         return false;
     }
 

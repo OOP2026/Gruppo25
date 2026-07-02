@@ -18,4 +18,13 @@ public interface TesiDAO {
 
     // Metodo per leggere il contenuto della tesi
     String leggiContenutoTesi(String matricolaStudente) throws SQLException;
+
+    // Metodo per modificare lo stato della tesi
+    void setStatoTesi(String matricolaStudente, String stato) throws SQLException;
+
+    // Metodo per visualizzare lo stato della tesi dallo studente
+    List<String[]> ottieniCatalogoStatoTesiStudente(String matricolaStudente) throws SQLException;
+
+    // Metodo per controllare se uno studente ha almeno una tesi
+    boolean haTesiDAO(String matricolaStudente) throws SQLException;
 }

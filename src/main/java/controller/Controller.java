@@ -424,35 +424,32 @@ public class Controller {
     }
 
     // Metodo per modificare lo stato della tesi
-    public void modificaStatoTesi(int rigaSelezionata, Stato nuovoStato, String matricola) {
-        List<Tesi> tesi = new ArrayList<>();
-        for (Tesi t : docenteLoggato.getTesi()) {
-            if (t.getStudente().getMatricola().equals(matricola) && t.getStatoTesi().equals(Stato.ATTESA)) {
-                tesi.add(t);
-            }
-        }
-        if (rigaSelezionata >= 0 && rigaSelezionata < tesi.size()) {
-            Tesi tesiEsatta = tesi.get(rigaSelezionata);
-            tesiEsatta.setStatoTesi(nuovoStato);
-            docenteLoggato.rimuoviTesi(rigaSelezionata);
+    public boolean modificaStatoTesi(Stato nuovoStato, String matricola) {
+        TesiDAO tesiDAO = new TesiImplementazioneDAO();
+        try{
+            tesiDAO.setStatoTesi(matricola,nuovoStato.toString());
+            return true;
+        } catch (SQLException e) {
+            System.err.println("Errore nella modifica dello stato della tesi.");
+            e.printStackTrace();
+            return false;
         }
     }
 
-    // Metodi per la tabella dello stato della tesi
-    // Metodo per visualizzare lo stato della tesi
-    public String getStatoTesiTabella() {
-        return  studenteLoggato.getTesi().getStatoTesi().toString();
+    // Metodo per la tabella dello stato della tesi dello studente
+    public List<String[]> getStatoTesiStudente(){
+        TesiDAO tesiDAO = new TesiImplementazioneDAO();
+        try{
+             return tesiDAO.ottieniCatalogoStatoTesiStudente(studenteLoggato.getMatricola());
+
+        } catch (SQLException e) {
+            System.err.println("Errore nel caricamento del stato della tesi.");
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
     }
 
-    public String getDocenteTesiTabella() {
-        String nomeDocenteTesi = studenteLoggato.getTesi().getDocente().getNome();
-        String cognomeDocenteTesi = studenteLoggato.getTesi().getDocente().getCognome();
-        return (nomeDocenteTesi + " " + cognomeDocenteTesi);
-    }
 
-    public String getTitotoTabella() {
-        return studenteLoggato.getTesi().getTitolo();
-    }
 
     // Metodo per istanziare il tirocinio quando il docente approva la richiesta
     public boolean setTirocinio(String nomeAzienda,String nominativoReferente,String argomentoTirocinio,String matricola) {
@@ -502,6 +499,15 @@ public class Controller {
 
     // Metodo per verificare che uno studente possa visualizzare lo stato della tesi
     public boolean haTesi() {
-        return this.studenteLoggato.getTesi() != null;
+
+        TesiDAO tesiDAO = new TesiImplementazioneDAO();
+        try{
+            return tesiDAO.haTesiDAO(studenteLoggato.getMatricola());
+
+        } catch (SQLException e) {
+            System.err.println("Errore nel controllo della tesi.");
+            e.printStackTrace();
+            return false;
+        }
     }
 }

@@ -39,7 +39,7 @@ public class TesiImplementazioneDAO implements TesiDAO {
 
     @Override
     public Integer getIdTesi(String matricola_studente) throws SQLException {
-        String query = "SELECT id_tesi FROM tesi WHERE matricola_studente = ?";
+        String query = "SELECT id_tesi FROM tesi WHERE matricola_studente = ? ORDER BY id_tesi DESC LIMIT 1";
         try(PreparedStatement ps = this.connection.prepareStatement(query)){
             ps.setString(1,matricola_studente);
             ResultSet rs = ps.executeQuery();
@@ -98,5 +98,56 @@ public class TesiImplementazioneDAO implements TesiDAO {
             }
         }
         return "";
+    }
+
+    @Override
+    public void setStatoTesi(String matricolaStudente, String stato) throws SQLException {
+        String query = "UPDATE tesi SET statotesi = ? WHERE matricola_studente = ? AND  statotesi = 'ATTESA'";
+
+        try(PreparedStatement ps = this.connection.prepareStatement(query)){
+            ps.setString(1,stato);
+            ps.setString(2,matricolaStudente);
+            ps.executeUpdate();
+        }
+    }
+
+    @Override
+    public List<String[]> ottieniCatalogoStatoTesiStudente(String matricolaStudente) throws SQLException {
+        List<String[]> righeTabella = new ArrayList<>();
+
+        String query = "SELECT t.titolo,t.contenuto,t.statotesi,d.nome,d.cognome FROM tesi t " +
+                "JOIN supervisione superv ON t.id_tesi = superv.idtesi " +
+                "JOIN docente d ON superv.logindocente = d.login " +
+                "WHERE t.matricola_studente = ?";
+        try(PreparedStatement ps = this.connection.prepareStatement(query)){
+            ps.setString(1,matricolaStudente);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                String titolo = rs.getString("titolo");
+                String contenuto = rs.getString("contenuto");
+                String nomeDocente = rs.getString("nome") +  " " + rs.getString("cognome");
+                String stato = rs.getString("statotesi");
+
+                righeTabella.add(new String[]{titolo,contenuto,nomeDocente,stato});
+            }
+        }
+        return righeTabella;
+    }
+
+    @Override
+    public boolean haTesiDAO(String matricolaStudente) throws SQLException {
+
+        String query = "SELECT COUNT(*) AS conta_tesi FROM tesi WHERE matricola_studente = ?";
+        try(PreparedStatement ps = this.connection.prepareStatement(query)){
+            ps.setString(1,matricolaStudente);
+            ResultSet rs = ps.executeQuery();
+            while(rs.next()){
+                int conteggio = rs.getInt("conta_tesi");
+                if(conteggio > 0){
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

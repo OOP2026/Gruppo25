@@ -6,6 +6,7 @@ import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.List;
 
 public class StatoTesi {
     private JTable table1;
@@ -35,18 +36,21 @@ public class StatoTesi {
         // Creo la tabella per visualizzare lo stato della tesi.
         table1.setModel(new DefaultTableModel(
                 new Object[][] {},
-                new String[]{"Titolo", "Docente", "Stato Tesi"}
+                new String[]{"Titolo", "Contenuto", "Docente", "Stato Tesi"}
         ));
-        DefaultTableModel model = (DefaultTableModel) table1.getModel();
+        DefaultTableModel model = new  DefaultTableModel();
+        table1.setRowHeight(30);
+        model.addColumn("Titolo");
+        model.addColumn("Contenuto");
+        model.addColumn("Docente");
+        model.addColumn("Stato Tesi");
 
-        String statoTesi = controller.getStatoTesiTabella();
-        String docenteTesi = controller.getDocenteTesiTabella();
-        String titolo = controller.getTitotoTabella();
 
-                model.addRow(new Object[]{
-                        titolo,
-                        docenteTesi,
-                        statoTesi
-                });
+        // Chiamiamo il metodo del controller
+        List<String[]> righeDalDataBase = controller.getStatoTesiStudente();
+        for(String [] riga : righeDalDataBase) {
+            model.addRow(riga);
+        }
+        table1.setModel(model);
         }
 }
