@@ -15,9 +15,9 @@ public class StatoTesi {
     private JFrame frame;
     private Controller controller;
 
-    private final static String STATO_TESI = "Stato Tesi";
+    private static final String STATO_TESI = "Stato Tesi";
 
-    public  StatoTesi(JFrame frameChiamante,Controller controller) {
+    public StatoTesi(JFrame frameChiamante,Controller controller) {
         this.controller = controller;
         frame = new JFrame(STATO_TESI);
         frame.setContentPane(panelTesi);

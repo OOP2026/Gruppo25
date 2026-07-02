@@ -2,7 +2,6 @@ package gui;
 
 import javax.swing.*;
 import controller.Controller;
-import model.Stato;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
