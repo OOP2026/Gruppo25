@@ -1,7 +1,7 @@
 package gui;
 
 import controller.Controller;
-import model.RichiestaTirocinio;
+
 
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
@@ -37,19 +37,22 @@ public class StatoRichiestaTirocinio {
         // Creo la tabella per visualizzare lo stato della richiesta.
         tableStatoRichiesta.setModel(new DefaultTableModel(
                 new Object[][] {},
-                new String[]{"Docente", "Stato della Richiesta"}
+                new String[]{"Docente","Argomento", "Stato Richiesta"}
         ));
-        DefaultTableModel model = (DefaultTableModel) tableStatoRichiesta.getModel();
 
-        List<RichiestaTirocinio> richiesteModello = controller.getRichiestaTirocinio();
-        for(RichiestaTirocinio r : richiesteModello){
-            if(r.getStudente().equals(controller.getStudenteLoggato())){
-                model.addRow(new Object[]{
-                        r.getDocente().getCognome() + " " + r.getDocente().getNome(),
-                        r.getStatoRichiesta()
-                });
-            }
+        DefaultTableModel model = new DefaultTableModel();
+        tableStatoRichiesta.setRowHeight(30);
+        tableStatoRichiesta.doLayout();
+        model.addColumn("Docente");
+        model.addColumn("Argomento");
+        model.addColumn("Stato Richiesta");
+
+
+        //Chiamo il metodo del controller
+        List<String[]> righeDalDataBase = controller.getRichiestaTirocinioStudente();
+        for(String [] riga : righeDalDataBase) {
+            model.addRow(riga);
         }
-
+        tableStatoRichiesta.setModel(model);
     }
 }

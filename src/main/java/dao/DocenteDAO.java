@@ -23,7 +23,7 @@ public interface DocenteDAO {
     Integer getIdArgomento(String login, String nomeArgomento) throws SQLException;
 
     // Metodo per trovare un docente sulla base della mail
-    boolean getDocenteDaEmail(String email, ArrayList<String> datidocenteTrovato) throws  SQLException;
+    boolean getDocenteDaEmail(String email, ArrayList<String> datiDocenteTrovato) throws  SQLException;
 
     // Metodo per verificare se un docente specifico ha un argomento
     boolean verificaEsistenzaArgomento(String nomeDocente, String cognomeDocente, String nomeArgomento)  throws SQLException;

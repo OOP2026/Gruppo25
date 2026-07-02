@@ -41,24 +41,29 @@ public class ElencoTesisti {
         // Creo la tabella per visualizzare i Tesisti
         table1.setModel(new DefaultTableModel(
                 new Object[][] {},
-                new String[] {"Studente", "Matricola", "Titolo", "Contenuto"}
+                new String[] {"Nome Studente", "Matricola", "Titolo", "Contenuto"}
         ));
-        DefaultTableModel model = (DefaultTableModel) table1.getModel();
 
-        List<String> listaNomiStudenti = controller.getStudentiTesi();
-        List<String> listaMatricole = controller.getMatricoleTesi();
-        List<String> listaTitoli = controller.getTitoliTesi();
-        List<String> listaContenuti = controller.getContenutoTesi();
-        if (listaNomiStudenti != null) {
-            for (int i = 0; i < listaNomiStudenti.size(); i++) {
-                model.addRow(new Object[]{ listaNomiStudenti.get(i), listaMatricole.get(i), listaTitoli.get(i), listaContenuti.get(i) });
-            }
+        DefaultTableModel model = new DefaultTableModel();
+        table1.setRowHeight(30);
+        model.addColumn("Nome Studente");
+        model.addColumn("Matricola");
+        model.addColumn("Titolo");
+        model.addColumn("Contenuto");
+
+        // Chiamiamo il metodo del controller
+        List<String[]> righeDalDataBase = controller.getDatiTabellaTesisti();
+        for(String [] riga : righeDalDataBase) {
+            model.addRow(riga);
         }
+        table1.setModel(model);
+
 
         leggiTesiButton.addActionListener(e -> {
             int riga = table1.getSelectedRow();
             if(riga >= 0) {
-                String contenutoTesi = controller.getContenutoTesiSingola(listaMatricole.get(riga));
+                String matricola = table1.getValueAt(riga,1).toString();
+                String contenutoTesi = controller.getContenutoTesiSingola(matricola);
 
                 // Creiamo una JTextArea al volo solo per leggerla
                 JTextArea areaTesto = new JTextArea(contenutoTesi);
@@ -82,7 +87,7 @@ public class ElencoTesisti {
                     return;
                 }
                 // Il controller aggiorna lo stato in base alla riga cliccata
-                controller.modificaStatoTesi(rigaSelezionata,Stato.APPROVATA, listaMatricole.get(rigaSelezionata));
+                //controller.modificaStatoTesi(rigaSelezionata,Stato.APPROVATA, listaMatricole.get(rigaSelezionata));
                 model.removeRow(rigaSelezionata);
                 JOptionPane.showMessageDialog(frame,"Tesi approvata con successo.");
             }
@@ -97,7 +102,7 @@ public class ElencoTesisti {
                     return;
                 }
                 // Il controller aggiorna lo stato in base alla riga cliccata
-                controller.modificaStatoTesi(rigaSelezionata,Stato.RIFIUTATA,listaMatricole.get(rigaSelezionata));
+                //controller.modificaStatoTesi(rigaSelezionata,Stato.RIFIUTATA,listaMatricole.get(rigaSelezionata));
                 model.removeRow(rigaSelezionata);
                 JOptionPane.showMessageDialog(frame,"Tesi non approvata.");
             }

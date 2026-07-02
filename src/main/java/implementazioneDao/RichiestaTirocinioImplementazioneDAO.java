@@ -112,4 +112,38 @@ public class RichiestaTirocinioImplementazioneDAO implements RichiestaTirocinioD
          return true;
     }
 
+    @Override
+    public String getLoginDocente(String matricola) throws SQLException {
+        String query = "SELECT docente_richiesta FROM richiestatirocinio WHERE  matricola_studente = ? AND statorichiesta = 'APPROVATA' ";
+        try(PreparedStatement preparedStatement = this.connection.prepareStatement(query)){
+            preparedStatement.setString(1, matricola);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                return resultSet.getString("docente_richiesta");
+            }
+        }
+        return "";
+    }
+
+    @Override
+    public List<String[]> ottieniCatalogoRichiesteStudente(String matricolaStudente) throws SQLException {
+        List<String[]> righeTabella = new ArrayList<>();
+
+        String query = "SELECT rich.docente_richiesta,arg.argomento,rich.statorichiesta " +
+                "FROM richiestatirocinio rich " + "JOIN argomentotirocinio arg ON rich.argomento_richiesta = arg.id_argomento "+
+                "WHERE rich.matricola_studente = ?";
+        try(PreparedStatement preparedStatement = this.connection.prepareStatement(query)){
+            preparedStatement.setString(1, matricolaStudente);
+            ResultSet resultSet = preparedStatement.executeQuery();
+            while (resultSet.next()){
+                String docente =  resultSet.getString("docente_richiesta");
+                String argomento =  resultSet.getString("argomento");
+                String statorichiesta = resultSet.getString("statorichiesta");
+
+                righeTabella.add(new String[]{docente, argomento, statorichiesta});
+            }
+        }
+        return righeTabella;
+    }
+
 }

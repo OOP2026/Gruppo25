@@ -14,6 +14,9 @@ public interface TirocinioDAO {
     void terminaTirocinio(Integer id_richiesta) throws SQLException;
 
     // Metodo per ottenere il l'id del tirocinio
-    Integer getTirocinio(String matricolaStudente) throws SQLException;
+    Integer getIdTirocinio(String matricolaStudente) throws SQLException;
+
+    // Metodo per controllare lo stato del tirocinio
+    boolean validaCompletamentoTirocinio(String matricolaStudente) throws SQLException;
 }
 

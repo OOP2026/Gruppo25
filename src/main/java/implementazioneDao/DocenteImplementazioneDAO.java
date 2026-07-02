@@ -119,17 +119,17 @@ public class DocenteImplementazioneDAO implements DocenteDAO{
     }
 
     @Override
-    public boolean getDocenteDaEmail(String email, ArrayList<String> datidocenteTrovato) throws SQLException {
+    public boolean getDocenteDaEmail(String email, ArrayList<String> datiDocenteTrovato) throws SQLException {
 
         String sql = "SELECT nome,cognome,login,password FROM docente WHERE email = ?";
         try(PreparedStatement ps = connection.prepareStatement(sql)){
             ps.setString(1, email);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                datidocenteTrovato.add(rs.getString("nome"));
-                datidocenteTrovato.add(rs.getString("cognome"));
-                datidocenteTrovato.add(rs.getString("login"));
-                datidocenteTrovato.add(rs.getString("password"));
+                datiDocenteTrovato.add(rs.getString("nome"));
+                datiDocenteTrovato.add(rs.getString("cognome"));
+                datiDocenteTrovato.add(rs.getString("login"));
+                datiDocenteTrovato.add(rs.getString("password"));
                 return true;
             }
 

@@ -18,4 +18,10 @@ public interface RichiestaTirocinioDAO {
 
     // Metodo per verificare lo stato della richiesta del tirocinio
     boolean controlloStatoRichiesta(String matricolaStudente) throws  SQLException;
+
+    // Metodo per ottenere la login di un docente data la matricola
+    String getLoginDocente(String matricola) throws SQLException;
+
+    // Metodo per visualizzare lo stato delle richieste dello studente
+    List<String[]> ottieniCatalogoRichiesteStudente(String matricolaStudente) throws SQLException;
 }

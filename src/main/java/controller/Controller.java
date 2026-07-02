@@ -308,9 +308,18 @@ public class Controller {
         }
     }
 
-    public List<RichiestaTirocinio> getRichiestaTirocinio() {
-        return this.richiesteTirocinio;
+    // Metodo per visualizzare le richieste di tirocinio inviate dallo studente
+    public List<String[]> getRichiestaTirocinioStudente() {
+        RichiestaTirocinioDAO richiestaTirocinioDAO = new RichiestaTirocinioImplementazioneDAO();
+        try{
+            return richiestaTirocinioDAO.ottieniCatalogoRichiesteStudente(studenteLoggato.getMatricola());
+        } catch (SQLException e) {
+            System.err.println("Errore nel caricamento del catalogo delle richieste di tirocinio.");
+            e.printStackTrace();
+            return new ArrayList<>();
+        }
     }
+
 
     public Studente getStudenteLoggato() {
         return this.studenteLoggato;
@@ -350,9 +359,16 @@ public class Controller {
     public boolean aggiungiNuovaTesi(String titolo, String contenuto, String data) {
         TirocinioDAO tirocinioDAO = new TirocinioImplementazioneDAO();
         TesiDAO tesiDAO = new TesiImplementazioneDAO();
+        RichiestaTirocinioDAO richiestaTirocinioDAO = new RichiestaTirocinioImplementazioneDAO();
         try {
-            Integer id_tirocinio = tirocinioDAO.getTirocinio(studenteLoggato.getMatricola());
+            // Inseriamo la tesi nel db
+            Integer id_tirocinio = tirocinioDAO.getIdTirocinio(studenteLoggato.getMatricola());
             tesiDAO.inserisciTesi(titolo,contenuto,data,id_tirocinio,studenteLoggato.getMatricola());
+            // Inseriamo nella tabella ponte i dati della tesi e del docente
+            Integer id_tesi =  tesiDAO.getIdTesi(studenteLoggato.getMatricola());
+            String loginDocente = richiestaTirocinioDAO.getLoginDocente(studenteLoggato.getMatricola());
+            tesiDAO.inserisciSupervisione(loginDocente,id_tesi);
+            // Successivamente la inseriamo nel Model
             for (RichiestaTirocinio r : richiesteTirocinio) {
                 if (r.getStudente().equals(studenteLoggato) && r.getStatoRichiesta().equals(Stato.APPROVATA)) {
                     Docente docente = r.getDocente();
@@ -371,64 +387,40 @@ public class Controller {
     }
 
     // Metodi per riempire la tabella dei tesisti
-    public List<String> getStudentiTesi() {
-        ArrayList<String> nomi = new ArrayList<>();
-        for (Studente s : studenti) {
-            if (s.getTesi() != null && s.getTesi().getStatoTesi().equals(Stato.ATTESA)) {
-                nomi.add(s.getNome() + " " + s.getCognome());
-            }
+    public List<String []> getDatiTabellaTesisti() {
+        TesiDAO tesiDAO = new TesiImplementazioneDAO();
+        try{
+           return tesiDAO.ottieniCatalogoTesisti(docenteLoggato.getLogin());
+        } catch (SQLException e) {
+            System.err.println("Errore nel caricamento del catalogo dei tesisti.");
+            e.printStackTrace();
+            return new ArrayList<>();
         }
-        return nomi;
-    }
-
-    public List<String> getMatricoleTesi() {
-        ArrayList<String> matricole = new ArrayList<>();
-        for (Studente s : studenti) {
-            if (s.getTesi() != null && s.getTesi().getStatoTesi().equals(Stato.ATTESA)) {
-                matricole.add(s.getMatricola());
-            }
-        }
-        return matricole;
-    }
-
-    public List<String> getTitoliTesi() {
-        ArrayList<String> titoli = new ArrayList<>();
-        for (Studente s : studenti) {
-            if (s.getTesi() != null && s.getTesi().getStatoTesi().equals(Stato.ATTESA)) {
-                titoli.add(s.getTesi().getTitolo());
-            }
-        }
-        return titoli;
-    }
-
-    public List<String> getContenutoTesi() {
-        ArrayList<String> contenuti = new ArrayList<>();
-        for (Studente s : studenti) {
-            if (s.getTesi() != null && s.getTesi().getStatoTesi().equals(Stato.ATTESA)) {
-                contenuti.add(s.getTesi().getContenuto());
-            }
-        }
-        return contenuti;
     }
 
     // Metodo per leggere il contenuto dalla tabella data la riga
     public String getContenutoTesiSingola(String matricola) {
-        String contenutoTesiRichiesta = "";
-        for (Studente s : studenti) {
-            if (s.getMatricola().equals(matricola)) {
-                contenutoTesiRichiesta = s.getTesi().getContenuto();
-            }
+        TesiDAO tesiDAO = new TesiImplementazioneDAO();
+        try{
+            return tesiDAO.leggiContenutoTesi(matricola);
+        } catch (SQLException e) {
+            System.err.println("Errore nel caricamento del contenuto della tesi.");
+            e.printStackTrace();
+            return "";
         }
-        return contenutoTesiRichiesta;
     }
 
     // Metodo per impedire agli studenti che non hanno terminato il tirocinio di poter caricare la tesi
     public boolean controlloTesiButton() {
-        return !(studenteLoggato.getTirocinio() == null ||
-                !studenteLoggato.getTirocinio().getCompletato() ||
-                (studenteLoggato.getTesi() != null &&
-                        (studenteLoggato.getTesi().getStatoTesi() == Stato.APPROVATA ||
-                                studenteLoggato.getTesi().getStatoTesi() == Stato.ATTESA)));
+        TirocinioDAO tirocinioDAO = new TirocinioImplementazioneDAO();
+        try {
+            return tirocinioDAO.validaCompletamentoTirocinio(studenteLoggato.getMatricola());
+        } catch (SQLException e) {
+            System.err.println("Errore nel controllo dell'attributo completato.");
+            e.printStackTrace();
+            return false;
+        }
+
     }
 
     // Metodo per modificare lo stato della tesi

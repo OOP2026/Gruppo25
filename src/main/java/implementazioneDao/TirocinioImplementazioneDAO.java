@@ -78,7 +78,7 @@ public class TirocinioImplementazioneDAO implements TirocinioDAO {
     }
 
     @Override
-    public Integer getTirocinio(String matricolaStudente) throws SQLException {
+    public Integer getIdTirocinio(String matricolaStudente) throws SQLException {
         String query = "SELECT tir.id_tirocinio FROM tirocinio tir " +
                 "JOIN richiestatirocinio rich ON tir.id_richiesta=rich.id_richiestatirocinio " +
                 "WHERE matricola_studente = ? AND rich.statorichiesta = 'APPROVATA'";
@@ -91,4 +91,32 @@ public class TirocinioImplementazioneDAO implements TirocinioDAO {
         }
         return null;
     }
+
+    @Override
+    public boolean validaCompletamentoTirocinio(String matricolaStudente) throws SQLException {
+        // Cerchiamo un tirocinio completato che NON abbia una tesi associata
+        String query = "SELECT tir.id_tirocinio FROM tirocinio tir " +
+                "JOIN richiestatirocinio rich ON tir.id_richiesta = rich.id_richiestatirocinio " +
+                "LEFT JOIN tesi t ON tir.id_tirocinio = t.tirocinio " +
+                "WHERE rich.matricola_studente = ? " +
+                "AND tir.completato = true " + // Il tirocinio DEVE essere completato
+                "AND t.tirocinio IS NULL";     // NON deve esserci nessuna tesi associata
+
+        try (PreparedStatement ps = this.connection.prepareStatement(query)) {
+            ps.setString(1, matricolaStudente);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                // Se rs.next() è vero, significa che il DB ha trovato un tirocinio
+                // concluso e senza tesi. Quindi: SI, lo studente può caricare la tesi!
+                if (rs.next()) {
+                    return true;
+                }
+            }
+        }
+
+        // Se non trova nulla (o il tirocinio non è finito, o c'è già una tesi)
+        return false;
+    }
+
+
 }
