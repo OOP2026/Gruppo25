@@ -9,6 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * The type Stato richiesta tirocinio.
+ */
 public class StatoRichiestaTirocinio {
     private JButton okbutton;
     private JPanel panelStatoRichiestaTirocinio;
@@ -16,6 +19,12 @@ public class StatoRichiestaTirocinio {
     private JFrame frame;
     private Controller controller;
 
+    /**
+     * Instantiates a new Stato richiesta tirocinio.
+     *
+     * @param frameChiamante the frame chiamante
+     * @param controller     the controller
+     */
     public StatoRichiestaTirocinio(JFrame frameChiamante, Controller controller) {
         this.controller = controller;
         frame = new JFrame("Stato Richiesta Tirocinio");

@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The type Studente home.
+ */
 public class StudenteHome {
     private JButton elencoDocentiButton;
     private JButton compilaRichiestaDiTirocinioButton;
@@ -17,6 +20,12 @@ public class StudenteHome {
     private JFrame frame;
     private Controller controller;
 
+    /**
+     * Instantiates a new Studente home.
+     *
+     * @param frameChiamante the frame chiamante
+     * @param controller     the controller
+     */
     public StudenteHome(JFrame frameChiamante, Controller controller) {
         this.controller = controller;
         frame = new JFrame("Home Studente");
