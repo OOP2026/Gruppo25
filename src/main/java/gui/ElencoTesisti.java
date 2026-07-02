@@ -60,9 +60,13 @@ public class ElencoTesisti {
 
 
         leggiTesiButton.addActionListener(e -> {
-            int riga = table1.getSelectedRow();
-            if(riga >= 0) {
-                String matricola = table1.getValueAt(riga,1).toString();
+            int rigaSelezionata = table1.getSelectedRow();
+            if (rigaSelezionata < 0) {
+                JOptionPane.showMessageDialog(frame,"Selezionare prima una richiesta dalla tabella.","Errore",JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            if(rigaSelezionata >= 0) {
+                String matricola = table1.getValueAt(rigaSelezionata,1).toString();
                 String contenutoTesi = controller.getContenutoTesiSingola(matricola);
 
                 // Creiamo una JTextArea al volo solo per leggerla
