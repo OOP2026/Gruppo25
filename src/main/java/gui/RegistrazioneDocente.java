@@ -18,7 +18,8 @@ public class RegistrazioneDocente extends JFrame {
     private JPanel panelRegDocenti;
     private JLabel titoloRegistraDocenteJLabel; // NOSONAR
     private JFrame frame;
-    private Controller controller;
+    private transient Controller controller;
+
     private static final String TITOLO_ERRORE = "Errore";
 
     public RegistrazioneDocente(JFrame frameHome, Controller controller) {

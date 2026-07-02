@@ -18,7 +18,7 @@ public class RegistrazioneStudente extends JFrame {
     private JPasswordField sPasswordPasswordField;
     private JTextField sMatricolaTextField;
     private JFrame frame;
-    private Controller controller;
+    private transient Controller controller;
     private static final String TITOLO_ERRORE = "Errore";
 
     public RegistrazioneStudente(JFrame frameHome, Controller controller) {

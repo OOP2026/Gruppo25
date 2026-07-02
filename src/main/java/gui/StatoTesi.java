@@ -15,9 +15,11 @@ public class StatoTesi {
     private JFrame frame;
     private Controller controller;
 
+    private final static String STATO_TESI = "Stato Tesi";
+
     public  StatoTesi(JFrame frameChiamante,Controller controller) {
         this.controller = controller;
-        frame = new JFrame("Stato Tesi");
+        frame = new JFrame(STATO_TESI);
         frame.setContentPane(panelTesi);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
@@ -36,7 +38,7 @@ public class StatoTesi {
         // Creo la tabella per visualizzare lo stato della tesi.
         table1.setModel(new DefaultTableModel(
                 new Object[][] {},
-                new String[]{"Titolo", "Contenuto","Data Seduta" , "Docente", "Stato Tesi"}
+                new String[]{"Titolo", "Contenuto","Data Seduta" , "Docente", STATO_TESI}
         ));
         DefaultTableModel model = new  DefaultTableModel();
         table1.setRowHeight(30);
@@ -44,7 +46,7 @@ public class StatoTesi {
         model.addColumn("Contenuto");
         model.addColumn("Docente");
         model.addColumn("Data Seduta");
-        model.addColumn("Stato Tesi");
+        model.addColumn(STATO_TESI);
 
 
         // Chiamiamo il metodo del controller

@@ -42,48 +42,53 @@ public class AggiungiNuovoArgomento {
         okbutton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                // Variabile per contenere l'argomento in input dal Docente.
-                String argomentoInput = nomeArgomentoText.getText();
-                String tipologiaTirocinio = tipologiaTirocinioTextField.getText();
-                // Controlliamo che il campo non sia vuoto.
+                String argomentoInput = nomeArgomentoText.getText().trim();
+                String tipologiaTirocinio = tipologiaTirocinioTextField.getText().trim();
+                // 1. Controlli generici sul riempimento dei campi
                 if(argomentoInput.isEmpty() || tipologiaTirocinio.isEmpty()){
                     JOptionPane.showMessageDialog(null,"Devi riempire tutti i campi idoneamente.",TITOLO_ERRORE,JOptionPane.ERROR_MESSAGE);
                     return;
-                } else if(!(controller.controlloInserimentoTirocinio(tipologiaTirocinio))) {
+                }
+                if(!(controller.controlloInserimentoTirocinio(tipologiaTirocinio))) {
                     JOptionPane.showMessageDialog(null, "Inserire correttamente la tipologia del tirocinio. [INTERNO o ESTERNO].",TITOLO_ERRORE,JOptionPane.ERROR_MESSAGE);
                     return;
-                }else if(tipologiaTirocinio.equalsIgnoreCase("ESTERNO")) {
+                }
+                boolean successo = false;
+                // 2. Gestione del caso ESTERNO
+                if(tipologiaTirocinio.equalsIgnoreCase("ESTERNO")) {
                     nomeAziendaTextField.setVisible(true);
                     nominativoReferenteTextField.setVisible(true);
+
                     if (nomeAziendaTextField.getText().trim().isEmpty() || nominativoReferenteTextField.getText().trim().isEmpty()) {
                         JOptionPane.showMessageDialog(null, "Ora aggiungi le info dell'azienda collaboratrice.","Aggiungi Azienda",JOptionPane.INFORMATION_MESSAGE);
                         return;
-                    } else if (controller.controlloNomeCognome(nominativoReferenteTextField.getText())) {
+                    }
+                    if (controller.controlloNomeCognome(nominativoReferenteTextField.getText())) {
                         JOptionPane.showMessageDialog(null, "Attenzione: carattere non consentito nel nome!",TITOLO_ERRORE,JOptionPane.ERROR_MESSAGE);
                         return;
                     }
-                    else{
-                        boolean successo = controller.aggiungiNuovoArgomento(nomeArgomentoText.getText(),tipologiaTirocinioTextField.getText(),nomeAziendaTextField.getText(),nominativoReferenteTextField.getText());
-                        if (successo){
-                            JOptionPane.showMessageDialog(null, "Tirocinio aggiunto correttamente.");
-                        } else{
-                            JOptionPane.showMessageDialog(null, """
-                                    Errore nel salvataggio dei dati nel DataBase, azienda non esistente""",TITOLO_ERRORE,JOptionPane.ERROR_MESSAGE);
-                        }
-
+                    successo = controller.aggiungiNuovoArgomento(nomeArgomentoText.getText(), tipologiaTirocinioTextField.getText(), nomeAziendaTextField.getText(), nominativoReferenteTextField.getText());
+                    if (successo){
+                        JOptionPane.showMessageDialog(null, "Tirocinio aggiunto correttamente.");
+                    } else{
+                        JOptionPane.showMessageDialog(null, "Errore nel salvataggio dei dati nel DataBase, azienda non esistente",TITOLO_ERRORE,JOptionPane.ERROR_MESSAGE);
                     }
                 }
-                else if(tipologiaTirocinio.equalsIgnoreCase("INTERNO")) {
-                    boolean successo = controller.aggiungiNuovoArgomento(nomeArgomentoText.getText(),tipologiaTirocinioTextField.getText(),nomeAziendaTextField.getText(),nominativoReferenteTextField.getText());
+                // 3. Gestione del caso INTERNO
+                if(tipologiaTirocinio.equalsIgnoreCase("INTERNO")) {
+                    successo = controller.aggiungiNuovoArgomento(nomeArgomentoText.getText(), tipologiaTirocinioTextField.getText(), nomeAziendaTextField.getText(), nominativoReferenteTextField.getText());
+
                     if (successo){
                         JOptionPane.showMessageDialog(null, "Tirocinio aggiunto correttamente.");
                     } else{
                         JOptionPane.showMessageDialog(null,"Errore nel salvataggio dei dati nel DataBase",TITOLO_ERRORE,JOptionPane.ERROR_MESSAGE);
                     }
                 }
-                frameChiamante.setVisible(true);
-                frame.dispose();
-
+                // 4. Chiusura del frame SOLO se l'inserimento è andato a buon fine
+                if (successo) {
+                    frameChiamante.setVisible(true);
+                    frame.dispose();
+                }
             }
         });
     }

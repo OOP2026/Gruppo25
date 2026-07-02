@@ -29,6 +29,9 @@ public class Controller {
     private static final String TIPO_INTERNO = "INTERNO";
     private static final Logger LOGGER = Logger.getLogger(Controller.class.getName());
 
+    // Variabile da stampare a video in caso di errore nel login.  La Definiamo la costante una volta sola per tutta la classe
+    private static final String ERRORE_CONNESSIONE_LOGIN = "Errore di connessione durante il login";
+
     /**
      * Instantiates a new Controller.
      */
@@ -113,7 +116,12 @@ public class Controller {
                 return "STUDENTE";
             }
         } catch (SQLException e){
+<<<<<<< Updated upstream
             LOGGER.log(Level.SEVERE, "Errore durante la connessione al database",e);
+=======
+            System.err.println(ERRORE_CONNESSIONE_LOGIN);
+            e.printStackTrace();
+>>>>>>> Stashed changes
         }
 
         // 2. Cerca tra i docenti
@@ -131,7 +139,12 @@ public class Controller {
                 return "DOCENTE";
             }
         } catch (SQLException e){
+<<<<<<< Updated upstream
             LOGGER.log(Level.SEVERE, "Errore durante la connessione al database",e);
+=======
+            System.err.println(ERRORE_CONNESSIONE_LOGIN);
+            e.printStackTrace();
+>>>>>>> Stashed changes
         }
         // 3. Se non trova nessuno
         return "NON_TROVATO";
@@ -150,7 +163,12 @@ public class Controller {
         try {
             return utenteDAO.controlloLogin(login);
         } catch (SQLException e) {
+<<<<<<< Updated upstream
             LOGGER.log(Level.SEVERE, "Errore durante la connessione al database",e);
+=======
+            System.err.println(ERRORE_CONNESSIONE_LOGIN);
+            e.printStackTrace();
+>>>>>>> Stashed changes
             return true;
         }
     }
