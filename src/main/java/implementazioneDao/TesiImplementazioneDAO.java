@@ -65,7 +65,7 @@ public class TesiImplementazioneDAO implements TesiDAO {
     @Override
     public List<String[]> ottieniCatalogoTesisti(String loginDocente) throws SQLException {
         List<String[]> righeTabella = new ArrayList<>();
-        String query = "SELECT s.nome,s.cognome,s.matricola,t.titolo,t.contenuto " +
+        String query = "SELECT s.nome,s.cognome,s.matricola,t.titolo,t.contenuto,t.dataseduta " +
                 "FROM studente s " + "JOIN tesi t ON s.matricola = t.matricola_studente " +
                 "JOIN supervisione superv ON t.id_tesi = superv.idtesi " +
                 "WHERE t.statotesi = 'ATTESA' AND superv.logindocente = ?";
@@ -77,8 +77,9 @@ public class TesiImplementazioneDAO implements TesiDAO {
                 String matricola = rs.getString("matricola");
                 String titolo = rs.getString("titolo");
                 String contenuto = rs.getString("contenuto");
+                String dataseduta = rs.getString("dataseduta");
 
-                righeTabella.add(new String[]{nome,matricola,titolo,contenuto});
+                righeTabella.add(new String[]{nome,matricola,titolo,contenuto,dataseduta});
             }
 
         }

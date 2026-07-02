@@ -50,6 +50,7 @@ public class ElencoTesisti {
         model.addColumn("Matricola");
         model.addColumn("Titolo");
         model.addColumn("Contenuto");
+        model.addColumn("Data Seduta");
 
         // Chiamiamo il metodo del controller
         List<String[]> righeDalDataBase = controller.getDatiTabellaTesisti();

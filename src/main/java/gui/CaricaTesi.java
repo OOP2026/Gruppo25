@@ -31,7 +31,7 @@ public class CaricaTesi {
         okbutton.addActionListener(new ActionListener() { // NOSONAR
             @Override
             public void actionPerformed(ActionEvent e) {
-                if (titoloTesiTextField.getText().isEmpty() || tesiTextArea.getText().isEmpty()) {
+                if (titoloTesiTextField.getText().trim().isEmpty() || tesiTextArea.getText().trim().isEmpty()) {
                     JOptionPane.showMessageDialog(frame, "Attenzione riempire correttamente tutti i campi!", "Errore", JOptionPane.ERROR_MESSAGE);
                 }else if (comboBoxDateSeduteDiLaurea.getSelectedItem().equals("--- Seleziona una data ---")) {
                         JOptionPane.showMessageDialog(null, "Per favore, seleziona una data per la seduta!", "Errore", JOptionPane.ERROR_MESSAGE);
