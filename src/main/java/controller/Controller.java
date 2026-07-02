@@ -30,7 +30,7 @@ public class Controller {
     private static final Logger LOGGER = Logger.getLogger(Controller.class.getName());
 
     // Variabile da stampare a video in caso di errore nel login.  La Definiamo la costante una volta sola per tutta la classe
-    private static final String ERRORE_CONNESSIONE_LOGIN = "Errore di connessione durante il login";
+    private static final String ERRORE_CONNESSIONE_LOGIN = "Errore durante la connessione al database";
 
     /**
      * Instantiates a new Controller.
@@ -60,7 +60,7 @@ public class Controller {
         try {
 
             studenteDAO.inserisciStudente(matricola, nome, cognome, email, login, password);
-            System.out.println("Salvataggio nel Database completato per: " + matricola);
+            LOGGER.log(Level.INFO, "Studente inserito");
 
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, "Errore durante il salvataggio dello studente nel database",e);
@@ -83,7 +83,7 @@ public class Controller {
         DocenteDAO docenteDAO = new DocenteImplementazioneDAO();
         try{
             docenteDAO.inserisciDocente(login,password,nome,cognome,email);
-            System.out.println("Docente inserito");
+            LOGGER.log(Level.INFO, "Docente inserito");
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, "Errore durante il salvataggio del docente  nel database",e);
             docenti.remove(docente);
@@ -116,7 +116,7 @@ public class Controller {
             }
         } catch (SQLException e){
 
-            LOGGER.log(Level.SEVERE, "Errore durante la connessione al database",e);
+            LOGGER.log(Level.SEVERE, ERRORE_CONNESSIONE_LOGIN,e);
 
         }
 
@@ -135,7 +135,7 @@ public class Controller {
                 return "DOCENTE";
             }
         } catch (SQLException e){
-            LOGGER.log(Level.SEVERE, "Errore durante la connessione al database",e);
+            LOGGER.log(Level.SEVERE, ERRORE_CONNESSIONE_LOGIN,e);
         }
         // 3. Se non trova nessuno
         return "NON_TROVATO";
@@ -154,7 +154,7 @@ public class Controller {
         try {
             return utenteDAO.controlloLogin(login);
         } catch (SQLException e) {
-            LOGGER.log(Level.SEVERE, "Errore durante la connessione al database",e);
+            LOGGER.log(Level.SEVERE, ERRORE_CONNESSIONE_LOGIN,e);
             return true;
         }
     }
@@ -280,7 +280,7 @@ public class Controller {
             }
             this.docenteLoggato.addArgomentoTirocinio(argomento);
 
-            System.out.println("Argomento (e Azienda) salvati con successo.");
+            LOGGER.log(Level.INFO, "Argomento inserito.");
             return true;
 
         } catch (SQLException e) {
@@ -366,7 +366,7 @@ public class Controller {
                 this.richiesteTirocinio.add(nuovaRichiesta);
                 return true;
             }
-            System.err.println("Non trovato nessun docente con la email fornita.");
+            LOGGER.log(Level.SEVERE, "Errore durante la ricerca della email nel database");
             return false;
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, "Errore durante il salvataggio della richiesta nel database",e);
