@@ -9,6 +9,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The type Controller.
+ */
 public class Controller {
 
     // Variabili di sessione per ricordare chi sono i docenti/studenti che sono nel sistema
@@ -22,6 +25,9 @@ public class Controller {
     private static final String TIPO_ESTERNO = "ESTERNO";
     private static final String TIPO_INTERNO = "INTERNO";
 
+    /**
+     * Instantiates a new Controller.
+     */
     public Controller() {
 
         this.studenti = new ArrayList<>();
@@ -30,6 +36,16 @@ public class Controller {
         this.listaAziende = new ArrayList<>();
     }
 
+    /**
+     * Sets studente.
+     *
+     * @param login     the login
+     * @param password  the password
+     * @param nome      the nome
+     * @param cognome   the cognome
+     * @param email     the email
+     * @param matricola the matricola
+     */
     public void setStudente(String login, String password, String nome, String cognome, String email, String matricola) {
         Studente studente = new Studente(login, password, nome, cognome, email, matricola);
         studenti.add(studente);
@@ -47,6 +63,15 @@ public class Controller {
         }
     }
 
+    /**
+     * Sets docente.
+     *
+     * @param login    the login
+     * @param password the password
+     * @param nome     the nome
+     * @param cognome  the cognome
+     * @param email    the email
+     */
     public void setDocente(String login, String password, String nome, String cognome, String email) {
         Docente docente = new Docente(login, password, nome, cognome, email);
         docenti.add(docente);
@@ -62,7 +87,14 @@ public class Controller {
         }
     }
 
-    // Metodo per verificare se la login e la password inseriti corrispondono ad uno Studente, ad un Docente o non esiste
+    /**
+     * Effettua login string.
+     *
+     * @param login    the login
+     * @param password the password
+     * @return the string
+     */
+// Metodo per verificare se la login e la password inseriti corrispondono ad uno Studente, ad un Docente o non esiste
     public String effettuaLogin(String login, String password) {
         // 1. Cerca tra gli studenti
         StudenteDAO studenteDAO = new StudenteImplementazioneDAO();
@@ -106,7 +138,14 @@ public class Controller {
         return "NON_TROVATO";
     }
 
-    // Metodo per verificare che la login inserita non esista giá
+    /**
+     * Controllo login boolean.
+     *
+     * @param login the login
+     * @return the boolean
+     * @throws SQLException the sql exception
+     */
+// Metodo per verificare che la login inserita non esista giá
     public boolean controlloLogin(String login) throws SQLException {
         UtenteDAO utenteDAO = new UtenteImplementazioneDao();
         try {
@@ -117,7 +156,14 @@ public class Controller {
             return true;
         }
     }
-    // Metodo per la verifica degli input di nome e cognome
+
+    /**
+     * Controllo nome cognome boolean.
+     *
+     * @param stringa the stringa
+     * @return the boolean
+     */
+// Metodo per la verifica degli input di nome e cognome
     public boolean controlloNomeCognome(String stringa) {
         for (int i = 0; i < stringa.length(); i++) {
             if (!(Character.isLetter(stringa.charAt(i))) && (stringa.charAt(i) != ' ')) {
@@ -127,7 +173,13 @@ public class Controller {
         return false;
     }
 
-    // Metodo per la verifica del formato della matricola
+    /**
+     * Controllo formato matricola boolean.
+     *
+     * @param matricola the matricola
+     * @return the boolean
+     */
+// Metodo per la verifica del formato della matricola
     public boolean controlloFormatoMatricola(String matricola) {
         if (matricola.length() != 9) {
             return true;
@@ -136,7 +188,13 @@ public class Controller {
         return !(matricola.matches("^(D[A-Z]\\d{7}|N\\d{8})$"));
     }
 
-    // Metodo per la verifica dell`unicità della matricola
+    /**
+     * Controllo matricola boolean.
+     *
+     * @param matricola the matricola
+     * @return the boolean
+     */
+// Metodo per la verifica dell`unicità della matricola
     public boolean controlloMatricola(String matricola) {
         StudenteDAO studenteDAO =  new StudenteImplementazioneDAO();
         try {
@@ -148,22 +206,49 @@ public class Controller {
         }
     }
 
-    // Metodo per la verifica del formato della mail di studente
+    /**
+     * Controllo email studente boolean.
+     *
+     * @param email the email
+     * @return the boolean
+     */
+// Metodo per la verifica del formato della mail di studente
     public boolean controlloEmailStudente(String email) {
         return !(email.matches("^[\\w\\.-]+@studenti\\.unina\\.it$"));
     }
 
-    // Metodo per la verifica del formato della mail di docente
+    /**
+     * Controllo email docente boolean.
+     *
+     * @param email the email
+     * @return the boolean
+     */
+// Metodo per la verifica del formato della mail di docente
     public boolean controlloEmailDocente(String email) {
         return !(email.matches("^[\\w\\.-]+@docenti\\.unina\\.it$"));
     }
 
-    // Metodo per la verifica minima della sicurezza sulla password
+    /**
+     * Controllo passoword boolean.
+     *
+     * @param pass the pass
+     * @return the boolean
+     */
+// Metodo per la verifica minima della sicurezza sulla password
     public boolean controlloPassoword(String pass) {
         return pass.length() < 8;
     }
 
-    // Metodo per aggiungere un argomento alla lista di argomenti del docente loggato.
+    /**
+     * Aggiungi nuovo argomento boolean.
+     *
+     * @param argomento          the argomento
+     * @param tipologiaTirocinio the tipologia tirocinio
+     * @param nomeAz             the nome az
+     * @param refAz              the ref az
+     * @return the boolean
+     */
+// Metodo per aggiungere un argomento alla lista di argomenti del docente loggato.
     public boolean aggiungiNuovoArgomento(String argomento, String tipologiaTirocinio, String nomeAz, String refAz) {
         if (this.docenteLoggato == null) {
             return false;
@@ -207,6 +292,11 @@ public class Controller {
     }
 
 
+    /**
+     * Gets dati tabella elenco tirocini.
+     *
+     * @return the dati tabella elenco tirocini
+     */
     public List<String[]> getDatiTabellaElencoTirocini() {
         DocenteDAO docenteDAO = new DocenteImplementazioneDAO();
         try {
@@ -219,7 +309,15 @@ public class Controller {
         }
     }
 
-    // Metodo che controlla l'inserimento del docente e del relativo argomento nella richiesta di tirocinio
+    /**
+     * Controlla richiesta tirocinio boolean.
+     *
+     * @param nomeProf      the nome prof
+     * @param cognomeProf   the cognome prof
+     * @param nomeArgomento the nome argomento
+     * @return the boolean
+     */
+// Metodo che controlla l'inserimento del docente e del relativo argomento nella richiesta di tirocinio
     public boolean controllaRichiestaTirocinio(String nomeProf, String cognomeProf, String nomeArgomento) {
 
         DocenteDAO docenteDAO = new DocenteImplementazioneDAO();
@@ -232,7 +330,14 @@ public class Controller {
        }
     }
 
-    // Metodo per cercare il docente e inserire la nuova richiesta di tirocinio
+    /**
+     * Aggiungi richiesta tirocinio boolean.
+     *
+     * @param email     the email
+     * @param argomento the argomento
+     * @return the boolean
+     */
+// Metodo per cercare il docente e inserire la nuova richiesta di tirocinio
     public boolean aggiungiRichiestaTirocinio(String email, String argomento) {
         ArrayList<String> datiDocenteTrovato = new ArrayList<>();
         DocenteDAO docenteDAO = new DocenteImplementazioneDAO();
@@ -274,13 +379,23 @@ public class Controller {
         }
     }
 
-    // Metodo per aggiungere l'argomento del tirocinio allo studente
+    /**
+     * Sets argomento studente.
+     *
+     * @param argomentoStudente the argomento studente
+     */
+// Metodo per aggiungere l'argomento del tirocinio allo studente
     public void setArgomentoStudente(String argomentoStudente) {
         this.studenteLoggato.setArgomentoTirocinio(argomentoStudente);
 
     }
 
-    // Metodi per riempire la tabella delle richieste del tirocinio per il docente
+    /**
+     * Get dati tabella richieste tirocinio list.
+     *
+     * @return the list
+     */
+// Metodi per riempire la tabella delle richieste del tirocinio per il docente
     public List<String[]> getDatiTabellaRichiesteTirocinio(){
 
         RichiestaTirocinioDAO richiestaTirocinioDAO = new RichiestaTirocinioImplementazioneDAO();
@@ -294,7 +409,14 @@ public class Controller {
 
     }
 
-    // Metodo per modificare lo stato della richiesta del tirocinio
+    /**
+     * Modifica stato richiesta boolean.
+     *
+     * @param matricola  the matricola
+     * @param nuovoStato the nuovo stato
+     * @return the boolean
+     */
+// Metodo per modificare lo stato della richiesta del tirocinio
     public boolean modificaStatoRichiesta(String matricola, Stato nuovoStato) {
         RichiestaTirocinioDAO richiestaTirocinioDAO  = new RichiestaTirocinioImplementazioneDAO();
 
@@ -308,7 +430,12 @@ public class Controller {
         }
     }
 
-    // Metodo per visualizzare le richieste di tirocinio inviate dallo studente
+    /**
+     * Gets richiesta tirocinio studente.
+     *
+     * @return the richiesta tirocinio studente
+     */
+// Metodo per visualizzare le richieste di tirocinio inviate dallo studente
     public List<String[]> getRichiestaTirocinioStudente() {
         RichiestaTirocinioDAO richiestaTirocinioDAO = new RichiestaTirocinioImplementazioneDAO();
         try{
@@ -321,11 +448,21 @@ public class Controller {
     }
 
 
+    /**
+     * Gets studente loggato.
+     *
+     * @return the studente loggato
+     */
     public Studente getStudenteLoggato() {
         return this.studenteLoggato;
     }
 
-    // Metodo per riempire la tabella dei tirocinanti(ovvero studenti la quale richiesta ha stato approvato)
+    /**
+     * Gets dati tabella tirocinanti.
+     *
+     * @return the dati tabella tirocinanti
+     */
+// Metodo per riempire la tabella dei tirocinanti(ovvero studenti la quale richiesta ha stato approvato)
     public List<String[]> getDatiTabellaTirocinanti() {
         TirocinioDAO tirocinioDAO = new TirocinioImplementazioneDAO();
         try{
@@ -338,7 +475,12 @@ public class Controller {
     }
 
 
-    // Metodo per controllare lo stato della Richiesta del tirocinio.
+    /**
+     * Controllo richiesta boolean.
+     *
+     * @return the boolean
+     */
+// Metodo per controllare lo stato della Richiesta del tirocinio.
     public boolean controlloRichiesta() {
         RichiestaTirocinioDAO richiestaTirocinioDAO =  new RichiestaTirocinioImplementazioneDAO();
         try{
@@ -350,12 +492,26 @@ public class Controller {
         }
     }
 
-    // Metodo per controllare se la tipologia del tirocinio inserita sia giusta.
+    /**
+     * Controllo inserimento tirocinio boolean.
+     *
+     * @param tipologiaTirocinio the tipologia tirocinio
+     * @return the boolean
+     */
+// Metodo per controllare se la tipologia del tirocinio inserita sia giusta.
     public boolean controlloInserimentoTirocinio(String tipologiaTirocinio) {
         return tipologiaTirocinio.equalsIgnoreCase(TIPO_INTERNO) || tipologiaTirocinio.equalsIgnoreCase(TIPO_ESTERNO);
     }
 
-    // Metodo per istanziare una nuova tesi
+    /**
+     * Aggiungi nuova tesi boolean.
+     *
+     * @param titolo    the titolo
+     * @param contenuto the contenuto
+     * @param data      the data
+     * @return the boolean
+     */
+// Metodo per istanziare una nuova tesi
     public boolean aggiungiNuovaTesi(String titolo, String contenuto, String data) {
         TirocinioDAO tirocinioDAO = new TirocinioImplementazioneDAO();
         TesiDAO tesiDAO = new TesiImplementazioneDAO();
@@ -386,7 +542,12 @@ public class Controller {
 
     }
 
-    // Metodi per riempire la tabella dei tesisti
+    /**
+     * Gets dati tabella tesisti.
+     *
+     * @return the dati tabella tesisti
+     */
+// Metodi per riempire la tabella dei tesisti
     public List<String []> getDatiTabellaTesisti() {
         TesiDAO tesiDAO = new TesiImplementazioneDAO();
         try{
@@ -398,7 +559,13 @@ public class Controller {
         }
     }
 
-    // Metodo per leggere il contenuto dalla tabella data la riga
+    /**
+     * Gets contenuto tesi singola.
+     *
+     * @param matricola the matricola
+     * @return the contenuto tesi singola
+     */
+// Metodo per leggere il contenuto dalla tabella data la riga
     public String getContenutoTesiSingola(String matricola) {
         TesiDAO tesiDAO = new TesiImplementazioneDAO();
         try{
@@ -410,7 +577,12 @@ public class Controller {
         }
     }
 
-    // Metodo per impedire agli studenti che non hanno terminato il tirocinio di poter caricare la tesi
+    /**
+     * Controllo tesi button boolean.
+     *
+     * @return the boolean
+     */
+// Metodo per impedire agli studenti che non hanno terminato il tirocinio di poter caricare la tesi
     public boolean controlloTesiButton() {
         TirocinioDAO tirocinioDAO = new TirocinioImplementazioneDAO();
         try {
@@ -423,7 +595,14 @@ public class Controller {
 
     }
 
-    // Metodo per modificare lo stato della tesi
+    /**
+     * Modifica stato tesi boolean.
+     *
+     * @param nuovoStato the nuovo stato
+     * @param matricola  the matricola
+     * @return the boolean
+     */
+// Metodo per modificare lo stato della tesi
     public boolean modificaStatoTesi(Stato nuovoStato, String matricola) {
         TesiDAO tesiDAO = new TesiImplementazioneDAO();
         try{
@@ -436,7 +615,12 @@ public class Controller {
         }
     }
 
-    // Metodo per la tabella dello stato della tesi dello studente
+    /**
+     * Get stato tesi studente list.
+     *
+     * @return the list
+     */
+// Metodo per la tabella dello stato della tesi dello studente
     public List<String[]> getStatoTesiStudente(){
         TesiDAO tesiDAO = new TesiImplementazioneDAO();
         try{
@@ -450,8 +634,16 @@ public class Controller {
     }
 
 
-
-    // Metodo per istanziare il tirocinio quando il docente approva la richiesta
+    /**
+     * Sets tirocinio.
+     *
+     * @param nomeAzienda         the nome azienda
+     * @param nominativoReferente the nominativo referente
+     * @param argomentoTirocinio  the argomento tirocinio
+     * @param matricola           the matricola
+     * @return the tirocinio
+     */
+// Metodo per istanziare il tirocinio quando il docente approva la richiesta
     public boolean setTirocinio(String nomeAzienda,String nominativoReferente,String argomentoTirocinio,String matricola) {
         TirocinioDAO tirocinioDAO = new TirocinioImplementazioneDAO();
         RichiestaTirocinioDAO richiestaTirocinioDAO = new RichiestaTirocinioImplementazioneDAO();
@@ -482,7 +674,13 @@ public class Controller {
         }
     }
 
-    // Metodo per terminare il tirocinio
+    /**
+     * Sets termina tirocinio.
+     *
+     * @param matricolaStudente the matricola studente
+     * @return the termina tirocinio
+     */
+// Metodo per terminare il tirocinio
     public boolean setTerminaTirocinio(String matricolaStudente) {
         RichiestaTirocinioDAO richiestaTirocinioDAO = new RichiestaTirocinioImplementazioneDAO();
         TirocinioDAO tirocinioDAO = new TirocinioImplementazioneDAO();
@@ -497,7 +695,12 @@ public class Controller {
         }
     }
 
-    // Metodo per verificare che uno studente possa visualizzare lo stato della tesi
+    /**
+     * Ha tesi boolean.
+     *
+     * @return the boolean
+     */
+// Metodo per verificare che uno studente possa visualizzare lo stato della tesi
     public boolean haTesi() {
 
         TesiDAO tesiDAO = new TesiImplementazioneDAO();
