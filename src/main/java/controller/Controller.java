@@ -86,7 +86,6 @@ public class Controller {
             System.out.println("Docente inserito");
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, "Errore durante il salvataggio del docente  nel database",e);
-
             docenti.remove(docente);
         }
     }
@@ -116,12 +115,9 @@ public class Controller {
                 return "STUDENTE";
             }
         } catch (SQLException e){
-<<<<<<< Updated upstream
+
             LOGGER.log(Level.SEVERE, "Errore durante la connessione al database",e);
-=======
-            System.err.println(ERRORE_CONNESSIONE_LOGIN);
-            e.printStackTrace();
->>>>>>> Stashed changes
+
         }
 
         // 2. Cerca tra i docenti
@@ -139,12 +135,7 @@ public class Controller {
                 return "DOCENTE";
             }
         } catch (SQLException e){
-<<<<<<< Updated upstream
             LOGGER.log(Level.SEVERE, "Errore durante la connessione al database",e);
-=======
-            System.err.println(ERRORE_CONNESSIONE_LOGIN);
-            e.printStackTrace();
->>>>>>> Stashed changes
         }
         // 3. Se non trova nessuno
         return "NON_TROVATO";
@@ -163,12 +154,7 @@ public class Controller {
         try {
             return utenteDAO.controlloLogin(login);
         } catch (SQLException e) {
-<<<<<<< Updated upstream
             LOGGER.log(Level.SEVERE, "Errore durante la connessione al database",e);
-=======
-            System.err.println(ERRORE_CONNESSIONE_LOGIN);
-            e.printStackTrace();
->>>>>>> Stashed changes
             return true;
         }
     }
