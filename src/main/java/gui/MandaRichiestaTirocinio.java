@@ -15,7 +15,9 @@ public class MandaRichiestaTirocinio extends JFrame {
     private JTextField cognomeDocenteTextField;
     private JTextField emailDocenteTextField;
     private JFrame frame;
-    private Controller controller;
+    private transient Controller controller;
+
+    private static final String TITOLO_ERRORE = "Errore";
 
     public MandaRichiestaTirocinio(JFrame frameChiamante, Controller controller) {
         this.controller = controller;
@@ -36,9 +38,9 @@ public class MandaRichiestaTirocinio extends JFrame {
                 String argomentoProf = argomentoTextField.getText();
                 String email = emailDocenteTextField.getText();
                 if(nomeDocente.trim().isEmpty() || cognomeDocente.trim().isEmpty() || argomentoProf.trim().isEmpty() || email.trim().isEmpty() ) {
-                    JOptionPane.showMessageDialog(frame, "Attenzione riempire correttamente tutti i campi!", "Errore", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(frame, "Attenzione riempire correttamente tutti i campi!", TITOLO_ERRORE, JOptionPane.ERROR_MESSAGE);
                 } else if (!MandaRichiestaTirocinio.this.controller.controllaRichiestaTirocinio(nomeDocente, cognomeDocente, argomentoProf)) {
-                    JOptionPane.showMessageDialog(frame, "Attenzione riempire correttamente tutti i campi!", "Errore", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(frame, "Attenzione riempire correttamente tutti i campi!", TITOLO_ERRORE, JOptionPane.ERROR_MESSAGE);
                 }
                 else {
                     if(MandaRichiestaTirocinio.this.controller.aggiungiRichiestaTirocinio(email, argomentoProf)){
@@ -49,7 +51,7 @@ public class MandaRichiestaTirocinio extends JFrame {
                         frameChiamante.setVisible(true);
                         frame.dispose();
                     } else{
-                        JOptionPane.showMessageDialog(frame, "Errore di connessione al Server o Email docente errata. Riprova","Errore",JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(frame, "Errore di connessione al Server o Email docente errata. Riprova",TITOLO_ERRORE,JOptionPane.ERROR_MESSAGE);
                     }
                 }
 

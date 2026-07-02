@@ -21,6 +21,9 @@ public class ElencoTesisti {
     private JFrame frame;
     private Controller controller;
 
+    private static final String TITOLO_ERRORE = "Errore";
+    private static final String MESSAGGIO_RIGA_NON_SELEZIONATA = "Selezionare prima una richiesta dalla tabella.";
+
     public ElencoTesisti(JFrame frameChiamante, Controller controller) {
         this.controller = controller;
         frame = new JFrame("Elenco Tesisti");
@@ -63,7 +66,7 @@ public class ElencoTesisti {
         leggiTesiButton.addActionListener(e -> {
             int rigaSelezionata = table1.getSelectedRow();
             if (rigaSelezionata < 0) {
-                JOptionPane.showMessageDialog(frame,"Selezionare prima una richiesta dalla tabella.","Errore",JOptionPane.ERROR_MESSAGE);
+                JOptionPane.showMessageDialog(frame,MESSAGGIO_RIGA_NON_SELEZIONATA,TITOLO_ERRORE,JOptionPane.ERROR_MESSAGE);
                 return;
             }
             if(rigaSelezionata >= 0) {
@@ -89,7 +92,7 @@ public class ElencoTesisti {
                 int rigaSelezionata = table1.getSelectedRow();
                 String matricola = table1.getValueAt(rigaSelezionata,1).toString();
                 if (rigaSelezionata < 0) {
-                    JOptionPane.showMessageDialog(frame,"Selezionare prima una richiesta dalla tabella.","Errore",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(frame,MESSAGGIO_RIGA_NON_SELEZIONATA,TITOLO_ERRORE,JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 // Il controller aggiorna lo stato in base alla riga cliccata
@@ -97,7 +100,7 @@ public class ElencoTesisti {
                     model.removeRow(rigaSelezionata);
                     JOptionPane.showMessageDialog(frame,"Tesi approvata con successo.");
                 } else{
-                    JOptionPane.showMessageDialog(frame,"Modifica stato tesi fallita.","Errore",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(frame,"Modifica stato tesi fallita.",TITOLO_ERRORE,JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -108,7 +111,7 @@ public class ElencoTesisti {
                 int rigaSelezionata = table1.getSelectedRow();
                 String matricola = table1.getValueAt(rigaSelezionata,1).toString();
                 if (rigaSelezionata < 0) {
-                    JOptionPane.showMessageDialog(frame,"Selezionare prima una richiesta dalla tabella.","Errore",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(frame,MESSAGGIO_RIGA_NON_SELEZIONATA,TITOLO_ERRORE,JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 // Il controller aggiorna lo stato in base alla riga cliccata
@@ -116,7 +119,7 @@ public class ElencoTesisti {
                     model.removeRow(rigaSelezionata);
                     JOptionPane.showMessageDialog(frame,"Tesi rifiutata.");
                 } else{
-                    JOptionPane.showMessageDialog(frame,"Modifica stato tesi fallita.","Errore",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(frame,MESSAGGIO_RIGA_NON_SELEZIONATA,TITOLO_ERRORE,JOptionPane.ERROR_MESSAGE);
                 }
             }
         });

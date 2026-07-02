@@ -18,6 +18,8 @@ public class CaricaTesi {
     private JFrame frame;
     private Controller controller;
 
+    private static final String TITOLO_ERRORE = "Errore";
+
     public CaricaTesi(JFrame frameChiamante, Controller controller){
         this.controller = controller;
         frame = new JFrame("Carica Tesi");
@@ -32,9 +34,9 @@ public class CaricaTesi {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (titoloTesiTextField.getText().trim().isEmpty() || tesiTextArea.getText().trim().isEmpty()) {
-                    JOptionPane.showMessageDialog(frame, "Attenzione riempire correttamente tutti i campi!", "Errore", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(frame, "Attenzione riempire correttamente tutti i campi!", TITOLO_ERRORE, JOptionPane.ERROR_MESSAGE);
                 }else if (comboBoxDateSeduteDiLaurea.getSelectedItem().equals("--- Seleziona una data ---")) {
-                        JOptionPane.showMessageDialog(null, "Per favore, seleziona una data per la seduta!", "Errore", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null, "Per favore, seleziona una data per la seduta!", TITOLO_ERRORE, JOptionPane.ERROR_MESSAGE);
                 }else {
                     if(CaricaTesi.this.controller.aggiungiNuovaTesi(titoloTesiTextField.getText(), tesiTextArea.getText(), comboBoxDateSeduteDiLaurea.getSelectedItem().toString())) {
                         JOptionPane.showMessageDialog(null,"Tesi inserita correttamente.");
@@ -42,7 +44,7 @@ public class CaricaTesi {
                         frameChiamante.setVisible(true);
                         frame.dispose();
                     } else{
-                        JOptionPane.showMessageDialog(null,"Errore nel caricamento della tesi nel DataBase.","Errore", JOptionPane.ERROR_MESSAGE);
+                        JOptionPane.showMessageDialog(null,"Errore nel caricamento della tesi nel DataBase.",TITOLO_ERRORE, JOptionPane.ERROR_MESSAGE);
                     }
                 }
             }

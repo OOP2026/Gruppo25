@@ -14,6 +14,10 @@ import java.util.logging.Logger;
 public class TesiImplementazioneDAO implements TesiDAO {
     private Connection connection;
     private static final Logger LOGGER = Logger.getLogger(TesiImplementazioneDAO.class.getName());
+
+    private static final String TITOLO = "titolo";
+    private static final String CONTENUTO = "contenuto";
+
     public TesiImplementazioneDAO() {
         try {
             this.connection = ConnessioneDatabase.getInstance().getConnection();

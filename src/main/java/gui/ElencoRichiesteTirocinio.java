@@ -20,6 +20,8 @@ public class ElencoRichiesteTirocinio {
     private JFrame frame;
     private Controller controller;
 
+    private static final String TITOLO_ERRORE = "Errore";
+
     public ElencoRichiesteTirocinio(JFrame frameChiamante, Controller controller) {
         this.controller = controller;
         frame = new JFrame("Elenco Richieste di Tirocinio");
@@ -65,7 +67,7 @@ public class ElencoRichiesteTirocinio {
             public void actionPerformed(ActionEvent e) {
                 int rigaSelezionata = table1.getSelectedRow();
                 if (rigaSelezionata < 0) {
-                    JOptionPane.showMessageDialog(frame,"Selezionare prima una richiesta dalla tabella.","Errore",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(frame,"Selezionare prima una richiesta dalla tabella.",TITOLO_ERRORE,JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 String matricolaStudente = (String) table1.getValueAt(rigaSelezionata, 1);
@@ -78,7 +80,7 @@ public class ElencoRichiesteTirocinio {
                     JOptionPane.showMessageDialog(frame,"Richiesta approvata con successo, tirocinante aggiunto all'elenco.");
 
                 } else{
-                    JOptionPane.showMessageDialog(frame,"Errore nella modifica dello stato nel DataBase.","Errore",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(frame,"Errore nella modifica dello stato nel DataBase.",TITOLO_ERRORE,JOptionPane.ERROR_MESSAGE);
                 }
             }
         });
@@ -88,7 +90,7 @@ public class ElencoRichiesteTirocinio {
             public void actionPerformed(ActionEvent e) {
                 int rigaSelezionata = table1.getSelectedRow();
                 if (rigaSelezionata < 0) {
-                    JOptionPane.showMessageDialog(frame,"Selezionare prima una richiesta dalla tabella.","Errore",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(frame,"Selezionare prima una richiesta dalla tabella.",TITOLO_ERRORE,JOptionPane.ERROR_MESSAGE);
                     return;
                 }
                 String matricolaStudente = (String) table1.getValueAt(rigaSelezionata, 1);
@@ -97,7 +99,7 @@ public class ElencoRichiesteTirocinio {
                     model.removeRow(rigaSelezionata);
                     JOptionPane.showMessageDialog(frame,"Richiesta rifiutata.");
                 } else{
-                    JOptionPane.showMessageDialog(frame,"Errore nella modifica dello stato nel DataBase.","Errore",JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(frame,"Errore nella modifica dello stato nel DataBase.",TITOLO_ERRORE,JOptionPane.ERROR_MESSAGE);
                 }
             }
         });

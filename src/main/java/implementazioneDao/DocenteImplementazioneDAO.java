@@ -12,6 +12,8 @@ import java.util.logging.Logger;
 
 public class DocenteImplementazioneDAO implements DocenteDAO{
 
+    private static final String COGNOME = "cognome";
+
     private Connection connection;
     private static final Logger LOGGER = Logger.getLogger(DocenteImplementazioneDAO.class.getName());
     public DocenteImplementazioneDAO() {
@@ -50,7 +52,7 @@ public class DocenteImplementazioneDAO implements DocenteDAO{
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 datiDocente.add(rs.getString("nome"));
-                datiDocente.add(rs.getString("cognome"));
+                datiDocente.add(rs.getString(COGNOME));
                 datiDocente.add(rs.getString("email"));
                 return true;
             }
@@ -87,7 +89,7 @@ public class DocenteImplementazioneDAO implements DocenteDAO{
 
             while (rs.next()) {
                 // Estraiamo i dati della riga
-                String prof = "Prof. " + rs.getString("nome") + " " + rs.getString("cognome");
+                String prof = "Prof. " + rs.getString("nome") + " " + rs.getString(COGNOME);
                 String email = rs.getString("email");
                 String argomento = rs.getString("argomento");
                 String azienda = rs.getString("nomeazienda");
@@ -129,7 +131,7 @@ public class DocenteImplementazioneDAO implements DocenteDAO{
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
                 datiDocenteTrovato.add(rs.getString("nome"));
-                datiDocenteTrovato.add(rs.getString("cognome"));
+                datiDocenteTrovato.add(rs.getString(COGNOME));
                 datiDocenteTrovato.add(rs.getString("login"));
                 datiDocenteTrovato.add(rs.getString("password"));
                 return true;
