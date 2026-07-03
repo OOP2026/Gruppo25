@@ -10,10 +10,17 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * The type Richiesta tirocinio implementazione dao.
+ */
 public class RichiestaTirocinioImplementazioneDAO implements RichiestaTirocinioDAO {
 
     private Connection connection;
     private static final Logger LOGGER = Logger.getLogger(RichiestaTirocinioImplementazioneDAO.class.getName());
+
+    /**
+     * Instantiates a new Richiesta tirocinio implementazione dao.
+     */
     public RichiestaTirocinioImplementazioneDAO(){
         try{
             this.connection = ConnessioneDatabase.getInstance().getConnection();

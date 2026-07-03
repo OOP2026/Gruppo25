@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The type Manda richiesta tirocinio.
+ */
 public class MandaRichiestaTirocinio extends JFrame {
     private JButton okbutton;
     private JPanel panelRichiestaTirocinio;
@@ -19,6 +22,12 @@ public class MandaRichiestaTirocinio extends JFrame {
 
     private static final String TITOLO_ERRORE = "Errore";
 
+    /**
+     * Instantiates a new Manda richiesta tirocinio.
+     *
+     * @param frameChiamante the frame chiamante
+     * @param controller     the controller
+     */
     public MandaRichiestaTirocinio(JFrame frameChiamante, Controller controller) {
         this.controller = controller;
         frame = new JFrame("Richiesta Tirocinio");

@@ -8,6 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * The type Stato tesi.
+ */
 public class StatoTesi {
     private JTable table1;
     private JButton ritornaAllaHomeButton;
@@ -17,6 +20,12 @@ public class StatoTesi {
 
     private static final String STATO_TESI = "Stato Tesi";
 
+    /**
+     * Instantiates a new Stato tesi.
+     *
+     * @param frameChiamante the frame chiamante
+     * @param controller     the controller
+     */
     public StatoTesi(JFrame frameChiamante,Controller controller) {
         this.controller = controller;
         frame = new JFrame(STATO_TESI);

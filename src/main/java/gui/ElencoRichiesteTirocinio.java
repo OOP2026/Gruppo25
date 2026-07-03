@@ -9,6 +9,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * The type Elenco richieste tirocinio.
+ */
 public class ElencoRichiesteTirocinio {
     private JButton ritornaAllaHomeButton;
     private JPanel panelElencoRichiesteTirocinio;
@@ -21,6 +24,12 @@ public class ElencoRichiesteTirocinio {
 
     private static final String TITOLO_ERRORE = "Errore";
 
+    /**
+     * Instantiates a new Elenco richieste tirocinio.
+     *
+     * @param frameChiamante the frame chiamante
+     * @param controller     the controller
+     */
     public ElencoRichiesteTirocinio(JFrame frameChiamante, Controller controller) {
         this.controller = controller;
         frame = new JFrame("Elenco Richieste di Tirocinio");

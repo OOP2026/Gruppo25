@@ -11,6 +11,9 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * The type Tesi implementazione dao.
+ */
 public class TesiImplementazioneDAO implements TesiDAO {
     private Connection connection;
     private static final Logger LOGGER = Logger.getLogger(TesiImplementazioneDAO.class.getName());
@@ -18,6 +21,9 @@ public class TesiImplementazioneDAO implements TesiDAO {
     private static final String TITOLO = "titolo";
     private static final String CONTENUTO = "contenuto";
 
+    /**
+     * Instantiates a new Tesi implementazione dao.
+     */
     public TesiImplementazioneDAO() {
         try {
             this.connection = ConnessioneDatabase.getInstance().getConnection();

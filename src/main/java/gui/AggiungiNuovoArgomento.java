@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The type Aggiungi nuovo argomento.
+ */
 public class AggiungiNuovoArgomento {
     private JLabel nomeArgomentoLabel; //NOSONAR
     private JTextField nomeArgomentoText;
@@ -19,6 +22,12 @@ public class AggiungiNuovoArgomento {
     private Controller controller;
     private static final String TITOLO_ERRORE = "Errore";
 
+    /**
+     * Instantiates a new Aggiungi nuovo argomento.
+     *
+     * @param frameChiamante the frame chiamante
+     * @param controller     the controller
+     */
     public AggiungiNuovoArgomento(JFrame frameChiamante, Controller controller) {
         this.controller = controller;
         frame = new JFrame("Aggiungi Argomento di Tirocinio");

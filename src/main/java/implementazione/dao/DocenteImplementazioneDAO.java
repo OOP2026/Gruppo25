@@ -10,12 +10,19 @@ import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * The type Docente implementazione dao.
+ */
 public class DocenteImplementazioneDAO implements DocenteDAO{
 
     private static final String COGNOME = "cognome";
 
     private Connection connection;
     private static final Logger LOGGER = Logger.getLogger(DocenteImplementazioneDAO.class.getName());
+
+    /**
+     * Instantiates a new Docente implementazione dao.
+     */
     public DocenteImplementazioneDAO() {
         try{
             this.connection = ConnessioneDatabase.getInstance().getConnection();

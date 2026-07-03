@@ -10,6 +10,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * The type Elenco tesisti.
+ */
 public class ElencoTesisti {
     private JButton ritornaAllaHomeButton;
     private JPanel panelElencoTesisti;
@@ -24,6 +27,12 @@ public class ElencoTesisti {
     private static final String TITOLO_ERRORE = "Errore";
     private static final String MESSAGGIO_RIGA_NON_SELEZIONATA = "Selezionare prima una richiesta dalla tabella.";
 
+    /**
+     * Instantiates a new Elenco tesisti.
+     *
+     * @param frameChiamante the frame chiamante
+     * @param controller     the controller
+     */
     public ElencoTesisti(JFrame frameChiamante, Controller controller) {
         this.controller = controller;
         frame = new JFrame("Elenco Tesisti");

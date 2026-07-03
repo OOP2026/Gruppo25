@@ -6,6 +6,9 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * The type Connessione database.
+ */
 public class ConnessioneDatabase {
     private static ConnessioneDatabase instance;
     private Connection connection = null;
@@ -25,6 +28,12 @@ public class ConnessioneDatabase {
         }
     }
 
+    /**
+     * Gets instance.
+     *
+     * @return the instance
+     * @throws SQLException the sql exception
+     */
     public static ConnessioneDatabase getInstance() throws SQLException {
         if (instance == null) {
             instance = new ConnessioneDatabase();
@@ -35,6 +44,11 @@ public class ConnessioneDatabase {
         return instance;
     }
 
+    /**
+     * Gets connection.
+     *
+     * @return the connection
+     */
     public Connection getConnection() {
         return connection;
     }

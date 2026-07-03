@@ -6,6 +6,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
+/**
+ * The type Registrazione studente.
+ */
 public class RegistrazioneStudente extends JFrame {
     private JTextField sLoginTextField;
     private JTextField sNomeTextField;
@@ -21,6 +24,12 @@ public class RegistrazioneStudente extends JFrame {
     private transient Controller controller;
     private static final String TITOLO_ERRORE = "Errore";
 
+    /**
+     * Instantiates a new Registrazione studente.
+     *
+     * @param frameHome  the frame home
+     * @param controller the controller
+     */
     public RegistrazioneStudente(JFrame frameHome, Controller controller) {
         this.controller = controller;
 

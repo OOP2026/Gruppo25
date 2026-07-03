@@ -8,6 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * The type Elenco tirocinanti.
+ */
 public class ElencoTirocinanti {
     private JButton ritornaAllaHomeButton;
     private JTable tabellaStudenteArgomentoTirocinio;
@@ -17,6 +20,12 @@ public class ElencoTirocinanti {
     private JFrame frame;
     private Controller controller;
 
+    /**
+     * Instantiates a new Elenco tirocinanti.
+     *
+     * @param frameChiamante the frame chiamante
+     * @param controller     the controller
+     */
     public ElencoTirocinanti(JFrame frameChiamante, Controller controller) {
         this.controller = controller;
         frame = new JFrame("Elenco Tirocinanti");

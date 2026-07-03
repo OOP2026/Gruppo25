@@ -5,7 +5,13 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The type Home.
+ */
 public class Home extends JFrame {
+    /**
+     * The constant frame.
+     */
     public static JFrame frame;
     private JButton registratiComeStudenteRButton;
     private JTextField loginTextField;
@@ -15,8 +21,13 @@ public class Home extends JFrame {
     private JButton inviaButton;
     private final transient Controller controller;
 
+    /**
+     * The entry point of application.
+     *
+     * @param args the input arguments
+     */
     public static void main(String[] args) {
-       
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -39,6 +50,9 @@ public class Home extends JFrame {
 
     }
 
+    /**
+     * Instantiates a new Home.
+     */
     public Home() {
         controller = new Controller();
 

@@ -10,9 +10,18 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
+/**
+ * The type Utente implementazione dao.
+ */
 public class UtenteImplementazioneDao implements UtenteDAO {
     private Connection connection;
     private static final Logger LOGGER = Logger.getLogger(UtenteImplementazioneDao.class.getName());
+
+    /**
+     * Instantiates a new Utente implementazione dao.
+     *
+     * @throws SQLException the sql exception
+     */
     public UtenteImplementazioneDao() throws SQLException {
         try{
             this.connection = ConnessioneDatabase.getInstance().getConnection();

@@ -8,6 +8,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
 
+/**
+ * The type Elenco docenti.
+ */
 public class ElencoDocenti {
     private JButton indietroButton;
     private JPanel panelElencoDocenti;
@@ -16,6 +19,12 @@ public class ElencoDocenti {
     private JFrame frame;
     private Controller controller;
 
+    /**
+     * Instantiates a new Elenco docenti.
+     *
+     * @param frameChiamante the frame chiamante
+     * @param controller     the controller
+     */
     public ElencoDocenti(JFrame frameChiamante, Controller controller) {
         this.controller = controller;
         frame = new JFrame("Elenco Docenti");

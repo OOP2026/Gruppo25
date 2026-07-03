@@ -9,11 +9,17 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-
+/**
+ * The type Azienda implementazione dao.
+ */
 public class AziendaImplementazioneDAO implements AziendaDAO {
 
     private Connection connection;
     private static final Logger LOGGER = Logger.getLogger(AziendaImplementazioneDAO.class.getName());
+
+    /**
+     * Instantiates a new Azienda implementazione dao.
+     */
     public AziendaImplementazioneDAO() {
         try{
             this.connection = ConnessioneDatabase.getInstance().getConnection();

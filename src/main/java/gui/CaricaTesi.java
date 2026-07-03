@@ -7,6 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 
+/**
+ * The type Carica tesi.
+ */
 public class CaricaTesi {
     private JTextField titoloTesiTextField;
     private JTextArea tesiTextArea;
@@ -19,6 +22,12 @@ public class CaricaTesi {
 
     private static final String TITOLO_ERRORE = "Errore";
 
+    /**
+     * Instantiates a new Carica tesi.
+     *
+     * @param frameChiamante the frame chiamante
+     * @param controller     the controller
+     */
     public CaricaTesi(JFrame frameChiamante, Controller controller){
         this.controller = controller;
         frame = new JFrame("Carica Tesi");

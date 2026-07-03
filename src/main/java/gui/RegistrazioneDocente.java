@@ -7,6 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
+/**
+ * The type Registrazione docente.
+ */
 public class RegistrazioneDocente extends JFrame {
     private JButton dConfermaButton;
     private JTextField dLogintext;
@@ -22,6 +25,12 @@ public class RegistrazioneDocente extends JFrame {
 
     private static final String TITOLO_ERRORE = "Errore";
 
+    /**
+     * Instantiates a new Registrazione docente.
+     *
+     * @param frameHome  the frame home
+     * @param controller the controller
+     */
     public RegistrazioneDocente(JFrame frameHome, Controller controller) {
 
         this.controller = controller;

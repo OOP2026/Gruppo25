@@ -11,10 +11,17 @@ import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+/**
+ * The type Studente implementazione dao.
+ */
 public class StudenteImplementazioneDAO implements StudenteDAO {
 
     private Connection connection;
     private static final Logger LOGGER = Logger.getLogger(StudenteImplementazioneDAO.class.getName());
+
+    /**
+     * Instantiates a new Studente implementazione dao.
+     */
     public StudenteImplementazioneDAO() {
         try {
             // Otteniamo la connessione dal Singleton una sola volta quando il DAO viene "creato" (new)
