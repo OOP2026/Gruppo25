@@ -80,8 +80,8 @@ public class TesiImplementazioneDAO implements TesiDAO {
             while(rs.next()){
                 String nome = rs.getString("nome") +  " " + rs.getString("cognome");
                 String matricola = rs.getString("matricola");
-                String titolo = rs.getString("titolo");
-                String contenuto = rs.getString("contenuto");
+                String titolo = rs.getString(TITOLO);
+                String contenuto = rs.getString(CONTENUTO);
                 String dataseduta = rs.getString("dataseduta");
 
                 righeTabella.add(new String[]{nome,matricola,titolo,contenuto,dataseduta});
@@ -98,8 +98,8 @@ public class TesiImplementazioneDAO implements TesiDAO {
             ps.setString(1,matricolaStudente);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
-                String titolo = rs.getString("titolo");
-                String contenuto = rs.getString("contenuto");
+                String titolo = rs.getString(TITOLO);
+                String contenuto = rs.getString(CONTENUTO);
                 return titolo + "\n\n\n" + contenuto;
             }
         }
@@ -129,8 +129,8 @@ public class TesiImplementazioneDAO implements TesiDAO {
             ps.setString(1,matricolaStudente);
             ResultSet rs = ps.executeQuery();
             while(rs.next()){
-                String titolo = rs.getString("titolo");
-                String contenuto = rs.getString("contenuto");
+                String titolo = rs.getString(TITOLO);
+                String contenuto = rs.getString(CONTENUTO);
                 String nomeDocente = rs.getString("nome") +  " " + rs.getString("cognome");
                 String stato = rs.getString("statotesi");
                 String dataseduta = rs.getString("dataseduta");
