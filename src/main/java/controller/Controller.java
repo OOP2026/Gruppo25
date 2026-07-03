@@ -2,7 +2,7 @@ package controller;
 
 
 import dao.*;
-import implementazioneDao.*;
+import implementazione.dao.*;
 import model.*;
 
 
@@ -259,14 +259,14 @@ public class Controller {
 
             // Costruiamo gli oggetti del model
             Azienda nuovaAzienda = null;
-            Integer id_azienda = null;
+            Integer idAzienda = null;
             // Controlliamo se l'azienda è esterna
             if (tipologiaTirocinio.equalsIgnoreCase(TIPO_ESTERNO)) {
                 AziendaDAO aziendaDAO = new AziendaImplementazioneDAO();
                 // se esiste nel db la creiamo anche nel Model
                 if (aziendaDAO.validaAzienda(refAz, nomeAz)) {
                     nuovaAzienda = new Azienda(nomeAz, refAz);
-                    id_azienda = aziendaDAO.getIdAzienda(refAz,nomeAz);
+                    idAzienda = aziendaDAO.getIdAzienda(refAz,nomeAz);
                 } else {
                     return false; // Blocco l'operazione se l'azienda non è valida
                 }
@@ -274,7 +274,7 @@ public class Controller {
             // Salviamo l'argomento nel DB
             DocenteDAO docenteDAO = new DocenteImplementazioneDAO();
 
-            docenteDAO.inserisciArgomento(argomento, docenteLoggato.getLogin(),id_azienda);
+            docenteDAO.inserisciArgomento(argomento, docenteLoggato.getLogin(),idAzienda);
             if (nuovaAzienda != null) {
                 this.listaAziende.add(nuovaAzienda);
             }
@@ -351,13 +351,13 @@ public class Controller {
 
 
                 // Se esiste un docente con i dati inseriti dallo studente al momento della compilazione creiamo un nuovo oggetto docente, e la richiesta del tirocinio con quei dati
-                Integer id_argomento = docenteDAO.getIdArgomento(login, argomento);
-                if(id_argomento == null) {
+                Integer idArgomento = docenteDAO.getIdArgomento(login, argomento);
+                if(idArgomento == null) {
                     System.err.println("Impossibile trovare l'argomento");
                     return false;
                 }
 
-                richiestaTirocinioDAO.inserisciRichiesta(this.studenteLoggato.getMatricola(), login, id_argomento);
+                richiestaTirocinioDAO.inserisciRichiesta(this.studenteLoggato.getMatricola(), login, idArgomento);
 
                 Docente docenteTrovato = new Docente(login,password,nome,cognome,email);
                 RichiestaTirocinio nuovaRichiesta = new RichiestaTirocinio(this.studenteLoggato, docenteTrovato, argomento);
@@ -508,12 +508,12 @@ public class Controller {
         RichiestaTirocinioDAO richiestaTirocinioDAO = new RichiestaTirocinioImplementazioneDAO();
         try {
             // Inseriamo la tesi nel db
-            Integer id_tirocinio = tirocinioDAO.getIdTirocinio(studenteLoggato.getMatricola());
-            tesiDAO.inserisciTesi(titolo,contenuto,data,id_tirocinio,studenteLoggato.getMatricola());
+            Integer idTirocinio = tirocinioDAO.getIdTirocinio(studenteLoggato.getMatricola());
+            tesiDAO.inserisciTesi(titolo,contenuto,data,idTirocinio,studenteLoggato.getMatricola());
             // Inseriamo nella tabella ponte i dati della tesi e del docente
-            Integer id_tesi =  tesiDAO.getIdTesi(studenteLoggato.getMatricola());
+            Integer idTesi =  tesiDAO.getIdTesi(studenteLoggato.getMatricola());
             String loginDocente = richiestaTirocinioDAO.getLoginDocente(studenteLoggato.getMatricola());
-            tesiDAO.inserisciSupervisione(loginDocente,id_tesi);
+            tesiDAO.inserisciSupervisione(loginDocente,idTesi);
             // Successivamente la inseriamo nel Model
             for (RichiestaTirocinio r : richiesteTirocinio) {
                 if (r.getStudente().equals(studenteLoggato) && r.getStatoRichiesta().equals(Stato.APPROVATA)) {
@@ -636,12 +636,12 @@ public class Controller {
 
         try{
             // Recupero dei vari id richiesti per la insert del tirocinio del DataBase
-            Integer id_richiesta = richiestaTirocinioDAO.getIdRichiesta(matricola,docenteLoggato.getLogin());
-            Integer id_azienda = aziendaDAO.getIdAzienda(nominativoReferente,nomeAzienda);
-            Integer id_argomento = docenteDAO.getIdArgomento(docenteLoggato.getLogin(),argomentoTirocinio);
+            Integer idRichiesta = richiestaTirocinioDAO.getIdRichiesta(matricola,docenteLoggato.getLogin());
+            Integer idAzienda = aziendaDAO.getIdAzienda(nominativoReferente,nomeAzienda);
+            Integer idArgomento = docenteDAO.getIdArgomento(docenteLoggato.getLogin(),argomentoTirocinio);
 
             // Una volta recuperati gli id con i dati della tabella possiamo chiamare il metodo che inserisce il tirocinio e contestualmente crearlo nel Model
-            tirocinioDAO.inserisciTirocinio(id_richiesta,id_azienda,docenteLoggato.getLogin(),id_argomento);
+            tirocinioDAO.inserisciTirocinio(idRichiesta,idAzienda,docenteLoggato.getLogin(),idArgomento);
             for (RichiestaTirocinio r : richiesteTirocinio) {
                 if (r.getStudente().getMatricola().equals(matricola)) {
                     Studente studenteCorrente = r.getStudente();
@@ -668,8 +668,8 @@ public class Controller {
         RichiestaTirocinioDAO richiestaTirocinioDAO = new RichiestaTirocinioImplementazioneDAO();
         TirocinioDAO tirocinioDAO = new TirocinioImplementazioneDAO();
         try{
-            Integer id_richiesta = richiestaTirocinioDAO.getIdRichiesta(matricolaStudente,docenteLoggato.getLogin());
-            tirocinioDAO.terminaTirocinio(id_richiesta);
+            Integer idRichiesta = richiestaTirocinioDAO.getIdRichiesta(matricolaStudente,docenteLoggato.getLogin());
+            tirocinioDAO.terminaTirocinio(idRichiesta);
             return true;
         } catch (SQLException e) {
             LOGGER.log(Level.SEVERE, "Errore durante la modifica dello stato nel database",e);

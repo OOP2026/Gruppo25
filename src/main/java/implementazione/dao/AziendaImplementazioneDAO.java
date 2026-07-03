@@ -1,4 +1,4 @@
-package implementazioneDao;
+package implementazione.dao;
 import dao.AziendaDAO;
 import database_connection.ConnessioneDatabase;
 import java.sql.Connection;

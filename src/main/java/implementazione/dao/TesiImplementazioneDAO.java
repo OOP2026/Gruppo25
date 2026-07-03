@@ -1,4 +1,4 @@
-package implementazioneDao;
+package implementazione.dao;
 import dao.TesiDAO;
 import database_connection.ConnessioneDatabase;
 
@@ -27,14 +27,14 @@ public class TesiImplementazioneDAO implements TesiDAO {
     }
 
     @Override
-    public void inserisciTesi(String titolo, String contenuto, String data, Integer idTirocinio,String matricola_studente) throws SQLException{
+    public void inserisciTesi(String titolo, String contenuto, String data, Integer idTirocinio,String matricolaStudente) throws SQLException{
         String query = "INSERT INTO tesi(titolo,contenuto,tirocinio,dataseduta,matricola_studente) VALUES (?,?,?,?,?)";
         try(PreparedStatement ps = this.connection.prepareStatement(query)){
             ps.setString(1,titolo);
             ps.setString(2,contenuto);
             ps.setInt(3,idTirocinio);
             ps.setString(4,data);
-            ps.setString(5,matricola_studente);
+            ps.setString(5,matricolaStudente);
             ps.executeUpdate();
 
             System.out.println("Inserimento tesi riuscito.");
@@ -43,10 +43,10 @@ public class TesiImplementazioneDAO implements TesiDAO {
     }
 
     @Override
-    public Integer getIdTesi(String matricola_studente) throws SQLException {
+    public Integer getIdTesi(String matricolaStudente) throws SQLException {
         String query = "SELECT id_tesi FROM tesi WHERE matricola_studente = ? ORDER BY id_tesi DESC LIMIT 1";
         try(PreparedStatement ps = this.connection.prepareStatement(query)){
-            ps.setString(1,matricola_studente);
+            ps.setString(1,matricolaStudente);
             ResultSet rs = ps.executeQuery();
             if(rs.next()){
                 return rs.getInt("id_tesi");
@@ -56,11 +56,11 @@ public class TesiImplementazioneDAO implements TesiDAO {
     }
 
     @Override
-    public void inserisciSupervisione(String loginDocente, Integer id_tesi) throws SQLException {
+    public void inserisciSupervisione(String loginDocente, Integer idTesi) throws SQLException {
         String query = "INSERT INTO supervisione VALUES (?,?)";
         try(PreparedStatement ps = this.connection.prepareStatement(query)){
             ps.setString(1,loginDocente);
-            ps.setInt(2,id_tesi);
+            ps.setInt(2,idTesi);
             ps.executeUpdate();
 
             System.out.println("Inserimento supervisione riuscito.");

@@ -1,4 +1,4 @@
-package implementazioneDao;
+package implementazione.dao;
 import dao.RichiestaTirocinioDAO;
 import database_connection.ConnessioneDatabase;
 import java.sql.Connection;
@@ -23,12 +23,12 @@ public class RichiestaTirocinioImplementazioneDAO implements RichiestaTirocinioD
     }
 
     @Override
-    public void inserisciRichiesta(String matricola_studente,String login_docente,Integer id_argomento) throws SQLException{
+    public void inserisciRichiesta(String matricolaStudente,String loginDocente,Integer idArgomento) throws SQLException{
         String query = "INSERT INTO richiestatirocinio(matricola_studente,docente_richiesta,argomento_richiesta) VALUES(?,?,?)";
         try (PreparedStatement preparedStatement = this.connection.prepareStatement(query)){
-            preparedStatement.setString(1, matricola_studente);
-            preparedStatement.setString(2, login_docente);
-            preparedStatement.setInt(3, id_argomento);
+            preparedStatement.setString(1, matricolaStudente);
+            preparedStatement.setString(2, loginDocente);
+            preparedStatement.setInt(3, idArgomento);
             preparedStatement.executeUpdate();
 
             System.out.println("Richiesta inserita con successo");

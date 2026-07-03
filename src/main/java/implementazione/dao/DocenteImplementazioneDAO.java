@@ -1,4 +1,4 @@
-package implementazioneDao;
+package implementazione.dao;
 import dao.DocenteDAO;
 import database_connection.ConnessioneDatabase;
 import java.sql.Connection;
@@ -62,12 +62,12 @@ public class DocenteImplementazioneDAO implements DocenteDAO{
     }
 
     @Override
-    public void inserisciArgomento(String argomento,String login, Integer id_azienda) throws SQLException{
+    public void inserisciArgomento(String argomento,String login, Integer idAzienda) throws SQLException{
         String query = "INSERT INTO argomentotirocinio(argomento,docente,id_azienda) VALUES (?,?,?)";
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)){
             preparedStatement.setString(1, argomento);
             preparedStatement.setString(2, login);
-            preparedStatement.setInt(3, id_azienda);
+            preparedStatement.setInt(3, idAzienda);
 
             preparedStatement.executeUpdate();
             System.out.println("Argomento inserito");

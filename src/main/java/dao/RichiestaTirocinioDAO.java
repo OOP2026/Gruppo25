@@ -5,7 +5,7 @@ import java.util.List;
 public interface RichiestaTirocinioDAO {
 
     // Metodo per creare una nuova richiesta di tirocinio nel db
-    void inserisciRichiesta(String matricola_studente,String login_docente,Integer id_argomento) throws SQLException;
+    void inserisciRichiesta(String matricolaStudente,String loginDocente,Integer idArgomento) throws SQLException;
 
     // Metodo per visualizzare la tabella delle richieste del docente
     List<String[]> ottieniCatalogoRichieste(String login) throws SQLException;

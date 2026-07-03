@@ -14,7 +14,7 @@ public interface DocenteDAO {
     boolean verificaCredenziali(String login, String password, ArrayList<String> datiDocente) throws SQLException;
 
     // Metodo per inserire l'argomento nel db
-    void inserisciArgomento(String argomento,String login,Integer id_azienda) throws SQLException;
+    void inserisciArgomento(String argomento,String login,Integer idAzienda) throws SQLException;
 
     // Metodo per popolare le tabelle della gui con la lista dei docenti
     List<String[]> ottieniCatalogoArgomenti() throws SQLException;

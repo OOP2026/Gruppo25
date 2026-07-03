@@ -1,4 +1,4 @@
-package implementazioneDao;
+package implementazione.dao;
 import dao.TirocinioDAO;
 import database_connection.ConnessioneDatabase;
 import java.sql.Connection;
@@ -23,18 +23,18 @@ public class TirocinioImplementazioneDAO implements TirocinioDAO {
     }
 
     @Override
-    public void inserisciTirocinio(Integer id_richiesta, Integer id_azienda, String loginDocente, Integer id_argomento) throws SQLException {
+    public void inserisciTirocinio(Integer idRichiesta, Integer idAzienda, String loginDocente, Integer idArgomento) throws SQLException {
         String query = "INSERT INTO tirocinio(id_richiesta,azienda,docentesupervisore,argomento) VALUES (?,?,?,?)";
         try(PreparedStatement stmt = this.connection.prepareStatement(query)){
-            stmt.setInt(1, id_richiesta);
+            stmt.setInt(1, idRichiesta);
             // Gestione del caso di tirocinio interno
-            if(id_azienda != null) {
-                stmt.setInt(2, id_azienda);
+            if(idAzienda != null) {
+                stmt.setInt(2, idAzienda);
             } else{
                 stmt.setNull(2,java.sql.Types.INTEGER);
             }
             stmt.setString(3, loginDocente);
-            stmt.setInt(4, id_argomento);
+            stmt.setInt(4, idArgomento);
             stmt.executeUpdate();
 
             System.out.println("Tirocinio aggiunto con successo.");
@@ -71,10 +71,10 @@ public class TirocinioImplementazioneDAO implements TirocinioDAO {
     }
 
     @Override
-    public void terminaTirocinio(Integer id_richiesta) throws SQLException {
+    public void terminaTirocinio(Integer idRichiesta) throws SQLException {
         String query = "UPDATE tirocinio SET completato = true WHERE id_richiesta = ?";
         try(PreparedStatement ps = this.connection.prepareStatement(query)){
-            ps.setInt(1, id_richiesta);
+            ps.setInt(1, idRichiesta);
             ps.executeUpdate();
         }
     }

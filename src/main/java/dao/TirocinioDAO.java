@@ -5,13 +5,13 @@ import java.util.List;
 public interface TirocinioDAO {
 
     // Metodo per aggiungere un tirocinio al db
-    void inserisciTirocinio(Integer id_richiesta, Integer id_azienda, String loginDocente, Integer id_argomento) throws SQLException;
+    void inserisciTirocinio(Integer idRichiesta, Integer idAzienda, String loginDocente, Integer idArgomento) throws SQLException;
 
     // Metodo per popolare la tabella dei tirocinanti
     List<String []> ottieniCatalogoTirocinanti(String loginDocente) throws SQLException;
 
     // Metodo per terminare il tirocinio
-    void terminaTirocinio(Integer id_richiesta) throws SQLException;
+    void terminaTirocinio(Integer idRichiesta) throws SQLException;
 
     // Metodo per ottenere il l'id del tirocinio
     Integer getIdTirocinio(String matricolaStudente) throws SQLException;
