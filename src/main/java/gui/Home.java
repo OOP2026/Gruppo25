@@ -16,9 +16,14 @@ public class Home extends JFrame {
     private final transient Controller controller;
 
     public static void main(String[] args) {
-       // TRY-CATCH PER SETTARE LA GUI IN BASE AL TEMA DELLA MACCHINA.
+       
         try {
-            javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    break;
+                }
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }

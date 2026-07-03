@@ -67,7 +67,13 @@ public class DocenteImplementazioneDAO implements DocenteDAO{
         try (PreparedStatement preparedStatement = connection.prepareStatement(query)){
             preparedStatement.setString(1, argomento);
             preparedStatement.setString(2, login);
-            preparedStatement.setInt(3, idAzienda);
+            if (idAzienda != null) {
+                // Se c'è un'azienda usiamo setInt
+                preparedStatement.setInt(3, idAzienda);
+            } else {
+                // Se l'azienda non c'è inseriamo esplicitamente un NULL SQL
+                preparedStatement.setNull(3, java.sql.Types.INTEGER);
+            }
 
             preparedStatement.executeUpdate();
             System.out.println("Argomento inserito");

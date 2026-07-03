@@ -131,14 +131,15 @@ public class RichiestaTirocinioImplementazioneDAO implements RichiestaTirocinioD
     public List<String[]> ottieniCatalogoRichiesteStudente(String matricolaStudente) throws SQLException {
         List<String[]> righeTabella = new ArrayList<>();
 
-        String query = "SELECT rich.docente_richiesta,arg.argomento,rich.statorichiesta " +
+        String query = "SELECT d.nome,d.cognome,arg.argomento,rich.statorichiesta " +
                 "FROM richiestatirocinio rich " + "JOIN argomentotirocinio arg ON rich.argomento_richiesta = arg.id_argomento "+
+                "JOIN docente d ON rich.docente_richiesta = d.login " +
                 "WHERE rich.matricola_studente = ?";
         try(PreparedStatement preparedStatement = this.connection.prepareStatement(query)){
             preparedStatement.setString(1, matricolaStudente);
             ResultSet resultSet = preparedStatement.executeQuery();
             while (resultSet.next()){
-                String docente =  resultSet.getString("docente_richiesta");
+                String docente =  resultSet.getString("nome") + " " + resultSet.getString("cognome");
                 String argomento =  resultSet.getString("argomento");
                 String statorichiesta = resultSet.getString("statorichiesta");
 
