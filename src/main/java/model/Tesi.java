@@ -1,7 +1,9 @@
 package model;
 
 /**
- * The type Tesi.
+ * Rappresenta una tesi di laurea all'interno del sistema.
+ * Gestisce le informazioni relative allo stato della tesi, allo studente associato,
+ * al docente relatore, al titolo, al contenuto e alla data della relativa seduta di laurea.
  */
 public class Tesi {
     private Stato statoTesi;
@@ -12,13 +14,14 @@ public class Tesi {
     private String sedutaDiLaurea;
 
     /**
-     * Instantiates a new Tesi.
+     * Crea una nuova istanza di Tesi, impostando lo stato iniziale in ATTESA
+     * e collegando automaticamente la tesi sia allo studente che al docente relatore.
      *
-     * @param studente       the studente
-     * @param docente        the docente
-     * @param titolo         the titolo
-     * @param contenuto      the contenuto
-     * @param sedutaDiLaurea the seduta di laurea
+     * @param studente       Lo studente proprietario della tesi.
+     * @param docente        Il docente che fa da relatore per la tesi.
+     * @param titolo         Il titolo della tesi.
+     * @param contenuto      Il contenuto della tesi.
+     * @param sedutaDiLaurea La data e la sessione della seduta di laurea.
      */
 // Costruttore dell'Oggetto Tesi
     public Tesi(Studente studente, Docente docente, String titolo, String contenuto, String sedutaDiLaurea ) {
@@ -33,66 +36,66 @@ public class Tesi {
     }
 
     /**
-     * Gets stato tesi.
+     * Restituisce lo stato attuale della tesi.
      *
-     * @return the stato tesi
+     * @return L'oggetto Stato che rappresenta la fase in cui si trova la tesi.
      */
 // Implementazione dei vari metodi get e set di tutti gli attributi della classe
     public Stato getStatoTesi() {return statoTesi;}
 
     /**
-     * Sets stato tesi.
+     * Imposta il nuovo stato della tesi.
      *
-     * @param statoTesi the stato tesi
+     * @param statoTesi Il nuovo stato da assegnare alla tesi.
      */
     public void setStatoTesi(Stato statoTesi) {this.statoTesi = statoTesi;}
 
     /**
-     * Gets studente.
+     * Restituisce lo studente associato alla tesi.
      *
-     * @return the studente
+     * @return L'oggetto Studente autore della tesi.
      */
     public Studente getStudente() {return studente;}
 
     /**
-     * Sets studente.
+     * Imposta lo studente associato alla tesi.
      *
-     * @param studente the studente
+     * @param studente Il nuovo studente da associare alla tesi.
      */
     public void setStudente(Studente studente) {this.studente = studente;}
 
     /**
-     * Gets docente.
+     * Restituisce il docente relatore della tesi.
      *
-     * @return the docente
+     * @return L'oggetto Docente che fa da relatore.
      */
     public Docente getDocente() {return docente;}
 
     /**
-     * Sets docente.
+     * Imposta il docente relatore della tesi.
      *
-     * @param docente the docente
+     * @param docente Il nuovo docente relatore da associare.
      */
     public void setDocente(Docente docente) {this.docente = docente;}
 
     /**
-     * Gets titolo.
+     * Restituisce il titolo della tesi.
      *
-     * @return the titolo
+     * @return Una stringa contenente il titolo della tesi.
      */
     public String getTitolo() {return titolo;}
 
     /**
-     * Gets contenuto.
+     * Restituisce il contenuto della tesi.
      *
-     * @return the contenuto
+     * @return Una stringa contenente il contenuto informativo della tesi.
      */
     public String getContenuto() {return contenuto;}
 
     /**
-     * Gets seduta di laurea.
+     * Restituisce le informazioni sulla seduta di laurea.
      *
-     * @return the seduta di laurea
+     * @return Una stringa contenente i dettagli della seduta di laurea.
      */
     public String getSedutaDiLaurea() {return sedutaDiLaurea;}
 

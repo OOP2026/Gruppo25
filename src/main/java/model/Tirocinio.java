@@ -1,7 +1,9 @@
 package model;
 
 /**
- * The type Tirocinio.
+ * Rappresenta un tirocinio all'interno del sistema.
+ * Gestisce le informazioni sulle caratteristiche del tirocinio (tipologia, argomento, stato),
+ * e le relazioni con lo studente, il docente, l'eventuale azienda ospitante e la tesi associata.
  */
 public class Tirocinio {
     private String tipologiaTirocinio;
@@ -14,12 +16,13 @@ public class Tirocinio {
 
 
     /**
-     * Instantiates a new Tirocinio.
+     * Crea una nuova istanza di Tirocinio definendo la tipologia e l'argomento,
+     * e collegando automaticamente il tirocinio allo studente e al docente tutor.
      *
-     * @param tipologiaTirocinio the tipologia tirocinio
-     * @param argomento          the argomento
-     * @param studente           the studente
-     * @param docente            the docente
+     * @param tipologiaTirocinio La tipologia del tirocinio (es. INTERNO o ESTERNO).
+     * @param argomento          L'argomento del tirocinio.
+     * @param studente           Lo studente che svolge il tirocinio.
+     * @param docente            Il docente che fa da tutor per il tirocinio.
      */
 // Costruttore dell'Oggetto Tirocinio
     public Tirocinio(String tipologiaTirocinio, String argomento, Studente studente, Docente docente) {
@@ -33,10 +36,10 @@ public class Tirocinio {
     }
 
     /**
-     * Instantiates a new Tirocinio.
+     * Crea una nuova istanza di Tirocinio specificando solamente la tipologia e l'argomento.
      *
-     * @param tipologiaTirocinio the tipologia tirocinio
-     * @param argomento          the argomento
+     * @param tipologiaTirocinio La tipologia del tirocinio (es. INTERNO o ESTERNO).
+     * @param argomento          L'argomento o del tirocinio.
      */
 // Secondo costruttore dell'Oggetto Tirocinio
     public Tirocinio(String tipologiaTirocinio, String argomento){
@@ -45,10 +48,10 @@ public class Tirocinio {
     }
 
     /**
-     * Instantiates a new Tirocinio.
+     * Crea una nuova istanza di Tirocinio associando solamente lo studente e il docente tutor.
      *
-     * @param studente the studente
-     * @param docente  the docente
+     * @param studente Lo studente che svolge il tirocinio.
+     * @param docente  Il docente che fa da tutor per il tirocinio.
      */
 // Terzo costruttore dell'Oggetto Tirocinio
     public Tirocinio(Studente studente, Docente docente){
@@ -57,9 +60,9 @@ public class Tirocinio {
     }
 
     /**
-     * Sets tipologia tirocinio.
+     * Imposta la tipologia del tirocinio.
      *
-     * @param tipologiaTirocinio the tipologia tirocinio
+     * @param tipologiaTirocinio La nuova tipologia da assegnare al tirocinio.
      */
 // Implementazione dei vari metodi get e set di tutti gli attributi della classe
     public void setTipologiaTirocinio(String tipologiaTirocinio) {
@@ -67,108 +70,109 @@ public class Tirocinio {
     }
 
     /**
-     * Gets tipologia tirocinio.
+     * Restituisce la tipologia del tirocinio.
      *
-     * @return the tipologia tirocinio
+     * @return Una stringa contenente la tipologia del tirocinio.
      */
     public String getTipologiaTirocinio() {return tipologiaTirocinio;}
 
     /**
-     * Sets argomento.
+     * Imposta l'argomento del tirocinio.
      *
-     * @param argomento the argomento
+     * @param argomento Il nuovo argomento da assegnare al tirocinio.
      */
     public void setArgomento(String argomento) {
         this.argomento = argomento;
     }
 
     /**
-     * Gets argomento.
+     * Restituisce l'argomento del tirocinio.
      *
-     * @return the argomento
+     * @return Una stringa contenente l'argomento del tirocinio.
      */
     public String getArgomento() {return argomento;}
 
     /**
-     * Sets completato.
+     * Imposta lo stato di completamento del tirocinio.
      *
-     * @param completato the completato
+     * @param completato Vero se il tirocinio è completato, falso altrimenti.
      */
     public void setCompletato(Boolean completato) {
         this.completato = completato;
     }
 
     /**
-     * Gets completato.
+     * Restituisce lo stato di completamento del tirocinio.
      *
-     * @return the completato
+     * @return Vero se il tirocinio è stato completato, falso altrimenti.
      */
     public boolean getCompletato() {return this.completato;}
 
     /**
-     * Sets azienda.
+     * Imposta l'azienda in collaborazione con quel Tirocinio. Se il tirocinio è di tipo ESTERNO,
+     * provvede ad aggiungere automaticamente il tirocinio alla lista dell'azienda.
      *
-     * @param azienda the azienda
+     * @param azienda L'azienda da associare al tirocinio.
      */
     public void setAzienda(Azienda azienda) {
-                this.azienda = azienda;
-            if(this.tipologiaTirocinio.equalsIgnoreCase("ESTERNO") && this.azienda != null){
-                this.azienda.addTirocinio(this);
-            }
+        this.azienda = azienda;
+        if(this.tipologiaTirocinio.equalsIgnoreCase("ESTERNO") && this.azienda != null){
+            this.azienda.addTirocinio(this);
         }
+    }
 
     /**
-     * Gets azienda.
+     * Restituisce l'azienda associata al tirocinio.
      *
-     * @return the azienda
+     * @return L'oggetto Azienda associata al Tirocinio. Sarà null se il tirocinio è INTERNO.
      */
     public Azienda getAzienda() {return azienda;}
 
     /**
-     * Sets studente.
+     * Imposta lo studente assegnato al tirocinio.
      *
-     * @param studente the studente
+     * @param studente Il nuovo studente da associare.
      */
     public void setStudente(Studente studente) {
         this.studente = studente;
     }
 
     /**
-     * Gets studente.
+     * Restituisce lo studente che svolge il tirocinio.
      *
-     * @return the studente
+     * @return L'oggetto Studente associato.
      */
     public Studente getStudente() {return studente;}
 
     /**
-     * Sets docente.
+     * Imposta il docente tutor per il tirocinio.
      *
-     * @param docente the docente
+     * @param docente Il nuovo docente tutor da associare.
      */
     public void setDocente(Docente docente) {
         this.docente = docente;
     }
 
     /**
-     * Gets docente.
+     * Restituisce il docente tutor del tirocinio.
      *
-     * @return the docente
+     * @return L'oggetto Docente associato.
      */
     public Docente getDocente() {return docente;}
 
     /**
-     * Gets tesi.
+     * Restituisce la tesi che segue l'esperienza del tirocinio.
      *
-     * @return the tesi
+     * @return L'oggetto Tesi associato, o null se non è presente una tesi.
      */
     public Tesi getTesi() {
         return tesi;
     }
 
     /**
-     * Sets tesi.
+     * Imposta la tesi collegata al tirocinio.
      *
-     * @param tesi the tesi
+     * @param tesi La nuova tesi da associare al tirocinio.
      */
     public void setTesi(Tesi tesi) {
         this.tesi = tesi;

@@ -5,7 +5,9 @@ import java.util.List;
 
 
 /**
- * The type Azienda.
+ * Rappresenta un'azienda partner registrata nel sistema che offre
+ * opportunità di tirocinio agli studenti universitari.
+ * Mantiene le informazioni anagrafiche e la lista dei tirocini attivi associati.
  */
 public class Azienda {
     private String nomeAzienda;
@@ -13,10 +15,10 @@ public class Azienda {
     private List<Tirocinio> tirocinio = new ArrayList<>();
 
     /**
-     * Instantiates a new Azienda.
+     * Creazione di una nuova Azienda con le informazioni minime.
      *
-     * @param nomeAzienda         the nome azienda
-     * @param nominativoReferente the nominativo referente
+     * @param nomeAzienda        La denominazione dell'Azienda.
+     * @param nominativoReferente Il nominativo della persona di riferimento.
      */
 // Costruttore dell'Oggetto Azienda
     public Azienda(String nomeAzienda,String nominativoReferente ) {
@@ -25,54 +27,54 @@ public class Azienda {
     }
 
     /**
-     * Gets nome azienda.
+     * Restituisce il nome dell'azienda.
      *
-     * @return the nome azienda
+     * @return Una stringa contenente il nome dell'azienda.
      */
 // Implementazione dei vari metodi get e set di tutti gli attributi della classe
     public String getNomeAzienda() {return nomeAzienda;}
 
     /**
-     * Sets nome azienda.
+     * Imposta il nome dell'azienda.
      *
-     * @param nomeAzienda the nome azienda
+     * @param nomeAzienda Il nuovo nome da assegnare all'azienda.
      */
     public void setNomeAzienda(String nomeAzienda) {this.nomeAzienda = nomeAzienda;}
 
     /**
-     * Gets nominativo referente.
+     * Restituisce il nominativo del referente dell'azienda.
      *
-     * @return the nominativo referente
+     * @return  Una stringa contenente il nominativo del referente.
      */
     public String getNominativoReferente() {
         return nominativoReferente;
     }
 
     /**
-     * Sets nominativo referente.
+     * Imposta il nominativo del referente.
      *
-     * @param nominativoReferente the nominativo referente
+     * @param nominativoReferente Il nuovo nominativo del referente aziendale.
      */
     public void setNominativoReferente(String nominativoReferente) {this.nominativoReferente = nominativoReferente;}
 
     /**
-     * Gets tirocinio.
+     * Restituisce la lista di tirocini.
      *
-     * @return the tirocinio
+     * @return Un ArrayList di oggetti Tirocinio.
      */
     public List<Tirocinio> getTirocinio() {return tirocinio;}
 
     /**
-     * Sets tirocinio.
+     * Imposta la lista di tirocini.
      *
-     * @param tirocinio the tirocinio
+     * @param tirocinio La nuova lista di tirocini da associare all'azienda.
      */
     public void setTirocinio(List<Tirocinio> tirocinio) {this.tirocinio = tirocinio;}
 
     /**
-     * Add tirocinio.
+     * Aggiunge un oggetto Tirocinio alla lista.
      *
-     * @param nuovoTirocinio the nuovo tirocinio
+     * @param nuovoTirocinio Il nuovo tirocinio da aggiungere alla lista.
      */
     public void addTirocinio(Tirocinio nuovoTirocinio) {
         if (nuovoTirocinio != null) {

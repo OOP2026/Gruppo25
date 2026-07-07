@@ -4,7 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * The type Docente.
+ * Rappresenta un docente universitario all'interno del sistema.
+ * Estende la classe Utente e gestisce le attività relative ai tirocini,
+ * alle tesi associate e alle richieste (di tirocinio o di tesi) da parte degli studenti.
  */
 public class Docente extends Utente {
 
@@ -15,53 +17,51 @@ public class Docente extends Utente {
     private List<Tirocinio> tirociniProposti = new ArrayList<>();
 
     /**
-     * Instantiates a new Docente.
+     * Crea una nuova istanza di Docente richiamando il costruttore della superclasse Utente.
      *
-     * @param login    the login
-     * @param password the password
-     * @param nome     the nome
-     * @param cognome  the cognome
-     * @param email    the email
+     * @param login    L'username per l'accesso al sistema.
+     * @param password La password per l'autenticazione dell'account.
+     * @param nome     Il nome del docente.
+     * @param cognome  Il cognome del docente.
+     * @param email    L'indirizzo email istituzionale del docente avente dominio "@docenti.unina.it".
      */
 //costruttore dell'oggetto Docente
     public Docente(String login, String password, String nome, String cognome, String email) {
         super(login, password, nome, cognome, email);
-
     }
 
-
     /**
-     * Add argomento tirocinio.
+     * Aggiunge un nuovo argomento di interesse per i tirocini alla lista del docente.
      *
-     * @param argomento the argomento
+     * @param argomento Il testo o il tema dell'argomento da aggiungere.
      */
     public void addArgomentoTirocinio(String argomento){this.argomentiTirocinio.add(argomento);}
 
     /**
-     * Get argomenti tirocinio list.
+     * Restituisce la lista degli argomenti di tirocinio trattati dal docente.
      *
-     * @return the list
+     * @return Una lista di stringhe contenente gli argomenti di tirocinio per docente.
      */
     public List<String> getArgomentiTirocinio(){return this.argomentiTirocinio;}
 
     /**
-     * Gets tirocinio.
+     * Restituisce la lista dei tirocini associati al docente.
      *
-     * @return the tirocinio
+     * @return Una lista di oggetti Tirocinio.
      */
     public List<Tirocinio> getTirocinio() { return tirocinio; }
 
     /**
-     * Sets tirocinio.
+     * Imposta la lista dei tirocini associati al docente.
      *
-     * @param tirocinio the tirocinio
+     * @param tirocinio La nuova lista di tirocini da assegnare.
      */
     public void setTirocinio(ArrayList<Tirocinio> tirocinio) { this.tirocinio = tirocinio; }
 
     /**
-     * Add tirocinio.
+     * Aggiunge un oggetto Tirocinio alla lista del docente, previa verifica che non sia nullo.
      *
-     * @param nuovoTirocinio the nuovo tirocinio
+     * @param nuovoTirocinio Il nuovo tirocinio da aggiungere.
      */
     public void addTirocinio(Tirocinio nuovoTirocinio) {
         if (nuovoTirocinio != null) {
@@ -70,16 +70,16 @@ public class Docente extends Utente {
     }
 
     /**
-     * Gets tesi.
+     * Restituisce la lista delle tesi seguite dal docente.
      *
-     * @return the tesi
+     * @return Una lista di oggetti Tesi.
      */
     public List<Tesi> getTesi() { return tesi; }
 
     /**
-     * Add tesi.
+     * Aggiunge una nuova tesi alla lista del docente, previa verifica che non sia nulla.
      *
-     * @param nuovaTesi the nuova tesi
+     * @param nuovaTesi La nuova tesi da aggiungere.
      */
     public void addTesi(Tesi nuovaTesi) {
         if (nuovaTesi != null) {
@@ -88,48 +88,48 @@ public class Docente extends Utente {
     }
 
     /**
-     * Gets richiesta tirocinio.
+     * Restituisce la lista delle richieste di tirocinio ricevute dal docente.
      *
-     * @return the richiesta tirocinio
+     * @return Una lista di oggetti RichiestaTirocinio.
      */
     public List<RichiestaTirocinio> getRichiestaTirocinio() { return richiestaTirocinio; }
 
     /**
-     * Sets richiesta tirocinio.
+     * Imposta la lista delle richieste di tirocinio del docente.
      *
-     * @param richiestaTirocinio the richiesta tirocinio
+     * @param richiestaTirocinio La nuova lista di richieste da assegnare.
      */
     public void setRichiestaTirocinio(ArrayList<RichiestaTirocinio> richiestaTirocinio) { this.richiestaTirocinio = richiestaTirocinio; }
 
     /**
-     * Get docente docente.
+     * Restituisce l'istanza corrente del docente.
      *
-     * @return the docente
+     * @return L'oggetto Docente corrente (this).
      */
     public Docente getDocente(){return this;}
 
     /**
-     * Add tirocinio proposto.
+     * Aggiunge un tirocinio all'elenco dei tirocini proposti dal docente.
      *
-     * @param tirocinio the tirocinio
+     * @param tirocinio Il tirocinio proposto da aggiungere alla lista.
      */
     public void addTirocinioProposto(Tirocinio tirocinio) {
         this.tirociniProposti.add(tirocinio);
     }
 
     /**
-     * Gets tirocini proposti.
+     * Restituisce la lista di tutti i tirocini proposti dal docente.
      *
-     * @return the tirocini proposti
+     * @return Una lista di oggetti Tirocinio rappresentanti le proposte.
      */
     public List<Tirocinio> getTirociniProposti() {
         return this.tirociniProposti;
     }
 
     /**
-     * Rimuovi tesi.
+     * Rimuove una tesi dalla lista del docente in base alla sua posizione.
      *
-     * @param indice the indice
+     * @param indice La posizione (ID numerico) della tesi da rimuovere all'interno della lista.
      */
     public void rimuoviTesi(int indice){
         tesi.remove(indice);

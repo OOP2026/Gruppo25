@@ -1,7 +1,9 @@
 package model;
 
 /**
- * The type Richiesta tirocinio.
+ * Rappresenta la richiesta effettuata da uno Studente,
+ * verso un Docente scelto, di iniziare un tirocinio
+ * avente un argomento specifico.
  */
 public class RichiestaTirocinio {
     private Stato statoRichiesta;
@@ -12,11 +14,11 @@ public class RichiestaTirocinio {
     private String tipologiaTirocinio;
 
     /**
-     * Instantiates a new Richiesta tirocinio.
+     * Crea una nuova istanza di RichiestaTirocinio richiamando il costruttore.
      *
-     * @param studente  the studente
-     * @param docente   the docente
-     * @param argomento the argomento
+     * @param studente  Lo Studente che fa richiesta.
+     * @param docente   Il Docente a cui è rivolta la richiesta.
+     * @param argomento L'argomento del professore, scelto dallo Studente.
      */
 // Costruttore dell'Oggetto RichiestaTirocinio
     public RichiestaTirocinio(Studente studente, Docente docente, String argomento) {
@@ -27,90 +29,90 @@ public class RichiestaTirocinio {
     }
 
     /**
-     * Gets stato richiesta.
+     * Restituisce lo stato attuale della RichiestaTirocinio.
      *
-     * @return the stato richiesta
+     * @return Uno Stato che indica l'approvazione, rifiuto, o ancora in attesa di giudizio della RichiestaTirocinio
      */
 // Implementazione dei vari metodi get e set di tutti gli attributi della classe
     public Stato getStatoRichiesta() {return this.statoRichiesta;}
 
     /**
-     * Sets stato richiesta.
+     * Imposta il nuovo stato della Richiesta.
      *
-     * @param statoRichiesta the stato richiesta
+     * @param statoRichiesta UnaIl nuovo stato della richiesta.
      */
     public void setStatoRichiesta(Stato statoRichiesta) {
         this.statoRichiesta = statoRichiesta;
     }
 
     /**
-     * Gets studente.
+     * Restituisce lo studente associato alla RichiestaTirocinio.
      *
-     * @return the studente
+     * @return L'oggetto Studente associato alla RichiestaTirocinio.
      */
     public Studente getStudente() {return studente;}
 
     /**
-     * Sets studente.
+     * Imposta lo Studente associandolo alla RichiestaTirocinio.
      *
-     * @param studente the studente
+     * @param studente Lo Studente che fa la RichiestaTirocinio.
      */
     public void setStudente(Studente studente) {
         this.studente = studente;
     }
 
     /**
-     * Gets docente.
+     * Restituisce il Docente asscociato alla RichiestaTirocinio.
      *
-     * @return the docente
+     * @return L'oggetto Docente associato alla RichiestaTirocinio.
      */
     public Docente getDocente() {return docente;}
 
     /**
-     * Sets docente.
+     * Imposta il Docente scelto dallo Studente, associandolo alla propria RichiestaTirocinio.
      *
-     * @param docente the docente
+     * @param docente L'oggetto Docente scelto dallo Studente.
      */
     public void setDocente(Docente docente) {
         this.docente = docente;
     }
 
     /**
-     * Sets tirocinio generato.
+     * Imposta il tirocinio effettivo generato a partire da questa richiesta o istanza.
      *
-     * @param tirocinio the tirocinio
+     * @param tirocinio Il tirocinio generato da associare.
      */
     public void setTirocinioGenerato(Tirocinio tirocinio) {
         this.tirocinioGenerato = tirocinio;
     }
 
     /**
-     * Gets tirocinio generato.
+     * Restituisce il tirocinio generato associato.
      *
-     * @return the tirocinio generato
+     * @return L'oggetto Tirocinio generato.
      */
     public Tirocinio getTirocinioGenerato() {return tirocinioGenerato;}
 
     /**
-     * Get argomento string.
+     * Restituisce l'argomento del tirocinio.
      *
-     * @return the string
+     * @return Una stringa contenente l'argomento.
      */
     public String getArgomento(){return argomento;}
 
     /**
-     * Get tipologia tirocinio string.
+     * Restituisce la tipologia del tirocinio (ad esempio: interno o esterno).
      *
-     * @return the string
+     * @return Una stringa contenente la tipologia del tirocinio.
      */
     public String getTipologiaTirocinio(){
         return this.tipologiaTirocinio;
     }
 
     /**
-     * Set tipologia tirocinio.
+     * Imposta la tipologia del tirocinio.
      *
-     * @param tipologiaTirocinio the tipologia tirocinio
+     * @param tipologiaTirocinio La nuova tipologia da assegnare al tirocinio.
      */
     public void setTipologiaTirocinio(String tipologiaTirocinio){
         this.tipologiaTirocinio = tipologiaTirocinio;
