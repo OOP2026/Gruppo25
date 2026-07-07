@@ -30,3 +30,12 @@ build/
 
 ### VS Code ###
 .vscode/
+
+*.html
+index-files/
+script-files/
+resource-files/
+
+element-list
+legal/
+*search-index.js
