@@ -298,7 +298,7 @@ public class Controller {
 
 
     /**
-     * Serve ad ottenere un elenco di Tirocini.
+     * Utile per ottenere un elenco di Tirocini.
      *
      * @return Una Lista di Stringhe contenenti le informazioni su un Tirocinio disponibile.
      */
@@ -314,12 +314,12 @@ public class Controller {
     }
 
     /**
-     * Controlla richiesta tirocinio boolean.
+     * Controlla l'inserimento del docente e del relativo argomento nella richiesta di tirocinio.
      *
-     * @param nomeProf      the nome prof
-     * @param cognomeProf   the cognome prof
-     * @param nomeArgomento the nome argomento
-     * @return the boolean
+     * @param nomeProf      Il nome del Docente.
+     * @param cognomeProf   Il Cognome del Docente.
+     * @param nomeArgomento Il nome dell'Argomento.
+     * @return Un valore booleano. Restituisce true se esiste la coppia Docente - Argomento. False altrimenti.
      */
 // Metodo che controlla l'inserimento del docente e del relativo argomento nella richiesta di tirocinio
     public boolean controllaRichiestaTirocinio(String nomeProf, String cognomeProf, String nomeArgomento) {
@@ -334,11 +334,11 @@ public class Controller {
     }
 
     /**
-     * Aggiungi richiesta tirocinio boolean.
+     * Cerca il docente e inserisce la nuova richiesta di tirocinio.
      *
-     * @param email     the email
-     * @param argomento the argomento
-     * @return the boolean
+     * @param email     L'email del Docente.
+     * @param argomento Il Nome dell'argomento.
+     * @return Un valore booleano. Restituisce true se la richiesta di tirocinio viene aggiunta correttamente. False altrimenti.
      */
 // Metodo per cercare il docente e inserire la nuova richiesta di tirocinio
     public boolean aggiungiRichiestaTirocinio(String email, String argomento) {
@@ -382,9 +382,9 @@ public class Controller {
     }
 
     /**
-     * Sets argomento studente.
+     * Aggiunge l'argomento del tirocinio allo Studente.
      *
-     * @param argomentoStudente the argomento studente
+     * @param argomentoStudente L'argomento associato allo Studente-
      */
 // Metodo per aggiungere l'argomento del tirocinio allo studente
     public void setArgomentoStudente(String argomentoStudente) {
@@ -393,9 +393,9 @@ public class Controller {
     }
 
     /**
-     * Get dati tabella richieste tirocinio list.
+     * Riempie la tabella delle richieste di tirocinio per il Docente.
      *
-     * @return the list
+     * @return Una lista di Stringhe contentente i dati degli Studenti e della Richiesta di Tirocinio mandata al Docente.
      */
 // Metodi per riempire la tabella delle richieste del tirocinio per il docente
     public List<String[]> getDatiTabellaRichiesteTirocinio(){
@@ -411,11 +411,11 @@ public class Controller {
     }
 
     /**
-     * Modifica stato richiesta boolean.
+     * Modifica lo stato della richiesta. Serve al docente per approvare o rifiutare una richiesta.
      *
-     * @param matricola  the matricola
-     * @param nuovoStato the nuovo stato
-     * @return the boolean
+     * @param matricola  La Matricola dello Studente associato alla Richiesta.
+     * @param nuovoStato Il nuovo stato della richiesta.
+     * @return Un valore booleano. Restituisce true se lo stato della richiesta viene modificato correttamente. False in tutti gli altri casi.
      */
 // Metodo per modificare lo stato della richiesta del tirocinio
     public boolean modificaStatoRichiesta(String matricola, Stato nuovoStato) {
@@ -431,9 +431,9 @@ public class Controller {
     }
 
     /**
-     * Gets richiesta tirocinio studente.
+     * Visualizza le richieste di tirocinio inviate dallo studente.
      *
-     * @return the richiesta tirocinio studente
+     * @return Una Lista di Stringhe contenente le informazioni di tutte le richieste inviate dallo Studente.
      */
 // Metodo per visualizzare le richieste di tirocinio inviate dallo studente
     public List<String[]> getRichiestaTirocinioStudente() {
@@ -448,18 +448,18 @@ public class Controller {
 
 
     /**
-     * Gets studente loggato.
+     * Ottiene l'oggetto Studente attualmente in sessione.
      *
-     * @return the studente loggato
+     * @return L'oggetto Studente attualmente in sessione.
      */
     public Studente getStudenteLoggato() {
         return this.studenteLoggato;
     }
 
     /**
-     * Gets dati tabella tirocinanti.
+     * Riempie la tabella dei tirocinanti (ovvero gli studenti la quale richiesta ha lo stato: APPROVATA).
      *
-     * @return the dati tabella tirocinanti
+     * @return Una Lista di Stringhe contenente le informazioni dei Tirocinanti e del proprio Tirocinio.
      */
 // Metodo per riempire la tabella dei tirocinanti(ovvero studenti la quale richiesta ha stato approvato)
     public List<String[]> getDatiTabellaTirocinanti() {
@@ -474,9 +474,9 @@ public class Controller {
 
 
     /**
-     * Controllo richiesta boolean.
+     * Controlla lo stato della Richiesta del tirocinio.
      *
-     * @return the boolean
+     * @return Un valore booleano. Restituisce true se ci sono richieste in ATTESA o APPROVATE. False in tutti gli altri i casi.
      */
 // Metodo per controllare lo stato della Richiesta del tirocinio.
     public boolean controlloRichiesta() {
@@ -490,10 +490,10 @@ public class Controller {
     }
 
     /**
-     * Controllo inserimento tirocinio boolean.
+     * Controlla se la tipologia del tirocinio inserita sia giusta (INTERNO o ESTERNO).
      *
-     * @param tipologiaTirocinio the tipologia tirocinio
-     * @return the boolean
+     * @param tipologiaTirocinio La Tipologia del Tirocinio inserita.
+     * @return Un valore booleano. Restituisce true se la tipologia inserita è corretta. False altrimenti.
      */
 // Metodo per controllare se la tipologia del tirocinio inserita sia giusta.
     public boolean controlloInserimentoTirocinio(String tipologiaTirocinio) {
@@ -501,12 +501,12 @@ public class Controller {
     }
 
     /**
-     * Aggiungi nuova tesi boolean.
+     * Istanzia un nuovo oggetto Tesi.
      *
-     * @param titolo    the titolo
-     * @param contenuto the contenuto
-     * @param data      the data
-     * @return the boolean
+     * @param titolo    Il titolo della nuova Tesi.
+     * @param contenuto Il contenuto della Tesi.
+     * @param data      La Data della Seduta di Laurea associata alla medesima Tesi.
+     * @return Un valore booleano. Restituisce true se il nuovo oggetto Tesi viene creato correttamente. False in tutti gli altri casi di errore.
      */
 // Metodo per istanziare una nuova tesi
     public boolean aggiungiNuovaTesi(String titolo, String contenuto, String data) {
@@ -539,9 +539,9 @@ public class Controller {
     }
 
     /**
-     * Gets dati tabella tesisti.
+     * Ottiene la tabella dei tesisti, ovvero coloro che hanno una tesi in attesa di giudizio.
      *
-     * @return the dati tabella tesisti
+     * @return Una Lista di Stringhe contenente le informazioni associate alla Tesi, come Titolo, Contenuto, Studente proprietario e Data della Seduta associata.
      */
 // Metodi per riempire la tabella dei tesisti
     public List<String []> getDatiTabellaTesisti() {
@@ -555,10 +555,10 @@ public class Controller {
     }
 
     /**
-     * Gets contenuto tesi singola.
+     * Ottiene il contenuto della tesi che il Docente sceglie di leggere.
      *
-     * @param matricola the matricola
-     * @return the contenuto tesi singola
+     * @param matricola La Matricola dello Studente proprietario della Tesi.
+     * @return Una Stringa contenente il contenuto della Tesi.
      */
 // Metodo per leggere il contenuto dalla tabella data la riga
     public String getContenutoTesiSingola(String matricola) {
@@ -572,9 +572,9 @@ public class Controller {
     }
 
     /**
-     * Controllo tesi button boolean.
+     * Serve per impedire allo Studente che non hanno terminato il tirocinio di poter caricare la tesi.
      *
-     * @return the boolean
+     * @return Un valore booleano. Restituisce true se ha finito il proprio Tirocinio e dunque può caricare la sua Tesi. False altrimenti.
      */
 // Metodo per impedire agli studenti che non hanno terminato il tirocinio di poter caricare la tesi
     public boolean controlloTesiButton() {
@@ -589,11 +589,11 @@ public class Controller {
     }
 
     /**
-     * Modifica stato tesi boolean.
+     * Modifica lo stato della Tesi. Serve al docente per approvare o rifiutare una Tesi.
      *
-     * @param nuovoStato the nuovo stato
-     * @param matricola  the matricola
-     * @return the boolean
+     * @param nuovoStato Il nuovo Stato della Tesi.
+     * @param matricola  La matricola dello Studente proprietario della Tesi.
+     * @return Un valore booleano, Restituisce true se lo stato della Tesi viene cambiato correttamente. False in tutti gli altri casi di errore.
      */
 // Metodo per modificare lo stato della tesi
     public boolean modificaStatoTesi(Stato nuovoStato, String matricola) {
@@ -608,9 +608,9 @@ public class Controller {
     }
 
     /**
-     * Get stato tesi studente list.
+     * Ottiene la tabella dello stato della tesi dello studente.
      *
-     * @return the list
+     * @return Una Lista di Stringhe contenente le informazioni sulle tesi mandate dallo Studente.
      */
 // Metodo per la tabella dello stato della tesi dello studente
     public List<String[]> getStatoTesiStudente(){
@@ -626,13 +626,13 @@ public class Controller {
 
 
     /**
-     * Sets tirocinio.
+     * Istanzia un nuovo oggetto Tirocinio.
      *
-     * @param nomeAzienda         the nome azienda
-     * @param nominativoReferente the nominativo referente
-     * @param argomentoTirocinio  the argomento tirocinio
-     * @param matricola           the matricola
-     * @return the tirocinio
+     * @param nomeAzienda         L'eventuale nome dell'Azienda.
+     * @param nominativoReferente L'eventuale nominativo del referente dell'Azienda.
+     * @param argomentoTirocinio  L'argomento del Tirocinio.
+     * @param matricola           La matricola dello Studente associato al Tirocinio.
+     * @return Il nuovo oggetto Tirocinio.
      */
 // Metodo per istanziare il tirocinio quando il docente approva la richiesta
     public boolean setTirocinio(String nomeAzienda,String nominativoReferente,String argomentoTirocinio,String matricola) {
@@ -665,10 +665,10 @@ public class Controller {
     }
 
     /**
-     * Sets termina tirocinio.
+     * Imposta l'attributo di Tirocinio "completato" a true.
      *
      * @param matricolaStudente the matricola studente
-     * @return the termina tirocinio
+     * @return Un valore booleano. Restituisce true se l'operazione va a buon fine. False in tutti gli altri casi di errore.
      */
 // Metodo per terminare il tirocinio
     public boolean setTerminaTirocinio(String matricolaStudente) {
@@ -685,9 +685,9 @@ public class Controller {
     }
 
     /**
-     * Ha tesi boolean.
+     * Verifica che uno studente possa visualizzare lo stato della tesi.
      *
-     * @return the boolean
+     * @return Un valore booleano. Restituisce true se lo Studente ha mandato delle Tesi.
      */
 // Metodo per verificare che uno studente possa visualizzare lo stato della tesi
     public boolean haTesi() {
