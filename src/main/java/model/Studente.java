@@ -23,8 +23,8 @@ public class Studente extends Utente{
      * @param password  La password per l'autenticazione.
      * @param nome      Il nome dello studente.
      * @param cognome   Il cognome dello studente.
-     * @param email     L'indirizzo email istituzionale dello studente.
-     * @param matricola Il codice identificativo (matricola) dello studente avente dominio "@studenti.unina.it".
+     * @param email     L'indirizzo email istituzionale dello studente, avente dominio "@studenti.unina.it".
+     * @param matricola Il codice identificativo (matricola) dello studente.
      */
 //Costruttore dell'Oggetto Studente
     public Studente(String login, String password, String nome, String cognome, String email,String matricola) {

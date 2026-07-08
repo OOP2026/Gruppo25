@@ -13,7 +13,7 @@ import java.util.logging.Logger;
 import java.util.logging.Level;
 
 /**
- * The type Controller.
+ * L'oggetto Controller. Utile per far comunicare la parte i dati presi dalla GUI con il DataBase e il Model.
  */
 public class Controller {
 
@@ -33,7 +33,9 @@ public class Controller {
     private static final String ERRORE_CONNESSIONE_LOGIN = "Errore durante la connessione al database";
 
     /**
-     * Instantiates a new Controller.
+     * Crea una nuova istanza del Controller. Crea dei nuovi oggetti all'interno di esso, tra i quali:
+     * Un ArrayList di oggetti Studente, Un ArrayList di oggetti Docente, Un ArrrayList di oggetti RichiestaTirocinio
+     * e infine un ArrayList di oggetti Azienda.
      */
     public Controller() {
 
@@ -44,14 +46,14 @@ public class Controller {
     }
 
     /**
-     * Sets studente.
+     * Crea una nuovo oggetto Studente in base ai parametri presi dalla pagina di Registrazione Studente.
      *
-     * @param login     the login
-     * @param password  the password
-     * @param nome      the nome
-     * @param cognome   the cognome
-     * @param email     the email
-     * @param matricola the matricola
+     * @param login     L'username per l'accesso.
+     * @param password  La password per l'autenticazione.
+     * @param nome      Il nome dello studente.
+     * @param cognome   Il cognome dello studente.
+     * @param email     L'indirizzo email istituzionale dello studente.
+     * @param matricola Il codice identificativo (matricola) dello studente.
      */
     public void setStudente(String login, String password, String nome, String cognome, String email, String matricola) {
         Studente studente = new Studente(login, password, nome, cognome, email, matricola);
@@ -69,13 +71,13 @@ public class Controller {
     }
 
     /**
-     * Sets docente.
+     * Crea una nuovo oggetto Docente in base ai parametri presi dalla pagina di Registrazione Docente.
      *
-     * @param login    the login
-     * @param password the password
-     * @param nome     the nome
-     * @param cognome  the cognome
-     * @param email    the email
+     * @param login    L'username per l'accesso.
+     * @param password La password per l'autenticazione dell'account.
+     * @param nome     Il nome del docente.
+     * @param cognome  Il cognome del docente.
+     * @param email    L'indirizzo email istituzionale del docente avente dominio "@docenti.unina.it".
      */
     public void setDocente(String login, String password, String nome, String cognome, String email) {
         Docente docente = new Docente(login, password, nome, cognome, email);
@@ -91,11 +93,11 @@ public class Controller {
     }
 
     /**
-     * Effettua login string.
+     * Verifica se la login e la password inseriti nel form, corrispondano a uno Studente, a un Docente oppure non esista questa combinazione.
      *
-     * @param login    the login
-     * @param password the password
-     * @return the string
+     * @param login    Il login inserito dall'Utente.
+     * @param password La password inserita dall'Utente.
+     * @return Una Stringa che indica il "tipo" di account che ha effettuato correttamente l'accesso (STUDENTE o DOCENTE).
      */
 // Metodo per verificare se la login e la password inseriti corrispondono ad uno Studente, ad un Docente o non esiste
     public String effettuaLogin(String login, String password) {
@@ -142,10 +144,10 @@ public class Controller {
     }
 
     /**
-     * Controllo login boolean.
+     * Controlla che il nuovo login non esista già. Serve per dare ulteriore controlli sull'unicità di un logjn nel sistema.
      *
-     * @param login the login
-     * @return the boolean
+     * @param login Il nuovo login inserito dall'Utente.
+     * @return Un valore booleano. Restituisce true se lo stesso login esiste già. False altrimenti.
      * @throws SQLException the sql exception
      */
 // Metodo per verificare che la login inserita non esista giá
@@ -160,10 +162,11 @@ public class Controller {
     }
 
     /**
-     * Controllo nome cognome boolean.
+     * Controlla che il nome e/o il cognome siano formati da caratteri reali.
+     * Vengono dunque esclusi caratteri di punteggiatura, numerici e altri simboli.
      *
-     * @param stringa the stringa
-     * @return the boolean
+     * @param stringa Il nome o il cognome da analizzare.
+     * @return Un valore booleano. Restituisce true se tutti i caratteri sono lettere. False altrimenti.
      */
 // Metodo per la verifica degli input di nome e cognome
     public boolean controlloNomeCognome(String stringa) {
@@ -176,10 +179,10 @@ public class Controller {
     }
 
     /**
-     * Controllo formato matricola boolean.
+     * Controlla il formato della Matricola.
      *
-     * @param matricola the matricola
-     * @return the boolean
+     * @param matricola La Matricola inserita dall'Utente che si sta registrando.
+     * @return Un valore booleano. Restituisce true se la matricola NON è lunga 9 caratteri. False altrimenti.
      */
 // Metodo per la verifica del formato della matricola
     public boolean controlloFormatoMatricola(String matricola) {
@@ -191,10 +194,11 @@ public class Controller {
     }
 
     /**
-     * Controllo matricola boolean.
+     * Controlla se la matricola inserita dall'Utente che si sta registrando esiste giò nel sistema.
      *
-     * @param matricola the matricola
-     * @return the boolean
+     * @param matricola La Matricola inserita dall'Utente che si sta registrando.
+     * @return Un valore booleano. Restituisce true se la matricola esiste già. False altrimenti.
+     * In caso di errore dell'esecuzione del metodo, restituisce true.
      */
 // Metodo per la verifica dell`unicità della matricola
     public boolean controlloMatricola(String matricola) {
@@ -208,10 +212,10 @@ public class Controller {
     }
 
     /**
-     * Controllo email studente boolean.
+     * Controlla il formato della mail dello Studente che si sta registrando.
      *
-     * @param email the email
-     * @return the boolean
+     * @param email L'email inserita dall'Utente che si sta registrando.
+     * @return Un valore booleano. Restituisce true se l'email non rispetta il formato. False altrimenti.
      */
 // Metodo per la verifica del formato della mail di studente
     public boolean controlloEmailStudente(String email) {
@@ -219,10 +223,10 @@ public class Controller {
     }
 
     /**
-     * Controllo email docente boolean.
+     * Controlla il formato della mail del Docente che si sta registrando.
      *
-     * @param email the email
-     * @return the boolean
+     * @param email L'email inserita dall'Utente che si sta registrando.
+     * @return Un valore booleano. Restituisce true se l'email non rispetta il formato. False altrimenti.
      */
 // Metodo per la verifica del formato della mail di docente
     public boolean controlloEmailDocente(String email) {
@@ -230,10 +234,12 @@ public class Controller {
     }
 
     /**
-     * Controllo passoword boolean.
+     * Controlla la minima lunghezza della Password.
      *
-     * @param pass the pass
-     * @return the boolean
+     * @param pass La nuova password inserita dall'Utente che si sta registrando.
+     * @return Un valore booleano.
+     * Restituisce false se la lunghezza della nuova password è inferiore a quella minima consentita.
+     * False altrimenti.
      */
 // Metodo per la verifica minima della sicurezza sulla password
     public boolean controlloPassoword(String pass) {
@@ -241,13 +247,14 @@ public class Controller {
     }
 
     /**
-     * Aggiungi nuovo argomento boolean.
+     * Prende i valori dati in input dal Docente per aggiungere un Nuovo Argomento di Tirocinio.
      *
-     * @param argomento          the argomento
-     * @param tipologiaTirocinio the tipologia tirocinio
-     * @param nomeAz             the nome az
-     * @param refAz              the ref az
-     * @return the boolean
+     * @param argomento          Il Nome dell'argomento.
+     * @param tipologiaTirocinio La tipologia del Tirocinio (ESTERNO o INTERNO).
+     * @param nomeAz             Il Nome dell'Azienda, in caso di tirocinio esterno.
+     * @param refAz              Il nome del referente dell'azienda.
+     * @return Restituisce true in caso l'operazione si concluda correttamente. False nei casi in cui: l'azienda non esiste nel DataBase, il Docente in sessione risulta NULL
+     * oppure in qualsiasi errore nel caricamento delle risorse necessarie nel DataBase.
      */
 // Metodo per aggiungere un argomento alla lista di argomenti del docente loggato.
     public boolean aggiungiNuovoArgomento(String argomento, String tipologiaTirocinio, String nomeAz, String refAz) {
@@ -291,9 +298,9 @@ public class Controller {
 
 
     /**
-     * Gets dati tabella elenco tirocini.
+     * Serve ad ottenere un elenco di Tirocini.
      *
-     * @return the dati tabella elenco tirocini
+     * @return Una Lista di Stringhe contenenti le informazioni su un Tirocinio disponibile.
      */
     public List<String[]> getDatiTabellaElencoTirocini() {
         DocenteDAO docenteDAO = new DocenteImplementazioneDAO();

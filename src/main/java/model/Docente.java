@@ -19,7 +19,7 @@ public class Docente extends Utente {
     /**
      * Crea una nuova istanza di Docente richiamando il costruttore della superclasse Utente.
      *
-     * @param login    L'username per l'accesso al sistema.
+     * @param login    L'username per l'accesso.
      * @param password La password per l'autenticazione dell'account.
      * @param nome     Il nome del docente.
      * @param cognome  Il cognome del docente.
