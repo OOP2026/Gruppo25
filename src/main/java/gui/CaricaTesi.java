@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 
 
 /**
- * The type Carica tesi.
+ * La classe che implementa la GUI riguardo la schermata per far caricare la tesi ad uno Studente.
  */
 public class CaricaTesi {
     private JTextField titoloTesiTextField;
@@ -23,10 +23,10 @@ public class CaricaTesi {
     private static final String TITOLO_ERRORE = "Errore";
 
     /**
-     * Instantiates a new Carica tesi.
+     * Costruttore di una nuova schermata CaricaTesi.
      *
-     * @param frameChiamante the frame chiamante
-     * @param controller     the controller
+     * @param frameChiamante Il frame che chiama la nuova schermata.
+     * @param controller Il controller.
      */
     public CaricaTesi(JFrame frameChiamante, Controller controller){
         this.controller = controller;

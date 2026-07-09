@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 /**
- * The type Elenco tirocinanti.
+ * La classe che implementa la GUI riguardo la schermata che mostra l'elenco dei tirocinanti.
  */
 public class ElencoTirocinanti {
     private JButton ritornaAllaHomeButton;
@@ -21,10 +21,10 @@ public class ElencoTirocinanti {
     private Controller controller;
 
     /**
-     * Instantiates a new Elenco tirocinanti.
+     * Costruttore di una nuova schermata ElencoTesisti.
      *
-     * @param frameChiamante the frame chiamante
-     * @param controller     the controller
+     * @param frameChiamante Il frame che chiama la nuova schermata.
+     * @param controller     Il controller.
      */
     public ElencoTirocinanti(JFrame frameChiamante, Controller controller) {
         this.controller = controller;

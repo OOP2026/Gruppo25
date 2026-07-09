@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 /**
- * The type Stato tesi.
+ * La classe che implementa la GUI riguardo la schermata per controllare lo Stato della Tesi.
  */
 public class StatoTesi {
     private JTable table1;
@@ -21,10 +21,10 @@ public class StatoTesi {
     private static final String STATO_TESI = "Stato Tesi";
 
     /**
-     * Instantiates a new Stato tesi.
+     * Costruttore di una nuova schermata StatoTesi.
      *
-     * @param frameChiamante the frame chiamante
-     * @param controller     the controller
+     * @param frameChiamante Il frame che chiama la nuova schermata.
+     * @param controller     Il controller.
      */
     public StatoTesi(JFrame frameChiamante,Controller controller) {
         this.controller = controller;

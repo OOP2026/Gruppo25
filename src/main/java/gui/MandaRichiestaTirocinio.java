@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * The type Manda richiesta tirocinio.
+ * La classe che implementa la GUI riguardo la schermata per permettere allo Studente di mandare una nuova Richiesta di Tirocinio.
  */
 public class MandaRichiestaTirocinio extends JFrame {
     private JButton okbutton;
@@ -23,10 +23,10 @@ public class MandaRichiestaTirocinio extends JFrame {
     private static final String TITOLO_ERRORE = "Errore";
 
     /**
-     * Instantiates a new Manda richiesta tirocinio.
+     *Costruttore di una nuova schermata MandaRichiestaTirocinio.
      *
-     * @param frameChiamante the frame chiamante
-     * @param controller     the controller
+     * @param frameChiamante Il frame che chiama la nuova schermata.
+     * @param controller     Il controller.
      */
     public MandaRichiestaTirocinio(JFrame frameChiamante, Controller controller) {
         this.controller = controller;

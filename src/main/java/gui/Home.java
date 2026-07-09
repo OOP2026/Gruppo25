@@ -6,11 +6,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * The type Home.
+ * La Home Page dell'applicazione.
  */
 public class Home extends JFrame {
     /**
-     * The constant frame.
+     * Il JFrame Home.
      */
     public static JFrame frame;
     private JButton registratiComeStudenteRButton;
@@ -22,9 +22,9 @@ public class Home extends JFrame {
     private final transient Controller controller;
 
     /**
-     * The entry point of application.
+     * Il Punto di inizio dell'applicazione.
      *
-     * @param args the input arguments
+     * @param args the input arguments.
      */
     public static void main(String[] args) {
 
@@ -51,7 +51,7 @@ public class Home extends JFrame {
     }
 
     /**
-     * Instantiates a new Home.
+     * Costruttore di una Home.
      */
     public Home() {
         controller = new Controller();

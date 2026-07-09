@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * The type Aggiungi nuovo argomento.
+ * La classe che implementa la GUI riguardo la schermata per aggiungere un nuovo argomento di Tirocinio.
  */
 public class AggiungiNuovoArgomento {
     private JLabel nomeArgomentoLabel; //NOSONAR
@@ -23,10 +23,10 @@ public class AggiungiNuovoArgomento {
     private static final String TITOLO_ERRORE = "Errore";
 
     /**
-     * Instantiates a new Aggiungi nuovo argomento.
+     * Costruttore di una nuova schermata AggiungiNuovoArgomento.
      *
-     * @param frameChiamante the frame chiamante
-     * @param controller     the controller
+     * @param frameChiamante Il frame che chiama la nuova schermata.
+     * @param controller     Il controller.
      */
     public AggiungiNuovoArgomento(JFrame frameChiamante, Controller controller) {
         this.controller = controller;

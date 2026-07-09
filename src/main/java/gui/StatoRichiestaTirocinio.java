@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 /**
- * The type Stato richiesta tirocinio.
+ * La classe che implementa la GUI riguardo la schermata per controllare lo Stato della Richiesta di tirocinio.
  */
 public class StatoRichiestaTirocinio {
     private JButton okbutton;
@@ -20,10 +20,10 @@ public class StatoRichiestaTirocinio {
     private Controller controller;
 
     /**
-     * Instantiates a new Stato richiesta tirocinio.
+     * Costruttore di una nuova schermata RichiestaTirocinio.
      *
-     * @param frameChiamante the frame chiamante
-     * @param controller     the controller
+     * @param frameChiamante Il frame che chiama la nuova schermata.
+     * @param controller     Il controller.
      */
     public StatoRichiestaTirocinio(JFrame frameChiamante, Controller controller) {
         this.controller = controller;

@@ -9,7 +9,8 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 /**
- * The type Elenco docenti.
+ * La classe che implementa la GUI riguardo la schermata con l'elenco dei Docenti disponibili e i relativi argomenti
+ * per fare richiesta di un Tirocinio.
  */
 public class ElencoDocenti {
     private JButton indietroButton;
@@ -20,10 +21,10 @@ public class ElencoDocenti {
     private Controller controller;
 
     /**
-     * Instantiates a new Elenco docenti.
+     * Costruttore di una nuova schermata ElencoDocenti.
      *
-     * @param frameChiamante the frame chiamante
-     * @param controller     the controller
+     * @param frameChiamante Il frame che chiama la nuova schermata.
+     * @param controller     Il controller.
      */
     public ElencoDocenti(JFrame frameChiamante, Controller controller) {
         this.controller = controller;

@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 /**
- * The type Elenco tesisti.
+ * La classe che implementa la GUI riguardo la schermata che mostra l'elenco dei Tesisti.
  */
 public class ElencoTesisti {
     private JButton ritornaAllaHomeButton;
@@ -28,10 +28,10 @@ public class ElencoTesisti {
     private static final String MESSAGGIO_RIGA_NON_SELEZIONATA = "Selezionare prima una richiesta dalla tabella.";
 
     /**
-     * Instantiates a new Elenco tesisti.
+     * Costruttore di una nuova schermata ElencoTesisti.
      *
-     * @param frameChiamante the frame chiamante
-     * @param controller     the controller
+     * @param frameChiamante Il frame che chiama la nuova schermata.
+     * @param controller     Il controller.
      */
     public ElencoTesisti(JFrame frameChiamante, Controller controller) {
         this.controller = controller;

@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 /**
- * The type Registrazione docente.
+ * La classe che implementa la GUI riguardo la schermata per permettere al Docente di registrarsi al sistema.
  */
 public class RegistrazioneDocente extends JFrame {
     private JButton dConfermaButton;
@@ -26,10 +26,10 @@ public class RegistrazioneDocente extends JFrame {
     private static final String TITOLO_ERRORE = "Errore";
 
     /**
-     * Instantiates a new Registrazione docente.
+     * Costruttore di una nuova schermata RegistrazioneDocente.
      *
-     * @param frameHome  the frame home
-     * @param controller the controller
+     * @param frameHome  Il frame che chiama la nuova schermata.
+     * @param controller Il controller.
      */
     public RegistrazioneDocente(JFrame frameHome, Controller controller) {
 

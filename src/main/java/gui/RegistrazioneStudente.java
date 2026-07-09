@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.sql.SQLException;
 
 /**
- * The type Registrazione studente.
+ * La classe che implementa la GUI riguardo la schermata per permettere allo Studente di registrarsi al sistema.
  */
 public class RegistrazioneStudente extends JFrame {
     private JTextField sLoginTextField;
@@ -25,10 +25,10 @@ public class RegistrazioneStudente extends JFrame {
     private static final String TITOLO_ERRORE = "Errore";
 
     /**
-     * Instantiates a new Registrazione studente.
+     * Costruttore di una nuova schermata RegistrazioneStudente.
      *
-     * @param frameHome  the frame home
-     * @param controller the controller
+     * @param frameHome  Il frame che chiama la nuova schermata.
+     * @param controller Il controller.
      */
     public RegistrazioneStudente(JFrame frameHome, Controller controller) {
         this.controller = controller;

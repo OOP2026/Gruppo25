@@ -7,7 +7,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * The type Docente home.
+ * La classe che implementa la GUI riguardo la schermata home del Docente.
  */
 public class DocenteHome {
     private JButton aggiungiTirocinioButton;
@@ -20,10 +20,10 @@ public class DocenteHome {
     private Controller controller;
 
     /**
-     * Instantiates a new Docente home.
+     * Costruttore di una nuova schermata DocenteHome.
      *
-     * @param frameChiamante the frame chiamante
-     * @param controller     the controller
+     * @param frameChiamante Il frame che chiama la nuova schermata.
+     * @param controller     Il controller.
      */
     public DocenteHome(JFrame frameChiamante, Controller controller) {
         this.controller = controller;

@@ -10,7 +10,7 @@ import java.awt.event.ActionListener;
 import java.util.List;
 
 /**
- * The type Elenco richieste tirocinio.
+ * La classe che implementa la GUI riguardo la schermata che mostra tutte le richieste di Tirocinio ricevute dagli Studenti.
  */
 public class ElencoRichiesteTirocinio {
     private JButton ritornaAllaHomeButton;
@@ -25,10 +25,10 @@ public class ElencoRichiesteTirocinio {
     private static final String TITOLO_ERRORE = "Errore";
 
     /**
-     * Instantiates a new Elenco richieste tirocinio.
+     * Costruttore di una nuova schermata ElencoRichiesteTirocinio.
      *
-     * @param frameChiamante the frame chiamante
-     * @param controller     the controller
+     * @param frameChiamante Il frame che chiama la nuova schermata.
+     * @param controller     Il controller.
      */
     public ElencoRichiesteTirocinio(JFrame frameChiamante, Controller controller) {
         this.controller = controller;
