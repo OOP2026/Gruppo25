@@ -7,7 +7,8 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * The type Connessione database.
+ * Gestisce la connessione al database PostgreSQL.
+ * Permette di mantenere un'unica istanza di connessione attiva in tutta l'applicazione.
  */
 public class ConnessioneDatabase {
     private static ConnessioneDatabase instance;
@@ -19,6 +20,12 @@ public class ConnessioneDatabase {
     private String password = "npg_vxd3IToV0Sup"; // NOSONAR
     private String driver = "org.postgresql.Driver";
 
+    /**
+     * Costruttore privato per impedire l'istanza diretta della classe da parte di altri componenti.
+     * Carica il driver JDBC e stabilisce la connessione fisica con il database.
+     *
+     * @throws SQLException Se si verifica un errore durante il tentativo di connessione.
+     */
     private ConnessioneDatabase() throws SQLException {
         try {
             Class.forName(driver);
@@ -29,10 +36,11 @@ public class ConnessioneDatabase {
     }
 
     /**
-     * Gets instance.
+     * Restituisce l'unica istanza attiva della classe ConnessioneDatabase.
+     * Se l'istanza non esiste o se la connessione è stata chiusa, provvede a crearne una nuova.
      *
-     * @return the instance
-     * @throws SQLException the sql exception
+     * @return L'istanza corrente della connessione.
+     * @throws SQLException Se si verifica un errore durante il tentativo di connessione.
      */
     public static ConnessioneDatabase getInstance() throws SQLException {
         if (instance == null) {
@@ -45,9 +53,9 @@ public class ConnessioneDatabase {
     }
 
     /**
-     * Gets connection.
+     * Restituisce l'oggetto Connection utile per eseguire query e interagire con il database.
      *
-     * @return the connection
+     * @return L'oggetto Connection corrente.
      */
     public Connection getConnection() {
         return connection;
