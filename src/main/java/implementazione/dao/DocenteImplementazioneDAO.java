@@ -122,7 +122,7 @@ public class DocenteImplementazioneDAO implements DocenteDAO{
     @Override
     public Integer getIdArgomento(String login, String nomeArgomento) throws SQLException {
 
-        String query = "SELECT id_argomento FROM argomentotirocinio WHERE docente = ? AND argomento = ? ";
+        String query = "SELECT id_argomento FROM argomentotirocinio WHERE LOWER(docente) = LOWER(?) AND LOWER(argomento) = LOWER(?) ";
         try (PreparedStatement ps = connection.prepareStatement(query)){
             ps.setString(1, login);
             ps.setString(2, nomeArgomento);
@@ -156,7 +156,7 @@ public class DocenteImplementazioneDAO implements DocenteDAO{
 
     @Override
     public boolean verificaEsistenzaArgomento(String nomeDocente, String cognomeDocente, String nomeArgomento) throws SQLException {
-        String query = "SELECT d.nome,d.cognome,arg.argomento FROM docente d JOIN argomentotirocinio arg ON d.login = arg.docente WHERE d.nome = ? AND d.cognome = ? AND arg.argomento = ?";
+        String query = "SELECT d.nome,d.cognome,arg.argomento FROM docente d JOIN argomentotirocinio arg ON d.login = arg.docente WHERE LOWER(d.nome) = LOWER(?)  AND LOWER(d.cognome) = LOWER(?) AND LOWER(arg.argomento) = LOWER(?)";
         try(PreparedStatement ps = connection.prepareStatement(query)){
             ps.setString(1, nomeDocente);
             ps.setString(2, cognomeDocente);
