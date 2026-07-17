@@ -49,7 +49,12 @@ public class StatoTesi {
                 new Object[][] {},
                 new String[]{"Titolo", "Contenuto","Data Seduta" , "Docente", STATO_TESI}
         ));
-        DefaultTableModel model = new  DefaultTableModel();
+        DefaultTableModel model = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Rende tutte le celle non modificabili graficamente
+            }
+        };
         table1.setRowHeight(30);
         model.addColumn("Titolo");
         model.addColumn("Contenuto");

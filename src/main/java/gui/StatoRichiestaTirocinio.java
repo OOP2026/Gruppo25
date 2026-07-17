@@ -49,7 +49,12 @@ public class StatoRichiestaTirocinio {
                 new String[]{"Docente","Argomento", "Stato Richiesta"}
         ));
 
-        DefaultTableModel model = new DefaultTableModel();
+        DefaultTableModel model = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Rende tutte le celle non modificabili graficamente
+            }
+        };
         tableStatoRichiesta.setRowHeight(30);
         tableStatoRichiesta.doLayout();
         model.addColumn("Docente");

@@ -52,7 +52,13 @@ public class ElencoDocenti {
         ));
 
         // 1. Creo il modello della tabella
-        DefaultTableModel model = new DefaultTableModel();
+        DefaultTableModel model = new DefaultTableModel() {
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                return false; // Rende tutte le celle non modificabili graficamente
+            }
+        };
+
         table1.setRowHeight(30);
         model.addColumn("Docente");
         model.addColumn("Email");
