@@ -77,7 +77,7 @@ public class RichiestaTirocinioImplementazioneDAO implements RichiestaTirocinioD
 
     @Override
     public void setStatoRichiestaDAO(String matricolaStudente, String loginDocente, String stato) throws SQLException {
-        String query = "UPDATE richiestatirocinio SET statorichiesta = ? WHERE matricola_studente = ? AND docente_richiesta = ?";
+        String query = "UPDATE richiestatirocinio SET statorichiesta = ? WHERE matricola_studente = ? AND docente_richiesta = ? AND statorichiesta = 'ATTESA'";
 
         try(PreparedStatement preparedStatement = this.connection.prepareStatement(query)){
             preparedStatement.setString(1, stato);
@@ -91,7 +91,7 @@ public class RichiestaTirocinioImplementazioneDAO implements RichiestaTirocinioD
 
     @Override
     public Integer getIdRichiesta(String matricolaStudente, String loginDocente) throws SQLException {
-        String query = "SELECT id_richiestatirocinio FROM richiestatirocinio WHERE matricola_studente = ? AND docente_richiesta = ?";
+        String query = "SELECT id_richiestatirocinio FROM richiestatirocinio WHERE matricola_studente = ? AND docente_richiesta = ? AND statorichiesta = 'APPROVATA'";
         try(PreparedStatement preparedStatement = this.connection.prepareStatement(query)){
             preparedStatement.setString(1, matricolaStudente);
             preparedStatement.setString(2, loginDocente);
